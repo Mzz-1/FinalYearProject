@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {useHistory} from 'react-router-dom'
 import Input from "../components/Input";
+import { useToken } from "../service/useToken";
 
 function Register() {
     const {
