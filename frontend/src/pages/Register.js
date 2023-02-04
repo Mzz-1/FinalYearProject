@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import {useHistory} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
+import axios from "axios";
 import { useToken } from "../service/useToken";
 
 function Register() {
+    const [token, setToken] = useToken();
+
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
@@ -15,8 +20,24 @@ function Register() {
     const emailRegex =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-    const handleFormSubmit = (data) => {
-        console.log(data);
+    const handleFormSubmit = async ({ email, confirmPassword }) => {
+        console.log(confirmPassword, email);
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/api/signup",
+                {
+                    email: email,
+                    password: confirmPassword,
+                }
+            );
+            console.log(confirmPassword, email);
+            const { token } = response.data;
+            console.log(token);
+            setToken(token);
+            navigate("/");
+        } catch (err) {
+            console.log(`err:${err}`);
+        }
     };
     watch();
 

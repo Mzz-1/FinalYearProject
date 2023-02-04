@@ -1,6 +1,7 @@
 import { Redirect, Route } from "react-router-dom";
 import { redirect, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useUser } from "./useUser";
 const PrivateRoutes = (props) => {
     const { component } = props;
     const user = null;
@@ -11,8 +12,9 @@ const PrivateRoutes = (props) => {
 const PrivateRoute = (props) => {
     const { Component } = props;
     const navigate = useNavigate();
+    const user = useUser();
     useEffect(() => {
-        const user = null;
+      
         if (user == null) {
             navigate("/login");
         }
