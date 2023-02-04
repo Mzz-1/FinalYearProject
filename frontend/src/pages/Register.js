@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import {useHistory} from 'react-router-dom'
+import Input from "../components/Input";
 
 function Register() {
     const {
@@ -9,23 +11,23 @@ function Register() {
         formState: { errors },
     } = useForm();
 
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    const emailRegex =
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     const handleFormSubmit = (data) => {
         console.log(data);
-       
     };
     watch();
 
     const validateConfirmPassword = (value) => {
         let error;
         if (!value) {
-          error = "Confirm Password is required";
-        } else if (value !== watch('password')) {
-          error = "Passwords do not match";
+            error = "Confirm Password is required";
+        } else if (value !== watch("password")) {
+            error = "Passwords do not match";
         }
         return error || true;
-      };
+    };
 
     return (
         <div className="grid grid-rows-1 grid-cols-2 h-[100vh] text-[#9F7E7E] bg-[#F4F4F2] 2xl:px-[8vw]">
@@ -42,52 +44,56 @@ function Register() {
                     className="flex flex-col gap-[30px] my-[20px]"
                     onSubmit={handleSubmit(handleFormSubmit)}
                 >
-                    <input
-                        className="w-[440px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                    <Input
                         type="text"
                         placeholder="Name"
-                        {...register("username", {
-                            required: "Please enter your username.",
-                        })}
+                        register={{
+                            ...register("username", {
+                                required: "Please enter your username.",
+                            }),
+                        }}
                     />
                     <p>{errors.username?.message}</p>
-                    <input
-                        className="w-[440px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                    <Input
                         type="text"
                         placeholder="Email Address"
-                        {...register("email", {
-                            required: "Please enter your email address.",
-                            pattern:{
-                                value:emailRegex,
-                                message:"The email address is invalid."
-                            }
-                        })}
+                        register={{
+                            ...register("email", {
+                                required: "Please enter your email address.",
+                                pattern: {
+                                    value: emailRegex,
+                                    message: "The email address is invalid.",
+                                },
+                            }),
+                        }}
                     />
                     <p>{errors.email?.message}</p>
-                    <input
-                        className="w-[440px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                    <Input
                         type="password"
                         placeholder="Password"
-                        {...register("password", {
-                            required: "Please enter your password.",
-                            minLength: {
-                                value: 8,
-                                message:
-                                    "Password length should be at least 8 characters.",
-                            },
-                        })}
+                        register={{
+                            ...register("password", {
+                                required: "Please enter your password.",
+                                minLength: {
+                                    value: 8,
+                                    message:
+                                        "Password length should be at least 8 characters.",
+                                },
+                            }),
+                        }}
                     />
                     <p>{errors.password?.message}</p>
-                    <input
-                        className="w-[440px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                    <Input
                         type="password"
                         placeholder="Confirm Password"
-                        {...register("confirmPassword", {  
-                            validate:validateConfirmPassword 
-                        })}
+                        register={{
+                            ...register("confirmPassword", {
+                                validate: validateConfirmPassword,
+                            }),
+                        }}
                     />
                     <p>{errors.confirmPassword?.message}</p>
-                  
+
                     <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
                         Sign up
                     </button>
