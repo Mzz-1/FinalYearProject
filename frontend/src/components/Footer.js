@@ -1,6 +1,6 @@
 import FooterList from "./FooterList";
 
-const Footer = () => {
+export const Footer = () => {
     const about = ["ABOUT US", "ARTISTS", "EVENTS"];
     const events = ["EVENTS", "ONGOING EVENTS", "UPCOMMING EVENTS"];
     const shop = ["SHOP", "BROWSE STORE", "SELL YOUR ART"];
@@ -20,4 +20,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+

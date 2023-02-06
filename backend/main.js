@@ -3,6 +3,9 @@ const path = require("path");
 const express = require("express");
 const routes = require("./routes/Index");
 const connectDB = require("./db/Connect");
+const notFound = require("./middleware/NofFound");
+const router = express.Router()
+
 
 const app = express();
 
@@ -15,6 +18,7 @@ app.use(function (req, res, next) {
     );
     next();
 });
+
 app.use(express.json());
 
 const port = process.env.PORT || 5000;

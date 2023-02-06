@@ -1,7 +1,7 @@
 import {IonIcon} from '@ionic/react'
 import { search,cart } from "ionicons/icons"
 
-const Navbar = () => {
+export const Navbar = () => {
     return (
         <header>
             <nav className="grid grid-rows-1 grid-cols-2 px-[50px] h-[70px] items-center ">
@@ -19,4 +19,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+

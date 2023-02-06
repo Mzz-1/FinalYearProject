@@ -1,9 +1,27 @@
 import React, { useState } from "react";
 import login from "../assets/moodyfae.jpg";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useToken } from "../service/useToken";
 import Input from "../components/Input";
 
 function Login() {
+    const [token, setToken] = useToken();
+
+    const navigate = useNavigate();
+
+    const handleLogin = async ({ email, password }) => {
+        const response = await axios.post("http://localhost:5000/api/login", {
+            email: email,
+            password: password,
+        });
+
+        const { token } = response.data;
+        setToken(token)
+        navigate('/')
+    };
+
     const {
         register,
         handleSubmit,
@@ -21,13 +39,16 @@ function Login() {
             <div className="flex flex-col items-center justify-center gap-[10px] ">
                 <div className="shadow-xl py-[60px] px-[40px] flex flex-col items-center justify-center gap-[30px] rounded-[20px] border-[#9F7E7E] border-[px]">
                     <h1 className="text-5xl font-semibold ">SimplyArt</h1>
-                    <form className="flex flex-col gap-[30px] my-[20px] rounded-[20px]">
+                    <form
+                        className="flex flex-col gap-[30px] my-[20px] rounded-[20px]"
+                        onSubmit={handleSubmit(handleLogin)}
+                    >
                         <Input
                             type="text"
                             placeholder="Email address"
                             register={{
-                                ...register("username", {
-                                    required: "Please enter your username.",
+                                ...register("email", {
+                                    required: "Please enter your email.",
                                     pattern: {
                                         value: emailRegex,
                                         message:
