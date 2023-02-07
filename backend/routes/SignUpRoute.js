@@ -45,6 +45,7 @@ const signUpRoute = {
                     http://localhost:3000/verify-email/${verificationString}
                 `,
             });
+            res.sendStatus(200);
         } catch (err) {
             console.log(err);
             res.sendStatus(500);

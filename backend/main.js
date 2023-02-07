@@ -7,10 +7,18 @@ const connectDB = require("./db/Connect");
 const notFound = require("./middleware/NofFound");
 const errorHandlerMiddleware = require("./middleware/ErrorHandler");
 const router = express.Router();
+const cors = require('cors');
+
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200
+  };
 
 const app = express();
 
 // middleware
+app.use(cors(corsOptions));
+
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
@@ -19,6 +27,7 @@ app.use(function (req, res, next) {
     );
     next();
 });
+
 
 app.use(express.json());
 

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.set('strictQuery', false);
+mongoose.set("strictQuery", false);
 const userSchema = mongoose.Schema({
     email: {
         type: String,
@@ -8,6 +8,12 @@ const userSchema = mongoose.Schema({
     passwordHash: {
         type: String,
         required: [true, "password must be provided"],
+    },
+    isVerified: {
+        type: Boolean,
+    },
+    verificationString: {
+        type: String,
     },
     createdAt: {
         type: Date,

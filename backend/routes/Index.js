@@ -1,6 +1,7 @@
 const signUpRoute = require("./SignUpRoute");
 const loginRoute = require("./LoginRoute");
 const testEmailRoute = require("./Email");
+const verifyEmailRoute = require("./VerifyEmailRoute");
 //const {testEmailRoute} = require("./Nodemailer");
 
 const {
@@ -20,6 +21,7 @@ const {
 
 const routes = [
     signUpRoute,
+    verifyEmailRoute,
     loginRoute,
     testEmailRoute,
     addProducts,
