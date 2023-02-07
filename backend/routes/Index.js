@@ -1,13 +1,22 @@
 const signUpRoute = require("./SignUpRoute");
 const loginRoute = require("./LoginRoute");
 const testEmailRoute = require("./Email");
+//const {testEmailRoute} = require("./Nodemailer");
+
 const {
     addProducts,
     updateProducts,
     getAllProducts,
     getProduct,
+    deleteProduct,
 } = require("./ProductRoute");
-const addEventsRoute = require("./EventsRoute");
+const {
+    addEvents,
+    getAllEvents,
+    getEvent,
+    updateEvents,
+    deleteEvent,
+} = require("./EventsRoute");
 
 const routes = [
     signUpRoute,
@@ -17,7 +26,12 @@ const routes = [
     updateProducts,
     getAllProducts,
     getProduct,
-    addEventsRoute,
+    deleteProduct,
+    addEvents,
+    getAllEvents,
+    getEvent,
+    updateEvents,
+    deleteEvent,
 ];
 
 module.exports = routes;

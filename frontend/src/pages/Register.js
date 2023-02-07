@@ -34,7 +34,8 @@ function Register() {
             const { token } = response.data;
             console.log(token);
             setToken(token);
-            navigate("/");
+            navigate("/verify-email");
+           
         } catch (err) {
             console.log(`err:${err}`);
         }

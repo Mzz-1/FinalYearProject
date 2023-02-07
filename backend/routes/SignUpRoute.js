@@ -3,6 +3,8 @@ const connectDB = require("../db/Connect");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const { uuid, v4 } = require("uuid");
+const sendEmail = require('../Utils/SendEmail')
 
 const signUpRoute = {
     path: "/api/signup",
@@ -17,6 +19,8 @@ const signUpRoute = {
         }
         const passwordHash = await bcrypt.hash(password, 10);
 
+        const verificationString = v4();
+
         const startingInfo = {
             admin: "",
         };
@@ -26,9 +30,25 @@ const signUpRoute = {
             passwordHash,
             info: startingInfo,
             isVerified: false,
+            verificationString,
         });
 
         const { insertedId } = result;
+
+        try {
+            await sendEmail({
+                to: email,
+                from: "simply.art213@outlook.com",
+                subject: "Please verify your email",
+                text: `
+                    Thank you for signing up! To verify your email,click here:
+                    http://localhost:3000/verify-email/${verificationString}
+                `,
+            });
+        } catch (err) {
+            console.log(err);
+            res.sendStatus(500);
+        }
 
         jwt.sign(
             {

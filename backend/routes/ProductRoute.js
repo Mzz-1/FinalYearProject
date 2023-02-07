@@ -56,6 +56,7 @@ const updateProducts = {
             {
                 new: true,
                 runValidators: true,
+                useFindAndModify:true,
             }
         );
 
@@ -63,13 +64,13 @@ const updateProducts = {
             return res.status(404);
         }
 
-        res.status(200).json({ task });
+        res.status(200).json({ product });
     },
 };
 
 const deleteProduct = {
     path: "/api/products/:id",
-    method: "get",
+    method: "delete",
     handler: async (req, res) => {
         const { id: productID } = req.params;
         const product = await Product.findOne({ _id: productID });
@@ -80,4 +81,4 @@ const deleteProduct = {
     },
 };
 
-module.exports = { addProducts, updateProducts, getAllProducts, getProduct };
+module.exports = { addProducts, updateProducts, getAllProducts, getProduct,deleteProduct };

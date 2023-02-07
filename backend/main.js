@@ -1,11 +1,12 @@
 require("dotenv").config();
+require('express-async-errors');
 const path = require("path");
 const express = require("express");
 const routes = require("./routes/Index");
 const connectDB = require("./db/Connect");
 const notFound = require("./middleware/NofFound");
-const router = express.Router()
-
+const errorHandlerMiddleware = require("./middleware/ErrorHandler");
+const router = express.Router();
 
 const app = express();
 
@@ -21,11 +22,14 @@ app.use(function (req, res, next) {
 
 app.use(express.json());
 
-const port = process.env.PORT || 5000;
-
 routes.forEach((route) => {
     app[route.method](route.path, route.handler);
 });
+
+app.use(notFound);
+app.use(errorHandlerMiddleware);
+
+const port = process.env.PORT || 5000;
 
 const start = async () => {
     try {
