@@ -10,6 +10,28 @@ method:'put',
 handler:async(req,res)=>{
     const {email} = req.params
  
+    const passwordResetCode = v4()
+ 
+    const user = await User.findOne({ email });
+        if (user) {
+         User.updateOne({email},{
+                $set:{passwordResetCode}
+            })
+            await sendEmail({
+                to:email,
+                from:'simply.art213@outlook.com',
+                subject:"password Reset",
+                text:`
+                    To reset your password, click this link:
+                    http://localhost:3000/reset-password/${passwordResetCode}
+                `
+            })
+        }
 
+   
+
+    res.sendStatus(200)
 }
 }
+
+module.exports = forgoPasswordRoute
