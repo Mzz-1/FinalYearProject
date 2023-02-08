@@ -56,7 +56,7 @@ const updateProducts = {
             {
                 new: true,
                 runValidators: true,
-                useFindAndModify:true,
+                useFindAndModify: true,
             }
         );
 
@@ -81,4 +81,10 @@ const deleteProduct = {
     },
 };
 
-module.exports = { addProducts, updateProducts, getAllProducts, getProduct,deleteProduct };
+module.exports = {
+    addProducts,
+    updateProducts,
+    getAllProducts,
+    getProduct,
+    deleteProduct,
+};

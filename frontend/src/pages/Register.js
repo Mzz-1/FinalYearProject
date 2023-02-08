@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
 import axios from "axios";
 import { useToken } from "../service/useToken";
@@ -21,7 +21,7 @@ function Register() {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     const handleFormSubmit = async ({ email, confirmPassword }) => {
-        console.log(confirmPassword, email);
+        
         try {
             const response = await axios.post(
                 "http://localhost:5000/api/signup",
@@ -31,11 +31,11 @@ function Register() {
                 }
             );
             console.log(confirmPassword, email);
+            console.log(response.data)
             const { token } = response.data;
             console.log(token);
             setToken(token);
             navigate("/verify-email");
-           
         } catch (err) {
             console.log(`err:${err}`);
         }
@@ -122,7 +122,9 @@ function Register() {
                     </button>
                 </form>
                 <p>Forgot password?</p>
-                <p>Already have an account? Log in</p>
+                <p>
+                    Already have an account?<Link to="/login">Log in.</Link>{" "}
+                </p>
             </div>
         </div>
     );

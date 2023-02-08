@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import login from "../assets/moodyfae.jpg";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useToken } from "../service/useToken";
 import Input from "../components/Input";
 
@@ -18,8 +18,8 @@ function Login() {
         });
 
         const { token } = response.data;
-        setToken(token)
-        navigate('/')
+        setToken(token);
+        navigate("/");
     };
 
     const {
@@ -74,8 +74,13 @@ function Login() {
                         </button>
                     </form>
                     <div className="flex flex-col justify-center items-center">
-                        <p>Forgot password</p>
-                        <p>Don't have an account? Sign up.</p>
+                        <p>
+                            <Link to="/forgot-password">Forgot password</Link>{" "}
+                        </p>
+                        <p>
+                            Don't have an account?{" "}
+                            <Link to="/register">Sign up.</Link>{" "}
+                        </p>
                     </div>
                 </div>
             </div>

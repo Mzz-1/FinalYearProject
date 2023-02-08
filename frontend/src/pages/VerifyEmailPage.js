@@ -6,7 +6,7 @@ const VerifyEmailPage = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            navigate("./");
+            navigate("/");
         }, 3000);
     }, [navigate]);
     return (
