@@ -15,7 +15,7 @@ handler:async(req,res)=>{
     const user = await User.findOne({ email });
         if (user) {
          User.updateOne({email},{
-                $set:{passwordResetCode}
+                $set:{passwordResetCode:passwordResetCode}
             })
             await sendEmail({
                 to:email,

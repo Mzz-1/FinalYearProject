@@ -49,10 +49,12 @@ const ForgotPasswordPage = () => {
                     }}
                 />
                 <p>{errors.username?.message}</p>
-                <button disabled={!values.resetPasswordEmail}>Send Reset Link</button>
+                <button disabled={!values.resetPasswordEmail}>
+                    Send Reset Link
+                </button>
             </form>
         </div>
     );
 };
 
-export default ForgotPasswordPage
+export default ForgotPasswordPage;

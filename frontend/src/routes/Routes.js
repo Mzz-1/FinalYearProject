@@ -6,6 +6,7 @@ import PrivateRoute from "../service/Auth";
 import VerifyEmailPage from "../pages/VerifyEmailPage";
 import EmailVerificationPage from "../pages/EmailVerificationLandingPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
+import PasswordResetLandingPage from "../pages/PasswordResetLandingPage";
 
 export const AllRoutes = () => {
     return (
@@ -19,7 +20,14 @@ export const AllRoutes = () => {
                     path="/verify-email/:verificationString"
                     element={<EmailVerificationPage />}
                 />
-                <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
+                <Route
+                    path="/forgot-password"
+                    element={<ForgotPasswordPage />}
+                />
+                <Route
+                    path="/reset-password/:passwordResetCode"
+                    element={<PasswordResetLandingPage />}
+                />
             </Routes>
         </BrowserRouter>
     );
