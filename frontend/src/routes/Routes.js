@@ -7,6 +7,8 @@ import VerifyEmailPage from "../pages/VerifyEmailPage";
 import EmailVerificationPage from "../pages/EmailVerificationLandingPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import PasswordResetLandingPage from "../pages/PasswordResetLandingPage";
+import Store from "../pages/Store";
+
 
 export const AllRoutes = () => {
     return (
@@ -28,6 +30,7 @@ export const AllRoutes = () => {
                     path="/reset-password/:passwordResetCode"
                     element={<PasswordResetLandingPage />}
                 />
+                <Route path="/store" element={<Store />} />
             </Routes>
         </BrowserRouter>
     );

@@ -4,10 +4,10 @@ const EmailVerificationSuccess = () => {
     const navigate = useNavigate();
 
     return (
-        <div>
+        <div className="w-full h-full">
             <h1>Success</h1>
             <p>Thank you for verfying your email</p>
-            <button onClick={()=> navigate('/')}>Go to Home page</button>
+            <button onClick={() => navigate("/")}>Go to Home page</button>
         </div>
     );
 };

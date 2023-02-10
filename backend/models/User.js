@@ -4,10 +4,13 @@ const userSchema = mongoose.Schema({
     email: {
         type: String,
         required: [true, "email is required"],
+        unique: true,
+        
     },
     passwordHash: {
         type: String,
         required: [true, "password must be provided"],
+        
     },
     isVerified: {
         type: Boolean,
