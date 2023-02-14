@@ -3,15 +3,15 @@ mongoose.set("strictQuery", false);
 const eventsSchema = mongoose.Schema({
     name: {
         type: String,
-        required: [true, "Name must be provided."],
+        required: [true, "Name must be provided"],
     },
-    venue: {
+    place: {
         type: String,
-        required: [true, "password must be provided"],
+        required: [true, "Place must must be provided"],
     },
     location: {
         type: String,
-        required: [true, "password must be provided"],
+        required: [true, "Location must be provided"],
     },
     description: {
         type: String,
@@ -19,19 +19,19 @@ const eventsSchema = mongoose.Schema({
     },
     startDate: {
         type: Date,
-        required: [true, "password must be provided"],
+        required: [true, "Start date must be provided"],
     },
     endDate: {
         type: Date,
-        required: [true, "password must be provided"],
+        required: [true, "End date must be provided"],
     },
     startTime: {
         type: String,
-        required: [true, "password must be provided"],
+        required: [true, "Start time must be provided"],
     },
     endTime: {
         type: String,
-        required: [true, "password must be provided"],
+        required: [true, "End time must be provided"],
     },
 });
 

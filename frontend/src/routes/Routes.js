@@ -8,7 +8,8 @@ import EmailVerificationPage from "../pages/EmailVerificationLandingPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import PasswordResetLandingPage from "../pages/PasswordResetLandingPage";
 import Store from "../pages/Store";
-
+import AdminDashboard from "../pages/AdminDashboard";
+import AddEventPage from "../pages/AddEventpage";
 
 export const AllRoutes = () => {
     return (
@@ -31,6 +32,8 @@ export const AllRoutes = () => {
                     element={<PasswordResetLandingPage />}
                 />
                 <Route path="/store" element={<Store />} />
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                <Route path="/add-event" element={<AddEventPage />} />
             </Routes>
         </BrowserRouter>
     );
