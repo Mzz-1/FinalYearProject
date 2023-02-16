@@ -1,6 +1,8 @@
 require("dotenv").config();
 const connectDB = require("../db/Connect");
 const jwt = require("jsonwebtoken");
+const connectCloudinary = require("../db/Cloudinary");
+const cloudinary = require("cloudinary").v2;
 const Event = require("../models/Events");
 
 const addEvents = {
@@ -9,25 +11,34 @@ const addEvents = {
     handler: async (req, res) => {
         const {
             name,
-            venue,
+            place,
             location,
-            description,
+            image,
             startDate,
             endDate,
             startTime,
             endTime,
         } = req.body;
+        connectCloudinary();
+        console.log(image);
+        const upload = await cloudinary.uploader.upload(image, {
+            folder: "events",
+        });
+
+        //const url = cloudinary.url(name);
+        console.log("node 1");
 
         const event = await Event.create({
             name,
-            venue,
+            place,
             location,
-            description,
+            url: upload.secure_url,
             startDate,
             endDate,
             startTime,
             endTime,
         });
+        console.log("node 2");
         res.sendStatus(200);
     },
 };
@@ -55,22 +66,17 @@ const getEvent = {
     },
 };
 
-
 const updateEvents = {
     path: "/api/events/:id",
     method: "patch",
     handler: async (req, res) => {
         const { id: eventID } = req.params;
 
-        const event = await Event.findOneAndUpdate(
-            { _id: eventID },
-            req.body,
-            {
-                new: true,
-                runValidators: true,
-                useFindAndModify:true,
-            }
-        );
+        const event = await Event.findOneAndUpdate({ _id: eventID }, req.body, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: true,
+        });
 
         if (!event) {
             return res.status(404);
@@ -93,4 +99,10 @@ const deleteEvent = {
     },
 };
 
-module.exports = {addEvents,getAllEvents,getEvent,updateEvents,deleteEvent};
+module.exports = {
+    addEvents,
+    getAllEvents,
+    getEvent,
+    updateEvents,
+    deleteEvent,
+};

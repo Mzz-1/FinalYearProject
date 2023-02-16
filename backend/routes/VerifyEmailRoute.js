@@ -19,7 +19,7 @@ const verifyEmailRoute = {
             }
 
             await User.findOneAndUpdate(
-                {  verificationString: verificationString },
+                { verificationString: verificationString },
 
                 { $set: { isVerified: true } },
 
@@ -29,7 +29,7 @@ const verifyEmailRoute = {
                     useFindAndModify: false,
                 }
             );
-
+            const { _id: userID, email } = user;
             jwt.sign(
                 { userID, email, isVerified: true },
                 process.env.JWT_SECRET,
