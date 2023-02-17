@@ -21,7 +21,6 @@ function Register() {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     const handleFormSubmit = async ({ email, confirmPassword }) => {
-        
         try {
             const response = await axios.post(
                 "http://localhost:5000/api/signup",
@@ -31,7 +30,7 @@ function Register() {
                 }
             );
             console.log(confirmPassword, email);
-            console.log(response.data)
+            console.log(response.data);
             const { token } = response.data;
             console.log(token);
             setToken(token);
@@ -121,7 +120,7 @@ function Register() {
                         Sign up
                     </button>
                 </form>
-                <p>Forgot password?</p>
+
                 <p>
                     Already have an account?<Link to="/login">Log in.</Link>{" "}
                 </p>

@@ -10,6 +10,7 @@ import PasswordResetLandingPage from "../pages/PasswordResetLandingPage";
 import Store from "../pages/Store";
 import AdminDashboard from "../pages/AdminDashboard";
 import AddEventPage from "../pages/AddEventpage";
+import Events from "../pages/Events";
 
 export const AllRoutes = () => {
     return (
@@ -34,6 +35,7 @@ export const AllRoutes = () => {
                 <Route path="/store" element={<Store />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/add-event" element={<AddEventPage />} />
+                <Route path="/events" element={<Events />} />
             </Routes>
         </BrowserRouter>
     );

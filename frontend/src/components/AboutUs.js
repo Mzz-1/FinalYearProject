@@ -2,9 +2,9 @@ export const AboutUs = () => {
     return (
         <div className="h-[560px] bg-[#9F7E7E] text-[white] grid items-center justify-center">
             <h2 className="text-center">ABOUT US</h2>
-            <div className="grid grid-rows-2 grid-cols-2 items-center justify-center">
-                <div>
-                    <p>sadasd</p>
+            <div className="grid grid-rows-1 grid-cols-2 items-center justify-center gap-[150px]">
+                <div className="flex items-center justify-center">
+                    <img src="https://res.cloudinary.com/djuzpmqlp/image/upload/v1676613644/assets/about_bfnndy.png" className="w-[450px] h-[450px] object-cover" alt="about" />
                 </div>
                 <div className="w-[500px] text-center">
                     <p>
