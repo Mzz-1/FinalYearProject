@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { AdminEvent } from "../components/AdminEventsList";
+import { AdminSidebar } from "../components/AdminSidebar"
+import SplitScreen from "../components/SplitScreen"
 
-const AdminEvent = () => {
+const AdminEventPage = () => {
     const [events, setEvents] = useState([]);
 
     const getEvents = async () => {
@@ -17,7 +20,12 @@ const AdminEvent = () => {
     useEffect(() => {
         getEvents();
     }, []);
-    return <div></div>;
+    return (
+        <SplitScreen>
+        <AdminSidebar/>
+        <AdminEvent/>
+    </SplitScreen>
+    )
 };
 
-export default AdminEvent;
+export default AdminEventPage;

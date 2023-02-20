@@ -20,7 +20,9 @@ const addEvents = {
             endTime,
         } = req.body;
         connectCloudinary();
+      
         console.log(image);
+    
         const upload = await cloudinary.uploader.upload(image, {
             folder: "events",
         });

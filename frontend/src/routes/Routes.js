@@ -11,10 +11,17 @@ import Store from "../pages/Store";
 import AdminDashboard from "../pages/AdminDashboard";
 import AddEventPage from "../pages/AddEventpage";
 import Events from "../pages/Events";
+import AddProductPage from "../pages/AddProductsPage";
+import AdminEventPage from "../pages/AdminEvents";
+import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
+
 
 export const AllRoutes = () => {
     return (
         <BrowserRouter>
+        {/* <Navbar/> */}
+        
             <Routes>
                 <Route path="/" element={<PrivateRoute Component={Home} />} />
                 <Route path="/login" element={<Login />} />
@@ -35,8 +42,11 @@ export const AllRoutes = () => {
                 <Route path="/store" element={<Store />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/add-event" element={<AddEventPage />} />
+                <Route path="/add-product" element={<AddProductPage />} />
                 <Route path="/events" element={<Events />} />
+                <Route path="/admin-dashboard/events" element={<AdminEventPage />} />
             </Routes>
+            {/* <Footer/> */}
         </BrowserRouter>
     );
 };

@@ -1,14 +1,14 @@
+import { EventsSlideShow } from "./EventsSlideShow";
+import WhiteButton from "./WhiteButton";
+
 export const HomeEvents = () => {
     return (
         <div className="h-[560px] bg-[#9F7E7E] text-[white] grid items-center justify-center">
             <h2 className="text-center">EXPLORE EVENTS</h2>
-            <div className="grid grid-rows-1 grid-cols-2 items-center justify-center gap-[150px]">
+            <div className="grid grid-rows-1 grid-cols-2 items-center justify-center gap-[150px] w-[70%] m-auto">
                 <div className="flex items-center justify-center">
-                    <img
-                        src="https://res.cloudinary.com/djuzpmqlp/image/upload/v1676613644/assets/about_bfnndy.png"
-                        className="w-[450px] h-[450px] object-cover"
-                        alt="about"
-                    />
+                  
+                    <EventsSlideShow/>
                 </div>
                 <div className="w-[500px] text-center">
                     <p>
@@ -25,6 +25,7 @@ export const HomeEvents = () => {
                         world's most talented artists. Browse our listings now
                         and plan your next artistic adventure."
                     </p>
+                    <WhiteButton text="Explore Events" link="/events"/>
                 </div>
             </div>
         </div>

@@ -1,3 +1,5 @@
+import WhiteButton from "./WhiteButton";
+
 export const AboutUs = () => {
     return (
         <div className="h-[560px] bg-[#9F7E7E] text-[white] grid items-center justify-center">
@@ -16,6 +18,7 @@ export const AboutUs = () => {
                         your portal to all those services. Join now and discover
                         thousands of original works by today’s top artists
                     </p>
+                    <WhiteButton text="Discover Artists" />
                 </div>
             </div>
         </div>

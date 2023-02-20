@@ -3,9 +3,13 @@ import axios from "axios";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { EventsList } from "../components/EventsList";
+import { Heading } from "../components/Heading";
 
 const Events = () => {
     const [events, setEvents] = useState([]);
+
+    const today = new Date();
+    const dateToday = today.toDateString();
 
     const getEvents = async () => {
         const productsData = await axios.get(
@@ -22,15 +26,19 @@ const Events = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <Navbar />
             <div className="bg-[#FAF9F6]">
-                <h1>Ongoing Events</h1>
-
-                <EventsList events={events} />
+                <div className="max-w-[1400px] m-auto">
+                    <Heading text="Ongoing Events" />
+                    <EventsList events={events} date="ongoing" />
+                    <hr className="bg-black h-[2px]"></hr>
+                    <Heading text="Upcomming Events" />
+                    <EventsList events={events} date="upcomming" />
+                </div>
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 
