@@ -1,7 +1,11 @@
 require("dotenv").config();
-const connectDB = require("../db/Connect");
+const cloudinary = require("cloudinary").v2;
+const connectCloudinary = require("../db/Cloudinary");
 const jwt = require("jsonwebtoken");
 const Product = require("../models/Products");
+const multer = require("multer");
+
+const upload = multer({ dest: "uploads/" });
 
 const getAllProducts = {
     path: "/api/products",
@@ -29,19 +33,56 @@ const getProduct = {
 const addProducts = {
     path: "/api/products",
     method: "post",
-    handler: async (req, res) => {
-        const { name, artist, category, description, quantity, dimentions } =
-            req.body;
-        const product = await Product.create({
-            name,
-            artist,
-            category,
-            description,
-            quantity,
-            dimentions,
-        });
-        res.sendStatus(200);
-    },
+    handler: [
+        upload.single("image"),
+        async (req, res) => {
+            try {
+                const {
+                    name,
+                    artist,
+                    category,
+                    description,
+                    quantity,
+                    dimensions,
+                    price,
+                } = req.body;
+                const file = req.file;
+
+                if (!file) {
+                    return res
+                        .status(400)
+                        .json({ message: "No file was uploaded" });
+                }
+
+                connectCloudinary();
+
+                const result = await cloudinary.uploader.upload(file.path, {
+                    folder: "products",
+                });
+
+                const product = await Product.create({
+                    name,
+                    artist,
+                    category,
+                    description,
+                    url: result.secure_url,
+
+                    quantity,
+                    price,
+                    dimensions,
+                });
+
+                return res
+                    .status(200)
+                    .json({ message: "Product created successfully", product });
+            } catch (error) {
+                console.log(error);
+                return res
+                    .status(500)
+                    .json({ message: "Something went wrong" });
+            }
+        },
+    ],
 };
 
 const updateProducts = {

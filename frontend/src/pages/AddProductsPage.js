@@ -11,44 +11,37 @@ const AddProductPage = () => {
         formState: { errors },
     } = useForm();
     watch("image");
-    const [image64, setImage64] = useState("");
+    // const [image64, setImage64] = useState("");
 
-    const setFileToBase = (file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setImage64(reader.result);
-        };
-    };
+    // const setFileToBase = (file) => {
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onloadend = () => {
+    //         setImage64(reader.result);
+    //     };
+    // };
 
-    const addEvent = async ({
-        name,
-        place,
-        category,
-        image,
-        description,
-        quantity,
-        dimentions,
-    }) => {
+    const addEvent = async (data) => {
         console.log("1");
-        if (image.length > 0) {
-            console.log("no image");
-            setFileToBase(image[0]);
-        }
 
-        console.log(image64);
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("artist", "as");
+        formData.append("category", data.category);
+        formData.append("description", data.description);
+        formData.append("quantity", data.quantity);
+        formData.append("price", data.price);
+        formData.append("dimensions", data.dimensions);
+        formData.append("image", data.image[0]);
+
         try {
             const response = await axios.post(
                 "http://localhost:5000/api/products",
+                formData,
                 {
-                    name: name,
-                    artist:"as",
-                    category: category,
-                    image: image64,
-                    description: description,
-                    quantity: quantity,
-                    dimentions: dimentions,
-                 
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
                 }
             );
 
@@ -91,7 +84,7 @@ const AddProductPage = () => {
                                 }),
                             }}
                         />
-                        <p>{errors.place?.message}</p>
+                        <p>{errors.category?.message}</p>
                         <label>Description</label>
                         <Input
                             type="text"
@@ -102,7 +95,7 @@ const AddProductPage = () => {
                                 }),
                             }}
                         />
-                        <p>{errors.location?.message}</p>
+                        <p>{errors.description?.message}</p>
                         <label>Image</label>
                         <input
                             type="file"
@@ -123,19 +116,30 @@ const AddProductPage = () => {
                                 }),
                             }}
                         />
-                        <p>{errors.startDate?.message}</p>
+                        <p>{errors.quantity?.message}</p>
                         <label>Dimentions</label>
                         <Input
                             type="text"
                             placeholder="eg 10x12"
                             register={{
-                                ...register("dimentions", {
+                                ...register("dimensions", {
                                     required: "Please enter your password.",
                                 }),
                             }}
                         />
-                        <p>{errors.endDate?.message}</p>
-            
+                        <p>{errors.dimensions?.message}</p>
+
+                        <label>Price</label>
+                        <Input
+                            type="text"
+                            placeholder="Price"
+                            register={{
+                                ...register("price", {
+                                    required: "Please enter the price.",
+                                }),
+                            }}
+                        />
+                        <p>{errors.price?.message}</p>
                     </div>
                 </div>
                 <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">

@@ -41,8 +41,8 @@ export const AllRoutes = () => {
                 />
                 <Route path="/store" element={<Store />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                <Route path="/add-event" element={<AddEventPage />} />
-                <Route path="/add-product" element={<AddProductPage />} />
+                <Route path="/admin-dashboard/add-event" element={<AddEventPage />} />
+                <Route path="/admin-dashboard/add-product" element={<AddProductPage />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/admin-dashboard/events" element={<AdminEventPage />} />
             </Routes>

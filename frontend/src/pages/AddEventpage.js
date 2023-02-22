@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Input from "../components/Input";
 
+
 const AddEventPage = () => {
     const {
         register,
