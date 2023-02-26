@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Input from "../components/Input";
+import Input from "../../components/Input";
 
-const AddProductPage = () => {
+const AddEventPage = () => {
     const {
         register,
         handleSubmit,
@@ -11,40 +11,57 @@ const AddProductPage = () => {
         formState: { errors },
     } = useForm();
     watch("image");
-    // const [image64, setImage64] = useState("");
+    const [image64, setImage64] = useState("");
 
-    // const setFileToBase = (file) => {
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onloadend = () => {
-    //         setImage64(reader.result);
-    //     };
-    // };
+    const setFileToBase = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setImage64(reader.result);
+        };
+    };
 
-    const addEvent = async (data) => {
+    const addEvent = async ({
+        name,
+        place,
+        location,
+        image,
+        startDate,
+        endDate,
+        startTime,
+        endTime,
+    }) => {
         console.log("1");
+        if (image.length > 0) {
+            console.log("no image");
+            setFileToBase(image[0]);
+        }
 
-        const formData = new FormData();
-        formData.append("name", data.name);
-        formData.append("artist", "as");
-        formData.append("category", data.category);
-        formData.append("description", data.description);
-        formData.append("quantity", data.quantity);
-        formData.append("price", data.price);
-        formData.append("dimensions", data.dimensions);
-        formData.append("image", data.image[0]);
-
+        console.log(image64);
         try {
             const response = await axios.post(
-                "http://localhost:5000/api/products",
-                formData,
+                "http://localhost:5000/api/events",
                 {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
+                    name: name,
+                    place: place,
+                    location: location,
+                    image: image64,
+                    startDate: startDate,
+                    endDate: endDate,
+                    startTime: startTime,
+                    endTime: endTime,
                 }
             );
-
+            // console.log(
+            //     name,
+            //     place,
+            //     location,
+            //     image,
+            //     startDate,
+            //     endDate,
+            //     startTime,
+            //     endTime
+            // );
             console.log(response.data);
             // const { token } = response.data;
             // console.log(token);
@@ -62,7 +79,7 @@ const AddProductPage = () => {
             >
                 <div className="grid grid-rows-1 grid-cols-2 gap-[30px]">
                     <div className="flex flex-col gap-[20px]">
-                        <label>Product Name</label>
+                        <label>Event Name</label>
                         <Input
                             type="text"
                             placeholder="Name"
@@ -73,29 +90,29 @@ const AddProductPage = () => {
                             }}
                         />
                         <p>{errors.name?.message}</p>
-                        <label>Category</label>
+                        <label>Place</label>
                         <Input
                             type="text"
-                            placeholder="Category"
+                            placeholder="Place"
                             register={{
-                                ...register("category", {
+                                ...register("place", {
                                     required:
                                         "Please enter your email address.",
                                 }),
                             }}
                         />
-                        <p>{errors.category?.message}</p>
-                        <label>Description</label>
+                        <p>{errors.place?.message}</p>
+                        <label>Location</label>
                         <Input
                             type="text"
-                            placeholder="Description"
+                            placeholder="Location"
                             register={{
-                                ...register("description", {
+                                ...register("location", {
                                     required: "Please enter your password.",
                                 }),
                             }}
                         />
-                        <p>{errors.description?.message}</p>
+                        <p>{errors.location?.message}</p>
                         <label>Image</label>
                         <input
                             type="file"
@@ -107,47 +124,54 @@ const AddProductPage = () => {
                         <p>{errors.image?.message}</p>
                     </div>
                     <div className="flex flex-col  gap-[20px]">
-                        <label>Quantity</label>
+                        <label>Start Date</label>
                         <Input
-                            type="number"
+                            type="date"
                             register={{
-                                ...register("quantity", {
+                                ...register("startDate", {
                                     required: "Please enter your password.",
                                 }),
                             }}
                         />
-                        <p>{errors.quantity?.message}</p>
-                        <label>Dimentions</label>
+                        <p>{errors.startDate?.message}</p>
+                        <label>End Date</label>
                         <Input
-                            type="text"
-                            placeholder="eg 10x12"
+                            type="date"
                             register={{
-                                ...register("dimensions", {
+                                ...register("endDate", {
                                     required: "Please enter your password.",
                                 }),
                             }}
                         />
-                        <p>{errors.dimensions?.message}</p>
-
-                        <label>Price</label>
+                        <p>{errors.endDate?.message}</p>
+                        <label>Start Time</label>
                         <Input
-                            type="text"
-                            placeholder="Price"
+                            type="time"
                             register={{
-                                ...register("price", {
-                                    required: "Please enter the price.",
+                                ...register("startTime", {
+                                    required: "Please enter your password.",
                                 }),
                             }}
                         />
-                        <p>{errors.price?.message}</p>
+                        <p>{errors.startTime?.message}</p>
+                        <label>End Time</label>
+                        <Input
+                            type="time"
+                            register={{
+                                ...register("endTime", {
+                                    required: "Please enter your password.",
+                                }),
+                            }}
+                        />
+                        <p>{errors.endTime?.message}</p>
                     </div>
                 </div>
                 <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
-                    Add Product
+                    Add Event
                 </button>
             </form>
         </div>
     );
 };
 
-export default AddProductPage;
+export default AddEventPage;

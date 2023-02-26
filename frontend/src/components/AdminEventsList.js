@@ -73,13 +73,14 @@ export const AdminEvent = () => {
                                         <td>{newEndDate}</td>
                                         <td className="">
                                             <EditButton />
-                                            <button
+                                            <DeleteButton
                                                 onClick={() =>
                                                     deleteEvent(events._id)
                                                 }
                                             >
                                                 Delete
-                                            </button>
+                                                </DeleteButton>
+                                        
                                         </td>
                                     </tr>
                                 );

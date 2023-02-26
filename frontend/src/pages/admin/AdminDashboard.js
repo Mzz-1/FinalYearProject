@@ -1,10 +1,10 @@
 
 import { useState } from "react"
-import SplitScreen from "../components/SplitScreen"
-import { AdminSidebar } from "../components/AdminSidebar"
+import SplitScreen from "../../components/SplitScreen"
+import { AdminSidebar } from "../../components/AdminSidebar"
 import AddEventPage from "./AddEventpage"
-import AddProductPage from "./AddProductsPage"
-import { AdminEvent } from "../components/AdminEventsList"
+import AddProductPage from "../artistDashboard/AddProductsPage"
+import { AdminEvent } from "../../components/AdminEventsList"
 
 const LeftComponent =()=>{
     return <h1>left</h1>

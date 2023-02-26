@@ -1,5 +1,8 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+
 export const EventsSlideShow = () => {
     const options = {
       type: "loop",
@@ -12,6 +15,22 @@ export const EventsSlideShow = () => {
       arrows: false,
     };
   
+    const [events, setEvents] = useState([]);
+
+    const getEvents = async () => {
+        const productsData = await axios.get(
+            `http://localhost:5000/api/events`
+        );
+
+        const data = await productsData.data.event;
+        setEvents(data);
+        console.log("getEvents", data);
+    };
+
+    useEffect(()=>{
+      getEvents()
+    },[])
+
     const slides = [
       {
         id: 1,
@@ -42,9 +61,9 @@ export const EventsSlideShow = () => {
   
     return (
       <Splide options={options}>
-        {slides.map((slide) => (
-          <SplideSlide key={slide.id}>
-            <img className='w-[450px] h-[450px] object-cover' src={slide.image} alt={slide.title} />
+        {events.map((events) => (
+          <SplideSlide key={events._id}>
+            <img className='w-[450px] h-[450px] object-cover' src={events.url} alt={events.title} />
           </SplideSlide>
         ))}
       </Splide>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
     const items = [
+        { itemName: "HOME", link: "/" },
         { itemName: "STORE", link: "/store" },
         { itemName: "ARTISTS", link: "" },
         { itemName: "EVENTS", link: "/events" },

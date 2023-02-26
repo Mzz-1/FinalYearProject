@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { Product } from "../components/Product";
-import { ProductList } from "../components/ProductList";
+import { ProductList } from "../../components/ProductList";
+import { Heading2 } from "../../components/Heading";
 
-const Store = () => {
+export const NewProducts = () => {
     const [products, setProducts] = useState([]);
 
     const getProducts = async () => {
         const productsData = await axios.get(
-            `http://localhost:5000/api/products`
+            `http://localhost:5000/api/products?limit=4`
         );
 
         const data = await productsData.data.product;
@@ -21,12 +21,9 @@ const Store = () => {
     }, []);
 
     return (
-        <div>
-            <h1>store</h1>
-            
+        <div className="px-[50px]">
+            <Heading2 text="New"/>
             <ProductList products={products}/>
         </div>
-    );
+    )
 };
-
-export default Store;

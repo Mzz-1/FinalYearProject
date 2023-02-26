@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import EmailVerificationSuccess from "./EmailVerificationSuccess";
 import EmailVerificationFail from "./EmailVerificationFail";
-import { useToken } from "../service/useToken";
+import { useToken } from "../../service/useToken";
 
 const EmailVerificationPage = () => {
     const [isLoading, setIsLoading] = useState(true);

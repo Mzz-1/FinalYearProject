@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import PasswordResetFail from "./PasswordResetFail";
 import PasswordResetSuccess from "./PasswordResetSuccess";
-import Input from "../components/Input";
+import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
 
 const PasswordResetLandingPage = () => {

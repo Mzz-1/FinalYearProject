@@ -21,10 +21,14 @@ const userSchema = mongoose.Schema({
     passwordResetCode: {
         type: String,
     },
+    role:{
+        type:String,
+    },
     createdAt: {
         type: Date,
         default: Date.now(),
     },
+
 });
 
 module.exports = mongoose.model("User", userSchema);

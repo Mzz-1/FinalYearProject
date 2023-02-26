@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Navbar } from "../components/Navbar";
-import { Footer } from "../components/Footer";
-import { EventsList } from "../components/EventsList";
-import { Heading } from "../components/Heading";
+import { EventsList } from "../../components/EventsList";
+import { Heading } from "../../components/Heading";
 
 const Events = () => {
     const [events, setEvents] = useState([]);
@@ -27,7 +25,7 @@ const Events = () => {
 
     return (
         <>
-            <Navbar />
+        
             <div className="bg-[#FAF9F6]">
                 <div className="max-w-[1400px] m-auto">
                     <Heading text="Ongoing Events" />
@@ -37,7 +35,7 @@ const Events = () => {
                     <EventsList events={events} date="upcomming" />
                 </div>
             </div>
-            <Footer />
+           
         </>
     );
 };

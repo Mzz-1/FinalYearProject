@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import Input from "../components/Input";
+import Input from "../../components/Input";
 
 const ForgotPasswordPage = () => {
     const {
