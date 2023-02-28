@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { EventsList } from "../../components/EventsList";
+import { EventsList } from "./EventsList";
 import { Heading } from "../../components/Heading";
 
 const Events = () => {

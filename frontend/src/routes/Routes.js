@@ -13,6 +13,7 @@ import AddEventPage from "../pages/admin/AddEventpage";
 import Events from "../pages/events/Events";
 import AddProductPage from "../pages/artistDashboard/AddProductsPage";
 import AdminEventPage from "../pages/admin/AdminEvents";
+import UserList from "../pages/admin/UsersList";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 
@@ -53,6 +54,10 @@ export const AllRoutes = () => {
                 <Route
                     path="/admin-dashboard/events"
                     element={<AdminEventPage />}
+                />
+                <Route
+                    path="/admin-dashboard/users"
+                    element={<UserList />}
                 />
             </Routes>
             <Footer />

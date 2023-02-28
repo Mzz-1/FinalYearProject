@@ -1,4 +1,4 @@
-export const Table=({th1,th2,th3,th4,th5,tabledata})=> {
+export const Table=({heading,data})=> {
     return (
       <table>
         <thead>

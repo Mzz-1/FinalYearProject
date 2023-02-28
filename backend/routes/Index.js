@@ -6,6 +6,8 @@ const forgotPasswordRoute = require("./ForgotPasswordRoute");
 const resetPasswordRoute = require("./ResetPasswordRoute");
 //const {testEmailRoute} = require("./Nodemailer");
 
+const { getAllUsers, getUser, deleteUser } = require("./UserRoute");
+
 const {
     addProducts,
     updateProducts,
@@ -13,6 +15,7 @@ const {
     getProduct,
     deleteProduct,
 } = require("./ProductRoute");
+
 const {
     addEvents,
     getAllEvents,
@@ -28,6 +31,9 @@ const routes = [
     resetPasswordRoute,
     loginRoute,
     testEmailRoute,
+    getAllUsers,
+    getUser,
+    deleteUser,
     addProducts,
     updateProducts,
     getAllProducts,

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { AdminEvent } from "../../components/AdminEventsList";
+import { AdminEvent } from "./AdminEventsList";
 import { AdminSidebar } from "../../components/AdminSidebar";
 import SplitScreen from "../../components/SplitScreen";
-
 
 const AdminEventPage = () => {
     const [events, setEvents] = useState([]);

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AdminHeading2 } from "./Heading";
-import { RiArrowRightSLine,RiCalendarEventLine } from "react-icons/ri";
+import { RiArrowRightSLine, RiCalendarEventLine } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
-import {AiOutlineUser} from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
 
 export const AdminSidebar = () => {
     const items = [
@@ -13,14 +13,38 @@ export const AdminSidebar = () => {
             subItems: [
                 {
                     subItemName: "Add Event",
-                    link: "/admin-dashboard/add-events",
+                    link: "/admin-dashboard/add-event",
+                },
+                {
+                    subItemName: "Manage Event",
+                    link: "/admin-dashboard/events",
                 },
             ],
-            icon:<RiCalendarEventLine/>,
+            icon: <RiCalendarEventLine />,
             link: "/admin-dashboard/events",
         },
-        { itemName: "Artists", subItems: [], link: "", icon:<AiOutlineUser/> },
-        { itemName: "Users", link: "", icon:<AiOutlineUser/> },
+        {
+            itemName: "Artists",
+            subItems: [
+                {
+                    subItemName: "Manage Artists",
+                    link: "/admin-dashboard/view-artists",
+                },
+            ],
+            link: "",
+            icon: <AiOutlineUser />,
+        },
+        {
+            itemName: "Users",
+            subItems: [
+                {
+                    subItemName: "Manage Users",
+                    link: "/admin-dashboard/view-users",
+                },
+            ],
+            link: "",
+            icon: <AiOutlineUser />,
+        },
     ];
 
     const [showDropdown, setShowDropdown] = useState(false);

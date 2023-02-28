@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { AdminHeading, AdminHeading2, ModalHeading } from "./Heading";
-import { ModalPara } from "./Paragraph";
+import {
+    AdminHeading,
+    AdminHeading2,
+    ModalHeading,
+} from "../../components/Heading";
+import { ModalPara } from "../../components/Paragraph";
 import { useNavigate } from "react-router-dom";
-import { ViewButton, EditButton, DeleteButton, YesButton, NoButton } from "../components/Button";
-import { Modal } from "./Modal";
+import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
+import { Modal, LargeModal } from "../../components/Modal";
+import ViewEvents from "./ViewEvent";
 
 export const AdminEvent = () => {
     const [events, setEvents] = useState([]);
-
+    const [viewEvents, setViewEvents] = useState([]);
     const navigate = useNavigate();
 
     const getEvents = async () => {
@@ -25,7 +30,8 @@ export const AdminEvent = () => {
         const viewData = await axios.get(
             `http://localhost:5000/api/events/${id}`
         );
-       
+        console.log("view event", viewData.data.event);
+        setViewEvents(viewData.data.event);
     };
 
     const deleteEvent = async (id) => {
@@ -43,7 +49,7 @@ export const AdminEvent = () => {
 
     return (
         <div className="flex flex-col gap-[40px] h-[100%] ">
-            <AdminHeading text="Events" />
+            <AdminHeading  > Events</AdminHeading>
             <div className="flex flex-col gap-[20px] border rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white">
                 <AdminHeading2 text="All Events" />
                 <div className="overflow-scroll">
@@ -81,24 +87,31 @@ export const AdminEvent = () => {
                                         <td>{newStartDate}</td>
                                         <td>{newEndDate}</td>
                                         <td className="">
-                                        <ViewButton
+                                           
+                                            <LargeModal
                                                 onClick={() =>
                                                     viewEvent(events._id)
                                                 }
                                             >
-                                                View
-                                                </ViewButton>
+                                                <ViewEvents
+                                                    events={viewEvents}
+                                                />
+                                            </LargeModal>
                                             <EditButton />
-                                            
-                                                
-                                               
-                                                <Modal onClick={() =>
+
+                                            <Modal
+                                                onClick={() =>
                                                     deleteEvent(events._id)
-                                                }>
-                                                   <ModalHeading>Confirm Delete?</ModalHeading>
-                                                   <ModalPara>Are you sure you want to delete the following event?</ModalPara>
-                                               
-                                                </Modal>
+                                                }
+                                            >
+                                                <ModalHeading>
+                                                    Confirm Delete?
+                                                </ModalHeading>
+                                                <ModalPara>
+                                                    Are you sure you want to
+                                                    delete the following event?
+                                                </ModalPara>
+                                            </Modal>
                                         </td>
                                     </tr>
                                 );

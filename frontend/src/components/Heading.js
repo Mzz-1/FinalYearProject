@@ -10,9 +10,9 @@ export const Heading2=({text})=>{
     )
 }
 
-export const AdminHeading=({text})=>{
+export const AdminHeading=({children})=>{
     return(
-        <h2 className="text-[#3C3737] text-[28px]">{text}</h2>
+        <h2 className="text-[#3C3737] text-[28px]">{children}</h2>
     )
 }
 

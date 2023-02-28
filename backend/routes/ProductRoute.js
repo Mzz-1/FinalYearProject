@@ -116,7 +116,7 @@ const deleteProduct = {
     method: "delete",
     handler: async (req, res) => {
         const { id: productID } = req.params;
-        const product = await Product.findOne({ _id: productID });
+        const product = await Product.findOneAndDelete({ _id: productID });
         if (!product) {
             return res.sendStatus(400);
         }
