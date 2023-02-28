@@ -11,7 +11,9 @@ const getAllProducts = {
     path: "/api/products",
     method: "get",
     handler: async (req, res) => {
-        const product = await Product.find({});
+        const{limit} = req.query
+        limitNum = parseInt(limit)
+        const product = await Product.find({}).limit(limitNum);
 
         res.status(200).json({ product });
     },

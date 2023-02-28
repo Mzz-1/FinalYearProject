@@ -4,6 +4,7 @@ import { AdminEvent } from "../../components/AdminEventsList";
 import { AdminSidebar } from "../../components/AdminSidebar";
 import SplitScreen from "../../components/SplitScreen";
 
+
 const AdminEventPage = () => {
     const [events, setEvents] = useState([]);
 

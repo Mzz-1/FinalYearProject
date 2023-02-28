@@ -1,4 +1,4 @@
-import WhiteButton from "./WhiteButton";
+import { WhiteButton } from "./Button";
 
 export const AboutUs = () => {
     return (

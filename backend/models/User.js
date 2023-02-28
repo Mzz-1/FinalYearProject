@@ -1,6 +1,12 @@
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 const userSchema = mongoose.Schema({
+    username:{
+        type: String,
+        required: [true, "email is required"],
+        unique: true,
+        trim:true,
+    },
     email: {
         type: String,
         required: [true, "email is required"],

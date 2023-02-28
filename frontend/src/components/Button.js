@@ -1,3 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
+export const ViewButton =({children, onClick})=>{
+    return(
+        <button className="h-[30px] w-[80px] bg-[#29CC97] text-white text-center rounded-[10px] mr-[20px]" onClick={onClick}>{children}</button>
+    )
+}
+
 export const EditButton =()=>{
     return(
         <button className="h-[30px] w-[80px] bg-[#29CC97] text-white text-center rounded-[10px] mr-[20px]">Edit</button>
@@ -6,7 +14,19 @@ export const EditButton =()=>{
 
 export const DeleteButton =({onClick})=>{
     return(
-        <button className="h-[30px] w-[80px] bg-[#29CC97] text-white text-center rounded-[10px] ml-[20px]" onClick={onClick}>Delete</button>
+        <button className="h-[30px] w-[80px] bg-[#a83232] text-white text-center rounded-[10px] ml-[20px]" onClick={onClick}>Delete</button>
+    )
+}
+
+export const YesButton =({onClick})=>{
+    return(
+        <button className="h-[30px] w-[80px] bg-[#a83232] text-white text-center rounded-[5px] mr-[5px]" onClick={onClick}>Yes</button>
+    )
+}
+
+export const NoButton =({onClick})=>{
+    return(
+        <button className="h-[30px] w-[80px] bg-[#a83232] text-white text-center rounded-[5px] ml-[5px]" onClick={onClick}>No</button>
     )
 }
 
@@ -15,5 +35,22 @@ export const VisitButton =({deleteEvent})=>{
         <button className="h-[30px] w-[80px] bg-[#29CC97] text-white text-center rounded-[10px] ml-[20px]" onClick={deleteEvent}>Delete</button>
     )
 }
+
+export const WhiteButton = ({ text, link, register }) => {
+    const navigate = useNavigate();
+
+    return (
+        <button
+            className="px-[10px] py-[10px] border mt-[20px]"
+            onClick={() => {
+                navigate(`${link}`);
+            }}
+        >
+            {text}
+        </button>
+    );
+};
+
+
 
 

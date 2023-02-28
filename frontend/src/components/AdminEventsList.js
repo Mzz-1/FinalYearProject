@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { AdminHeading, AdminHeading2 } from "./Heading";
+import { AdminHeading, AdminHeading2, ModalHeading } from "./Heading";
+import { ModalPara } from "./Paragraph";
 import { useNavigate } from "react-router-dom";
-import { EditButton, DeleteButton } from "../components/Button";
+import { ViewButton, EditButton, DeleteButton, YesButton, NoButton } from "../components/Button";
+import { Modal } from "./Modal";
 
 export const AdminEvent = () => {
     const [events, setEvents] = useState([]);
@@ -17,6 +19,13 @@ export const AdminEvent = () => {
         const data = await productsData.data.event;
         setEvents(data);
         console.log("getEvents", data);
+    };
+
+    const viewEvent = async (id) => {
+        const viewData = await axios.get(
+            `http://localhost:5000/api/events/${id}`
+        );
+       
     };
 
     const deleteEvent = async (id) => {
@@ -72,15 +81,24 @@ export const AdminEvent = () => {
                                         <td>{newStartDate}</td>
                                         <td>{newEndDate}</td>
                                         <td className="">
-                                            <EditButton />
-                                            <DeleteButton
+                                        <ViewButton
                                                 onClick={() =>
-                                                    deleteEvent(events._id)
+                                                    viewEvent(events._id)
                                                 }
                                             >
-                                                Delete
-                                                </DeleteButton>
-                                        
+                                                View
+                                                </ViewButton>
+                                            <EditButton />
+                                            
+                                                
+                                               
+                                                <Modal onClick={() =>
+                                                    deleteEvent(events._id)
+                                                }>
+                                                   <ModalHeading>Confirm Delete?</ModalHeading>
+                                                   <ModalPara>Are you sure you want to delete the following event?</ModalPara>
+                                               
+                                                </Modal>
                                         </td>
                                     </tr>
                                 );

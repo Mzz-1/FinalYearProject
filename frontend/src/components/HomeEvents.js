@@ -1,5 +1,5 @@
 import { EventsSlideShow } from "./EventsSlideShow";
-import WhiteButton from "./WhiteButton";
+import { WhiteButton } from "./Button";
 
 export const HomeEvents = () => {
     return (
