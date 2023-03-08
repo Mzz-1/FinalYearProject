@@ -14,12 +14,9 @@ const RightComponent = () => {
 };
 
 const AdminDashboard = () => {
-    const [currentPage, setCurentPage] = useState(<AddEventPage />);
+    
     return (
-        <SplitScreen>
-            <AdminSidebar />
-            {currentPage}
-        </SplitScreen>
+       <></>
     );
 };
 

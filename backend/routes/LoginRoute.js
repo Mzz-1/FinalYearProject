@@ -16,7 +16,7 @@ const loginRoute = {
             return res.sendStatus(401);
         }
 
-        const { _id: id, isVerified, passwordHash, info } = user;
+        const { _id: id, isVerified, passwordHash, role } = user;
 
         const isCorrect = await bcrypt.compare(password, passwordHash);
 
@@ -26,7 +26,7 @@ const loginRoute = {
                     id,
                     isVerified,
                     email,
-                    info,
+                    role,
                 },
                 process.env.JWT_SECRET,
                 {

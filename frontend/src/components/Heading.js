@@ -16,9 +16,9 @@ export const AdminHeading=({children})=>{
     )
 }
 
-export const AdminHeading2=({text, color})=>{
+export const AdminHeading2=({children, color})=>{
     return(
-        <h2 className="text-[#A4A6B3] text-[22px]">{text}</h2>
+        <h2 className="text-[#A4A6B3] text-[22px]">{children}</h2>
     )
 }
 

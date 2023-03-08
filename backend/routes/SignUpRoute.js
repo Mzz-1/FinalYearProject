@@ -10,7 +10,7 @@ const signUpRoute = {
     path: "/api/signup",
     method: "post",
     handler: async (req, res) => {
-        const { email, password } = req.body;
+        const { username, email, password,role } = req.body;
         const db = connectDB(process.env.MONGO_URI); // left
         const user = await User.findOne({ email });
 
@@ -21,14 +21,11 @@ const signUpRoute = {
 
         const verificationString = v4();
 
-        const startingInfo = {
-            admin: "",
-        };
-
         const result = await User.create({
+            username,
             email,
             passwordHash,
-            info: startingInfo,
+            role,
             isVerified: false,
             verificationString,
         });
@@ -36,7 +33,7 @@ const signUpRoute = {
         const { insertedId } = result;
 
         try {
-            await sendEmail({
+             sendEmail({
                 to: email,
                 from: "simply.art213@outlook.com",
                 subject: "Please verify your email",
@@ -55,7 +52,7 @@ const signUpRoute = {
             {
                 id: insertedId,
                 email,
-                info: startingInfo,
+                role,
                 isVerified: false,
             },
             process.env.JWT_SECRET,

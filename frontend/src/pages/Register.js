@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
 import axios from "axios";
@@ -14,20 +14,23 @@ function Register() {
         register,
         handleSubmit,
         watch,
+        control,
         formState: { errors },
     } = useForm();
 
     const emailRegex =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-    const handleFormSubmit = async ({ username, email, confirmPassword }) => {
+    const handleFormSubmit = async ({ username, email, confirmPassword,role }) => {
         try {
+            const userType = role ? "artist": "user"; 
             const response = await axios.post(
                 "http://localhost:5000/api/signup",
                 {
-                    username:username,
+                    username: username,
                     email: email,
                     password: confirmPassword,
+                    role:userType,
                 }
             );
             console.log(confirmPassword, email);
@@ -53,7 +56,7 @@ function Register() {
     };
 
     return (
-        <div className="grid grid-rows-1 grid-cols-2 h-[100vh] text-[#9F7E7E] bg-[#F4F4F2] 2xl:px-[8vw]">
+        <div className="grid grid-rows-1 grid-cols-2 h-[100%] text-[#9F7E7E] bg-[#F4F4F2] 2xl:px-[8vw] py-[40px]">
             <div className="flex items-center justify-center justify-items-start flex-col gap-[20px] px-[6vw]">
                 <h1 className="text-7xl font-bold">SimplyArt</h1>
                 <p className="text-2xl font-medium text-center">
@@ -61,10 +64,10 @@ function Register() {
                     artworks and exhibitions. Sign up to continue!
                 </p>
             </div>
-            <div className="flex flex-col items-center justify-center gap-[20px]">
+            <div className="flex flex-col items-center justify-center gap-[10px]">
                 <h2 className="text-5xl font-semibold ">Register</h2>
                 <form
-                    className="flex flex-col gap-[30px] my-[20px]"
+                    className="flex flex-col gap-[25px] my-[20px]"
                     onSubmit={handleSubmit(handleFormSubmit)}
                 >
                     <Input
@@ -115,9 +118,19 @@ function Register() {
                             }),
                         }}
                     />
-                    
-                    <p>{errors.confirmPassword?.message}</p>
 
+                    <p>{errors.confirmPassword?.message}</p>
+                    <Controller
+                        name="role"
+                        control={control}
+                        defaultValue={false}
+                        render={({ field }) => (
+                            <label>
+                                <input type="checkbox" {...field} />
+                                Do you wnat to sign up as an artist?
+                            </label>
+                        )}
+                    />
                     <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
                         Sign up
                     </button>

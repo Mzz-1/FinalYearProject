@@ -4,6 +4,7 @@ import { AdminHeading2 } from "./Heading";
 import { RiArrowRightSLine, RiCalendarEventLine } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
 import { AiOutlineUser } from "react-icons/ai";
+import {MdLogout} from "react-icons/md";
 
 export const AdminSidebar = () => {
     const items = [
@@ -28,7 +29,7 @@ export const AdminSidebar = () => {
             subItems: [
                 {
                     subItemName: "Manage Artists",
-                    link: "/admin-dashboard/view-artists",
+                    link: "/admin-dashboard/artists",
                 },
             ],
             link: "",
@@ -39,12 +40,13 @@ export const AdminSidebar = () => {
             subItems: [
                 {
                     subItemName: "Manage Users",
-                    link: "/admin-dashboard/view-users",
+                    link: "/admin-dashboard/users",
                 },
             ],
             link: "",
             icon: <AiOutlineUser />,
         },
+      
     ];
 
     const [showDropdown, setShowDropdown] = useState(false);
@@ -54,8 +56,8 @@ export const AdminSidebar = () => {
     };
 
     return (
-        <div className="flex flex-col py-[20px] text-center">
-            <AdminHeading2 text="Welcome Admin" />
+        <div className="flex flex-col py-[20px]  h-[100%]">
+            <AdminHeading2>Welcome Admin</AdminHeading2>
             <div className="flex justify-center mt-[50px]">
                 <ul className=" w-[100%] flex flex-col gap-[10px]">
                     {items.map((item, i) => (
@@ -77,9 +79,9 @@ export const AdminSidebar = () => {
                             </span>
 
                             {showDropdown && (
-                                <ul className="">
+                                <ul className="pl-[30px]">
                                     {item.subItems?.map((subItem, j) => (
-                                        <li key={j}>
+                                        <li key={j} className="">
                                             {" "}
                                             <Link to={subItem.link}>
                                                 {subItem.subItemName}
@@ -91,7 +93,10 @@ export const AdminSidebar = () => {
                         </li>
                     ))}
                 </ul>
+               
             </div>
+            
+            <button className=" text-[20px]  text-[#A4A6B3] mt-[auto] flex items-center gap-4 justify-center">Log out <MdLogout/> </button>
         </div>
     );
 };

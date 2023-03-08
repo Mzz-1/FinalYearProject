@@ -5,8 +5,8 @@ const getAllUsers = {
     path: "/api/users",
     method: "get",
     handler: async (req, res) => {
-        
-        const users = await User.find({})
+        const {role} = req.query; 
+        const users = await User.find({role})
 
         res.status(200).json({ users });
     },

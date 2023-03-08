@@ -49,9 +49,9 @@ export const AdminEvent = () => {
 
     return (
         <div className="flex flex-col gap-[40px] h-[100%] ">
-            <AdminHeading  > Events</AdminHeading>
+            <AdminHeading> Events</AdminHeading>
             <div className="flex flex-col gap-[20px] border rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white">
-                <AdminHeading2 text="All Events" />
+                <AdminHeading2> All Events </AdminHeading2>
                 <div className="overflow-scroll">
                     <table className=" w-[100%] text-[#252733]">
                         <thead className="text-left top-0">
@@ -87,7 +87,6 @@ export const AdminEvent = () => {
                                         <td>{newStartDate}</td>
                                         <td>{newEndDate}</td>
                                         <td className="">
-                                           
                                             <LargeModal
                                                 onClick={() =>
                                                     viewEvent(events._id)
