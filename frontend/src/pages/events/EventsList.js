@@ -48,28 +48,28 @@ export const EventsList = ({ events, date }) => {
                             {datebool ? (
                                 <SplideSlide key={newStartDate}>
                                     <div className="grid grid-rows-1 grid-cols-2 gap-[0px] justify-center items-center">
-                                        <div className="text-[24px]">
-                                            <h3 className="text-[40px]">
+                                        <div className="text-[20px] w-[500px] ml-auto mr-0">
+                                            <h3 className="text-[34px]">
                                                 {events.name}
                                             </h3>
-                                            <hr className="h-[2px] bg-black"></hr>
+                                            <hr className="h-[2px] bg-black my-[15px]"></hr>
                                             <span className="flex gap-2">
-                                                <p>At:</p> <p>{events.place}</p>
+                                                <p className="font-medium">At:</p> <p>{events.place}</p>
                                             </span>
                                             <span className="flex gap-2">
-                                                <p>Location:</p>{" "}
+                                                <p className="font-medium">Location:</p>{" "}
                                                 <p>{events.location}</p>
                                             </span>
 
                                             <span className="flex gap-2">
-                                                <p>Date:</p>{" "}
+                                                <p className="font-medium">Date:</p>{" "}
                                                 <p className="whitespace-pre">
                                                     {newStartDate} to{"  "}
                                                     {newEndDate}
                                                 </p>
                                             </span>
                                             <span className="flex gap-2">
-                                                <p>Time:</p>
+                                                <p className="font-medium">Time:</p>
                                                 <p className="whitespace-pre">
                                                     {events.startTime} -{" "}
                                                     {events.endTime}

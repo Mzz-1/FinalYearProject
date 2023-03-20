@@ -39,6 +39,7 @@ export const AdminEvent = () => {
             `http://localhost:5000/api/events/${id}`
         );
         getEvents();
+       
     };
 
     useEffect(() => {
@@ -101,6 +102,7 @@ export const AdminEvent = () => {
                                             <Modal
                                                 onClick={() =>
                                                     deleteEvent(events._id)
+                                                   
                                                 }
                                             >
                                                 <ModalHeading>

@@ -4,45 +4,52 @@ const jwt = require("jsonwebtoken");
 const connectCloudinary = require("../db/Cloudinary");
 const cloudinary = require("cloudinary").v2;
 const Event = require("../models/Events");
+const multer = require("multer");
+
+const upload = multer({ dest: "uploads/" });
 
 const addEvents = {
     path: "/api/events",
     method: "post",
-    handler: async (req, res) => {
-        const {
-            name,
-            place,
-            location,
-            image,
-            startDate,
-            endDate,
-            startTime,
-            endTime,
-        } = req.body;
-        connectCloudinary();
-      
-        console.log(image);
-    
-        const upload = await cloudinary.uploader.upload(image, {
-            folder: "events",
-        });
+    handler: [
+        upload.single("image"),
+        async (req, res) => {
+            const {
+                name,
+                place,
+                location,
+                image,
+                startDate,
+                endDate,
+                startTime,
+                endTime,
+            } = req.body;
+            const file = req.file;
+            connectCloudinary();
 
-        //const url = cloudinary.url(name);
-        console.log("node 1");
+            console.log(image);
 
-        const event = await Event.create({
-            name,
-            place,
-            location,
-            url: upload.secure_url,
-            startDate,
-            endDate,
-            startTime,
-            endTime,
-        });
-        console.log("node 2");
-        res.sendStatus(200);
-    },
+            const upload = await cloudinary.uploader.upload(file.path, {
+                folder: "events",
+            });
+
+            //const url = cloudinary.url(name);
+            console.log("node 1");
+
+            const event = await Event.create({
+                name,
+                place,
+                location,
+                url: upload.secure_url,
+                startDate,
+                endDate,
+                startTime,
+                endTime,
+            });
+            console.log("node 2");
+            res.sendStatus(200);
+        },
+    ],
 };
 
 const getAllEvents = {

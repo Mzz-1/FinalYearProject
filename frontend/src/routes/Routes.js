@@ -51,10 +51,7 @@ export const AllRoutes = () => {
                     element={<PasswordResetLandingPage />}
                 />
                 <Route path="/store" element={<Store />} />
-                <Route
-                    path="/admin-dashboard"
-                    element={<PrivateRouteAdmin Component={AdminDashboard} />}
-                />
+              
 
                 <Route path="/events" element={<Events />} />
                 <Route path="/product/:id" element={<ProductDetails />} />

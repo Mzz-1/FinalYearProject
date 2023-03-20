@@ -18,6 +18,9 @@ export const LoginForm = ({ formHeading }) => {
 
         const { token } = response.data;
         setToken(token);
+       if( formHeading !== "Admin"){
+        navigate("/admin-dashboard");
+       }
         navigate("/");
     };
 

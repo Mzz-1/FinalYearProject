@@ -26,20 +26,24 @@ export const Navbar = () => {
                             <Link to={items.link}>{items.itemName}</Link>
                         </li>
                     ))}
-                    {!user && (
+                    {user?.role === "artist" && (
                         <li key={5} className="">
+                            <Link to="/artist-dashboard">DASHBOARD</Link>
+                        </li>
+                    )}
+                    {!user && (
+                        <li key={6} className="">
                             <Link to="/login">LOG IN</Link>
                         </li>
                     )}
                     {user && (
                         <li
-                            key={6}
+                            key={7}
                             className=""
                             onClick={() => localStorage.removeItem("token")}
                         >
                             <LogOutModal>
                                 <ModalHeading>Log out Successful.</ModalHeading>
-                               
                             </LogOutModal>
                         </li>
                     )}

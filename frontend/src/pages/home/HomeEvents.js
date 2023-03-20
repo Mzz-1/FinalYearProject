@@ -1,14 +1,13 @@
-import { EventsSlideShow } from "./EventsSlideShow";
-import { WhiteButton } from "./Button";
+import { EventsSlideShow } from "../../components/EventsSlideShow";
+import { WhiteButton } from "../../components/Button";
 
 export const HomeEvents = () => {
     return (
-        <div className="h-[560px] bg-[#9F7E7E] text-[white] grid items-center justify-center">
+        <div className="h-[750px] bg-[#9F7E7E] text-[white] grid items-center justify-center">
             <h2 className="text-center">EXPLORE EVENTS</h2>
             <div className="grid grid-rows-1 grid-cols-2 items-center justify-center gap-[150px] w-[70%] m-auto">
-                <div className="flex items-center justify-center">
-                  
-                    <EventsSlideShow/>
+                <div className="">
+                    <EventsSlideShow />
                 </div>
                 <div className="w-[500px] text-center">
                     <p>
@@ -25,7 +24,7 @@ export const HomeEvents = () => {
                         world's most talented artists. Browse our listings now
                         and plan your next artistic adventure."
                     </p>
-                    <WhiteButton text="Explore Events" link="/events"/>
+                    <WhiteButton text="Explore Events" link="/events" />
                 </div>
             </div>
         </div>

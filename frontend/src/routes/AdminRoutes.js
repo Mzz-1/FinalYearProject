@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SplitScreen from "../components/SplitScreen";
 
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import { AdminSidebar } from "../components/AdminSidebar";
+import { AdminSidebar } from "../pages/admin/AdminSidebar";
 import { PrivateRouteAdmin } from "../service/Auth";
 import Login from "../pages/login/Login";
 import AddEventPage from "../pages/admin/AddEventpage";
@@ -18,7 +18,10 @@ const AdminRoutes = () => {
                 <AdminSidebar />
                 <Routes>
                     <Route path="/admin-dashboard">
-                    <Route path="control-panel" element={<AdminDashboard />} />
+                        <Route
+                            path="control-panel"
+                            element={<AdminDashboard />}
+                        />
                         <Route path="add-event" element={<AddEventPage />} />
                         <Route
                             path="add-product"

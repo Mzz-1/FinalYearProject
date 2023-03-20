@@ -4,6 +4,9 @@ import axios from "axios";
 
 export const Search = ({ heading }) => {
  
+    const searchProducts= ()=>{
+        
+    }
 
     return (
         <div className="flex relative">
@@ -12,7 +15,7 @@ export const Search = ({ heading }) => {
                 placeholder="KEYWORDS"
                 className="w-[450px] h-[70px] my-[40px] mr-[0px] ml-auto shadow-in outline-none pl-[30px] pr-[80px]"
             />{" "}
-            <button > <TfiSearch size={30} color="grey" className="absolute right-[30px] top-[60px]"/></button>
+            <button onClick={searchProducts}> <TfiSearch size={30} color="grey" className="absolute right-[30px] top-[60px]"/></button>
            
         </div>
     );

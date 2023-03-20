@@ -11,45 +11,31 @@ const AddEventPage = () => {
         formState: { errors },
     } = useForm();
     watch("image");
-    const [image64, setImage64] = useState("");
 
-    const setFileToBase = (file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setImage64(reader.result);
-        };
-    };
 
-    const addEvent = async ({
-        name,
-        place,
-        location,
-        image,
-        startDate,
-        endDate,
-        startTime,
-        endTime,
-    }) => {
+    const addEvent = async (data) => {
         console.log("1");
-        if (image.length > 0) {
-            console.log("no image");
-            setFileToBase(image[0]);
-        }
+     
 
-        console.log(image64);
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("place", data.place);
+        formData.append("location", data.location);
+        formData.append("startDate", data.startDate);
+        formData.append("endDate", data.endDate);
+        formData.append("startTime", data.startTime);
+        formData.append("endTime", data.endTime);
+        formData.append("image", data.image[0]);
+
+        
         try {
             const response = await axios.post(
                 "http://localhost:5000/api/events",
+                formData,
                 {
-                    name: name,
-                    place: place,
-                    location: location,
-                    image: image64,
-                    startDate: startDate,
-                    endDate: endDate,
-                    startTime: startTime,
-                    endTime: endTime,
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
                 }
             );
             // console.log(

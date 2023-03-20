@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SplitScreen from "../../components/SplitScreen";
-import { AdminSidebar } from "../../components/AdminSidebar";
+import { AdminSidebar } from "../../components/Sidebar";
 import AddEventPage from "./AddEventpage";
 import AddProductPage from "../artistDashboard/AddProductsPage";
 import { AdminEvent } from "./AdminEventsList";
@@ -14,10 +14,7 @@ const RightComponent = () => {
 };
 
 const AdminDashboard = () => {
-    
-    return (
-       <></>
-    );
+    return <></>;
 };
 
 export default AdminDashboard;

@@ -26,12 +26,14 @@ const Events = () => {
     return (
         <>
         
-            <div className="bg-[#FAF9F6]">
+            <div className="bg-[#f7f4ed] py-[30px]">
                 <div className="max-w-[1400px] m-auto">
                     <Heading text="Ongoing Events" />
+                    <hr className="bg-black h-[2px] my-[20px]"></hr>
                     <EventsList events={events} date="ongoing" />
-                    <hr className="bg-black h-[2px]"></hr>
+                   
                     <Heading text="Upcomming Events" />
+                    <hr className="bg-black h-[2px] my-[20px]"></hr>
                     <EventsList events={events} date="upcomming" />
                 </div>
             </div>

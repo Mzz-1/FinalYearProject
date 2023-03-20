@@ -1,5 +1,6 @@
 import { useUser } from "./service/useUser";
 import { AllRoutes } from "./routes/Routes";
+import { ArtistRoutes } from "./routes/ArtistDashboard";
 import AdminRoutes from "./routes/AdminRoutes";
 import { BrowserRouter } from "react-router-dom";
 
@@ -14,13 +15,14 @@ function App() {
 
     return (
         <>
-            {role === "anon" || role === "user" || role === "artist" ? (
+            {role === "anon" || role === "user" ? (
                 <BrowserRouter>
                     <AllRoutes />
                 </BrowserRouter>
             ) : (
                 <></>
             )}
+             {role === "artist" ? <ArtistRoutes /> : <></>}
             {role === "admin" ? <AdminRoutes /> : <></>}
         </>
     );

@@ -51,6 +51,10 @@ export const WhiteButton = ({ text, link, register }) => {
     );
 };
 
-
+export const UpdateButton =({children})=>{
+    return(
+        <button className="h-[50px] w-[180px] bg-[#29CC97] text-lg text-white text-center rounded-[5px] mr-[20px]">{children}</button>
+    )
+}
 
 

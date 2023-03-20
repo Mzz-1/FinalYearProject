@@ -11,15 +11,7 @@ const AddProductPage = () => {
         formState: { errors },
     } = useForm();
     watch("image");
-    // const [image64, setImage64] = useState("");
-
-    // const setFileToBase = (file) => {
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onloadend = () => {
-    //         setImage64(reader.result);
-    //     };
-    // };
+ 
 
     const addEvent = async (data) => {
         console.log("1");
