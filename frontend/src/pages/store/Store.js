@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Product } from "../../components/Product";
-import { ProductList } from "../../components/ProductList";
+import { ProductList } from "./ProductList";
 import { Banner } from "../../components/Banner";
 
 import { Search } from "../../components/Search";
@@ -27,7 +27,8 @@ const Store = () => {
         <div className="bg-[#F4F4F2]">
             <Banner heading="Store" />
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
-                <Search/>
+                <Search />
+                <hr className="h-[2px] bg-[#65635F] " />
                 <ProductList products={products} />
             </div>
         </div>

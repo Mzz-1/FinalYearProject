@@ -13,7 +13,7 @@ export const Footer = () => {
                 <FooterList items={shop} />
                 <FooterList items={artists} />
             </div>
-            <p className="text-[9px] font-medium text-center">
+            <p className="text-[12px] font-medium text-center">
                 SimplyArt, All rights reserved.
             </p>
         </footer>

@@ -31,7 +31,6 @@ export const LoginForm = ({ formHeading }) => {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     return (
-        
         <div className="flex flex-col items-center justify-center gap-[10px] text-[#9F7E7E]">
             <div className="bg-white shadow-xl py-[60px] px-[40px] flex flex-col items-center justify-center gap-[30px] rounded-[20px] border-[#9F7E7E] border-[px]">
                 <h1 className="text-5xl font-semibold ">{formHeading}</h1>

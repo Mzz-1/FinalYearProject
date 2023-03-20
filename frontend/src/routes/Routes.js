@@ -12,6 +12,7 @@ import ForgotPasswordPage from "../pages/passwordReset/ForgotPasswordPage";
 import PasswordResetLandingPage from "../pages/passwordReset/PasswordResetLandingPage";
 import Store from "../pages/store/Store";
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import { ProductDetails } from "../pages/store/ProductDesc";
 
 import Events from "../pages/events/Events";
 
@@ -27,9 +28,8 @@ export const AllRoutes = () => {
     // Check if the current location matches any excluded path
     const shouldHide = excludedPaths.includes(location.pathname);
 
-    
     return (
-       <div>
+        <div>
             {!shouldHide && <Navbar />}
 
             <Routes>
@@ -57,9 +57,9 @@ export const AllRoutes = () => {
                 />
 
                 <Route path="/events" element={<Events />} />
+                <Route path="/product/:id" element={<ProductDetails />} />
             </Routes>
             {!shouldHide && <Footer />}
-            </div>
-      
+        </div>
     );
 };

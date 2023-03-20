@@ -18,9 +18,9 @@ export const Navbar = () => {
 
     return (
         <header>
-            <nav className="grid grid-rows-1 grid-cols-2 px-[50px] h-[70px] items-center ">
-                <p className="font-medium">SimplyArt</p>
-                <ul className="flex gap-[20px] text-[10px] justify-end">
+            <nav className="grid grid-rows-1 grid-cols-2 px-[50px] h-[80px] items-center ">
+                <p className="font-medium text-2xl">SimplyArt</p>
+                <ul className="flex gap-[20px] text-[12px] justify-end">
                     {items.map((items, i) => (
                         <li key={i} className="">
                             <Link to={items.link}>{items.itemName}</Link>

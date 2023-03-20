@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ProductList } from "../../components/ProductList";
+import { ProductList } from "../store/ProductList";
 import { Heading2 } from "../../components/Heading";
 
 export const NewProducts = () => {
@@ -22,8 +22,8 @@ export const NewProducts = () => {
 
     return (
         <div className="px-[50px]">
-            <Heading2 text="New"/>
-            <ProductList products={products}/>
+            <Heading2 text="New" />
+            <ProductList products={products} />
         </div>
-    )
+    );
 };
