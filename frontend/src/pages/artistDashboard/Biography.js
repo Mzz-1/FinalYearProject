@@ -20,7 +20,7 @@ const Biography = () => {
     } = useForm();
     watch("image");
 
-    const [submitCount, setSubmitCount] = useState(0);
+    const [exist, setDoesExist] = useState(false);
 
     const onEditorStateChange = (editorState) => {
         setValue("aboutContent", editorState);
@@ -45,7 +45,17 @@ const Biography = () => {
         formData.append("image", data.image[0]);
 
         console.log(user.id, data.name, data.aboutContent, data.biography);
-        if (submitCount > 0) {
+
+        try {
+            const response = await axios.get(
+                `http://localhost:5000/api/artist/${user.id}`
+            );
+            console.log(response.data);
+            setDoesExist(true);
+        } catch (err) {
+            console.log(`err:${err}`);
+        }
+        if (!exist) {
             try {
                 const response = await axios.patch(
                     `http://localhost:5000/api/biography/${user.id}`,
@@ -87,7 +97,6 @@ const Biography = () => {
             } catch (err) {
                 console.log(`err:${err}`);
             }
-            setSubmitCount(submitCount + 1);
         }
     };
 

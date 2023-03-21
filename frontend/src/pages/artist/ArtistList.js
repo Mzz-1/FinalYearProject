@@ -24,7 +24,7 @@ export const ArtistList = ({ artists }) => {
                     <div className="relative" >
                         <img
                             src={artist.profilePhoto}
-                            className=" mb-[10px] w-[300px] h-[350px] object-cover"
+                            className=" mb-[10px] w-[300px] h-[350px] object-cover m-auto"
                             alt="product"
                         />
                         <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px]">

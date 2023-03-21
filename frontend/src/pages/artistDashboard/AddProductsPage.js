@@ -2,8 +2,13 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Input from "../../components/Input";
+import { useUser } from "../../service/useUser";
 
 const AddProductPage = () => {
+    const user = useUser();
+
+    const [artistName, setArtistName] = useState("");
+
     const {
         register,
         handleSubmit,
@@ -11,14 +16,23 @@ const AddProductPage = () => {
         formState: { errors },
     } = useForm();
     watch("image");
- 
 
     const addEvent = async (data) => {
         console.log("1");
 
+        try {
+            const response = await axios.get(
+                `http://localhost:5000/api/artist/${user.id}`
+            );
+            console.log(response.data.artist.name);
+            setArtistName(response.data.artist.name);
+        } catch (err) {
+            console.log(`err:${err}`);
+        }
+
         const formData = new FormData();
         formData.append("name", data.name);
-        formData.append("artist", "as");
+        formData.append("artist", artistName);
         formData.append("category", data.category);
         formData.append("description", data.description);
         formData.append("quantity", data.quantity);

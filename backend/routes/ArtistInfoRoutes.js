@@ -49,16 +49,16 @@ const getAllArtists = {
     },
 };
 
-const getEvent = {
-    path: "/api/events/:id",
+const getArtist = {
+    path: "/api/artist/:id",
     method: "get",
     handler: async (req, res) => {
-        const { id: eventID } = req.params;
-        const event = await Event.findOne({ _id: eventID });
-        if (!event) {
+        const { id: userID } = req.params;
+        const artist = await Artist.findOne({ userID: userID });
+        if (!artist) {
             return res.sendStatus(400);
         }
-        res.status(200).json({ event });
+        res.status(200).json({ artist });
     },
 };
 
@@ -116,4 +116,5 @@ module.exports = {
     addBiography,
     updateBiography,
     getAllArtists,
+    getArtist,
 };
