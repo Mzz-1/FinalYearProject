@@ -24,10 +24,13 @@ const Store = () => {
     }, []);
 
     return (
-        <div className="bg-[#F4F4F2]">
-            <Banner heading="Store" />
-            <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
+        <div className="bg-[#F4F4F2] px-[5%]">
+            <div className="max-w-[1440px] m-auto flex justify-between items-center">
+                <Banner heading="Store" />
                 <Search />
+            </div>
+
+            <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
                 <hr className="h-[2px] bg-[#65635F] " />
                 <ProductList products={products} />
             </div>

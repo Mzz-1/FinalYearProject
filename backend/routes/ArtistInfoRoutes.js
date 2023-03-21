@@ -39,13 +39,13 @@ const addBiography = {
     ],
 };
 
-const getAllEvents = {
-    path: "/api/events",
+const getAllArtists = {
+    path: "/api/artists",
     method: "get",
     handler: async (req, res) => {
-        const event = await Event.find({});
+        const artist = await Artist.find({});
 
-        res.status(200).json({ event });
+        res.status(200).json({ artist });
     },
 };
 
@@ -115,4 +115,5 @@ const deleteEvent = {
 module.exports = {
     addBiography,
     updateBiography,
+    getAllArtists,
 };

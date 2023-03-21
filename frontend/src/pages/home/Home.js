@@ -3,6 +3,7 @@ import { Footer } from "../../components/Footer";
 import { AboutUs } from "../../components/AboutUs";
 import { HomeEvents } from "./HomeEvents";
 import { NewProducts } from "./newProducts";
+import { FeaturedArtists } from "./FeaturedArtists";
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             />
             <NewProducts />
             <AboutUs />
+            <FeaturedArtists/>
             <HomeEvents />
         </>
     );

@@ -124,22 +124,39 @@ const FeaturedEvents = () => {
                             })}
                         />
                         <p>{errors.image?.message}</p>
-                        <Label>About the artist</Label>
-                        <ReactQuill
-                            className="h-[400px] w-[800px]"
-                            theme="snow"
-                            value={aboutArtistContent}
-                            onChange={onEditorStateChange}
+                        <label>Start Date</label>
+                        <Input
+                            type="date"
+                            register={{
+                                ...register("startDate", {
+                                    required: "Please enter your password.",
+                                }),
+                            }}
                         />
-                        <p>{errors.aboutContent?.message}</p>
-                        <Label>Biography</Label>
-                        <ReactQuill
-                            className="h-[400px] w-[800px]"
-                            theme="snow"
-                            value={biographyContent}
-                            onChange={onEditorStateChange2}
+                        <p>{errors.startDate?.message}</p>
+                        <label>End Date</label>
+                        <Input
+                            type="date"
+                            register={{
+                                ...register("endDate", {
+                                    required: "Please enter your password.",
+                                }),
+                            }}
                         />
-                        <p>{errors.biographyContent?.message}</p>
+                        <p>{errors.endDate?.message}</p>
+                        <p>{errors.name?.message}</p>
+                        <Label>Location</Label>
+                        <Input
+                            type="text"
+                            placeholder="Location"
+                            register={{
+                                ...register("location", {
+                                    required: "Please enter the location.",
+                                }),
+                            }}
+                        />
+                        <p>{errors.location?.message}</p>
+                       
                     </div>
                 </div>
 

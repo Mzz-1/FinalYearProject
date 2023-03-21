@@ -38,7 +38,7 @@ export const ArtistRoutes = () => {
                             element={<Biography />}
                         />
                         <Route
-                            path="featured-events"
+                            path="add-event"
                             element={<FeaturedEvents />}
                         />
                     </Route>

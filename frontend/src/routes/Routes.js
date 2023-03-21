@@ -13,7 +13,7 @@ import PasswordResetLandingPage from "../pages/passwordReset/PasswordResetLandin
 import Store from "../pages/store/Store";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import { ProductDetails } from "../pages/store/ProductDesc";
-
+import ArtistPage from "../pages/artist/ArtistPage";
 import Events from "../pages/events/Events";
 
 import { Navbar } from "../components/Navbar";
@@ -51,7 +51,7 @@ export const AllRoutes = () => {
                     element={<PasswordResetLandingPage />}
                 />
                 <Route path="/store" element={<Store />} />
-              
+                <Route path="/artists" element={<ArtistPage />} />
 
                 <Route path="/events" element={<Events />} />
                 <Route path="/product/:id" element={<ProductDetails />} />

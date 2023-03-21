@@ -11,7 +11,7 @@ export const Navbar = () => {
     const items = [
         { itemName: "HOME", link: "/" },
         { itemName: "STORE", link: "/store" },
-        { itemName: "ARTISTS", link: "" },
+        { itemName: "ARTISTS", link: "/artists" },
         { itemName: "EVENTS", link: "/events" },
     ];
     const user = useUser();
