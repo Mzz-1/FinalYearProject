@@ -29,6 +29,22 @@ export const ArtistSidebar = () => {
                     subItemName: "Biography",
                     link: "/artist-dashboard/biography",
                 },
+                
+            ],
+            link: "",
+            icon: <AiOutlineUser />,
+        },
+        {
+            itemName: "Featured Events",
+            subItems: [
+                {
+                    subItemName: "Add Event",
+                    link: "/artist-dashboard/add-event",
+                },
+                {
+                    subItemName: "Featured Events",
+                    link: "/artist-dashboard/manage-events",
+                },
             ],
             link: "",
             icon: <AiOutlineUser />,

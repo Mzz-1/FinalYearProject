@@ -14,7 +14,7 @@ const addBiography = {
     handler: [
         upload.single("image"),
         async (req, res) => {
-            const { name, aboutContent, biography } = req.body;
+            const { userID, name, aboutContent, biography } = req.body;
             const file = req.file;
             connectCloudinary();
 
@@ -27,6 +27,7 @@ const addBiography = {
             console.log(name, aboutContent, biography);
 
             const artist = await Artist.create({
+                userID,
                 name,
                 aboutArtist: aboutContent,
                 biography,
@@ -64,21 +65,38 @@ const getEvent = {
 const updateBiography = {
     path: "/api/biography/:id",
     method: "patch",
-    handler: async (req, res) => {
-        const { id: eventID } = req.params;
+    handler:[
+        upload.single("image"),
+         async (req, res) => {
+        const { id: bioID } = req.params;
+        const { userID, name, aboutContent, biography } = req.body;
+        console.log(name, aboutContent, biography );
+        const file = req.file;
+        connectCloudinary();
 
-        const event = await Event.findOneAndUpdate({ _id: eventID }, req.body, {
-            new: true,
-            runValidators: true,
-            useFindAndModify: true,
+        const upload = await cloudinary.uploader.upload(file.path, {
+            folder: "artist",
         });
 
-        if (!event) {
+        console.log(bioID);
+
+        const bio = await Artist.findOneAndUpdate(
+            { userID: bioID },
+            { name, aboutContent, biography, profilePhoto: upload.secure_url },
+            {
+                new: true,
+                runValidators: true,
+                useFindAndModify: false,
+            }
+        );
+
+        if (!bio) {
             return res.status(404);
         }
 
-        res.status(200).json({ event });
+        res.status(200).json({ bio });
     },
+],
 };
 
 const deleteEvent = {
@@ -96,4 +114,5 @@ const deleteEvent = {
 
 module.exports = {
     addBiography,
+    updateBiography,
 };

@@ -11,6 +11,7 @@ import { ArtistSidebar } from "../pages/artistDashboard/ArtistSidebar";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import Biography from "../pages/artistDashboard/Biography";
+import FeaturedEvents from "../pages/artistDashboard/FeaturedEvents";
 
 export const ArtistRoutes = () => {
     // Define an array of paths where Navbar and Footer should not appear
@@ -35,6 +36,10 @@ export const ArtistRoutes = () => {
                         <Route
                             path="biography"
                             element={<Biography />}
+                        />
+                        <Route
+                            path="featured-events"
+                            element={<FeaturedEvents />}
                         />
                     </Route>
                 </Routes>

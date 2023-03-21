@@ -11,7 +11,7 @@ const notFound = require("./middleware/NofFound");
 const errorHandlerMiddleware = require("./middleware/ErrorHandler");
 const router = express.Router();
 const cors = require("cors");
-
+const multer = require("multer");
 const corsOptions = {
     origin: "http://localhost:3000",
     optionsSuccessStatus: 200,
@@ -34,6 +34,8 @@ app.use(function (req, res, next) {
 app.use(express.json());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+
+
 
 routes.forEach((route) => {
     app[route.method](route.path, route.handler);
