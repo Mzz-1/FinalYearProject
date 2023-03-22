@@ -1,4 +1,5 @@
-import { WhiteButton } from "./Button";
+import { WhiteButton } from "../../components/Button";
+import { Heading } from "../../components/Heading";
 
 export const AboutUs = () => {
     return (
@@ -6,9 +7,14 @@ export const AboutUs = () => {
             <h2 className="text-center">ABOUT US</h2>
             <div className="grid grid-rows-1 grid-cols-2 items-center justify-center gap-[150px]">
                 <div className="flex items-center justify-center">
-                    <img src="https://res.cloudinary.com/djuzpmqlp/image/upload/v1676613644/assets/about_bfnndy.png" className="w-[450px] h-[450px] object-cover" alt="about" />
+                    <img
+                        src="https://res.cloudinary.com/djuzpmqlp/image/upload/v1676613644/assets/about_bfnndy.png"
+                        className="w-[450px] h-[450px] object-cover"
+                        alt="about"
+                    />
                 </div>
                 <div className="w-[500px] text-center">
+                   <h3 className="text-[35px] mb-[10px]">SimplyArt</h3>
                     <p>
                         At SimplyArt, we make it our mission to help you
                         discover and buy from the best emerging artists around
@@ -18,7 +24,7 @@ export const AboutUs = () => {
                         your portal to all those services. Join now and discover
                         thousands of original works by today’s top artists
                     </p>
-                    <WhiteButton text="Discover Artists" />
+                    <WhiteButton text="Sign Up Now" link="register" />
                 </div>
             </div>
         </div>

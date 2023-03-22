@@ -3,7 +3,7 @@ const connectDB = require("../db/Connect");
 const jwt = require("jsonwebtoken");
 const connectCloudinary = require("../db/Cloudinary");
 const cloudinary = require("cloudinary").v2;
-const { Artist } = require("../models/Artist");
+const { Artist,Exhibition } = require("../models/Artist");
 const multer = require("multer");
 
 const upload = multer({ dest: "uploads/" });
@@ -33,6 +33,43 @@ const addBiography = {
                 biography,
                 profilePhoto: upload.secure_url,
             });
+            console.log("node 2");
+            res.sendStatus(200);
+        },
+    ],
+};
+
+const addArtistEvent = {
+    path: "/api/add-artist-event",
+    method: "post",
+    handler: [
+        upload.single("image"),
+        async (req, res) => {
+            const { userID, name, startDate, endDate, location } = req.body;
+            const file = req.file;
+            connectCloudinary();
+
+            const upload = await cloudinary.uploader.upload(file.path, {
+                folder: "artist events",
+            });
+
+            //const url = cloudinary.url(name);
+            console.log("node 1");
+            console.log(name, startDate, endDate,location);
+
+            const exhibition = await Exhibition.create({
+               
+                name,
+                startDate,
+                endDate,
+                location,
+                image: upload.secure_url,
+            });
+            const artistId = "<artist_id>"; // replace with actual artist id
+
+            const artist = await Artist.findOne({userID});
+            artist.exhibitions.push(exhibition);
+            await artist.save();
             console.log("node 2");
             res.sendStatus(200);
         },
@@ -117,4 +154,5 @@ module.exports = {
     updateBiography,
     getAllArtists,
     getArtist,
+    addArtistEvent
 };

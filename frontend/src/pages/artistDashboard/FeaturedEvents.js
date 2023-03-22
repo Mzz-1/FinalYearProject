@@ -20,84 +20,52 @@ const FeaturedEvents = () => {
     } = useForm();
     watch("image");
 
-    const [submitCount, setSubmitCount] = useState(0);
-
-    const onEditorStateChange = (editorState) => {
-        setValue("aboutContent", editorState);
-    };
-
-    const onEditorStateChange2 = (editorState) => {
-        setValue("biography", editorState);
-    };
-
-    const aboutArtistContent = watch("aboutContent");
-    const biographyContent = watch("biography");
-
     const addBiography = async (data) => {
         console.log("1");
 
         const formData = new FormData();
         formData.append("userID", user.id);
+        formData.append("location", data.location);
         formData.append("name", data.name);
-        formData.append("aboutContent", data.aboutContent);
-        formData.append("biography", data.biography);
+        formData.append("startDate", data.startDate);
+        formData.append("endDate", data.endDate);
 
         formData.append("image", data.image[0]);
 
-        console.log(user.id, data.name, data.aboutContent, data.biography);
-        if (submitCount > 0) {
-            try {
-                const response = await axios.patch(
-                    `http://localhost:5000/api/biography/${user.id}`,
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                );
-                console.log(response.data);
-            } catch (err) {
-                console.log(`err:${err}`);
-            }
+        console.log(data.name, data.startDate, data.endDate);
 
-            
-        }else{
-           
-            try {
-                const response = await axios.post(
-                    "http://localhost:5000/api/biography",
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                );
-                // console.log(
-                //     name,
-                //     place,
-                //     location,
-                //     image,
-                //     startDate,
-                //     endDate,
-                //     startTime,
-                //     endTime
-                // );
-                console.log(response.data);
-                // const { token } = response.data;
-                // console.log(token);
-            } catch (err) {
-                console.log(`err:${err}`);
-            }
-            setSubmitCount(submitCount + 1);
-            
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/api/add-artist-event",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            // console.log(
+            //     name,
+            //     place,
+            //     location,
+            //     image,
+            //     startDate,
+            //     endDate,
+            //     startTime,
+            //     endTime
+            // );
+            console.log(response.data);
+            // const { token } = response.data;
+            // console.log(token);
+        } catch (err) {
+            console.log(`err:${err}`);
         }
+        
     };
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <h2 className="text-5xl font-semibold ">Biography</h2>
+            <h2 className="text-5xl font-semibold ">Add Featured Events</h2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(addBiography)}
@@ -156,7 +124,6 @@ const FeaturedEvents = () => {
                             }}
                         />
                         <p>{errors.location?.message}</p>
-                       
                     </div>
                 </div>
 

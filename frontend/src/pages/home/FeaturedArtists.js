@@ -24,6 +24,14 @@ export const FeaturedArtists = () => {
     return (
         <div className="px-[250px] mt-[30px]">
             <Heading2 text="Featured Artists" />
+            <div className="w-[500px] text-center m-auto">
+                <hr className="h-[2.5px] bg-black my-[20px]" />
+                <p>
+                    Discover top creators around you. Explore each of their
+                    artworks and find the designs you love from a wide range of
+                    artworks.
+                </p>
+            </div>
             <ArtistList artists={artists} />
         </div>
     );
