@@ -15,7 +15,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import { ProductDetails } from "../pages/store/ProductDesc";
 import ArtistPage from "../pages/artist/ArtistPage";
 import Events from "../pages/events/Events";
-
+import ArtistPortfolio from "../pages/artist/ArtistPortfolio";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 
@@ -52,7 +52,7 @@ export const AllRoutes = () => {
                 />
                 <Route path="/store" element={<Store />} />
                 <Route path="/artists" element={<ArtistPage />} />
-
+                <Route path="/artist-portfolio/:id" element={<ArtistPortfolio />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
             </Routes>

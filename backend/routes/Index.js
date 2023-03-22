@@ -8,7 +8,15 @@ const resetPasswordRoute = require("./ResetPasswordRoute");
 
 const { getAllUsers, getUser, deleteUser } = require("./UserRoute");
 
-const {addBiography,updateBiography,getAllArtists,getArtist,addArtistEvent} = require("./ArtistInfoRoutes")
+const {
+    addBiography,
+    updateBiography,
+    getAllArtists,
+    getArtist,
+    addArtistEvent,
+    getArtistExhibitions,
+    getBiography,
+} = require("./ArtistInfoRoutes");
 
 const {
     addProducts,
@@ -50,7 +58,9 @@ const routes = [
     updateBiography,
     getAllArtists,
     getArtist,
-    addArtistEvent
+    addArtistEvent,
+    getArtistExhibitions,
+    getBiography,
 ];
 
 module.exports = routes;

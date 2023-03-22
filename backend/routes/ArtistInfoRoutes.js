@@ -39,6 +39,20 @@ const addBiography = {
     ],
 };
 
+const getBiography = {
+    path: "/api/biography/:id",
+    method: "get",
+    handler: async (req, res) => {
+        const { id: userID } = req.params;
+        const bio = await Artist.findOne({ _id: userID });
+        if (!bio) {
+            return res.sendStatus(400);
+        }
+        res.status(200).json({ bio });
+    },
+};
+
+
 const addArtistEvent = {
     path: "/api/add-artist-event",
     method: "post",
@@ -67,7 +81,7 @@ const addArtistEvent = {
             });
             const artistId = "<artist_id>"; // replace with actual artist id
 
-            const artist = await Artist.findOne({userID});
+            const artist = await Artist.find({userID});
             artist.exhibitions.push(exhibition);
             await artist.save();
             console.log("node 2");
@@ -83,6 +97,18 @@ const getAllArtists = {
         const artist = await Artist.find({});
 
         res.status(200).json({ artist });
+    },
+};
+
+const getArtistExhibitions = {
+    path: "/api/artist-exhibitions/:id",
+    method: "get",
+    handler: async (req, res) => {
+        const artistId = req.params.id;
+        const artist = await Artist.findById(artistId).populate("exhibitions");
+        const exhibitions = artist.exhibitions;
+
+        res.status(200).json({ exhibitions });
     },
 };
 
@@ -154,5 +180,7 @@ module.exports = {
     updateBiography,
     getAllArtists,
     getArtist,
-    addArtistEvent
+    getArtistExhibitions,
+    addArtistEvent,
+    getBiography
 };
