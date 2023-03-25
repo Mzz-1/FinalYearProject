@@ -15,7 +15,10 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import { ProductDetails } from "../pages/store/ProductDesc";
 import ArtistPage from "../pages/artist/ArtistPage";
 import Events from "../pages/events/Events";
+import ArtistBiography from "../pages/artist/ArtistBiography";
 import ArtistPortfolio from "../pages/artist/ArtistPortfolio";
+import ArtistExhibition from "../pages/artist/ArtistExhibition";
+import { Cart } from "../pages/store/Cart";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 
@@ -52,9 +55,17 @@ export const AllRoutes = () => {
                 />
                 <Route path="/store" element={<Store />} />
                 <Route path="/artists" element={<ArtistPage />} />
-                <Route path="/artist-portfolio/:id" element={<ArtistPortfolio />} />
+                <Route path="/artist-profile">
+                    <Route path="biography/:id" element={<ArtistBiography />} />
+                    <Route path="portfolio/:id" element={<ArtistPortfolio />} />
+                    <Route
+                        path="exhibition/:id"
+                        element={<ArtistExhibition />}
+                    />
+                </Route>
                 <Route path="/events" element={<Events />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
+                <Route path="/cart" element={ <PrivateRoute Component={Cart}/>}/>
             </Routes>
             {!shouldHide && <Footer />}
         </div>

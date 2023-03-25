@@ -13,12 +13,13 @@ export const Navbar = () => {
         { itemName: "STORE", link: "/store" },
         { itemName: "ARTISTS", link: "/artists" },
         { itemName: "EVENTS", link: "/events" },
+        { itemName: "CART", link: "/cart" },
     ];
     const user = useUser();
 
     return (
         <header>
-            <nav className="grid grid-rows-1 grid-cols-2 px-[50px] h-[80px] items-center ">
+            <nav className="grid grid-rows-1 grid-cols-2 px-[50px] h-[80px] shadow-lg items-center ">
                 <p className="font-medium text-2xl">SimplyArt</p>
                 <ul className="flex gap-[20px] text-[12px] justify-end">
                     {items.map((items, i) => (

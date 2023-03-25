@@ -4,10 +4,12 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../service/useUser";
 
 export const ProductDetails = () => {
     const [product, setProducts] = useState([]);
 
+        const user = useUser()
     const { id } = useParams();
 
     const navigate = useNavigate();
@@ -18,6 +20,23 @@ export const ProductDetails = () => {
         );
         console.log(productData.data.product);
         setProducts(productData.data.product);
+    };
+
+    const addToCart = async () => {
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/api/add-to-cart",
+                {
+                    userID: user.id,
+                    productID: product._id,
+                    quantity: 1,
+                }
+            );
+            console.log(response.data);
+            // navigate("/cart");
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     console.log(product);
@@ -35,8 +54,11 @@ export const ProductDetails = () => {
 
             <div className="relative w-[420px]">
                 <ul className="flex flex-col gap-[2px] relative px-[10px] py-[100px]">
-                    <button className="flex gap-2 items-center" onClick={()=>navigate(-1)}>
-                      <BiArrowBack /> BACK 
+                    <button
+                        className="flex gap-2 items-center"
+                        onClick={() => navigate(-1)}
+                    >
+                        <BiArrowBack /> BACK
                     </button>
                     <li className="text-[48px]">{product.name}</li>
                     <li className="text-[#65635F] text-[25px] mb-[30px]">
@@ -55,7 +77,10 @@ export const ProductDetails = () => {
                     <li className="text-[25px] mb-[30px] font-medium">
                         Rs {product.price}
                     </li>
-                    <button className="flex justify-center items-center h-[40px] w-[350px] bg-[#161412] text-white rounded-[3px]">
+                    <button
+                        className="flex justify-center items-center h-[40px] w-[350px] bg-[#161412] text-white rounded-[3px]"
+                        onClick={addToCart}
+                    >
                         ADD TO CART
                     </button>
                 </ul>

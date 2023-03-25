@@ -32,7 +32,7 @@ const Store = () => {
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
                 <hr className="h-[2px] bg-[#65635F] " />
-                <ProductList products={products} />
+                <ProductList products={products} gridSize={4} />
             </div>
         </div>
     );

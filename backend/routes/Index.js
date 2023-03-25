@@ -4,7 +4,6 @@ const testEmailRoute = require("./Email");
 const verifyEmailRoute = require("./VerifyEmailRoute");
 const forgotPasswordRoute = require("./ForgotPasswordRoute");
 const resetPasswordRoute = require("./ResetPasswordRoute");
-//const {testEmailRoute} = require("./Nodemailer");
 
 const { getAllUsers, getUser, deleteUser } = require("./UserRoute");
 
@@ -34,6 +33,8 @@ const {
     deleteEvent,
 } = require("./EventsRoute");
 
+const { addToCart, getCartDetails } = require("./CartRoute");
+
 const routes = [
     signUpRoute,
     verifyEmailRoute,
@@ -61,6 +62,8 @@ const routes = [
     addArtistEvent,
     getArtistExhibitions,
     getBiography,
+    addToCart,
+    getCartDetails,
 ];
 
 module.exports = routes;

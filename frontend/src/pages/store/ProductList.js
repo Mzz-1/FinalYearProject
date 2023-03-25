@@ -2,7 +2,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const ProductList = ({ products }) => {
+export const ProductList = ({ products,gridSize }) => {
     console.log(products);
 
     const navigate= useNavigate()
@@ -18,7 +18,7 @@ export const ProductList = ({ products }) => {
 
 
     return (
-        <div className="grid grid-row-auto grid-cols-4 bg-[] justify-center items-center gap-[100px] my-[50px]">
+        <div className={`grid grid-row-auto grid-cols-${gridSize} bg-[] justify-center items-center gap-[100px] my-[50px]`}>
             {products.map((product) => {
                 return (
                     <div className="relative" onClick={()=>getProducts(product._id)}>

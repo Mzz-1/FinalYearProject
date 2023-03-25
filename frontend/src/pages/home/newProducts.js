@@ -23,7 +23,7 @@ export const NewProducts = () => {
     return (
         <div className="px-[50px]">
             <Heading2 text="New" />
-            <ProductList products={products} />
+            <ProductList products={products} gridSize={4}/>
         </div>
     );
 };

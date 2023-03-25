@@ -3,7 +3,7 @@ const connectDB = require("../db/Connect");
 const jwt = require("jsonwebtoken");
 const connectCloudinary = require("../db/Cloudinary");
 const cloudinary = require("cloudinary").v2;
-const { Artist,Exhibition } = require("../models/Artist");
+const { Artist, Exhibition } = require("../models/Artist");
 const multer = require("multer");
 
 const upload = multer({ dest: "uploads/" });
@@ -44,14 +44,17 @@ const getBiography = {
     method: "get",
     handler: async (req, res) => {
         const { id: userID } = req.params;
-        const bio = await Artist.findOne({ _id: userID });
-        if (!bio) {
+        // const bio = await Artist.findOne({ _id: userID });
+        const artist = await Artist.findOne({ userID: userID });
+        // if (!bio) {
+        //     return res.sendStatus(400);
+        // }
+        if (!artist) {
             return res.sendStatus(400);
         }
-        res.status(200).json({ bio });
+        res.status(200).json({ artist });
     },
 };
-
 
 const addArtistEvent = {
     path: "/api/add-artist-event",
@@ -69,10 +72,9 @@ const addArtistEvent = {
 
             //const url = cloudinary.url(name);
             console.log("node 1");
-            console.log(name, startDate, endDate,location);
+            console.log(name, startDate, endDate, location);
 
             const exhibition = await Exhibition.create({
-               
                 name,
                 startDate,
                 endDate,
@@ -81,7 +83,7 @@ const addArtistEvent = {
             });
             const artistId = "<artist_id>"; // replace with actual artist id
 
-            const artist = await Artist.find({userID});
+            const artist = await Artist.find({ userID });
             artist.exhibitions.push(exhibition);
             await artist.save();
             console.log("node 2");
@@ -104,8 +106,10 @@ const getArtistExhibitions = {
     path: "/api/artist-exhibitions/:id",
     method: "get",
     handler: async (req, res) => {
-        const artistId = req.params.id;
-        const artist = await Artist.findById(artistId).populate("exhibitions");
+        const { id: artistID } = req.params;
+        const artist = await Artist.findOne({ name: artistID }).populate(
+            "exhibitions"
+        );
         const exhibitions = artist.exhibitions;
 
         res.status(200).json({ exhibitions });
@@ -128,38 +132,43 @@ const getArtist = {
 const updateBiography = {
     path: "/api/biography/:id",
     method: "patch",
-    handler:[
+    handler: [
         upload.single("image"),
-         async (req, res) => {
-        const { id: bioID } = req.params;
-        const { userID, name, aboutContent, biography } = req.body;
-        console.log(name, aboutContent, biography );
-        const file = req.file;
-        connectCloudinary();
+        async (req, res) => {
+            const { id: bioID } = req.params;
+            const { userID, name, aboutContent, biography } = req.body;
+            console.log(name, aboutContent, biography);
+            const file = req.file;
+            connectCloudinary();
 
-        const upload = await cloudinary.uploader.upload(file.path, {
-            folder: "artist",
-        });
+            const upload = await cloudinary.uploader.upload(file.path, {
+                folder: "artist",
+            });
 
-        console.log(bioID);
+            console.log(bioID);
 
-        const bio = await Artist.findOneAndUpdate(
-            { userID: bioID },
-            { name, aboutContent, biography, profilePhoto: upload.secure_url },
-            {
-                new: true,
-                runValidators: true,
-                useFindAndModify: false,
+            const bio = await Artist.findOneAndUpdate(
+                { userID: bioID },
+                {
+                    name,
+                    aboutContent,
+                    biography,
+                    profilePhoto: upload.secure_url,
+                },
+                {
+                    new: true,
+                    runValidators: true,
+                    useFindAndModify: false,
+                }
+            );
+
+            if (!bio) {
+                return res.status(404);
             }
-        );
 
-        if (!bio) {
-            return res.status(404);
-        }
-
-        res.status(200).json({ bio });
-    },
-],
+            res.status(200).json({ bio });
+        },
+    ],
 };
 
 const deleteEvent = {
@@ -182,5 +191,5 @@ module.exports = {
     getArtist,
     getArtistExhibitions,
     addArtistEvent,
-    getBiography
+    getBiography,
 };

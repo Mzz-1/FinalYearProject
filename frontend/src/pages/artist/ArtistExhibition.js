@@ -3,11 +3,11 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Heading2, Heading } from "../../components/Heading";
-import { ProductList } from "../store/ProductList";
+import { ExhibitionList } from "./ExhibitionList";
 
-const ArtistPortfolio = () => {
+const ArtistExhibition = () => {
     const [bio, setBio] = useState([]);
-    const [portfolio, setPortfolio] = useState([]);
+    const [exhibition, setExhibition] = useState([]);
 
     const today = new Date();
     const dateToday = today.toDateString();
@@ -29,16 +29,16 @@ const ArtistPortfolio = () => {
 
     useEffect(() => {
         if (bio.name) {
-            const getPortfolio = async () => {
+            const getExhibition = async () => {
                 const productsData = await axios.get(
-                    `http://localhost:5000/api/products?artist=${bio.name}`
+                    `http://localhost:5000/api/artist-exhibitions/${bio.name}`
                 );
 
-                const data = await productsData.data.product;
-                setPortfolio(data);
+                const data = await productsData.data.exhibitions;
+                setExhibition(data);
                 console.log("portfolio", data);
             };
-            getPortfolio();
+            getExhibition();
         }
     }, [bio.name]);
 
@@ -61,10 +61,10 @@ const ArtistPortfolio = () => {
                 </ul>
             </div>
 
-                <ProductList products={portfolio} gridSize={2} />
+                <ExhibitionList exhibition={exhibition}  />
             
         </div>
     );
 };
 
-export default ArtistPortfolio;
+export default ArtistExhibition;

@@ -11,6 +11,22 @@ import { useUser } from "../../service/useUser";
 const Biography = () => {
     const user = useUser();
 
+    const [bio, setBio] = useState([]);
+
+    const getBio = async () => {
+        const productsData = await axios.get(
+            `http://localhost:5000/api/biography/${user.id}`
+        );
+
+        const data = await productsData.data.artist;
+        setBio(data);
+        console.log("getEvents", data);
+    };
+
+    useEffect(() => {
+        getBio();
+    }, []);
+
     const {
         register,
         handleSubmit,
@@ -113,6 +129,7 @@ const Biography = () => {
                         <Input
                             type="text"
                             placeholder="Name"
+                            defaultValue={bio.name}
                             register={{
                                 ...register("name", {
                                     required: "Please enter your name.",
@@ -133,7 +150,7 @@ const Biography = () => {
                         <ReactQuill
                             className="h-[400px] w-[800px] mb-[20px]"
                             theme="snow"
-                            value={aboutArtistContent}
+                            value={aboutArtistContent || bio.aboutArtist}
                             onChange={onEditorStateChange}
                         />
                         <p>{errors.aboutContent?.message}</p>
@@ -141,7 +158,7 @@ const Biography = () => {
                         <ReactQuill
                             className="h-[400px] w-[800px] mb-[40px]"
                             theme="snow"
-                            value={biographyContent}
+                            value={biographyContent || bio.biography}
                             onChange={onEditorStateChange2}
                         />
                         <p>{errors.biographyContent?.message}</p>
