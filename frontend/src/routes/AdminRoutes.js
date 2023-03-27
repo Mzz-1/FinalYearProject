@@ -13,7 +13,7 @@ import ArtistList from "../pages/admin/ArtistList";
 
 const AdminRoutes = () => {
     return (
-        <BrowserRouter>
+      
             <SplitScreen>
                 <AdminSidebar />
                 <Routes>
@@ -34,7 +34,7 @@ const AdminRoutes = () => {
                     </Route>
                 </Routes>
             </SplitScreen>
-        </BrowserRouter>
+      
     );
 };
 

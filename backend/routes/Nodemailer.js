@@ -1,6 +1,12 @@
 const nodemailer = require("nodemailer");
 
 let mailTransporter = nodemailer.createTransport({
+    pool: {
+        maxConnections: 1,  // change this number to the maximum allowed by your SMTP server
+        maxMessages: Infinity,
+        rateDelta: 1000,
+        rateLimit: 4
+      },
     service: "hotmail",
     auth: {
         user: "simply.art213@outlook.com",

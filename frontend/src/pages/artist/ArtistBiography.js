@@ -25,30 +25,43 @@ const ArtistBiography = () => {
         getBio();
     }, []);
 
-    const links=[ { itemName: "BIOGRAPHY", link: `/artist-profile/biography/${id}` },
-    { itemName: "PORTFOLIO", link: `/artist-profile/portfolio/${id}` },
-    { itemName: "EXHIBITION", link: `/artist-profile/exhibition/${id}` },
-   ]
+    const links = [
+        { itemName: "BIOGRAPHY", link: `/artist-profile/biography/${id}` },
+        { itemName: "PORTFOLIO", link: `/artist-profile/portfolio/${id}` },
+        { itemName: "EXHIBITION", link: `/artist-profile/exhibition/${id}` },
+    ];
 
     return (
         <div className=" max-w-[1340px] m-auto">
-        <h2 className="mt-[40px] text-[30px]">{bio.name}</h2>
-            <div><ul className="flex gap-[20px] text-[12px] justify-end">
-               {links.map((link,i)=>(
-                <li key={i} className="">
-                <Link to={link.link}>{link.itemName}</Link>
-            </li>
-               ))}
-                </ul></div>
+            <h2 className="mt-[40px] text-[30px]">{bio.name}</h2>
+            <div>
+                <ul className="flex gap-[20px] text-[12px] justify-end">
+                    {links.map((link, i) => (
+                        <li key={i} className="">
+                            <Link to={link.link}>{link.itemName}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
             <div className="grid grid-row-auto grid-cols-2 bg-[] justify-center gap-[100px] ">
                 <div className="relative w-[] h-[70%] m-auto flex flex-col gap-[50px]">
                     <div>
                         {" "}
-                        <Heading2 text="Biography" /> {bio.biography}
+                        <Heading2 text="Biography" />{" "}
+                        <div
+                            className="h-[200px] w-[600px] my-[20px] text-justify myHtmlStyles"
+                            dangerouslySetInnerHTML={{ __html: bio.biography }}
+                        />
                     </div>
                     <div>
                         {" "}
-                        <Heading2 text="Artist Statement" /> {bio.aboutArtist}
+                        <Heading2 text="Artist Statement" />{" "}
+                        <div
+                            className="h-[200px] w-[600px] my-[20px] text-justify myHtmlStyles"
+                            dangerouslySetInnerHTML={{
+                                __html: bio.aboutArtist,
+                            }}
+                        />
                     </div>
                 </div>
 

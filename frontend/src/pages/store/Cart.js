@@ -52,15 +52,15 @@ export const Cart = () => {
     // }
 
     return (
-        <div className="bg-[#F4F4F2] px-[5%]">
+        <div className="bg-[#F4F4F2] px-[5%] py-[100px]">
             <div className="max-w-[1440px] m-auto flex justify-between items-center">
                 <Banner heading="My Cart" />
             </div>
 
-            <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
+            <div className="flex flex-col justify-center gap-[40px] ">
                 <hr className="h-[2px] bg-[#65635F] " />
                 <div className="w-[700px]">
-                    <ul className="grid text-[#3C3737] w-[500px] text-[20px] grid-cols-3 ">
+                    <ul className="flex text-[#3C3737] w-[530px] text-[18px] gap-[40px] ">
                         {cart.items?.map((item) => {
                             getProducts(item.productID);
                             return (
@@ -69,19 +69,23 @@ export const Cart = () => {
                                         {" "}
                                         <img
                                             src={product.url}
-                                            className="h-[250px] "
+                                            className="h-[200px] shadow-lg"
                                             alt=""
                                         />{" "}
                                     </li>
-                                    <li className="text-[24px] ">
+                                    <div className="flex flex-col gap-[10px] mt-[20px]">
+                                    <li className="text-[22px] ">
                                         {product.name}
                                     </li>
-                                    <li>{product.price}</li>
+                                    <li>Rs {product.price}</li>
                                     <li>Quantity {item.quantity}</li>
+                                    
+                                    </div>
+                                    <li className="mt-[20px] ml-[80px]">Total {cart.total}</li>
                                 </>
                             );
                         })}
-                        <li>Total {cart.total}</li>
+                        
                     </ul>
                 </div>
             </div>

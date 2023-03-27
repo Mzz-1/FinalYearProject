@@ -31,6 +31,7 @@ const {
     getEvent,
     updateEvents,
     deleteEvent,
+    sendEventMail,
 } = require("./EventsRoute");
 
 const { addToCart, getCartDetails } = require("./CartRoute");
@@ -55,6 +56,7 @@ const routes = [
     getEvent,
     updateEvents,
     deleteEvent,
+    sendEventMail,
     addBiography,
     updateBiography,
     getAllArtists,

@@ -12,12 +12,22 @@ const AddEventPage = () => {
     } = useForm();
     watch("image");
 
+    const [userList,setUserList] = useState([]);
 
     const addEvent = async (data) => {
         console.log("1");
      
+        const users = await axios.post("http://localhost:5000/api/sendEmail",{
+            name:data.name,
+            location:data.location,
+            startDate:data.startDate,
+            endDate:data.endDate,
+        })
+        
+
 
         const formData = new FormData();
+        formData.append("userList", userList);
         formData.append("name", data.name);
         formData.append("place", data.place);
         formData.append("location", data.location);
