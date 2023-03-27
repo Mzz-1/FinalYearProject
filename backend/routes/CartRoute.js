@@ -1,11 +1,10 @@
-const Cart = require('../models/Cart')
-
+const Cart = require("../models/Cart");
 
 const addToCart = {
     path: "/api/add-to-cart",
     method: "post",
     handler: async (req, res) => {
- const { userID, productID } = req.body;
+        const { userID, productID } = req.body;
         try {
             // Check if the cart already exists for the user
             let cart = await Cart.findOne({ userID: userID });
@@ -50,9 +49,9 @@ const getCartDetails = {
     method: "get",
     handler: async (req, res) => {
         const { id: userID } = req.params;
-       
+
         const cart = await Cart.findOne({ userID: userID });
-       
+
         if (!cart) {
             return res.sendStatus(400);
         }
@@ -60,7 +59,36 @@ const getCartDetails = {
     },
 };
 
+const getCartProductDetails = {
+    path: "/api/cartProducts/:userID",
+    method: "get",
+    handler: async (req, res) => {
+        const { userID } = req.params;
+
+        try {
+            // Use "populate" to populate the "items.productID" field in the cart
+            const cart = await Cart.findOne({ userID: userID }).populate({
+                path: "items.productID",
+                model: "Product",
+            });
+
+            if (!cart) {
+                return res.sendStatus(404);
+            }
+
+            // Extract the product field from the cart document
+            const products = cart.items.map((item) => item.productID);
+
+            // Return the products array in the response
+            res.status(200).json({ products });
+        } catch (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }
+    },
+};
 module.exports = {
     addToCart,
-    getCartDetails
+    getCartDetails,
+    getCartProductDetails,
 };
