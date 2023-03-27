@@ -26,7 +26,13 @@ export const AllRoutes = () => {
     const location = useLocation();
 
     // Define an array of paths where Navbar and Footer should not appear
-    const excludedPaths = ["/login", "/register", "/admin"];
+    const excludedPaths = [
+        "/login",
+        "/register",
+        "/admin",
+        "/artist-dashboard/*",
+        "/artist-dashboard",
+    ];
 
     // Check if the current location matches any excluded path
     const shouldHide = excludedPaths.includes(location.pathname);
@@ -65,7 +71,10 @@ export const AllRoutes = () => {
                 </Route>
                 <Route path="/events" element={<Events />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
-                <Route path="/cart" element={ <PrivateRoute Component={Cart}/>}/>
+                <Route
+                    path="/cart"
+                    element={<PrivateRoute Component={Cart} />}
+                />
             </Routes>
             {!shouldHide && <Footer />}
         </div>

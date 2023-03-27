@@ -20,16 +20,16 @@ const productSchema = mongoose.Schema({
     quantity: {
         type: Number,
     },
-    price:{
+    price: {
         type: Number,
-        required: [true, "Price must be provided"]
+        required: [true, "Price must be provided"],
     },
     dimensions: {
         type: String,
         required: [true, "Dimentions must be provided"],
     },
-    url:{
-        type:String,
+    url: {
+        type: String,
         required: [true, "Image must be provided"],
     },
     uploadedAt: {

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, matchPath } from "react-router-dom";
 import { useEffect } from "react";
 import PrivateRoute from "../service/Auth";
 import { PrivateRouteAdmin } from "../service/Auth";
@@ -14,36 +14,41 @@ import Biography from "../pages/artistDashboard/Biography";
 import FeaturedEvents from "../pages/artistDashboard/FeaturedEvents";
 
 export const ArtistRoutes = () => {
-    // Define an array of paths where Navbar and Footer should not appear
+    const location = useLocation();
+    console.log("location", location);
+    console.log("pathname", location.pathname);
+    // Define an array of paths where dashboard should appear
+    const includedPaths = ["/artist-dashboard/*"];
 
-    // Check if the current location matches any excluded path
-
+    // Check if the current location matches any included path
+    const shouldDisplayDashboard = includedPaths.some((path) =>
+    typeof location.pathname === 'string' && location.pathname.match(path)
+  );
     return (
-        <BrowserRouter>
-            <SplitScreen>
-                <ArtistSidebar />
-                <Routes>
-                    <Route path="/artist-dashboard">
-                        <Route
-                            path="control-panel"
-                            element={<AdminDashboard />}
-                        />
+        <div>
+            {shouldDisplayDashboard && (
+                <SplitScreen>
+                    <ArtistSidebar />
+                    <Routes>
+                        <Route path="/artist-dashboard">
+                            <Route
+                                path="control-panel"
+                                element={<AdminDashboard />}
+                            />
 
-                        <Route
-                            path="add-product"
-                            element={<AddProductPage />}
-                        />
-                        <Route
-                            path="biography"
-                            element={<Biography />}
-                        />
-                        <Route
-                            path="add-event"
-                            element={<FeaturedEvents />}
-                        />
-                    </Route>
-                </Routes>
-            </SplitScreen>
-        </BrowserRouter>
+                            <Route
+                                path="add-product"
+                                element={<AddProductPage />}
+                            />
+                            <Route path="biography" element={<Biography />} />
+                            <Route
+                                path="add-event"
+                                element={<FeaturedEvents />}
+                            />
+                        </Route>
+                    </Routes>
+                </SplitScreen>
+            )}
+        </div>
     );
 };

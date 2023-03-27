@@ -8,11 +8,14 @@ import { FeaturedArtists } from "./FeaturedArtists";
 const Home = () => {
     return (
         <>
-            <img
-                src="https://res.cloudinary.com/djuzpmqlp/image/upload/v1677401708/assets/banner_urwns0.jpg"
-                alt="banner"
-                className="h-[80vh] w-[100%] object-cover mb-[30px]"
-            />
+            <div>
+                <img
+                    src="https://res.cloudinary.com/djuzpmqlp/image/upload/v1679823816/artist%20events/wngsr0os6x7ojscnnuu5.jpg"
+                    alt="banner"
+                    className="h-[80vh] w-[100%] object-cover mb-[30px]"
+                />
+        
+            </div>
             <NewProducts />
             <AboutUs />
             <FeaturedArtists />

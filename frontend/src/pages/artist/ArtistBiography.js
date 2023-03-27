@@ -16,7 +16,7 @@ const ArtistBiography = () => {
             `http://localhost:5000/api/biography/${id}`
         );
 
-        const data = await productsData.data.bio;
+        const data = await productsData.data.artist;
         setBio(data);
         console.log("getEvents", data);
     };

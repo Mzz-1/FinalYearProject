@@ -44,11 +44,11 @@ const getBiography = {
     method: "get",
     handler: async (req, res) => {
         const { id: userID } = req.params;
-        // const bio = await Artist.findOne({ _id: userID });
-        const artist = await Artist.findOne({ userID: userID });
-        // if (!bio) {
-        //     return res.sendStatus(400);
-        // }
+        const artist = await Artist.findOne({ _id: userID });
+        // const artist = await Artist.findOne({ userID: userID });
+        if (!artist) {
+            return res.sendStatus(400);
+        }
         if (!artist) {
             return res.sendStatus(400);
         }
@@ -81,9 +81,8 @@ const addArtistEvent = {
                 location,
                 image: upload.secure_url,
             });
-            const artistId = "<artist_id>"; // replace with actual artist id
 
-            const artist = await Artist.find({ userID });
+            const artist = await Artist.findOne({ userID });
             artist.exhibitions.push(exhibition);
             await artist.save();
             console.log("node 2");

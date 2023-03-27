@@ -15,15 +15,16 @@ function App() {
 
     return (
         <>
-            {role === "anon" || role === "user" ? (
-                <BrowserRouter>
+            <BrowserRouter>
+                {role === "anon" || role === "user" || role === "artist" ? (
                     <AllRoutes />
-                </BrowserRouter>
-            ) : (
-                <></>
-            )}
-             {role === "artist" ? <ArtistRoutes /> : <></>}
-            {role === "admin" ? <AdminRoutes /> : <></>}
+                ) : (
+                    <></>
+                )}
+                {role === "artist" ? <ArtistRoutes /> : <></>}
+                {role === "admin" ? <AdminRoutes /> : <></>}
+            </BrowserRouter>
+           
         </>
     );
 }

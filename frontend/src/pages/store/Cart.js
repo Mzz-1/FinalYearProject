@@ -7,23 +7,9 @@ import { ProductList } from "./ProductList";
 import { useUser } from "../../service/useUser";
 
 export const Cart = () => {
-    const [products, setProducts] = useState([]);
+    const [product, setProducts] = useState([]);
 
     const user = useUser();
-
-    // const getProducts = async () => {
-    //     const productsData = await axios.get(
-    //         `http://localhost:5000/api/products/:id`
-    //     );
-
-    //     const data = await productsData.data.product;
-    //     setProducts(data);
-    //     console.log("getProducts", data);
-    // };
-
-    // useEffect(() => {
-    //     getProducts();
-    // }, []);
 
     const [cart, setCart] = useState([]);
 
@@ -39,6 +25,20 @@ export const Cart = () => {
 
     useEffect(() => {
         getCart();
+    }, []);
+
+    const getProducts = async (id) => {
+        const productsData = await axios.get(
+            `http://localhost:5000/api/products/${id}`
+        );
+
+        const data = await productsData.data.product;
+        setProducts(data);
+        console.log("getProducts", data);
+    };
+
+    useEffect(() => {
+        getProducts();
     }, []);
 
     // const navigate= useNavigate()
@@ -59,9 +59,29 @@ export const Cart = () => {
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
                 <hr className="h-[2px] bg-[#65635F] " />
-                <div>
-                    <ul>
-                        <li>{cart.total}</li>
+                <div className="w-[700px]">
+                    <ul className="grid text-[#3C3737] w-[500px] text-[20px] grid-cols-3 ">
+                        {cart.items?.map((item) => {
+                            getProducts(item.productID);
+                            return (
+                                <>
+                                    <li>
+                                        {" "}
+                                        <img
+                                            src={product.url}
+                                            className="h-[250px] "
+                                            alt=""
+                                        />{" "}
+                                    </li>
+                                    <li className="text-[24px] ">
+                                        {product.name}
+                                    </li>
+                                    <li>{product.price}</li>
+                                    <li>Quantity {item.quantity}</li>
+                                </>
+                            );
+                        })}
+                        <li>Total {cart.total}</li>
                     </ul>
                 </div>
             </div>
