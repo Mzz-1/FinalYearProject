@@ -5,7 +5,7 @@ const connectCloudinary = require("../db/Cloudinary");
 const cloudinary = require("cloudinary").v2;
 const Event = require("../models/Events");
 const multer = require("multer");
-const sendEmail = require("../Utils/SendEmail");
+const sendEventsEmail = require("../Utils/SendInBlue");
 const User = require("../models/User");
 
 const upload = multer({ dest: "uploads/" });
@@ -57,32 +57,31 @@ const sendEventMail = {
     path: "/api/sendEmail",
     method: "post",
     handler: async (req, res) => {
-        const { name, place, startDate, endDate } = req.body;
+        const { name, location, startDate, endDate } = req.body;
 
         const users = await User.find({});
         console.log(users);
         users.map((user) => {
-            if(user.role!=="admin" && user.isVerified===true){ 
+            if (user.role !== "admin" && user.isVerified === true) {
                 console.log(user.username);
-            sendEmail({
-                to: user.email,
-                from: "simply.art213@outlook.com",
-                subject: "Reminder: Don't miss our upcoming event",
-                text: `
-                Dear ${user.username},
+                sendEventsEmail({
+                    to: user.email,
 
-                I hope this message finds you doing well. I am writing to inform you about an exciting event that will be taking place soon. ${name}, will be held at ${place} from ${startDate} to ${endDate}.
+                    text: `
+Dear ${user.username},
+
+        I hope this message finds you doing well. I am writing to inform you about an exciting event that will be taking place soon. ${name}, will be held at ${location} from ${startDate} to ${endDate}.
                 
-                We would be delighted if you could join us for this celebration of creativity and art. Please visit our website at [Website URL] for more information and details about the event.
+        We would be delighted if you could join us for this celebration of creativity and art. Please visit our website at [Website URL] for more information and details about the event.
                 
-                Thank you for being a part of our community of artists, and we look forward to seeing you at the exhibition!
+        Thank you for being a part of our community of artists, and we look forward to seeing you at the exhibition!
                 
-                Best regards,
+Best regards,
                 
-                SimplyArt Team
+SimplyArt Team
             `,
-            });
-        }
+                });
+            }
         });
         res.status(200).json({ users });
     },

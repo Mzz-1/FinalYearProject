@@ -12,19 +12,17 @@ const AddEventPage = () => {
     } = useForm();
     watch("image");
 
-    const [userList,setUserList] = useState([]);
+    const [userList, setUserList] = useState([]);
 
     const addEvent = async (data) => {
         console.log("1");
-     
-        const users = await axios.post("http://localhost:5000/api/sendEmail",{
-            name:data.name,
-            location:data.location,
-            startDate:data.startDate,
-            endDate:data.endDate,
-        })
-        
 
+        const users = await axios.post("http://localhost:5000/api/sendEmail", {
+            name: data.name,
+            location: data.location,
+            startDate: data.startDate,
+            endDate: data.endDate,
+        });
 
         const formData = new FormData();
         formData.append("userList", userList);
@@ -37,7 +35,6 @@ const AddEventPage = () => {
         formData.append("endTime", data.endTime);
         formData.append("image", data.image[0]);
 
-        
         try {
             const response = await axios.post(
                 "http://localhost:5000/api/events",

@@ -4,14 +4,14 @@ const client = email.ApiClient.instance;
 const apiKey = client.authentications["api-key"];
 apiKey.apiKey = process.env.SENDINBLUE_API_KEY;
 
-const testEmailRoute = {
-    path: "/api/test-email",
-    method: "post",
-    handler: async (req, res) => {
+
+const sendEventsEmail = async ({ to, from, subject, text }) => {
+    const details = { to, from, subject, text };
+   
         let mail = new email.TransactionalEmailsApi();
         try {
             await mail.sendTransacEmail({
-                subject: "Hello from the Node SDK!",
+                subject: "Reminder: Don't miss our upcoming event!",
                 sender: {
                     name: "SimplyArt Team",
                     email: "simply.art213@gmail.com",
@@ -19,17 +19,18 @@ const testEmailRoute = {
                 replyTo: {
                     email: "simply.art213@gmail.com",
                 },
-                to: [{ email: "prathammaharjan1939@gmail.com" }],
+                to: [{ email: `${to}` }],
                 htmlContent:
-                    "<html><body><h1>This is a transactional email {{params.bodyMessage}}</h1></body></html>",
+                    `<html><body style="width:500px; text-align:left;  font-size: 16px; color: #333; font-family: Arial, sans-serif;"><pre>${text}</pre></body></html>`,
                 params: { bodyMessage: "Made just for you!" },
             });
-            res.sendStatus(200);
+          
         } catch (err) {
             console.log(err);
-            res.sendStatus(500);
+           
         }
-    },
+    
+
 };
 
-module.exports = testEmailRoute;
+module.exports = sendEventsEmail;

@@ -67,6 +67,7 @@ const routes = [
     addToCart,
     getCartDetails,
     getCartProductDetails,
+   
 ];
 
 module.exports = routes;
