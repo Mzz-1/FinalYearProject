@@ -60,7 +60,7 @@ const addArtistEvent = {
     path: "/api/add-artist-event",
     method: "post",
     handler: [
-        upload.single("image"),
+        upload.single("image", { dest: null }),
         async (req, res) => {
             const { userID, name, startDate, endDate, location } = req.body;
             const file = req.file;

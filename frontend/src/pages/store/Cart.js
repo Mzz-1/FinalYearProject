@@ -6,11 +6,14 @@ import { Banner } from "../../components/Banner";
 import { ProductList } from "./ProductList";
 import { useUser } from "../../service/useUser";
 
+
 export const Cart = () => {
   const [products, setProducts] = useState([]);
   const user = useUser();
   const [cart, setCart] = useState();
   const [subTotal, setSubTotal] = useState(0);
+
+  const navigate = useNavigate()
 
   const getCart = async () => {
     const cartData = await axios.get(
@@ -49,7 +52,7 @@ export const Cart = () => {
     }
   }, [cart, products]);
 
-  const navigate = useNavigate();
+ 
 
   return (
     <div className="bg-gray-100 min-h-screen px-[50px]">
@@ -116,7 +119,7 @@ export const Cart = () => {
             </div>
         <div className="flex items-center justify-between py-4">
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate(`/checkout/${cart._id}`)}
             className="bg-white text-gray-500 border border-gray-300 px-4 py-2 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none"
           >
             Checkout

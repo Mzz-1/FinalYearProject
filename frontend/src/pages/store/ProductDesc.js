@@ -5,11 +5,13 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../service/useUser";
+import { ToastContainer, toast } from "react-toastify";
+import { SuccessToast } from "../../helpers/Toast";
 
 export const ProductDetails = () => {
     const [product, setProducts] = useState([]);
 
-        const user = useUser()
+    const user = useUser();
     const { id } = useParams();
 
     const navigate = useNavigate();
@@ -33,9 +35,11 @@ export const ProductDetails = () => {
                 }
             );
             console.log(response.data);
-            // navigate("/cart");
+            navigate("/cart");
+            SuccessToast("Product added to cart.");
         } catch (error) {
             console.error(error);
+            navigate("/login");
         }
     };
 
@@ -85,6 +89,7 @@ export const ProductDetails = () => {
                     </button>
                 </ul>
             </div>
+            <ToastContainer />
         </div>
     );
 };

@@ -18,6 +18,7 @@ import Events from "../pages/events/Events";
 import ArtistBiography from "../pages/artist/ArtistBiography";
 import ArtistPortfolio from "../pages/artist/ArtistPortfolio";
 import ArtistExhibition from "../pages/artist/ArtistExhibition";
+import CheckoutPage from "../pages/store/Checkout";
 import { Cart } from "../pages/store/Cart";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
@@ -74,6 +75,10 @@ export const AllRoutes = () => {
                 <Route
                     path="/cart"
                     element={<PrivateRoute Component={Cart} />}
+                />
+                <Route
+                    path="/checkout/:id"
+                    element={<PrivateRoute Component={CheckoutPage} />}
                 />
             </Routes>
             {!shouldHide && <Footer />}

@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Input from "../../components/Input";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { SuccessToast } from "../../helpers/Toast";
 
 const AddEventPage = () => {
     const {
@@ -17,12 +20,7 @@ const AddEventPage = () => {
     const addEvent = async (data) => {
         console.log("1");
 
-        const users = await axios.post("http://localhost:5000/api/sendEmail", {
-            name: data.name,
-            location: data.location,
-            startDate: data.startDate,
-            endDate: data.endDate,
-        });
+     
 
         const formData = new FormData();
         formData.append("userList", userList);
@@ -58,6 +56,7 @@ const AddEventPage = () => {
             console.log(response.data);
             // const { token } = response.data;
             // console.log(token);
+            SuccessToast("Event has been added.")
         } catch (err) {
             console.log(`err:${err}`);
         }
@@ -163,6 +162,7 @@ const AddEventPage = () => {
                     Add Event
                 </button>
             </form>
+            <ToastContainer/>
         </div>
     );
 };

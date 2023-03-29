@@ -47,45 +47,49 @@ const addEvents = {
                 endTime,
             });
 
+            const users = await User.find({isVerified:true});
+            
+            sendEventsEmail({
+                users: users,
+                name:name,
+                location:location,
+                startDate:startDate,
+                endDate:endDate,
+                image:upload.secure_url,
+
+            });
+
             console.log("node 2");
             res.sendStatus(200);
         },
     ],
 };
 
-const sendEventMail = {
-    path: "/api/sendEmail",
-    method: "post",
-    handler: async (req, res) => {
-        const { name, location, startDate, endDate } = req.body;
+// const sendEventMail = {
+//     path: "/api/sendEmail",
+//     method: "post",
+//     handler: async (req, res) => {
+//         const { name, location, startDate, endDate,image } = req.body;
 
-        const users = await User.find({});
-        console.log(users);
-        users.map((user) => {
-            if (user.role !== "admin" && user.isVerified === true) {
-                console.log(user.username);
-                sendEventsEmail({
-                    to: user.email,
+//         const users = await User.find({});
+//         console.log(users);
+//         users.map((user) => {
+//             if (user.role !== "admin" && user.isVerified === true) {
+//                 console.log(user.username);
+//                 sendEventsEmail({
+//                     to: user.email,
+//                     name:user.username,
+//                     location:location,
+//                     startDate:startDate,
+//                     emdDate:endDate,
+//                     image:image,
 
-                    text: `
-Dear ${user.username},
-
-        I hope this message finds you doing well. I am writing to inform you about an exciting event that will be taking place soon. ${name}, will be held at ${location} from ${startDate} to ${endDate}.
-                
-        We would be delighted if you could join us for this celebration of creativity and art. Please visit our website at [Website URL] for more information and details about the event.
-                
-        Thank you for being a part of our community of artists, and we look forward to seeing you at the exhibition!
-                
-Best regards,
-                
-SimplyArt Team
-            `,
-                });
-            }
-        });
-        res.status(200).json({ users });
-    },
-};
+//                 });
+//             }
+//         });
+//         res.status(200).json({ users });
+//     },
+// };
 
 const getAllEvents = {
     path: "/api/events",
@@ -149,5 +153,5 @@ module.exports = {
     getEvent,
     updateEvents,
     deleteEvent,
-    sendEventMail,
+    
 };

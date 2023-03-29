@@ -36,6 +36,10 @@ const {
 
 const { addToCart, getCartDetails, getCartProductDetails } = require("./CartRoute");
 
+const { addDelivery } = require("./DeliveryRoute");
+
+const testEmailTemplate = require("./Template");
+
 const routes = [
     signUpRoute,
     verifyEmailRoute,
@@ -56,7 +60,7 @@ const routes = [
     getEvent,
     updateEvents,
     deleteEvent,
-    sendEventMail,
+   
     addBiography,
     updateBiography,
     getAllArtists,
@@ -67,7 +71,8 @@ const routes = [
     addToCart,
     getCartDetails,
     getCartProductDetails,
-   
+    addDelivery,
+    testEmailTemplate,
 ];
 
 module.exports = routes;
