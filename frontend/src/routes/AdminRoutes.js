@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import SplitScreen from "../components/SplitScreen";
 
 import AdminDashboard from "../pages/admin/AdminDashboard";
@@ -10,13 +10,17 @@ import AddProductPage from "../pages/artistDashboard/AddProductsPage";
 import AdminEventPage from "../pages/admin/AdminEvents";
 import UserList from "../pages/admin/UsersList";
 import ArtistList from "../pages/admin/ArtistList";
+import AdminLogin from "../pages/login/AdminLogin";
 
 const AdminRoutes = () => {
+    
     return (
-      
+        
             <SplitScreen>
                 <AdminSidebar />
+                
                 <Routes>
+                
                     <Route path="/admin-dashboard">
                         <Route
                             path="control-panel"

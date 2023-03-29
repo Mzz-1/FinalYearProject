@@ -22,10 +22,14 @@ export const LoginForm = ({ formHeading }) => {
         const { token } = response.data;
         setToken(token);
 
-        if (formHeading !== "Admin") {
+        if (formHeading === "Admin") {
             navigate("/admin-dashboard");
+            window.location.reload(true)
+            
+        } else {
+            navigate("/");
         }
-        navigate("/");
+
         toast("Log In Successful");
     };
 
