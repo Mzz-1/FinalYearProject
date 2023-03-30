@@ -1,12 +1,11 @@
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 
 const emailAPI = require("sib-api-v3-sdk");
 const client = emailAPI.ApiClient.instance;
 const apiKey = client.authentications["api-key"];
 apiKey.apiKey = process.env.SENDINBLUE_API_KEY;
 
-const sendEventsEmail = ({
+const sendEventsEmail = async ({
     users,
     name,
     location,
@@ -28,7 +27,6 @@ const sendEventsEmail = ({
     sendSmtpEmail.to = emails;
     sendSmtpEmail.params = {
         username: name,
-
         image: image,
         name: name,
         location: location,
@@ -36,7 +34,7 @@ const sendEventsEmail = ({
         endDate: endDate,
     };
     try {
-        mail.sendTransacEmail(sendSmtpEmail).then(
+        await mail.sendTransacEmail(sendSmtpEmail).then(
             function (data) {
                 console.log(
                     "API called successfully. Returned data: " +

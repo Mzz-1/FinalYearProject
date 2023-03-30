@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../service/useUser";
 import { ToastContainer, toast } from "react-toastify";
-import { SuccessToast } from "../../helpers/Toast";
+import { SuccessToast, InfoToast } from "../../helpers/Toast";
 
 export const ProductDetails = () => {
     const [product, setProducts] = useState([]);
@@ -40,6 +40,7 @@ export const ProductDetails = () => {
         } catch (error) {
             console.error(error);
             navigate("/login");
+            InfoToast("Please log in to use the cart.");
         }
     };
 
@@ -89,7 +90,6 @@ export const ProductDetails = () => {
                     </button>
                 </ul>
             </div>
-            <ToastContainer />
         </div>
     );
 };

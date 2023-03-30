@@ -42,7 +42,7 @@ const addProducts = {
     path: "/api/products",
     method: "post",
     handler: [
-        upload.single("image"),
+        upload.single("image", { dest: null }),
         async (req, res) => {
             try {
                 const {

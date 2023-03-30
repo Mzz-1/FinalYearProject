@@ -32,7 +32,10 @@ export const AllRoutes = () => {
         "/register",
         "/admin",
         "/artist-dashboard/*",
-        "/artist-dashboard",
+        "/artist-dashboard/products",
+        "/artist-dashboard/add-product",
+        "/artist-dashboard/biography",
+        "/artist-dashboard/add-event",
     ];
 
     // Check if the current location matches any excluded path

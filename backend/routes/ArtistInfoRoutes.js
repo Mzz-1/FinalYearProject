@@ -12,7 +12,7 @@ const addBiography = {
     path: "/api/biography",
     method: "post",
     handler: [
-        upload.single("image"),
+        upload.single("image", { dest: null }),
         async (req, res) => {
             const { userID, name, aboutContent, biography } = req.body;
             const file = req.file;
@@ -132,7 +132,7 @@ const updateBiography = {
     path: "/api/biography/:id",
     method: "patch",
     handler: [
-        upload.single("image"),
+        upload.single("image", { dest: null }),
         async (req, res) => {
             const { id: bioID } = req.params;
             const { userID, name, aboutContent, biography } = req.body;

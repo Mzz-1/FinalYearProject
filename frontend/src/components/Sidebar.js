@@ -1,22 +1,21 @@
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { AdminHeading2 } from "./Heading";
 import { RiArrowRightSLine, RiCalendarEventLine } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
 import { AiOutlineUser } from "react-icons/ai";
-import {MdLogout} from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 import { LogOut } from "../helpers/Logout";
 
-export const Sidebar = ({items}) => {
+export const Sidebar = ({ items }) => {
     const navigate = useNavigate();
     const LogOut = () => {
-        
         localStorage.removeItem("token");
-        
-        navigate('/admin')
-        window.location.reload(true)
+
+        navigate("/");
+        window.location.reload(true);
     };
-    
+
     const [showDropdown, setShowDropdown] = useState(false);
 
     const handleDropdownClick = () => {
@@ -61,10 +60,15 @@ export const Sidebar = ({items}) => {
                         </li>
                     ))}
                 </ul>
-               
             </div>
-            
-            <button className=" text-[20px]  text-[#A4A6B3] mt-[auto] flex items-center gap-4 justify-center" onClick={() => LogOut()}> Log out <MdLogout/> </button>
+
+            <button
+                className=" text-[20px]  text-[#A4A6B3] mt-[auto] flex items-center gap-4 justify-center"
+                onClick={() => LogOut()}
+            >
+                {" "}
+                Log out <MdLogout />{" "}
+            </button>
         </div>
     );
 };

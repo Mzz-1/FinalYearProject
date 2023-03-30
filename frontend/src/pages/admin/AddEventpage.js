@@ -162,7 +162,7 @@ const AddEventPage = () => {
                     Add Event
                 </button>
             </form>
-            <ToastContainer/>
+            
         </div>
     );
 };

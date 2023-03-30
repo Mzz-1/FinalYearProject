@@ -14,7 +14,7 @@ const addEvents = {
     path: "/api/events",
     method: "post",
     handler: [
-        upload.single("image"),
+        upload.single("image", { dest: null }),
         async (req, res) => {
             const {
                 name,
@@ -47,16 +47,15 @@ const addEvents = {
                 endTime,
             });
 
-            const users = await User.find({isVerified:true});
-            
+            const users = await User.find({ isVerified: true });
+
             sendEventsEmail({
                 users: users,
-                name:name,
-                location:location,
-                startDate:startDate,
-                endDate:endDate,
-                image:upload.secure_url,
-
+                name: name,
+                location: location,
+                startDate: startDate,
+                endDate: endDate,
+                image: upload.secure_url,
             });
 
             console.log("node 2");
@@ -153,5 +152,4 @@ module.exports = {
     getEvent,
     updateEvents,
     deleteEvent,
-    
 };

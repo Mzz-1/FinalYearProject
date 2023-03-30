@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useToken } from "../../service/useToken";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { SuccessToast } from "../../helpers/Toast";
 
@@ -30,7 +30,7 @@ export const LoginForm = ({ formHeading }) => {
             navigate("/");
         }
 
-        toast("Log In Successful");
+        SuccessToast("Log In Successful");
     };
 
     const {
@@ -91,7 +91,7 @@ export const LoginForm = ({ formHeading }) => {
                     </div>
                 )}
             </div>
-            <ToastContainer />
+            
         </div>
     );
 };

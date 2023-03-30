@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { SuccessToast } from "./Toast";
 import { Modal } from "../components/Modal";
 
 export const LogOut = () => {
-    const navigate = useNavigate();
+   
     localStorage.removeItem("token");
   
-    navigate('/')
+    
+    SuccessToast("Logged out.")
 };

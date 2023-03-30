@@ -1,11 +1,11 @@
 import { IonIcon } from "@ionic/react";
 import { search, cart } from "ionicons/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../service/useUser";
-import { useNavigate } from "react-router-dom";
 import { LogOutModal } from "./Modal";
 import { ModalHeading } from "./Heading";
 import { ModalPara } from "./Paragraph";
+import { SuccessToast } from "../helpers/Toast";
 
 export const Navbar = () => {
     const items = [
@@ -16,6 +16,14 @@ export const Navbar = () => {
         { itemName: "CART", link: "/cart" },
     ];
     const user = useUser();
+
+    const navigate = useNavigate;
+
+    const LogOut = () => {
+        localStorage.removeItem("token");
+        window.location.reload(true);
+        SuccessToast("Logged out.");
+    };
 
     return (
         <header>
@@ -38,15 +46,9 @@ export const Navbar = () => {
                         </li>
                     )}
                     {user && (
-                        <li
-                            key={7}
-                            className=""
-                            onClick={() => localStorage.removeItem("token")}
-                        >
-                            <LogOutModal>
-                                <ModalHeading>Log out Successful.</ModalHeading>
-                            </LogOutModal>
-                        </li>
+                        <button key={7} className="" onClick={LogOut}>
+                            LOGOUT
+                        </button>
                     )}
                 </ul>
             </nav>
