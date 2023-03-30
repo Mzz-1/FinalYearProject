@@ -13,32 +13,23 @@ import ArtistList from "../pages/admin/ArtistList";
 import AdminLogin from "../pages/login/AdminLogin";
 
 const AdminRoutes = () => {
-    
     return (
-        
-            <SplitScreen>
-                <AdminSidebar />
-                
-                <Routes>
-                
-                    <Route path="/admin-dashboard">
-                        <Route
-                            path="control-panel"
-                            element={<AdminDashboard />}
-                        />
-                        <Route path="add-event" element={<AddEventPage />} />
-                        <Route
-                            path="add-product"
-                            element={<AddProductPage />}
-                        />
+        <SplitScreen>
+            <AdminSidebar />
 
-                        <Route path="events" element={<AdminEventPage />} />
-                        <Route path="users" element={<UserList />} />
-                        <Route path="artists" element={<ArtistList />} />
-                    </Route>
-                </Routes>
-            </SplitScreen>
-      
+            <Routes>
+                <Route path="/admin-dashboard">
+                    <Route path="control-panel" element={<AdminDashboard />} />
+                    <Route path="add-event" element={<AddEventPage />} />
+                    <Route path="update-event/:id" element={<AddEventPage />} />
+                    <Route path="add-product" element={<AddProductPage />} />
+
+                    <Route path="events" element={<AdminEventPage />} />
+                    <Route path="users" element={<UserList />} />
+                    <Route path="artists" element={<ArtistList />} />
+                </Route>
+            </Routes>
+        </SplitScreen>
     );
 };
 

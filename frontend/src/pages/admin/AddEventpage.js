@@ -2,9 +2,11 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Input from "../../components/Input";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { SuccessToast } from "../../helpers/Toast";
+import "react-toastify/dist/ReactToastify.css";
+import { useParams } from "react-router-dom";
+import { SuccessToast,PromiseToast } from "../../helpers/Toast";
+import { getSingleEvent,updateEvent,addEvent } from "../../helpers/Events";
+import { DashboardActionButton } from "../../components/Button";
 
 const AddEventPage = () => {
     const {
@@ -15,59 +17,37 @@ const AddEventPage = () => {
     } = useForm();
     watch("image");
 
-    const [userList, setUserList] = useState([]);
+    const { id } = useParams();
 
-    const addEvent = async (data) => {
-        console.log("1");
+    const [eventToEdit, setEventToUpdate] = useState();
 
-     
+    
+    useEffect(() => {
+        const fetchData = async () => {
+          const event = await getSingleEvent(id);
+          setEventToUpdate(event);
+        };
+        fetchData();
+    }, [id]);
 
-        const formData = new FormData();
-        formData.append("userList", userList);
-        formData.append("name", data.name);
-        formData.append("place", data.place);
-        formData.append("location", data.location);
-        formData.append("startDate", data.startDate);
-        formData.append("endDate", data.endDate);
-        formData.append("startTime", data.startTime);
-        formData.append("endTime", data.endTime);
-        formData.append("image", data.image[0]);
+    
+    const EventAction = async (data) => {
 
-        try {
-            const response = await axios.post(
-                "http://localhost:5000/api/events",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
-            );
-            // console.log(
-            //     name,
-            //     place,
-            //     location,
-            //     image,
-            //     startDate,
-            //     endDate,
-            //     startTime,
-            //     endTime
-            // );
-            console.log(response.data);
-            // const { token } = response.data;
-            // console.log(token);
-            SuccessToast("Event has been added.")
-        } catch (err) {
-            console.log(`err:${err}`);
-        }
+        if(id){
+            // await updateEvent(data,eventToEdit._id)
+            PromiseToast("Event has been updated.", updateEvent(data, eventToEdit._id));
+        }else{
+            addEvent(data);
+            SuccessToast("Event has been added.");
+    }
     };
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <h2 className="text-5xl font-semibold ">Add Event</h2>
+            <h2 className="text-5xl font-semibold ">{eventToEdit ? "Update Event" : "Add Event"}</h2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
-                onSubmit={handleSubmit(addEvent)}
+                onSubmit={handleSubmit(EventAction)}
             >
                 <div className="grid grid-rows-1 grid-cols-2 gap-[30px]">
                     <div className="flex flex-col gap-[20px]">
@@ -75,6 +55,7 @@ const AddEventPage = () => {
                         <Input
                             type="text"
                             placeholder="Name"
+                            defaultValue={eventToEdit?.name}
                             register={{
                                 ...register("name", {
                                     required: "Please enter your username.",
@@ -86,6 +67,7 @@ const AddEventPage = () => {
                         <Input
                             type="text"
                             placeholder="Place"
+                            defaultValue={eventToEdit?.place}
                             register={{
                                 ...register("place", {
                                     required:
@@ -98,6 +80,7 @@ const AddEventPage = () => {
                         <Input
                             type="text"
                             placeholder="Location"
+                            defaultValue={eventToEdit?.location}
                             register={{
                                 ...register("location", {
                                     required: "Please enter your password.",
@@ -119,6 +102,7 @@ const AddEventPage = () => {
                         <label>Start Date</label>
                         <Input
                             type="date"
+                            defaultValue={eventToEdit?.startDate}
                             register={{
                                 ...register("startDate", {
                                     required: "Please enter your password.",
@@ -129,6 +113,7 @@ const AddEventPage = () => {
                         <label>End Date</label>
                         <Input
                             type="date"
+                            defaultValue={eventToEdit?.endDate}
                             register={{
                                 ...register("endDate", {
                                     required: "Please enter your password.",
@@ -139,6 +124,7 @@ const AddEventPage = () => {
                         <label>Start Time</label>
                         <Input
                             type="time"
+                            defaultValue={eventToEdit?.startTime}
                             register={{
                                 ...register("startTime", {
                                     required: "Please enter your password.",
@@ -149,6 +135,7 @@ const AddEventPage = () => {
                         <label>End Time</label>
                         <Input
                             type="time"
+                            defaultValue={eventToEdit?.endTime}
                             register={{
                                 ...register("endTime", {
                                     required: "Please enter your password.",
@@ -158,11 +145,11 @@ const AddEventPage = () => {
                         <p>{errors.endTime?.message}</p>
                     </div>
                 </div>
-                <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
-                    Add Event
-                </button>
+               
+                <DashboardActionButton>
+                {eventToEdit ? "Update Event" : "Add Event"}
+                </DashboardActionButton>
             </form>
-            
         </div>
     );
 };

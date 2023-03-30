@@ -11,10 +11,9 @@ import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
 import { Modal, LargeModal } from "../../components/Modal";
 import ViewEvents from "./ViewEvent";
 
-
 export const AdminEvent = () => {
     const [events, setEvents] = useState([]);
-    const [viewEvents, setViewEvents] = useState([]);
+    const [viewEvents, setViewEvents] = useState();
     const navigate = useNavigate();
 
     const getEvents = async () => {
@@ -40,17 +39,12 @@ export const AdminEvent = () => {
             `http://localhost:5000/api/events/${id}`
         );
         getEvents();
-       
     };
 
-    // const updateEvent = async (id) =>{
-    //     const viewData = await axios.get(
-    //         `http://localhost:5000/api/events/${id}`
-    //     );
-    //     navigate("/")
-    //     console.log("view event", viewData.data.event);
-    //     setViewEvents(viewData.data.event);
-    // }
+    const updateEvent = (id) => {
+        console.log("clicked")
+        navigate(`/admin-dashboard/update-event/${id}`);
+    };
 
     useEffect(() => {
         getEvents();
@@ -107,12 +101,13 @@ export const AdminEvent = () => {
                                                     events={viewEvents}
                                                 />
                                             </LargeModal>
-                                            <EditButton />
+                                            <EditButton
+                                                onClick={() => updateEvent(events._id)}
+                                            />
 
                                             <Modal
                                                 onClick={() =>
                                                     deleteEvent(events._id)
-                                                   
                                                 }
                                             >
                                                 <ModalHeading>

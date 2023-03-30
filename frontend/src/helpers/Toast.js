@@ -26,3 +26,12 @@ export const InfoToast = (message) => {
         theme: "light",
     });
 };
+
+export const PromiseToast = (message, promise) => {
+    toast.promise(promise, {
+        pending: "Action is pending",
+        success: message,
+        error: "Action failed",
+        position: "bottom-right",
+    });
+};

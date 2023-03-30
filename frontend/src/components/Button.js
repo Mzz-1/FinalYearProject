@@ -11,9 +11,9 @@ export const ViewButton = ({ onClick }) => {
     );
 };
 
-export const EditButton = () => {
+export const EditButton = ({onClick}) => {
     return (
-        <button className="h-[30px] w-[80px] bg-[#eb8f34] text-white text-center rounded-[10px] mr-[20px]">
+        <button className="h-[30px] w-[80px] bg-[#eb8f34] text-white text-center rounded-[10px] mr-[20px]" onClick={onClick}>
             Edit
         </button>
     );
@@ -81,6 +81,17 @@ export const WhiteButton = ({ text, link, register }) => {
 export const UpdateButton = ({ children }) => {
     return (
         <button className="h-[50px] w-[180px] bg-[#29CC97] text-lg text-white text-center rounded-[5px] mr-[20px]">
+            {children}
+        </button>
+    );
+};
+
+export const DashboardActionButton = ({ children, onClick }) => {
+    return (
+        <button
+            className="h-[60px] w-[300px] bg-[#29CC97] text-white text-[22px] text-center rounded-[5px]"
+            onClick={onClick}
+        >
             {children}
         </button>
     );

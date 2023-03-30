@@ -116,21 +116,52 @@ const getEvent = {
 const updateEvents = {
     path: "/api/events/:id",
     method: "patch",
-    handler: async (req, res) => {
-        const { id: eventID } = req.params;
+    handler: [
+        upload.single("image", { dest: null }),
+        async (req, res) => {
+            const { id: eventID } = req.params;
+            const {
+                name,
+                place,
+                location,
+                startDate,
+                endDate,
+                startTime,
+                endTime,
+            } = req.body;
+            const file = req.file;
+            connectCloudinary();
 
-        const event = await Event.findOneAndUpdate({ _id: eventID }, req.body, {
-            new: true,
-            runValidators: true,
-            useFindAndModify: true,
-        });
+            const upload = await cloudinary.uploader.upload(file.path, {
+                folder: "events",
+            });
+            console.log(req.body);
+            const event = await Event.findOneAndUpdate(
+                { _id: eventID },
+                {
+                    name,
+                    place,
+                    location,
+                    url: upload.secure_url,
+                    startDate,
+                    endDate,
+                    startTime,
+                    endTime,
+                },
+                {
+                    new: true,
+                    runValidators: true,
+                    useFindAndModify: true,
+                }
+            );
 
-        if (!event) {
-            return res.status(404);
-        }
+            if (!event) {
+                return res.status(404);
+            }
 
-        res.status(200).json({ event });
-    },
+            res.status(200).json({ event });
+        },
+    ],
 };
 
 const deleteEvent = {
