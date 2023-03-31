@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Banner } from "../../components/Banner";
 import { ProductList } from "./ProductList";
 import { useUser } from "../../service/useUser";
-
+import { InfoToast } from "../../helpers/Toast";
 
 export const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -16,24 +16,34 @@ export const Cart = () => {
   const navigate = useNavigate()
 
   const getCart = async () => {
+    try{
     const cartData = await axios.get(
       `http://localhost:5000/api/cart/${user.id}`
     );
     const cart = cartData.data.cart;
     console.log(cart);
     setCart(cart);
-  };
+  }catch(err){
+    InfoToast("Please log in to use the cart.")
+  }
+  }
+
 
   useEffect(() => {
     getCart();
   }, []);
 
   const getProducts = async (id) => {
+    try{
     const productData = await axios.get(
       `http://localhost:5000/api/cartProducts/${user.id}`
     );
     console.log("details", productData.data.products);
     setProducts(productData.data.products);
+    }catch(err){
+      console.log(err)
+     
+    }
   };
 
   useEffect(() => {

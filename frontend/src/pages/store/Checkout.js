@@ -3,8 +3,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Input from "../../components/Input";
 import { useParams } from "react-router-dom";
+import { SuccessToast } from "../../helpers/Toast";
+import { DashboardActionButton } from "../../components/Button";
+import KhaltiCheckout from "khalti-checkout-web";
+import { Config } from "../../components/khalti/KhaltiConfig";
 
 const CheckoutPage = () => {
+    let checkout = new KhaltiCheckout(Config);
+
     const {
         register,
         handleSubmit,
@@ -17,10 +23,8 @@ const CheckoutPage = () => {
 
     const { id: cartID } = useParams();
 
-    const addDelivery = async ({district,city,streetName,contactNo}) => {
+    const addDelivery = async ({ district, city, streetName, contactNo }) => {
         console.log("1");
-
-      
 
         try {
             const response = await axios.post(
@@ -30,23 +34,12 @@ const CheckoutPage = () => {
                     city,
                     streetName,
                     contactNo,
-                    cartID
-
-                },
-                
+                    cartID,
+                }
             );
-            // console.log(
-            //     name,
-            //     place,
-            //     location,
-            //     image,
-            //     startDate,
-            //     endDate,
-            //     startTime,
-            //     endTime
-            // );
+
             console.log(response.data);
-          
+            SuccessToast("Your order has been confirmed.");
         } catch (err) {
             console.log(`err:${err}`);
         }
@@ -110,10 +103,11 @@ const CheckoutPage = () => {
                         <p>{errors.contactNo?.message}</p>
                     </div>
                 </div>
-                <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
-                    Proceed to payment
-                </button>
+                <DashboardActionButton>Confirm Order</DashboardActionButton>
             </form>
+            <button onClick={() => checkout.show({ amount: 1000 })}>
+                Pay with khalti
+            </button>
         </div>
     );
 };

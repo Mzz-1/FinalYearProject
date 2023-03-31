@@ -3,12 +3,22 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Input from "../../components/Input";
 import { useUser } from "../../service/useUser";
+import { DashboardActionButton } from "../../components/Button";
+import { PromiseToast } from "../../helpers/Toast";
 
 const AddProductPage = () => {
     const user = useUser();
 
     const [artistName, setArtistName] = useState("");
 
+    const categories = [
+        "Painting",
+        "Sculptures",
+        "Ceramics",
+        "Photography",
+        "Drawings",
+        "Prints",
+    ];
     const {
         register,
         handleSubmit,
@@ -17,9 +27,10 @@ const AddProductPage = () => {
     } = useForm();
     watch("image");
 
-    const addEvent = async (data) => {
+    const ProductAction = async (data) => {
         console.log("1");
-
+        console.log(data.length);
+        console.log(data.breadth);
         try {
             const response = await axios.get(
                 `http://localhost:5000/api/artist/${user.id}`
@@ -37,7 +48,7 @@ const AddProductPage = () => {
         formData.append("description", data.description);
         formData.append("quantity", data.quantity);
         formData.append("price", data.price);
-        formData.append("dimensions", data.dimensions);
+        formData.append("dimensions", `${data.length} X ${data.breadth} in`);
         formData.append("image", data.image[0]);
 
         try {
@@ -64,7 +75,7 @@ const AddProductPage = () => {
             <h2 className="text-5xl font-semibold ">Add Event</h2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
-                onSubmit={handleSubmit(addEvent)}
+                onSubmit={handleSubmit(ProductAction)}
             >
                 <div className="grid grid-rows-1 grid-cols-2 gap-[30px]">
                     <div className="flex flex-col gap-[20px]">
@@ -80,17 +91,22 @@ const AddProductPage = () => {
                         />
                         <p>{errors.name?.message}</p>
                         <label>Category</label>
-                        <Input
-                            type="text"
-                            placeholder="Category"
-                            register={{
-                                ...register("category", {
-                                    required:
-                                        "Please enter your email address.",
-                                }),
-                            }}
-                        />
+
+                        <select
+                            className="w-[440px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                            {...register("category", {
+                                required: "Please select a category.",
+                            })}
+                        >
+                            <option value="">Select a category</option>
+                            {categories.map((category, i) => (
+                                <option key={i} value={category}>
+                                    {category}
+                                </option>
+                            ))}
+                        </select>
                         <p>{errors.category?.message}</p>
+
                         <label>Description</label>
                         <Input
                             type="text"
@@ -124,20 +140,34 @@ const AddProductPage = () => {
                         />
                         <p>{errors.quantity?.message}</p>
                         <label>Dimentions</label>
-                        <Input
-                            type="text"
-                            placeholder="eg 10x12"
-                            register={{
-                                ...register("dimensions", {
-                                    required: "Please enter your password.",
-                                }),
-                            }}
-                        />
-                        <p>{errors.dimensions?.message}</p>
+                        <div className="flex gap-[20px] items-center">
+                            <input
+                                className="w-[130px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                                type="number"
+                                placeholder="length"
+                                {...register("length", {
+                                    required: "Please enter the length.",
+                                })}
+                            />
+                            <p>{errors.length?.message}</p>
+
+                            <p>X</p>
+
+                            <input
+                                className="w-[130px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                                type="number"
+                                placeholder="breadth"
+                                {...register("breadth", {
+                                    required: "Please enter the breadth.",
+                                })}
+                            />
+                            <p>{errors.breadth?.message}</p>
+                            <p>Inches</p>
+                        </div>
 
                         <label>Price</label>
                         <Input
-                            type="text"
+                            type="number"
                             placeholder="Price"
                             register={{
                                 ...register("price", {
@@ -148,9 +178,7 @@ const AddProductPage = () => {
                         <p>{errors.price?.message}</p>
                     </div>
                 </div>
-                <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
-                    Add Product
-                </button>
+                <DashboardActionButton>Add Product</DashboardActionButton>
             </form>
         </div>
     );

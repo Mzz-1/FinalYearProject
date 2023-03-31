@@ -5,24 +5,36 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../service/useUser";
-import { ToastContainer, toast } from "react-toastify";
+import { getProducts } from "../../helpers/Product";
 import { SuccessToast, InfoToast } from "../../helpers/Toast";
 
 export const ProductDetails = () => {
     const [product, setProducts] = useState([]);
 
     const user = useUser();
+
     const { id } = useParams();
 
     const navigate = useNavigate();
 
-    const getProducts = async () => {
-        const productData = await axios.get(
-            `http://localhost:5000/api/products/${id}`
-        );
-        console.log(productData.data.product);
-        setProducts(productData.data.product);
-    };
+    // const getProducts = async () => {
+    //     const productData = await axios.get(
+    //         `http://localhost:5000/api/products/${id}`
+    //     );
+    //     console.log(productData.data.product);
+    //     setProducts(productData.data.product);
+    // };
+
+   
+    useEffect(() => {
+        const fetchData = async () => {
+          const event = await getProducts(id);
+          setProducts(event);
+        };
+        fetchData();
+    }, [id]);
+
+    useEffect(() => getProducts, []);
 
     const addToCart = async () => {
         try {
@@ -39,13 +51,13 @@ export const ProductDetails = () => {
             SuccessToast("Product added to cart.");
         } catch (error) {
             console.error(error);
+
             navigate("/login");
             InfoToast("Please log in to use the cart.");
         }
     };
 
     console.log(product);
-    useEffect(() => getProducts, []);
 
     return (
         <div className="grid grid-row-auto grid-cols-2 bg-[] justify-center gap-[100px] ">

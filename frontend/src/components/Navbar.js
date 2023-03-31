@@ -21,8 +21,9 @@ export const Navbar = () => {
 
     const LogOut = () => {
         localStorage.removeItem("token");
-        window.location.reload(true);
         SuccessToast("Logged out.");
+        window.location.reload(true);
+        navigate("/");
     };
 
     return (

@@ -42,7 +42,7 @@ export const AdminEvent = () => {
     };
 
     const updateEvent = (id) => {
-        console.log("clicked")
+        console.log("clicked");
         navigate(`/admin-dashboard/update-event/${id}`);
     };
 
@@ -102,7 +102,9 @@ export const AdminEvent = () => {
                                                 />
                                             </LargeModal>
                                             <EditButton
-                                                onClick={() => updateEvent(events._id)}
+                                                onClick={() =>
+                                                    updateEvent(events._id)
+                                                }
                                             />
 
                                             <Modal
