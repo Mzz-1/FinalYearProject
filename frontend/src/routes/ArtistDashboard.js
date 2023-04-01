@@ -13,6 +13,7 @@ import { Footer } from "../components/Footer";
 import Biography from "../pages/artistDashboard/Biography";
 import FeaturedEvents from "../pages/artistDashboard/FeaturedEvents";
 import { ManageProducts } from "../pages/artistDashboard/ManageProducts";
+import { ManageEvents } from "../pages/artistDashboard/ManageEvents";
 
 export const ArtistRoutes = () => {
     const location = useLocation();
@@ -53,6 +54,14 @@ export const ArtistRoutes = () => {
                             <Route
                                 path="add-event"
                                 element={<FeaturedEvents />}
+                            />
+                            <Route
+                                path="edit-event/:id"
+                                element={<FeaturedEvents />}
+                            />
+                            <Route
+                                path="manage-events"
+                                element={<ManageEvents />}
                             />
                         </Route>
                     </Routes>

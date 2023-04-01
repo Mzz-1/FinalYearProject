@@ -37,6 +37,7 @@ export const AllRoutes = () => {
         "/artist-dashboard/manage-products",
         "/artist-dashboard/biography",
         "/artist-dashboard/add-event",
+        "/artist-dashboard/manage-events",
         
     ];
 

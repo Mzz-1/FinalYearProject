@@ -7,9 +7,16 @@ import "react-quill/dist/quill.snow.css";
 import { Label } from "../../components/Label";
 import { UpdateButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";
+import { useParams } from "react-router-dom";
+import { addExhibition } from "../../helpers/Exhibition";
+import { PromiseToast, SuccessToast } from "../../helpers/Toast";
 
 const FeaturedEvents = () => {
     const user = useUser();
+
+    const { id } = useParams();
+
+    const [eventToEdit, setEventToUpdate] = useState();
 
     const {
         register,
@@ -20,47 +27,8 @@ const FeaturedEvents = () => {
     } = useForm();
     watch("image");
 
-    const addBiography = async (data) => {
-        console.log("1");
-
-        const formData = new FormData();
-        formData.append("userID", user.id);
-        formData.append("location", data.location);
-        formData.append("name", data.name);
-        formData.append("startDate", data.startDate);
-        formData.append("endDate", data.endDate);
-
-        formData.append("image", data.image[0]);
-
-        console.log(data.name, data.startDate, data.endDate);
-
-        try {
-            const response = await axios.post(
-                "http://localhost:5000/api/add-artist-event",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
-            );
-            // console.log(
-            //     name,
-            //     place,
-            //     location,
-            //     image,
-            //     startDate,
-            //     endDate,
-            //     startTime,
-            //     endTime
-            // );
-            console.log(response.data);
-            // const { token } = response.data;
-            // console.log(token);
-        } catch (err) {
-            console.log(`err:${err}`);
-        }
-        
+    const ExhibitionAction = async (data) => {
+        PromiseToast("Event has been Added.", addExhibition(data, user.id));
     };
 
     return (
@@ -68,7 +36,7 @@ const FeaturedEvents = () => {
             <h2 className="text-5xl font-semibold ">Add Featured Events</h2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
-                onSubmit={handleSubmit(addBiography)}
+                onSubmit={handleSubmit(ExhibitionAction)}
             >
                 <div className="grid grid-rows-1 grid-cols-1 gap-[30px]">
                     <div className="flex flex-col gap-[20px]">

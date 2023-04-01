@@ -53,8 +53,8 @@ export const ArtistSidebar = () => {
             itemName: "Orders",
             subItems: [
                 {
-                    subItemName: "Manage Users",
-                    link: "/admin-dashboard/users",
+                    subItemName: "View Orders",
+                    link: "/artist-dashboard/view-orders",
                 },
             ],
             link: "",

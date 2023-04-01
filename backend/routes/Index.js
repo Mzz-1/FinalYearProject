@@ -15,6 +15,7 @@ const {
     addArtistEvent,
     getArtistExhibitions,
     getBiography,
+    deleteExhibition
 } = require("./ArtistInfoRoutes");
 
 const {
@@ -68,6 +69,7 @@ const routes = [
     addArtistEvent,
     getArtistExhibitions,
     getBiography,
+    deleteExhibition,
     addToCart,
     getCartDetails,
     getCartProductDetails,
