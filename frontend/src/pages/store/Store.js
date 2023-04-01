@@ -13,6 +13,24 @@ const Store = () => {
 
     const [searchItem, setSearchItem] = useState("");
 
+    const categories = [
+        "Painting",
+        "Sculptures",
+        "Ceramics",
+        "Photography",
+        "Drawings",
+        "Prints",
+    ];
+
+    const sort = [
+        "A-Z",
+        "Z-A",
+        "Price:Low to High",
+        "Price:High to Low",
+        "Oldest to Newest",
+        "Newest to oldest",
+    ];
+
     const {
         register,
         handleSubmit,
@@ -20,9 +38,9 @@ const Store = () => {
         formState: { errors },
     } = useForm();
 
-    const getProducts = async ({ category = "" }) => {
+    const getProducts = async ({ category = "", sort = "" }) => {
         const productsData = await axios.get(
-            `http://localhost:5000/api/products?name=${searchItem}&category=${category}`
+            `http://localhost:5000/api/products?name=${searchItem}&category=${category}&sort=${sort}`
         );
 
         const data = await productsData.data.product;
@@ -39,8 +57,20 @@ const Store = () => {
             <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center">
                 <Banner heading="Store" />
                 <div className="flex gap-[50px] items-center">
-                    <p>Select Category</p>
+                    <p>Filter By:</p>
                     <Select
+                        text="Sort By"
+                        options={sort}
+                        register={{
+                            ...register("sort", {
+                                required: "Please select an option.",
+                            }),
+                        }}
+                        onChange={(e) => getProducts({ sort: e.target.value })}
+                    />
+                    <Select
+                        text="Select a category"
+                        options={categories}
                         register={{
                             ...register("category", {
                                 required: "Please select a category.",

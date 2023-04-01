@@ -11,7 +11,7 @@ const getAllProducts = {
     path: "/api/products",
     method: "get",
     handler: async (req, res) => {
-        const { limit,artist,name,category } = req.query;
+        const { limit, artist, name, category, sort } = req.query;
         limitNum = parseInt(limit);
 
         let query = {};
@@ -24,8 +24,38 @@ const getAllProducts = {
         if (category) {
             query.category = category;
         }
-  
-        const product = await Product.find(query).limit(limitNum);
+        let result = Product.find(query);
+
+        if (sort) {
+            switch (sort) {
+                case "A-Z":
+                    result = result.sort({ name: 1 });
+                    console.log("a-z");
+                    break;
+                case "Z-A":
+                    result = result.sort({ name: -1 });
+                    break;
+                case "Price:Low to High":
+                    result = result.sort({ price: 1 });
+                    break;
+                case "Price:High to Low":
+                    result = result.sort({ price: -1 });
+                    break;
+                case "Oldest to Newest":
+                    result = result.sort({ uploadedAt: 1 });
+                    break;
+                case "Newest to oldest":
+                    result = result.sort({ uploadedAt: -1 });
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (limitNum) {
+            result = result.limit(limitNum);
+        }
+
+        const product = await result;
 
         res.status(200).json({ product });
     },
