@@ -91,6 +91,50 @@ const addArtistEvent = {
     ],
 };
 
+const updateArtistEvent = {
+    path: "/api/update-artist-event/:id",
+    method: "patch",
+    handler: [
+        upload.single("image", { dest: null }),
+        async (req, res) => {
+            const { userID, name, startDate, endDate, location } = req.body;
+            const file = req.file;
+            const { id: eventID } = req.params;
+            connectCloudinary();
+
+            const upload = await cloudinary.uploader.upload(file.path, {
+                folder: "artist events",
+            });
+
+            //const url = cloudinary.url(name);
+            console.log("node 1");
+            console.log(name, startDate, endDate, location);
+
+            const exhibition = await Exhibition.findOneAndUpdate(
+                { _id: eventID },
+                {
+                    name,
+                    startDate,
+                    endDate,
+                    location,
+                    image: upload.secure_url,
+                },
+                {
+                    new: true,
+                    runValidators: true,
+                    useFindAndModify: true,
+                }
+            );
+
+           
+     
+        
+            console.log("node 2");
+            res.status(200).json({exhibition});
+        },
+    ],
+};
+
 const getAllArtists = {
     path: "/api/artists",
     method: "get",
@@ -114,7 +158,7 @@ const getAllArtists = {
 
         const artist = await result;
 
-        res.status(200).json({ artist,total });
+        res.status(200).json({ artist, total });
     },
 };
 
@@ -132,12 +176,27 @@ const getArtistExhibitions = {
     },
 };
 
+const getExhibitions = {
+    path: "/api/exhibitions/:id",
+    method: "get",
+    handler: async (req, res) => {
+        const { id: exhibitionID } = req.params;
+        const exhibition = await Exhibition.findOne({ _id: exhibitionID })
+        
+
+        res.status(200).json({ exhibition });
+    },
+};
+
+
 const deleteExhibition = {
     path: "/api/artist-exhibitions/:id",
     method: "delete",
     handler: async (req, res) => {
         const { id: exhibitionID } = req.params;
-        const exhibition = await Exhibition.findOneAndDelete({ _id: exhibitionID })
+        const exhibition = await Exhibition.findOneAndDelete({
+            _id: exhibitionID,
+        });
         if (!exhibition) {
             return res.sendStatus(400);
         }
@@ -200,8 +259,6 @@ const updateBiography = {
     ],
 };
 
-
-
 module.exports = {
     addBiography,
     updateBiography,
@@ -210,5 +267,7 @@ module.exports = {
     getArtistExhibitions,
     addArtistEvent,
     getBiography,
-    deleteExhibition
+    deleteExhibition,
+    updateArtistEvent,
+    getExhibitions
 };

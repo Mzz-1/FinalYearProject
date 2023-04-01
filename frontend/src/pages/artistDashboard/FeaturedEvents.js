@@ -8,7 +8,7 @@ import { Label } from "../../components/Label";
 import { UpdateButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";
 import { useParams } from "react-router-dom";
-import { addExhibition } from "../../helpers/Exhibition";
+import { addExhibition, updateExhibition,getSingleExhibition } from "../../helpers/Exhibition";
 import { PromiseToast, SuccessToast } from "../../helpers/Toast";
 
 const FeaturedEvents = () => {
@@ -27,8 +27,23 @@ const FeaturedEvents = () => {
     } = useForm();
     watch("image");
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const event = await getSingleExhibition(id);
+            setEventToUpdate(event);
+        };
+        fetchData();
+    }, [id]);
+
     const ExhibitionAction = async (data) => {
-        PromiseToast("Event has been Added.", addExhibition(data, user.id));
+        if (id) {
+            PromiseToast(
+                "Event has been updated.",
+                updateExhibition(data, user.id, eventToEdit._id)
+            );
+        } else {
+            PromiseToast("Event has been Added.", addExhibition(data, user.id));
+        }
     };
 
     return (
@@ -44,6 +59,7 @@ const FeaturedEvents = () => {
                         <Input
                             type="text"
                             placeholder="Name"
+                            defaultValue={eventToEdit?.name}
                             register={{
                                 ...register("name", {
                                     required: "Please enter your name.",
@@ -63,6 +79,7 @@ const FeaturedEvents = () => {
                         <label>Start Date</label>
                         <Input
                             type="date"
+                            defaultValue={eventToEdit?.startDate}
                             register={{
                                 ...register("startDate", {
                                     required: "Please enter your password.",
@@ -73,6 +90,7 @@ const FeaturedEvents = () => {
                         <label>End Date</label>
                         <Input
                             type="date"
+                            defaultValue={eventToEdit?.endDate}
                             register={{
                                 ...register("endDate", {
                                     required: "Please enter your password.",
@@ -85,6 +103,7 @@ const FeaturedEvents = () => {
                         <Input
                             type="text"
                             placeholder="Location"
+                            defaultValue={eventToEdit?.location}
                             register={{
                                 ...register("location", {
                                     required: "Please enter the location.",
