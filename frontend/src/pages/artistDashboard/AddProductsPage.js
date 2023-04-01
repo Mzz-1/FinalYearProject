@@ -5,9 +5,23 @@ import Input from "../../components/Input";
 import { useUser } from "../../service/useUser";
 import { DashboardActionButton } from "../../components/Button";
 import { PromiseToast } from "../../helpers/Toast";
+import { useParams } from "react-router-dom";
+import { getProducts } from "../../helpers/Product";
 
 const AddProductPage = () => {
     const user = useUser();
+
+    const { id } = useParams();
+
+    const [productToEdit, setProductToUpdate] = useState();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const event = await getProducts(id);
+            setProductToUpdate(event);
+        };
+        fetchData();
+    }, [id]);
 
     const [artistName, setArtistName] = useState("");
 
@@ -28,9 +42,7 @@ const AddProductPage = () => {
     watch("image");
 
     const ProductAction = async (data) => {
-        console.log("1");
-        console.log(data.length);
-        console.log(data.breadth);
+ 
         try {
             const response = await axios.get(
                 `http://localhost:5000/api/artist/${user.id}`
@@ -72,7 +84,7 @@ const AddProductPage = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <h2 className="text-5xl font-semibold ">Add Event</h2>
+            <h2 className="text-5xl font-semibold ">Add Product</h2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(ProductAction)}

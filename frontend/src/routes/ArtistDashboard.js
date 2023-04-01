@@ -12,6 +12,7 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import Biography from "../pages/artistDashboard/Biography";
 import FeaturedEvents from "../pages/artistDashboard/FeaturedEvents";
+import { ManageProducts } from "../pages/artistDashboard/ManageProducts";
 
 export const ArtistRoutes = () => {
     const location = useLocation();
@@ -39,6 +40,14 @@ export const ArtistRoutes = () => {
                             <Route
                                 path="add-product"
                                 element={<AddProductPage />}
+                            />
+                            <Route
+                                path="edit-product/:id"
+                                element={<AddProductPage />}
+                            />
+                            <Route
+                                path="manage-products"
+                                element={<ManageProducts />}
                             />
                             <Route path="biography" element={<Biography />} />
                             <Route

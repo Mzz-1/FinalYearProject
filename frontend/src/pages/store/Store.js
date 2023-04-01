@@ -3,15 +3,26 @@ import axios from "axios";
 import { Product } from "../../components/Product";
 import { ProductList } from "./ProductList";
 import { Banner } from "../../components/Banner";
-
+import { TfiSearch } from "react-icons/tfi";
 import { Search } from "../../components/Search";
+import { useForm } from "react-hook-form";
+import { Select } from "../../components/Select";
 
 const Store = () => {
     const [products, setProducts] = useState([]);
 
-    const getProducts = async () => {
+    const [searchItem, setSearchItem] = useState("");
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm();
+
+    const getProducts = async ({ category = "" }) => {
         const productsData = await axios.get(
-            `http://localhost:5000/api/products`
+            `http://localhost:5000/api/products?name=${searchItem}&category=${category}`
         );
 
         const data = await productsData.data.product;
@@ -20,14 +31,41 @@ const Store = () => {
     };
 
     useEffect(() => {
-        getProducts();
+        getProducts({});
     }, []);
 
     return (
         <div className="bg-[#F4F4F2] px-[5%]">
-            <div className="max-w-[1440px] m-auto flex justify-between items-center">
+            <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center">
                 <Banner heading="Store" />
-                <Search />
+                <div className="flex gap-[50px] items-center">
+                    <p>Select Category</p>
+                    <Select
+                        register={{
+                            ...register("category", {
+                                required: "Please select a category.",
+                            }),
+                        }}
+                        onChange={(e) =>
+                            getProducts({ category: e.target.value })
+                        }
+                    />
+                    <input
+                        type="text"
+                        placeholder="KEYWORDS"
+                        value={searchItem}
+                        onChange={(e) => setSearchItem(e.target.value)}
+                        className="w-[450px] relative h-[70px] my-[40px] mr-[0px] ml-auto shadow-in outline-none pl-[30px] pr-[80px]"
+                    />{" "}
+                    <button className="relative" onClick={getProducts}>
+                        {" "}
+                        <TfiSearch
+                            size={30}
+                            color="grey"
+                            className="absolute right-[60px] top-[-15px]"
+                        />
+                    </button>
+                </div>
             </div>
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">

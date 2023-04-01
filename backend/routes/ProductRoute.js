@@ -11,7 +11,7 @@ const getAllProducts = {
     path: "/api/products",
     method: "get",
     handler: async (req, res) => {
-        const { limit,artist,name } = req.query;
+        const { limit,artist,name,category } = req.query;
         limitNum = parseInt(limit);
 
         let query = {};
@@ -19,7 +19,10 @@ const getAllProducts = {
             query.artist = artist;
         }
         if (name) {
-            query.name = name;
+            query.name = new RegExp(name, "i");
+        }
+        if (category) {
+            query.category = category;
         }
   
         const product = await Product.find(query).limit(limitNum);

@@ -31,11 +31,13 @@ export const AllRoutes = () => {
         "/login",
         "/register",
         "/admin",
-        "/artist-dashboard/*",
+        "/artist-dashboard",
         "/artist-dashboard/products",
         "/artist-dashboard/add-product",
+        "/artist-dashboard/manage-products",
         "/artist-dashboard/biography",
         "/artist-dashboard/add-event",
+        
     ];
 
     // Check if the current location matches any excluded path

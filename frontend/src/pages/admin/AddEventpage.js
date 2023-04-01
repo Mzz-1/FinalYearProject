@@ -4,8 +4,8 @@ import axios from "axios";
 import Input from "../../components/Input";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
-import { SuccessToast,PromiseToast } from "../../helpers/Toast";
-import { getSingleEvent,updateEvent,addEvent } from "../../helpers/Events";
+import { SuccessToast, PromiseToast } from "../../helpers/Toast";
+import { getSingleEvent, updateEvent, addEvent } from "../../helpers/Events";
 import { DashboardActionButton } from "../../components/Button";
 
 const AddEventPage = () => {
@@ -21,30 +21,32 @@ const AddEventPage = () => {
 
     const [eventToEdit, setEventToUpdate] = useState();
 
-    
     useEffect(() => {
         const fetchData = async () => {
-          const event = await getSingleEvent(id);
-          setEventToUpdate(event);
+            const event = await getSingleEvent(id);
+            setEventToUpdate(event);
         };
         fetchData();
     }, [id]);
 
-    
     const EventAction = async (data) => {
-
-        if(id){
+        if (id) {
             // await updateEvent(data,eventToEdit._id)
-            PromiseToast("Event has been updated.", updateEvent(data, eventToEdit._id));
-        }else{
+            PromiseToast(
+                "Event has been updated.",
+                updateEvent(data, eventToEdit._id)
+            );
+        } else {
             addEvent(data);
             SuccessToast("Event has been added.");
-    }
+        }
     };
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <h2 className="text-5xl font-semibold ">{eventToEdit ? "Update Event" : "Add Event"}</h2>
+            <h2 className="text-5xl font-semibold ">
+                {eventToEdit ? "Update Event" : "Add Event"}
+            </h2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(EventAction)}
@@ -145,9 +147,9 @@ const AddEventPage = () => {
                         <p>{errors.endTime?.message}</p>
                     </div>
                 </div>
-               
+
                 <DashboardActionButton>
-                {eventToEdit ? "Update Event" : "Add Event"}
+                    {eventToEdit ? "Update Event" : "Add Event"}
                 </DashboardActionButton>
             </form>
         </div>

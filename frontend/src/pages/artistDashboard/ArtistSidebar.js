@@ -11,12 +11,12 @@ export const ArtistSidebar = () => {
             itemName: "Products",
             subItems: [
                 {
-                    subItemName: "Add Event",
+                    subItemName: "Add Product",
                     link: "/artist-dashboard/add-product",
                 },
                 {
                     subItemName: "Manage Products",
-                    link: "/artist-dashboard/products",
+                    link: "/artist-dashboard/manage-products",
                 },
             ],
             icon: <RiCalendarEventLine />,
@@ -42,7 +42,7 @@ export const ArtistSidebar = () => {
                     link: "/artist-dashboard/add-event",
                 },
                 {
-                    subItemName: "Featured Events",
+                    subItemName: "Manage Events",
                     link: "/artist-dashboard/manage-events",
                 },
             ],
