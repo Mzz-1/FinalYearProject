@@ -38,7 +38,7 @@ export const AllRoutes = () => {
         "/artist-dashboard/biography",
         "/artist-dashboard/add-event",
         "/artist-dashboard/manage-events",
-        
+        "/artist-dashboard/edit-product/*",
     ];
 
     // Check if the current location matches any excluded path

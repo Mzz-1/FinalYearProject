@@ -97,16 +97,7 @@ const Biography = () => {
                         },
                     }
                 );
-                // console.log(
-                //     name,
-                //     place,
-                //     location,
-                //     image,
-                //     startDate,
-                //     endDate,
-                //     startTime,
-                //     endTime
-                // );
+            
                 console.log(response.data);
                 // const { token } = response.data;
                 // console.log(token);

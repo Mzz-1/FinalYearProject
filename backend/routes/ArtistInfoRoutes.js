@@ -43,14 +43,13 @@ const getBiography = {
     path: "/api/biography/:id",
     method: "get",
     handler: async (req, res) => {
-        const { id: userID } = req.params;
-        const artist = await Artist.findOne({ _id: userID });
-        // const artist = await Artist.findOne({ userID: userID });
+        const { id } = req.params;
+        let artist = await Artist.findOne({ _id: id });
         if (!artist) {
-            return res.sendStatus(400);
-        }
-        if (!artist) {
-            return res.sendStatus(400);
+            artist = await Artist.findOne({ userID: id });
+            if (!artist) {
+                return res.sendStatus(400);
+            }
         }
         res.status(200).json({ artist });
     },

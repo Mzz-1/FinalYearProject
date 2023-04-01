@@ -42,7 +42,6 @@ const AddProductPage = () => {
     watch("image");
 
     const ProductAction = async (data) => {
- 
         try {
             const response = await axios.get(
                 `http://localhost:5000/api/artist/${user.id}`
@@ -125,7 +124,7 @@ const AddProductPage = () => {
                             placeholder="Description"
                             register={{
                                 ...register("description", {
-                                    required: "Please enter your password.",
+                                    required: "Please enter Description.",
                                 }),
                             }}
                         />
@@ -146,7 +145,7 @@ const AddProductPage = () => {
                             type="number"
                             register={{
                                 ...register("quantity", {
-                                    required: "Please enter your password.",
+                                    required: "Please enter quantity.",
                                 }),
                             }}
                         />

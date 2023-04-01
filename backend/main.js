@@ -12,6 +12,8 @@ const errorHandlerMiddleware = require("./middleware/ErrorHandler");
 const router = express.Router();
 const cors = require("cors");
 const multer = require("multer");
+
+
 const corsOptions = {
     origin: "http://localhost:3000",
     credentials: true,
