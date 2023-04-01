@@ -11,8 +11,7 @@ const getAllProducts = {
     path: "/api/products",
     method: "get",
     handler: async (req, res) => {
-        const { limit, artist, name, category, sort } = req.query;
-        limitNum = parseInt(limit);
+        const { artist, name, category, sort } = req.query;
 
         let query = {};
         if (artist) {
@@ -51,9 +50,14 @@ const getAllProducts = {
                     break;
             }
         }
-        if (limitNum) {
-            result = result.limit(limitNum);
-        }
+
+        const page = Number(req.query.page) || 1;
+
+        const limit = Number(req.query.limit) || 12;
+
+        const skip = (page - 1) * limit;
+
+        result = result.skip(skip).limit(limit);
 
         const product = await result;
 

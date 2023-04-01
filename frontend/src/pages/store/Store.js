@@ -11,7 +11,8 @@ import { Select } from "../../components/Select";
 const Store = () => {
     const [products, setProducts] = useState([]);
 
-    const [searchItem, setSearchItem] = useState("");
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     const categories = [
         "Painting",
@@ -34,23 +35,43 @@ const Store = () => {
     const {
         register,
         handleSubmit,
+        getValues,
         watch,
         formState: { errors },
     } = useForm();
 
-    const getProducts = async ({ category = "", sort = "" }) => {
+    const getProducts = async ({
+        searchItem = "",
+        category = "",
+        sort = "",
+    }) => {
+        setLoading(true);
         const productsData = await axios.get(
-            `http://localhost:5000/api/products?name=${searchItem}&category=${category}&sort=${sort}`
+            `http://localhost:5000/api/products?name=${searchItem}&category=${category}&sort=${sort}&page=${page}`
         );
 
         const data = await productsData.data.product;
         setProducts(data);
+        setLoading(false);
         console.log("getProducts", data);
     };
 
     useEffect(() => {
+        setPage(1);
         getProducts({});
     }, []);
+
+    const handleLoadMore = async () => {
+        const { searchItem, category, sort } = getValues();
+        setPage(page + 1);
+        setLoading(true);
+        const productsData = await axios.get(
+          `http://localhost:5000/api/products?name=${searchItem}&category=${category}&sort=${sort}&page=${page + 1}`
+        );
+        const newProducts = productsData.data.product;
+        setProducts([...products, ...newProducts]);
+        setLoading(false);
+      };
 
     return (
         <div className="bg-[#F4F4F2] px-[5%]">
@@ -80,27 +101,27 @@ const Store = () => {
                             getProducts({ category: e.target.value })
                         }
                     />
-                    <input
-                        type="text"
-                        placeholder="KEYWORDS"
-                        value={searchItem}
-                        onChange={(e) => setSearchItem(e.target.value)}
-                        className="w-[450px] relative h-[70px] my-[40px] mr-[0px] ml-auto shadow-in outline-none pl-[30px] pr-[80px]"
-                    />{" "}
-                    <button className="relative" onClick={getProducts}>
-                        {" "}
-                        <TfiSearch
-                            size={30}
-                            color="grey"
-                            className="absolute right-[60px] top-[-15px]"
-                        />
-                    </button>
+
+                    <Search
+                        register={{
+                            ...register("searchItem", {
+                                required: "Please enter a product name.",
+                            }),
+                        }}
+                        onClick={() =>
+                            getProducts({ searchItem: getValues("searchItem") })
+                        }
+                    />
                 </div>
             </div>
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
                 <hr className="h-[2px] bg-[#65635F] " />
                 <ProductList products={products} gridSize={4} />
+                {loading && <p>Loading...</p>}
+                {!loading && products.length > 0 && (
+                    <button onClick={handleLoadMore}>Load More</button>
+                )}
             </div>
         </div>
     );
