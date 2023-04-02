@@ -13,7 +13,7 @@ import ViewEvents from "./ViewEvent";
 
 export const AdminEvent = () => {
     const [events, setEvents] = useState([]);
-    const [viewEvents, setViewEvents] = useState();
+    const [viewEvents, setViewEvents] = useState([]);
     const navigate = useNavigate();
 
     const getEvents = async () => {
@@ -26,13 +26,13 @@ export const AdminEvent = () => {
         console.log("getEvents", data);
     };
 
-    const viewEvent = async (id) => {
-        const viewData = await axios.get(
-            `http://localhost:5000/api/events/${id}`
-        );
-        console.log("view event", viewData.data.event);
-        setViewEvents(viewData.data.event);
-    };
+    // const viewEvent = async (id) => {
+    //     const viewData = await axios.get(
+    //         `http://localhost:5000/api/events/${id}`
+    //     );
+    //     console.log("view event", viewData.data.event);
+    //     setViewEvents(viewData.data.event);
+    // };
 
     const deleteEvent = async (id) => {
         const deleteData = await axios.delete(
@@ -49,6 +49,17 @@ export const AdminEvent = () => {
     useEffect(() => {
         getEvents();
     }, []);
+
+    const viewEvent = async (id) => {
+        const viewData = await axios.get(
+            `http://localhost:5000/api/events/${id}`
+        );
+        console.log("view event", viewData.data.event);
+        setViewEvents(viewData.data.event);
+    };
+    
+  
+    
 
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
 

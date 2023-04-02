@@ -7,6 +7,7 @@ import { DashboardActionButton } from "../../components/Button";
 import { PromiseToast } from "../../helpers/Toast";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../../helpers/Product";
+import { addProduct } from "../../helpers/Product";
 
 const AddProductPage = () => {
     const user = useUser();
@@ -52,33 +53,9 @@ const AddProductPage = () => {
             console.log(`err:${err}`);
         }
 
-        const formData = new FormData();
-        formData.append("name", data.name);
-        formData.append("artist", artistName);
-        formData.append("category", data.category);
-        formData.append("description", data.description);
-        formData.append("quantity", data.quantity);
-        formData.append("price", data.price);
-        formData.append("dimensions", `${data.length} X ${data.breadth} in`);
-        formData.append("image", data.image[0]);
+        PromiseToast(addProduct(data,user.id),"Product has been added.")
 
-        try {
-            const response = await axios.post(
-                "http://localhost:5000/api/products",
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
-            );
-
-            console.log(response.data);
-            // const { token } = response.data;
-            // console.log(token);
-        } catch (err) {
-            console.log(`err:${err}`);
-        }
+      
     };
 
     return (

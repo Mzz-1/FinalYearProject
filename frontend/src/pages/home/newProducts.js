@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ProductList } from "../store/ProductList";
 import { Heading2 } from "../../components/Heading";
+import { BlackButton } from "../../components/Button";
 
 export const NewProducts = () => {
     const [products, setProducts] = useState([]);
@@ -24,6 +25,8 @@ export const NewProducts = () => {
         <div className="px-[50px]">
             <Heading2 text="New" />
             <ProductList products={products} gridSize={4}/>
+            <div className="text-center"><BlackButton text="Visit Store" link="/store"/></div>
+            
         </div>
     );
 };

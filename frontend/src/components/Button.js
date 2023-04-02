@@ -78,6 +78,21 @@ export const WhiteButton = ({ text, link, register }) => {
     );
 };
 
+export const BlackButton = ({ text, link, register }) => {
+    const navigate = useNavigate();
+
+    return (
+        <button
+            className="px-[10px] py-[10px] border-black border mb-[20px] text-[black] text-center"
+            onClick={() => {
+                navigate(`${link}`);
+            }}
+        >
+            {text}
+        </button>
+    );
+};
+
 export const UpdateButton = ({ children }) => {
     return (
         <button className="h-[50px] w-[180px] bg-[#29CC97] text-lg text-white text-center rounded-[5px] mr-[20px]">

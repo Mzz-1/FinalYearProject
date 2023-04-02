@@ -14,7 +14,7 @@ import Biography from "../pages/artistDashboard/Biography";
 import FeaturedEvents from "../pages/artistDashboard/FeaturedEvents";
 import { ManageProducts } from "../pages/artistDashboard/ManageProducts";
 import { ManageEvents } from "../pages/artistDashboard/ManageEvents";
-
+import { ManageOrders } from "../pages/artistDashboard/Order";
 export const ArtistRoutes = () => {
     const location = useLocation();
     console.log("location", location);
@@ -62,6 +62,10 @@ export const ArtistRoutes = () => {
                             <Route
                                 path="manage-events"
                                 element={<ManageEvents />}
+                            />
+                            <Route
+                                path="orders"
+                                element={<ManageOrders />}
                             />
                         </Route>
                     </Routes>

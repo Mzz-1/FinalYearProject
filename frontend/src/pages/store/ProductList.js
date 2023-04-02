@@ -24,7 +24,7 @@ export const ProductList = ({ products,gridSize }) => {
                     <div className="relative" onClick={()=>getProducts(product._id)}>
                         <img
                             src={product.url}
-                            className=" mb-[10px]"
+                            className=" mb-[10px] "
                             alt="product"
                         />
                         <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px]">
@@ -40,7 +40,7 @@ export const ProductList = ({ products,gridSize }) => {
                             <li className="text-[#65635F] text-[15px]">
                                 {product.dimensions}
                             </li>
-                            <li className="absolute top-[10px] right-[10px] text-[18px]">
+                            <li className=" text-[18px]">
                                 Rs {product.price}
                             </li>
                         </ul>
