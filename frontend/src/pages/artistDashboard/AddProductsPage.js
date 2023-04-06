@@ -7,7 +7,7 @@ import { DashboardActionButton } from "../../components/Button";
 import { PromiseToast } from "../../helpers/Toast";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../../helpers/Product";
-import { addProduct } from "../../helpers/Product";
+import { addProduct,updateProduct } from "../../helpers/Product";
 
 const AddProductPage = () => {
     const user = useUser();
@@ -43,18 +43,12 @@ const AddProductPage = () => {
     watch("image");
 
     const ProductAction = async (data) => {
-        try {
-            const response = await axios.get(
-                `http://localhost:5000/api/artist/${user.id}`
-            );
-            console.log(response.data.artist.name);
-            setArtistName(response.data.artist.name);
-        } catch (err) {
-            console.log(`err:${err}`);
-        }
+       
 
-        PromiseToast(addProduct(data,user.id),"Product has been added.")
+        console.log(artistName)
+            PromiseToast(addProduct(data,artistName),"Product has been added.")
 
+        
       
     };
 
@@ -71,6 +65,7 @@ const AddProductPage = () => {
                         <Input
                             type="text"
                             placeholder="Name"
+                            defaultValue={productToEdit}
                             register={{
                                 ...register("name", {
                                     required: "Please enter your username.",

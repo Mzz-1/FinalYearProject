@@ -17,7 +17,7 @@ export const ArtistList = ({ artists }) => {
     };
 
     return (
-        <div className="grid grid-row-auto grid-cols-3 bg-[] justify-center items-center gap-[100px] my-[50px] ">
+        <div className="grid grid-row-auto grid-cols-3 bg-[] cursor-pointer justify-center items-center gap-[100px] my-[50px] ">
             {artists.map((artist) => {
                 return (
                     <div

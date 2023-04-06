@@ -21,7 +21,7 @@ export const ProductList = ({ products,gridSize }) => {
         <div className={`grid grid-row-auto grid-cols-${gridSize} bg-[] justify-center items-center gap-[100px] my-[50px]`}>
             {products.map((product) => {
                 return (
-                    <div className="relative" onClick={()=>getProducts(product._id)}>
+                    <div className="relative cursor-pointer" onClick={()=>getProducts(product._id)}>
                         <img
                             src={product.url}
                             className=" mb-[10px] "

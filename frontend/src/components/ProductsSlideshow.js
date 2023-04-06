@@ -39,7 +39,7 @@ export const ProductSlideShow = () => {
             {events.map((events) => (
                 <SplideSlide key={events._id}>
                     <img
-                        className="h-[600px] w-full object-cover"
+                        className="h-[600px] w-full object-cover cursor-pointer"
                         src={events.url}
                         alt={events.title}
                         onClick={()=>navigate(`/product/${events._id}`)}

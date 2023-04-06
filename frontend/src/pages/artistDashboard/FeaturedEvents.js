@@ -79,7 +79,7 @@ const FeaturedEvents = () => {
                         <label>Start Date</label>
                         <Input
                             type="date"
-                            defaultValue={eventToEdit?.startDate}
+                            value={eventToEdit?.startDate}
                             register={{
                                 ...register("startDate", {
                                     required: "Please enter your password.",

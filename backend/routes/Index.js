@@ -4,8 +4,9 @@ const testEmailRoute = require("./Email");
 const verifyEmailRoute = require("./VerifyEmailRoute");
 const forgotPasswordRoute = require("./ForgotPasswordRoute");
 const resetPasswordRoute = require("./ResetPasswordRoute");
+const khaltiPayment = require('./Khalti')
 
-const { getAllUsers, getUser, deleteUser } = require("./UserRoute");
+const { getAllUsers, getUser, deleteUser,updateUser } = require("./UserRoute");
 
 const {
     addBiography,
@@ -50,14 +51,18 @@ const routes = [
     resetPasswordRoute,
     loginRoute,
     testEmailRoute,
+    
     getAllUsers,
     getUser,
     deleteUser,
+    updateUser,
+
     addProducts,
     updateProducts,
     getAllProducts,
     getProduct,
     deleteProduct,
+
     addEvents,
     getAllEvents,
     getEvent,
@@ -79,6 +84,8 @@ const routes = [
     getCartProductDetails,
     addDelivery,
     testEmailTemplate,
+
+    khaltiPayment
 ];
 
 module.exports = routes;

@@ -1,12 +1,27 @@
 require("dotenv").config();
-const User = require("../models/User")
+const User = require("../models/User");
 
 const getAllUsers = {
     path: "/api/users",
     method: "get",
     handler: async (req, res) => {
-        const {role} = req.query; 
-        const users = await User.find({role})
+        const { role } = req.query;
+        const users = await User.find({ role });
+
+        res.status(200).json({ users });
+    },
+};
+
+const updateUser = {
+    path: "/api/users/:id",
+    method: "patch",
+    handler: async (req, res) => {
+        const { id: userID } = req.params();
+        const users = await User.findOneAndUpdate({ _id: userID }, req.body, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: true,
+        });
 
         res.status(200).json({ users });
     },
@@ -42,5 +57,5 @@ module.exports = {
     getAllUsers,
     getUser,
     deleteUser,
-   
+    updateUser
 };

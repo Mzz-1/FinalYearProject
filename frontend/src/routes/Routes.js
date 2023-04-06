@@ -32,18 +32,16 @@ export const AllRoutes = () => {
         "/register",
         "/admin",
         "/artist-dashboard",
-        "/artist-dashboard/products",
-        "/artist-dashboard/add-product",
-        "/artist-dashboard/manage-products",
-        "/artist-dashboard/biography",
-        "/artist-dashboard/add-event",
-        "/artist-dashboard/manage-events",
         "/artist-dashboard/edit-product/*",
     ];
 
     // Check if the current location matches any excluded path
-    const shouldHide = excludedPaths.includes(location.pathname);
 
+    const shouldHide = excludedPaths.some(
+        (path) =>
+            typeof location.pathname === "string" &&
+            location.pathname.match(path)
+    );
     return (
         <div>
             {!shouldHide && <Navbar />}

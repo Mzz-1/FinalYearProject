@@ -21,16 +21,21 @@ function Register() {
     const emailRegex =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-    const handleFormSubmit = async ({ username, email, confirmPassword,role }) => {
+    const handleFormSubmit = async ({
+        username,
+        email,
+        confirmPassword,
+        role,
+    }) => {
         try {
-            const userType = role ? "artist": "user"; 
+            const userType = role ? "artist" : "user";
             const response = await axios.post(
                 "http://localhost:5000/api/signup",
                 {
                     username: username,
                     email: email,
                     password: confirmPassword,
-                    role:userType,
+                    role: userType,
                 }
             );
             console.log(confirmPassword, email);
