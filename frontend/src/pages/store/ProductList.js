@@ -24,7 +24,7 @@ export const ProductList = ({ products,gridSize }) => {
                     <div className="relative cursor-pointer" onClick={()=>getProducts(product._id)}>
                         <img
                             src={product.url}
-                            className=" mb-[10px] "
+                            className=" mb-[10px] w-[100%] h-[500px] object-cover"
                             alt="product"
                         />
                         <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px]">

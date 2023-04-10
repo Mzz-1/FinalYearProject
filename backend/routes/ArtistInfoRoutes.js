@@ -125,11 +125,8 @@ const updateArtistEvent = {
                 }
             );
 
-           
-     
-        
             console.log("node 2");
-            res.status(200).json({exhibition});
+            res.status(200).json({ exhibition });
         },
     ],
 };
@@ -166,7 +163,8 @@ const getArtistExhibitions = {
     method: "get",
     handler: async (req, res) => {
         const { id: artistID } = req.params;
-        const artist = await Artist.findOne({ userID: artistID }).populate(
+        console.log(artistID);
+        const artist = await Artist.findOne({ name: artistID }).populate(
             "exhibitions"
         );
         const exhibitions = artist.exhibitions;
@@ -180,13 +178,11 @@ const getExhibitions = {
     method: "get",
     handler: async (req, res) => {
         const { id: exhibitionID } = req.params;
-        const exhibition = await Exhibition.findOne({ _id: exhibitionID })
-        
+        const exhibition = await Exhibition.findOne({ _id: exhibitionID });
 
         res.status(200).json({ exhibition });
     },
 };
-
 
 const deleteExhibition = {
     path: "/api/artist-exhibitions/:id",
@@ -268,5 +264,5 @@ module.exports = {
     getBiography,
     deleteExhibition,
     updateArtistEvent,
-    getExhibitions
+    getExhibitions,
 };

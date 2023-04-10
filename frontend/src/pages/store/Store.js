@@ -76,7 +76,7 @@ const Store = () => {
     return (
         <div className="bg-[#F4F4F2] px-[5%]">
             <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center">
-                <Banner heading="Store" />
+                <Banner heading="STORE" img='https://res.cloudinary.com/djuzpmqlp/image/upload/v1681139641/assets/banner_yo00ky.jpg'/>
                 <div className="flex gap-[50px] items-center">
                     <p>Filter By:</p>
                     <Select
@@ -117,7 +117,7 @@ const Store = () => {
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
                 <hr className="h-[2px] bg-[#65635F] " />
-                <ProductList products={products} gridSize={4} />
+                <ProductList products={products} gridSize={3} />
                 {loading && <p>Loading...</p>}
                 {!loading && products.length > 0 && (
                     <button onClick={handleLoadMore}>Load More</button>

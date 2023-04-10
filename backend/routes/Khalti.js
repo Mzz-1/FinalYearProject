@@ -39,33 +39,5 @@ const khaltiPayment = {
     },
 };
 
-// app.post('/api/v2/khalti/verify', async (req, res) => {
-//     const { token, amount } = req.body; // Extract payment details from request body
-
-//     try {
-//       // Send the payment verification request using the Khalti API
-//       const response = await axios.post(`https://khalti.com/api/v2/payment/verify/`, {
-//         token,
-//         amount,
-//       }, {
-//         headers: {
-//           Authorization: `test_secret_key_f59e8b7d18b4499ca40f68195a846e9b`, // Replace with your Khalti API keys
-//         },
-//       });
-
-//       // If the payment is successful, complete the order and send a success response to the frontend
-//       if (response && response.data && response.data.state === 'Completed') {
-//         // TODO: Complete the order and send a success response to the frontend
-//         res.status(200).json({ success: true, message: 'Payment successful' });
-//       } else {
-//         // If the payment fails, send an error response to the frontend
-//         res.status(400).json({ success: false, message: 'Payment failed' });
-//       }
-//     } catch (error) {
-//       // Handle any errors that occur during payment verification
-//       console.error(error);
-//       res.status(500).json({ success: false, message: 'Server error' });
-//     }
-//   });
 
 module.exports = khaltiPayment;

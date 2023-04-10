@@ -1,4 +1,5 @@
 const Cart = require("../models/Cart");
+const Product = require("../models/Products")
 
 const addToCart = {
     path: "/api/add-to-cart",
@@ -24,6 +25,9 @@ const addToCart = {
             const productExists = cart.items.find(
                 (item) => item.productID.toString() === productID.toString()
             );
+
+            let product = await Product.findOne({_id:productID})
+        
 
             // If the product is already in the cart, increase the quantity
             if (productExists) {

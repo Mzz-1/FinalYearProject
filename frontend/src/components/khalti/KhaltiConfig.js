@@ -13,12 +13,14 @@ export const Config = {
                 amount: payload.amount,
             };
 
-            let config = {
-               
-            };
+            let config = {};
 
             axios
-                .post("http://localhost:5000/api/v2/khalti/verify", data, config)
+                .post(
+                    "http://localhost:5000/api/v2/khalti/verify",
+                    data,
+                    config
+                )
                 .then((response) => {
                     console.log(response.data);
                 })
@@ -44,7 +46,3 @@ export const Config = {
         "SCT",
     ],
 };
-
-
-
-

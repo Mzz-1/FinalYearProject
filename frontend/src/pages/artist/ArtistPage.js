@@ -52,8 +52,9 @@ const ArtistPage = () => {
 
     return (
         <div className="bg-[#F4F4F2]  px-[10%]">
-            <div className="flex justify-between items-center">
-                <Banner heading="Featured Artists" />
+            <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center">
+                <Banner heading="Featured Artists" img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1681142248/assets/Asymmetry_Painting_h0rit1.jpg"/>
+                <div className="flex gap-[50px] justify-end items-center">
                 <Search
                     register={{
                         ...register("searchItem", {
@@ -64,6 +65,7 @@ const ArtistPage = () => {
                         getArtists({ searchItem: getValues("searchItem") })
                     }
                 />
+                </div>
             </div>
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
