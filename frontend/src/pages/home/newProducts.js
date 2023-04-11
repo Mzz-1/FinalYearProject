@@ -9,7 +9,7 @@ export const NewProducts = () => {
 
     const getProducts = async () => {
         const productsData = await axios.get(
-            `http://localhost:5000/api/products?limit=4`
+            `http://localhost:5000/api/products?limit=3`
         );
 
         const data = await productsData.data.product;
@@ -24,9 +24,10 @@ export const NewProducts = () => {
     return (
         <div className="px-[50px]">
             <Heading2 text="New" />
-            <ProductList products={products} gridSize={4}/>
-            <div className="text-center"><BlackButton text="Visit Store" link="/store"/></div>
-            
+            <ProductList products={products} gridSize={3} />
+            <div className="text-center">
+                <BlackButton text="Visit Store" link="/store" />
+            </div>
         </div>
     );
 };

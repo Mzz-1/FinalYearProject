@@ -57,9 +57,6 @@ export const AdminEvent = () => {
         console.log("view event", viewData.data.event);
         setViewEvents(viewData.data.event);
     };
-    
-  
-    
 
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
 
