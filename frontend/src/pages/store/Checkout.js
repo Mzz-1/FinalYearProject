@@ -2,14 +2,13 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Input from "../../components/Input";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { SuccessToast } from "../../helpers/Toast";
 import { DashboardActionButton } from "../../components/Button";
-import KhaltiCheckout from "khalti-checkout-web";
-import { Config } from "../../components/khalti/KhaltiConfig";
+
 
 const CheckoutPage = () => {
-    let checkout = new KhaltiCheckout(Config);
+   
 
     const {
         register,
@@ -19,9 +18,12 @@ const CheckoutPage = () => {
     } = useForm();
     watch("image");
 
-    const [userList, setUserList] = useState([]);
+    const navigate = useNavigate();
+
+    const [deliveryID, setDeliveryID] = useState();
 
     const { id: cartID } = useParams();
+
 
     const addDelivery = async ({ district, city, streetName, contactNo }) => {
         console.log("1");
@@ -38,8 +40,11 @@ const CheckoutPage = () => {
                 }
             );
 
-            console.log(response.data);
-            SuccessToast("Your order has been confirmed.");
+            console.log(response.data.delivery);
+            setDeliveryID(response.data.delivery._id)
+            console.log("deliveryid",);
+            SuccessToast("Delivery location has been confirmed.");
+            navigate(`/order-summary/${response.data.delivery._id}`)
         } catch (err) {
             console.log(`err:${err}`);
         }
@@ -105,9 +110,7 @@ const CheckoutPage = () => {
                 </div>
                 <DashboardActionButton>Confirm Order</DashboardActionButton>
             </form>
-            <button onClick={() => checkout.show({ amount: 1000 })}>
-                Pay with khalti
-            </button>
+            
         </div>
     );
 };

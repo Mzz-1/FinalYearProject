@@ -40,7 +40,7 @@ const {
 
 const { addToCart, getCartDetails, getCartProductDetails } = require("./CartRoute");
 
-const { addDelivery } = require("./DeliveryRoute");
+const { addDelivery,getDeliveryDetails } = require("./DeliveryRoute");
 
 const testEmailTemplate = require("./Template");
 
@@ -82,7 +82,9 @@ const routes = [
     addToCart,
     getCartDetails,
     getCartProductDetails,
+
     addDelivery,
+    getDeliveryDetails,
     testEmailTemplate,
 
     khaltiPayment

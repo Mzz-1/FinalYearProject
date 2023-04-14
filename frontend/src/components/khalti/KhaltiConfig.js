@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SuccessToast } from "../../helpers/Toast";
 export const Config = {
     // replace this key with yours
     publicKey: "test_public_key_ef50d27384c44698a9ff9b84f75519e3",
@@ -23,6 +24,7 @@ export const Config = {
                 )
                 .then((response) => {
                     console.log(response.data);
+                    SuccessToast('Order has been confirmed')
                 })
                 .catch((error) => {
                     console.log(error);

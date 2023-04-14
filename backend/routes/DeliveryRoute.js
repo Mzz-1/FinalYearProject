@@ -19,18 +19,18 @@ const addDelivery = {
     },
 };
 
-const getCartDetails = {
-    path: "/api/cart/:id",
+const getDeliveryDetails = {
+    path: "/api/delivery/:id",
     method: "get",
     handler: async (req, res) => {
-        const { id: userID } = req.params;
+        const { id: deliveryID } = req.params;
 
-        const cart = await Cart.findOne({ userID: userID });
+        const delivery = await Delivery.findOne({ _id: deliveryID });
 
-        if (!cart) {
+        if (!delivery) {
             return res.sendStatus(400);
         }
-        res.status(200).json({ cart });
+        res.status(200).json({ delivery });
     },
 };
 
@@ -64,4 +64,5 @@ const getCartProductDetails = {
 };
 module.exports = {
     addDelivery,
+    getDeliveryDetails
 };

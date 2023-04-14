@@ -78,7 +78,7 @@ const Store = () => {
             <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center">
                 <Banner heading="STORE" img='https://res.cloudinary.com/djuzpmqlp/image/upload/v1681139641/assets/banner_yo00ky.jpg'/>
                 <div className="flex gap-[50px] items-center">
-                    <p>Filter By:</p>
+                    <p>Filter Products:</p>
                     <Select
                         text="Sort By"
                         options={sort}
