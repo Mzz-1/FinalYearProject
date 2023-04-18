@@ -21,9 +21,8 @@ export const deleteProducts = async (id) => {
 };
 
 export const addProduct = async (data, artistName) => {
-    
+
     const formData = new FormData();
-    console.log("artistname",artistName)
     formData.append("name", data.name);
     formData.append("artist", artistName);
     formData.append("category", data.category);
@@ -45,8 +44,7 @@ export const addProduct = async (data, artistName) => {
         );
 
         console.log(response.data);
-        // const { token } = response.data;
-        // console.log(token);
+       
     } catch (err) {
         console.log(`err:${err}`);
     }

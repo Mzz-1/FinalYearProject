@@ -44,7 +44,7 @@ const AddEventPage = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <h2 className="text-5xl font-semibold ">
+            <h2 className="text-5xl font-light border-b-[2px] pb-2 border-black ">
                 {eventToEdit ? "Update Event" : "Add Event"}
             </h2>
             <form
@@ -60,7 +60,7 @@ const AddEventPage = () => {
                             defaultValue={eventToEdit?.name}
                             register={{
                                 ...register("name", {
-                                    required: "Please enter your username.",
+                                    required: "Please enter the event name.",
                                 }),
                             }}
                         />
@@ -73,7 +73,7 @@ const AddEventPage = () => {
                             register={{
                                 ...register("place", {
                                     required:
-                                        "Please enter your email address.",
+                                        "Please enter the event venue.",
                                 }),
                             }}
                         />
@@ -85,7 +85,7 @@ const AddEventPage = () => {
                             defaultValue={eventToEdit?.location}
                             register={{
                                 ...register("location", {
-                                    required: "Please enter your password.",
+                                    required: "Please enter event location.",
                                 }),
                             }}
                         />
@@ -107,7 +107,7 @@ const AddEventPage = () => {
                             defaultValue={eventToEdit?.startDate}
                             register={{
                                 ...register("startDate", {
-                                    required: "Please enter your password.",
+                                    required: "Please enter the start date.",
                                 }),
                             }}
                         />
@@ -118,7 +118,7 @@ const AddEventPage = () => {
                             defaultValue={eventToEdit?.endDate}
                             register={{
                                 ...register("endDate", {
-                                    required: "Please enter your password.",
+                                    required: "Please enter the end date.",
                                 }),
                             }}
                         />
@@ -129,7 +129,7 @@ const AddEventPage = () => {
                             defaultValue={eventToEdit?.startTime}
                             register={{
                                 ...register("startTime", {
-                                    required: "Please enter your password.",
+                                    required: "Please enter the start time.",
                                 }),
                             }}
                         />
@@ -140,7 +140,7 @@ const AddEventPage = () => {
                             defaultValue={eventToEdit?.endTime}
                             register={{
                                 ...register("endTime", {
-                                    required: "Please enter your password.",
+                                    required: "Please enter the end time.",
                                 }),
                             }}
                         />

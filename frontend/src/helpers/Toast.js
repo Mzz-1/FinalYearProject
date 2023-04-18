@@ -14,6 +14,7 @@ export const SuccessToast = (message) => {
     });
 };
 
+
 export const InfoToast = (message) => {
     toast.info(message, {
         position: "bottom-right",

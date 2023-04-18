@@ -17,9 +17,8 @@ const eventsSchema = mongoose.Schema({
     //     type: String,
     //     required: [true, "password must be provided"],
     // },
-    url:{
+    url: {
         type: String,
-        
     },
     startDate: {
         type: Date,

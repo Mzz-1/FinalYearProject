@@ -53,7 +53,7 @@ const ArtistPage = () => {
     return (
         <div className="bg-[#F4F4F2]  px-[10%]">
             <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center">
-                <Banner heading="Featured Artists" img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1681142248/assets/Asymmetry_Painting_h0rit1.jpg"/>
+                <Banner heading="Featured Artists" img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1681497000/assets/birmingham-museums-trust-8FNuCxFfbFw-unsplash_uaudjs.jpg"/>
                 <div className="flex gap-[50px] justify-end items-center">
                 <Search
                     register={{

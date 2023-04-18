@@ -13,13 +13,10 @@ const sendEventsEmail = async ({
     endDate,
     image,
 }) => {
-    console.log("users", name, location, startDate, endDate, image);
-
+   
     const emails = users.map((user) => ({
         email: user.email,
     }));
-
-    console.log(emails);
 
     let mail = new emailAPI.TransactionalEmailsApi();
     const sendSmtpEmail = new emailAPI.SendSmtpEmail();

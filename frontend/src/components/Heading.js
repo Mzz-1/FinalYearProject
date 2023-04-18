@@ -18,7 +18,7 @@ export const AdminHeading=({children})=>{
 
 export const AdminHeading2=({children, color})=>{
     return(
-        <h2 className="text-[#A4A6B3] text-[22px]">{children}</h2>
+        <h2 className="text-[#A4A6B3] text-[22px] text-center">{children}</h2>
     )
 }
 
@@ -27,3 +27,10 @@ export const ModalHeading=({children, color})=>{
         <h2 className="text-[#36454F] text-[22px] font-medium">{children}</h2>
     )
 }
+
+export const DashboardHeading=({children, color})=>{
+    return(
+        <h2 className="text-5xl font-light w-[fit-content] border-b-[2px] pb-2 border-black ">{children}</h2>
+    )
+}
+

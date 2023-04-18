@@ -1,20 +1,16 @@
 import { BrowserRouter, Routes, Route, useLocation, matchPath } from "react-router-dom";
-import { useEffect } from "react";
-import PrivateRoute from "../service/Auth";
-import { PrivateRouteAdmin } from "../service/Auth";
+
 import AdminDashboard from "../pages/admin/AdminDashboard";
-import { ProductDetails } from "../pages/store/ProductDesc";
+
 import SplitScreen from "../components/SplitScreen";
-import { AdminSidebar } from "../components/Sidebar";
 import AddProductPage from "../pages/artistDashboard/AddProductsPage";
 import { ArtistSidebar } from "../pages/artistDashboard/ArtistSidebar";
-import { Navbar } from "../components/Navbar";
-import { Footer } from "../components/Footer";
 import Biography from "../pages/artistDashboard/Biography";
 import FeaturedEvents from "../pages/artistDashboard/FeaturedEvents";
 import { ManageProducts } from "../pages/artistDashboard/ManageProducts";
 import { ManageEvents } from "../pages/artistDashboard/ManageEvents";
 import { ManageOrders } from "../pages/artistDashboard/Order";
+
 export const ArtistRoutes = () => {
     const location = useLocation();
     console.log("location", location);
@@ -37,7 +33,6 @@ export const ArtistRoutes = () => {
                                 path="control-panel"
                                 element={<AdminDashboard />}
                             />
-
                             <Route
                                 path="add-product"
                                 element={<AddProductPage />}

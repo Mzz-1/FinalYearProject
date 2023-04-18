@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import { Banner } from "../../components/Banner";
 import { ProductList } from "./ProductList";
 import { useUser } from "../../service/useUser";
-import { InfoToast } from "../../helpers/Toast";
-import { Heading } from "../../components/Heading";
+import { InfoToast, SuccessToast } from "../../helpers/Toast";
+import { Heading, Heading2 } from "../../components/Heading";
+import { AiTwotoneDelete } from "react-icons/ai";
 
 export const Cart = () => {
     const [products, setProducts] = useState([]);
@@ -40,6 +41,20 @@ export const Cart = () => {
             );
             console.log("details", productData.data.products);
             setProducts(productData.data.products);
+            calculateTotal();
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const removeFromCart = async (productID) => {
+        try {
+            const product = await axios.post(
+                `http://localhost:5000/api/remove-from-cart/${user.id}/${productID}`
+            );
+            console.log("details", product.data);
+            getProducts();
+            SuccessToast("Product has been removed from cart");
         } catch (err) {
             console.log(err);
         }
@@ -49,23 +64,26 @@ export const Cart = () => {
         getProducts();
     }, []);
 
-    useEffect(() => {
+    const calculateTotal = () => {
         if (cart && products.length) {
             let total = 0;
             for (let i = 0; i < cart.items.length; i++) {
-                const item = cart.items[i];
+                const item = cart?.items[i];
                 const product = products.find((p) => p._id === item.productID);
                 total += item.quantity * product.price;
             }
             setSubTotal(total);
         }
-    }, [cart, products]);
+    };
 
     return (
         <div className="bg-gray-100 min-h-screen px-[50px]">
-            <Heading text="My Cart" />
-            <div className="flex gap-10">
-                <table className="bg-white  border-gray-300 w-[70%] rounded-md shadow-sm">
+            <div className="text-center py-[40px]">
+                <Heading text="My Cart" />
+            </div>
+
+            <div className="">
+                <table className="bg-white  border-gray-300 w-[100%] rounded-md shadow-sm">
                     <thead className="text-left">
                         <tr className=" ">
                             <th className=" text-center text-lg font-semibold">
@@ -122,20 +140,31 @@ export const Cart = () => {
                                             Rs {item.quantity * product.price}
                                         </p>
                                     </td>
+                                    <td>
+                                        <span
+                                            onClick={() =>
+                                                removeFromCart(item.productID)
+                                            }
+                                        >
+                                            <AiTwotoneDelete />
+                                        </span>
+                                    </td>
                                 </tr>
                             );
                         })}
                     </tbody>
                 </table>
                 <div className="">
-                    <div>Subtotal: {subTotal}</div>
+                    <p className="text-lg font-semibold mt-4">
+                        Subtotal: {subTotal}
+                    </p>
 
                     <div className="flex items-center justify-between py-4">
                         <button
                             onClick={() => navigate(`/checkout/${cart._id}`)}
                             className="bg-white text-gray-500 border border-gray-300 px-4 py-2 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none"
                         >
-                            Checkout
+                            Continue to delivery
                         </button>
                     </div>
                 </div>

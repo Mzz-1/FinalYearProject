@@ -4,9 +4,9 @@ const testEmailRoute = require("./Email");
 const verifyEmailRoute = require("./VerifyEmailRoute");
 const forgotPasswordRoute = require("./ForgotPasswordRoute");
 const resetPasswordRoute = require("./ResetPasswordRoute");
-const khaltiPayment = require('./Khalti')
+const khaltiPayment = require("./Khalti");
 
-const { getAllUsers, getUser, deleteUser,updateUser } = require("./UserRoute");
+const { getAllUsers, getUser, deleteUser, updateUser } = require("./UserRoute");
 
 const {
     addBiography,
@@ -18,7 +18,7 @@ const {
     getBiography,
     deleteExhibition,
     updateArtistEvent,
-    getExhibitions
+    getExhibitions,
 } = require("./ArtistInfoRoutes");
 
 const {
@@ -38,9 +38,14 @@ const {
     sendEventMail,
 } = require("./EventsRoute");
 
-const { addToCart, getCartDetails, getCartProductDetails } = require("./CartRoute");
+const {
+    addToCart,
+    getCartDetails,
+    getCartProductDetails,
+    deleteCartProduct,
+} = require("./CartRoute");
 
-const { addDelivery,getDeliveryDetails } = require("./DeliveryRoute");
+const { addDelivery, getDeliveryDetails } = require("./DeliveryRoute");
 
 const testEmailTemplate = require("./Template");
 
@@ -51,7 +56,7 @@ const routes = [
     resetPasswordRoute,
     loginRoute,
     testEmailRoute,
-    
+
     getAllUsers,
     getUser,
     deleteUser,
@@ -68,7 +73,7 @@ const routes = [
     getEvent,
     updateEvents,
     deleteEvent,
-   
+
     addBiography,
     updateBiography,
     getAllArtists,
@@ -82,12 +87,13 @@ const routes = [
     addToCart,
     getCartDetails,
     getCartProductDetails,
+    deleteCartProduct,
 
     addDelivery,
     getDeliveryDetails,
     testEmailTemplate,
 
-    khaltiPayment
+    khaltiPayment,
 ];
 
 module.exports = routes;

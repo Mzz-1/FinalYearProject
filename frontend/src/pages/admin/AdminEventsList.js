@@ -62,7 +62,9 @@ export const AdminEvent = () => {
 
     return (
         <div className="flex flex-col gap-[40px] h-[100%] ">
-            <AdminHeading> Events</AdminHeading>
+           <h2 className="text-5xl font-light w-[fit-content] border-b-[2px] pb-2 border-black ">
+                Event
+            </h2>
             <div className="flex flex-col gap-[20px] border rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white">
                 <AdminHeading2> All Events </AdminHeading2>
                 <div className="overflow-scroll">

@@ -1,5 +1,5 @@
 const Cart = require("../models/Cart");
-const Product = require("../models/Products")
+const Product = require("../models/Products");
 
 const addToCart = {
     path: "/api/add-to-cart",
@@ -26,8 +26,7 @@ const addToCart = {
                 (item) => item.productID.toString() === productID.toString()
             );
 
-            let product = await Product.findOne({_id:productID})
-        
+            let product = await Product.findOne({ _id: productID });
 
             // If the product is already in the cart, increase the quantity
             if (productExists) {
@@ -91,8 +90,55 @@ const getCartProductDetails = {
         }
     },
 };
+
+const deleteCartProduct = {
+    path: "/api/remove-from-cart/:userID/:productID",
+    method: "post",
+    handler: async (req, res) => {
+        const { userID, productID } = req.params;
+        console.log(userID, productID);
+        try {
+            // Find the cart document for the given userID
+            const cart = await Cart.findOne({ userID: userID });
+
+            // If the cart doesn't exist, send an error response
+            if (!cart) {
+                return res.status(404).json({ message: "Cart not found" });
+            }
+
+            // Check if the product exists in the cart
+            const productIndex = cart.items.findIndex(
+                (item) => item.productID.toString() === productID.toString()
+            );
+            console.log(productIndex);
+            // If the product is not found in the cart, send an error response
+            if (productIndex === -1) {
+                return res
+                    .status(404)
+                    .json({ message: "Product not found in cart" });
+            }
+
+            // Remove the product from the cart by splicing the array
+            cart.items.splice(productIndex, 1);
+
+            // Save the updated cart to the database
+            await cart.save();
+
+            // Send a success response with a message indicating that the product has been removed from the cart
+            res.status(200).json({
+                message: "Product removed from cart successfully",
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                message: "Error removing product from cart",
+            });
+        }
+    },
+};
 module.exports = {
     addToCart,
     getCartDetails,
     getCartProductDetails,
+    deleteCartProduct,
 };

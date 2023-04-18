@@ -4,12 +4,14 @@ import {
     AdminHeading,
     AdminHeading2,
     ModalHeading,
+    DashboardHeading
 } from "../../components/Heading";
 import { ModalPara } from "../../components/Paragraph";
 import { useNavigate } from "react-router-dom";
 import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
 import { Modal, LargeModal } from "../../components/Modal";
 import { getAllProducts, deleteProducts } from "../../helpers/Product";
+import { SuccessToast } from "../../helpers/Toast";
 
 export const ManageProducts = () => {
     const [products, setProducts] = useState([]);
@@ -34,6 +36,7 @@ export const ManageProducts = () => {
             `http://localhost:5000/api/products/${id}`
         );
         getProducts()
+        SuccessToast("Product has been deleted.")
     };
 
  
@@ -48,7 +51,7 @@ export const ManageProducts = () => {
 
     return (
         <div className="flex flex-col gap-[40px] h-[100%] ">
-            <AdminHeading>Products</AdminHeading>
+            <DashboardHeading>Products</DashboardHeading>
             <div className="flex flex-col gap-[20px] border rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white">
                 <AdminHeading2> All Products </AdminHeading2>
                 <div className="overflow-scroll">

@@ -11,6 +11,8 @@ import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
 import { Modal, LargeModal } from "../../components/Modal";
 import { getAllProducts, deleteProducts } from "../../helpers/Product";
 import { useUser } from "../../service/useUser";
+import { DashboardHeading } from "../../components/Heading";
+import { SuccessToast } from "../../helpers/Toast";
 
 export const ManageEvents = () => {
     const [exhibitions, setExhibitions] = useState([]);
@@ -33,6 +35,7 @@ export const ManageEvents = () => {
         const deleteData = await axios.delete(
             `http://localhost:5000/api/artist-exhibitions/${id}`
         );
+        SuccessToast("Event has been deleted.")
         getExhibitions()
     };
 
@@ -50,7 +53,7 @@ export const ManageEvents = () => {
 
     return (
         <div className="flex flex-col gap-[40px] h-[100%] ">
-            <AdminHeading>Events</AdminHeading>
+            <DashboardHeading>Featured Events</DashboardHeading>
             <div className="flex flex-col gap-[20px] border rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white">
                 <AdminHeading2> All Events </AdminHeading2>
                 <div className="overflow-scroll">

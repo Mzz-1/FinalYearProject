@@ -7,6 +7,8 @@ import "react-quill/dist/quill.snow.css";
 import { Label } from "../../components/Label";
 import { UpdateButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";
+import { DashboardHeading } from "../../components/Heading";
+import { SuccessToast } from "../../helpers/Toast";
 
 const Biography = () => {
     const user = useUser();
@@ -50,7 +52,6 @@ const Biography = () => {
     const biographyContent = watch("biography");
 
     const addBiography = async (data) => {
-        console.log("1");
 
         const formData = new FormData();
         formData.append("userID", user.id);
@@ -82,6 +83,7 @@ const Biography = () => {
                         },
                     }
                 );
+                SuccessToast("Artist Detail has been added.")
                 console.log(response.data);
             } catch (err) {
                 console.log(`err:${err}`);
@@ -97,7 +99,7 @@ const Biography = () => {
                         },
                     }
                 );
-            
+                SuccessToast("Artist Detail has been updated.")
                 console.log(response.data);
                 // const { token } = response.data;
                 // console.log(token);
@@ -109,7 +111,7 @@ const Biography = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <h2 className="text-5xl font-semibold ">Biography</h2>
+            <DashboardHeading>Biography</DashboardHeading>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(addBiography)}

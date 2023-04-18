@@ -30,9 +30,13 @@ export const LogOutModal = ({ children, onClick, message }) => {
         </>
     );
 };
-
 export const Modal = ({ children, onClick, message }) => {
     const [modal, setModal] = useState(false);
+
+    const handleYesClick = () => {
+        setModal(false);
+        onClick();
+    };
 
     return (
         <>
@@ -42,11 +46,11 @@ export const Modal = ({ children, onClick, message }) => {
                     className="w-[100%] h-[100%] fixed left-0 top-0 z-1 overflow-auto bg-gray-800 bg-opacity-80 flex justify-center items-center"
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <div className="bg-white h-[200px] w-[400px]  p-[20px] rounded-[10px] flex flex-col gap-[20px]">
+                    <div className="bg-white h-[170px] w-[400px]  p-[20px] rounded-[10px] flex flex-col gap-[20px]">
                         {children}
                         <div className="ml-auto mr-0">
                             {" "}
-                            <YesButton onClick={onClick} />
+                            <YesButton onClick={handleYesClick} />
                             <NoButton onClick={() => setModal(false)}>
                                 No
                             </NoButton>

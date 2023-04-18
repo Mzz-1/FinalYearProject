@@ -27,14 +27,12 @@ const addEvents = {
                 endTime,
             } = req.body;
             const file = req.file;
+
             connectCloudinary();
 
             const upload = await cloudinary.uploader.upload(file.path, {
                 folder: "events",
             });
-
-            //const url = cloudinary.url(name);
-            console.log("node 1");
 
             const event = await Event.create({
                 name,

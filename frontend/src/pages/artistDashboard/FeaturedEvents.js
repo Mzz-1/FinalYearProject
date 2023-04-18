@@ -8,8 +8,13 @@ import { Label } from "../../components/Label";
 import { UpdateButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";
 import { useParams } from "react-router-dom";
-import { addExhibition, updateExhibition,getSingleExhibition } from "../../helpers/Exhibition";
+import {
+    addExhibition,
+    updateExhibition,
+    getSingleExhibition,
+} from "../../helpers/Exhibition";
 import { PromiseToast, SuccessToast } from "../../helpers/Toast";
+import { DashboardHeading } from "../../components/Heading";
 
 const FeaturedEvents = () => {
     const user = useUser();
@@ -48,7 +53,9 @@ const FeaturedEvents = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <h2 className="text-5xl font-semibold ">Add Featured Events</h2>
+            <DashboardHeading>
+                {eventToEdit ? "Update Event Details" : "Add Featured Events"}
+            </DashboardHeading>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(ExhibitionAction)}
@@ -114,7 +121,9 @@ const FeaturedEvents = () => {
                     </div>
                 </div>
 
-                <UpdateButton>Update Inforamtion</UpdateButton>
+                <UpdateButton>
+                    {eventToEdit ? "Update Event" : "Add Event"}
+                </UpdateButton>
             </form>
         </div>
     );

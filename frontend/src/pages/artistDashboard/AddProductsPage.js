@@ -4,10 +4,12 @@ import axios from "axios";
 import Input from "../../components/Input";
 import { useUser } from "../../service/useUser";
 import { DashboardActionButton } from "../../components/Button";
-import { PromiseToast } from "../../helpers/Toast";
+import { PromiseToast, SuccessToast } from "../../helpers/Toast";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../../helpers/Product";
-import { addProduct,updateProduct } from "../../helpers/Product";
+import { addProduct, updateProduct } from "../../helpers/Product";
+import { DashboardHeading } from "../../components/Heading";
+import { Textarea } from "../../components/Input";
 
 const AddProductPage = () => {
     const user = useUser();
@@ -43,18 +45,28 @@ const AddProductPage = () => {
     watch("image");
 
     const ProductAction = async (data) => {
-       
+        const response = await axios.get(
+            `http://localhost:5000/api/artist/${user.id}`
+        );
 
-        console.log(artistName)
-            PromiseToast(addProduct(data,artistName),"Product has been added.")
+        setArtistName(response.data.artist.name);
+        console.log(response.data.artist.name);
+        console.log(artistName);
+        if (!productToEdit) {
+            addProduct(data, artistName);
+            SuccessToast("Product has been added.");
+        } else {
+            updateProduct(data, artistName, productToEdit._id);
 
-        
-      
+            SuccessToast("Product has been updated.");
+        }
     };
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <h2 className="text-5xl font-semibold ">Add Product</h2>
+            <DashboardHeading>
+                {productToEdit ? "Update Product Details" : "Add Product"}
+            </DashboardHeading>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(ProductAction)}
@@ -65,7 +77,7 @@ const AddProductPage = () => {
                         <Input
                             type="text"
                             placeholder="Name"
-                            defaultValue={productToEdit}
+                            defaultValue={productToEdit?.name}
                             register={{
                                 ...register("name", {
                                     required: "Please enter your username.",
@@ -80,6 +92,7 @@ const AddProductPage = () => {
                             {...register("category", {
                                 required: "Please select a category.",
                             })}
+                            defaultValue={productToEdit?.category}
                         >
                             <option value="">Select a category</option>
                             {categories.map((category, i) => (
@@ -91,9 +104,10 @@ const AddProductPage = () => {
                         <p>{errors.category?.message}</p>
 
                         <label>Description</label>
-                        <Input
+                        <Textarea
                             type="text"
                             placeholder="Description"
+                            defaultValue={productToEdit?.description}
                             register={{
                                 ...register("description", {
                                     required: "Please enter Description.",
@@ -115,6 +129,7 @@ const AddProductPage = () => {
                         <label>Quantity</label>
                         <Input
                             type="number"
+                            defaultValue={productToEdit?.quantity}
                             register={{
                                 ...register("quantity", {
                                     required: "Please enter quantity.",
@@ -152,6 +167,7 @@ const AddProductPage = () => {
                         <Input
                             type="number"
                             placeholder="Price"
+                            defaultValue={productToEdit?.price}
                             register={{
                                 ...register("price", {
                                     required: "Please enter the price.",
@@ -161,7 +177,9 @@ const AddProductPage = () => {
                         <p>{errors.price?.message}</p>
                     </div>
                 </div>
-                <DashboardActionButton>Add Product</DashboardActionButton>
+                <DashboardActionButton>
+                    {productToEdit ? "Update Product" : "Add Product"}
+                </DashboardActionButton>
             </form>
         </div>
     );

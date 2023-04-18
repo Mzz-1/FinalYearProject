@@ -33,7 +33,7 @@ export const DeleteButton = ({ onClick }) => {
 export const YesButton = ({ onClick }) => {
     return (
         <button
-            className="h-[30px] w-[80px] bg-[#a83232] text-white text-center rounded-[5px] mr-[5px]"
+            className="h-[30px] w-[80px] bg-[#29CC97] text-white text-center rounded-[5px] mr-[5px]"
             onClick={onClick}
         >
             Yes

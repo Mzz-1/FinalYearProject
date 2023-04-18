@@ -24,7 +24,7 @@ export const Sidebar = ({ items }) => {
 
     return (
         <div className="flex flex-col py-[20px]  h-[100%]">
-            <AdminHeading2>Welcome Admin</AdminHeading2>
+            <AdminHeading2>Welcome</AdminHeading2>
             <div className="flex justify-center mt-[50px]">
                 <ul className=" w-[100%] flex flex-col gap-[10px]">
                     {items.map((item, i) => (

@@ -59,10 +59,10 @@ export const ManageOrders = () => {
                                 return (
                                     <tr className="border-b divide-slate-400/25 h-[60px] first:border-t">
                                         <td>{index + 1}</td>
-                                        <td>{product.name}</td>
-                                        <td>{product.category}</td>
-                                        <td>{product.dimensions}</td>
-                                        <td>{product.quantity}</td>
+                                        <td>{product?.name}</td>
+                                        <td>{product?.category}</td>
+                                        <td>{product?.dimensions}</td>
+                                        <td>{product?.quantity}</td>
                                         <td className=""></td>
                                     </tr>
                                 );

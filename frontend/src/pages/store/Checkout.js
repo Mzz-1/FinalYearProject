@@ -2,14 +2,11 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Input from "../../components/Input";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { SuccessToast } from "../../helpers/Toast";
 import { DashboardActionButton } from "../../components/Button";
 
-
 const CheckoutPage = () => {
-   
-
     const {
         register,
         handleSubmit,
@@ -23,7 +20,6 @@ const CheckoutPage = () => {
     const [deliveryID, setDeliveryID] = useState();
 
     const { id: cartID } = useParams();
-
 
     const addDelivery = async ({ district, city, streetName, contactNo }) => {
         console.log("1");
@@ -41,10 +37,10 @@ const CheckoutPage = () => {
             );
 
             console.log(response.data.delivery);
-            setDeliveryID(response.data.delivery._id)
-            console.log("deliveryid",);
+            setDeliveryID(response.data.delivery._id);
+            console.log("deliveryid");
             SuccessToast("Delivery location has been confirmed.");
-            navigate(`/order-summary/${response.data.delivery._id}`)
+            navigate(`/order-summary/${response.data.delivery._id}`);
         } catch (err) {
             console.log(`err:${err}`);
         }
@@ -52,7 +48,7 @@ const CheckoutPage = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px] py-[50px]">
-            <h2 className="text-5xl font-semibold ">Checkout</h2>
+            <h2 className="text-5xl font-semibold ">Delivery Details</h2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(addDelivery)}
@@ -108,9 +104,10 @@ const CheckoutPage = () => {
                         <p>{errors.contactNo?.message}</p>
                     </div>
                 </div>
-                <DashboardActionButton>Confirm Order</DashboardActionButton>
+                <DashboardActionButton>
+                    Continue to Checkout
+                </DashboardActionButton>
             </form>
-            
         </div>
     );
 };
