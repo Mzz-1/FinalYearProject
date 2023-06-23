@@ -23,13 +23,13 @@ export const Cart = () => {
                 `http://localhost:5000/api/cart/${user.id}`
             );
             const cart = cartData.data.cart;
-            console.log(cart);
+           
             setCart(cart);
         } catch (err) {}
     };
 
     if (!user) {
-        
+        InfoToast("Please log in to use the cart.")
     }
 
     useEffect(() => {

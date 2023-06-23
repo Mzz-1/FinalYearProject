@@ -6,7 +6,7 @@ export const ExhibitionList = ({ exhibition }) => {
 
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
     return (
-        <div className="grid grid-row-auto grid-cols-3 bg-[] justify-center items-center gap-[100px] my-[50px] ">
+        <div className="grid grid-row-auto grid-cols-3 bg-[] justify-center items-center gap-[80px] my-[50px] ">
             {exhibition.map((exhibition) => {
                 var startDateTime = new Date(exhibition.startDate);
                 const newStartDate = startDateTime.toLocaleDateString(
@@ -20,20 +20,21 @@ export const ExhibitionList = ({ exhibition }) => {
                     dateOptions
                 );
                 return (
-                    <div className="relative">
+                    <div className="relative" data-aos="fade-up">
                         <img
                             src={exhibition.image}
-                            className=" mb-[10px] w-[350px] h-[350px] object-cover m-auto"
+                            className=" mb-[10px] w-[400px] h-[450px] object-cover m-auto"
                             alt="product"
                         />
-                        <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px]">
-                            <li className="font-medium text-[18px] text-center">
+                        <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] font-slab">
+                            <li className="font-medium font-libre text-[20px] text-center">
                                 {exhibition.name}
                             </li>
-                            <li className="font-medium text-[18px] text-center">
+                            <hr></hr>
+                            <li className="font-medium text-[15px] text-center">
                                 {exhibition.location}
                             </li>
-                            <li className="font-medium text-[18px] text-center">
+                            <li className="font-medium text-[15px] text-center">
                                 {newStartDate} - {newEndDate}
                             </li>
                         </ul>

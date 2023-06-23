@@ -78,7 +78,7 @@ export const LoginForm = ({ formHeading }) => {
     return (
         <div className="flex flex-col items-center justify-center gap-[10px] text-[#9F7E7E]  font-slab">
             <button
-                className="flex gap-2 items-center self-start px-12 ml-[8vw] mb-[20px]"
+                className="flex gap-2 items-center self-start px-12 mx-[auto] mb-[20px]"
                 onClick={() => navigate("/")}
             >
                 <BiArrowBack /> HOME

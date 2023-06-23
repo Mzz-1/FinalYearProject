@@ -45,7 +45,12 @@ const ArtistExhibition = () => {
 
     return (
         <div className=" max-w-[1340px] m-auto">
-            <h2 className="mt-[40px] text-[30px] text-[#9F7E7E]">{bio.name}</h2>
+             <h2
+                className=" text-[26px] font-slab mt-11 text-[#3C3737]"
+                data-aos="fade-down"
+            >
+                Featured Exibitions
+            </h2>
             
             <ArtistNavbar id={id}/>
 

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 export const ArtistNavbar =({id})=>{
     const links = [
         { itemName: "BIOGRAPHY", link: `/artist-profile/biography/${id}` },
@@ -8,9 +8,18 @@ export const ArtistNavbar =({id})=>{
     return(
         <div>
                 <ul className="flex gap-[20px] text-[12px] justify-end mb-[20px] font-slab ">
-                    {links.map((link, i) => (
-                        <li key={i} className="">
-                            <Link to={link.link}>{link.itemName}</Link>
+                    
+                     {links.map((item, i) => (
+                        <li key={i}>
+                            <NavLink
+                                to={item.link}
+                                exact
+                                className={({ isActive }) => {
+                                    return isActive ? "border-b-2 pb-1 border-[#9F7E7E] " : "hover:border-b-2 pb-1 border-[#9F7E7E]";
+                                }}
+                            >
+                                {item.itemName}
+                            </NavLink>
                         </li>
                     ))}
                 </ul>

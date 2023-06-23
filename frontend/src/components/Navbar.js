@@ -1,11 +1,12 @@
 import { IonIcon } from "@ionic/react";
 import { search, cart } from "ionicons/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../service/useUser";
 import { LogOutModal } from "./Modal";
 import { ModalHeading } from "./Heading";
 import { ModalPara } from "./Paragraph";
 import { SuccessToast } from "../helpers/Toast";
+import { useState } from "react";
 
 export const Navbar = () => {
     const items = [
@@ -15,9 +16,9 @@ export const Navbar = () => {
         { itemName: "EVENTS", link: "/events" },
         { itemName: "CART", link: "/cart" },
     ];
-    const user = useUser();
 
-    const navigate = useNavigate;
+    const user = useUser();
+    const navigate = useNavigate();
 
     const LogOut = () => {
         localStorage.removeItem("token");
@@ -29,25 +30,51 @@ export const Navbar = () => {
     return (
         <header className="sticky top-0 z-[9999999999]">
             <nav className="grid grid-rows-1 grid-cols-2 px-[50px] h-[80px] shadow-lg items-center bg-[#fdfdfd]">
-                <p className="font-medium text-2xl text-[#9F7E7E] font-libre">SimplyArt</p>
+                <p className="font-medium text-2xl text-[#9F7E7E] font-libre">
+                    SimplyArt
+                </p>
                 <ul className="flex gap-[20px] text-[12px] justify-end font-slab">
-                    {items.map((items, i) => (
-                        <li key={i} className="">
-                            <Link to={items.link}>{items.itemName}</Link>
+                    {items.map((item, i) => (
+                        <li key={i}>
+                            <NavLink
+                                to={item.link}
+                                exact
+                                className={({ isActive }) => {
+                                    return isActive ? "border-b-2 pb-1 border-[#9F7E7E] " : "hover:border-b-2 pb-1 border-[#9F7E7E]";
+                                }}
+                            >
+                                {item.itemName}
+                            </NavLink>
                         </li>
                     ))}
                     {user?.role === "artist" && (
-                        <li key={5} className="">
-                            <Link to="/artist-dashboard">DASHBOARD</Link>
+                        <li>
+                            <NavLink
+                                to="/artist-dashboard"
+                                exact
+                                className={({ isActive }) => {
+                                    return isActive ? "border-b-2 pb-1 border-[#9F7E7E] " : "hover:border-b-2 pb-1 border-[#9F7E7E]";
+                                }}
+                            >
+                                DASHBOARD
+                            </NavLink>
                         </li>
                     )}
                     {!user && (
-                        <li key={6} className="">
-                            <Link to="/login">LOG IN</Link>
+                        <li>
+                            <NavLink
+                                to="/login"
+                                exact
+                                className={({ isActive }) => {
+                                    return isActive ? "border-b-2 pb-1 border-[#9F7E7E] " : "hover:border-b-2 pb-1 border-[#9F7E7E]";
+                                }}
+                            >
+                                LOG IN
+                            </NavLink>
                         </li>
                     )}
                     {user && (
-                        <button key={7} className="" onClick={LogOut}>
+                        <button className="" onClick={LogOut}>
                             LOGOUT
                         </button>
                     )}

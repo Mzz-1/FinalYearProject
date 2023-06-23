@@ -14,7 +14,7 @@ const Banner1 = ({
     color,
     headingColor,
 }) => {
-    console.log(bg, "antiquewhite");
+   
     return (
         <>
             <div
@@ -31,7 +31,7 @@ const Banner1 = ({
                     </p>
                     <BlueButton>{button}</BlueButton>
                 </div>
-                <div className={`grid grid-cols-${imgNum} m-auto`} data-aos="fade-left">
+                <div className={`grid grid-cols-${imgNum} ${img2 ? "": "m-auto"}`} data-aos="fade-left">
                     <img src={`${img1}`} className={`w-[${width}]`} alt="" />
                     {img2 ? (
                         <img

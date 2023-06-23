@@ -2,7 +2,7 @@ const FooterList = ({items}) => {
     return (
         <ul className="flex flex-col text-[11px] gap-[9px]">
             {items.map((items,i)=>(
-                <li key={i} className={i===0? "text-sm font-bold" : ""}>{items}</li>
+                <li key={i} className={i===0? "text-sm font-bold" : "hover:cursor-pointer"}>{items}</li>
             ))}
         </ul>
     );

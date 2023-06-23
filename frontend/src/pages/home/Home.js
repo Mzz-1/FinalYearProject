@@ -7,18 +7,31 @@ import { FeaturedArtists } from "./FeaturedArtists";
 import { ProductSlideShow } from "../../components/ProductsSlideshow";
 import { Banner } from "./Banner";
 import Banner1 from "./Banner1";
-import Intro from "./Intro";
+
 import "aos/dist/aos.css";
 import Aos from "aos";
 import { useEffect } from "react";
 
 const Home = () => {
     useEffect(() => {
-        Aos.init({ duration: 1500 });
-    },[]);
+        Aos.init({ duration: 1500, once: true });
+    }, []);
     return (
         <>
-            <Intro />
+            <Banner1
+                imgNum={2}
+                bg="antiquewhite"
+                button="Get Started"
+                heading="ARE YOU AN ARTIST?"
+                headingColor="#aaaaa8"
+                para="Create Your Own Portfolio Today!"
+                paraWidth="500px"
+                color="#404048"
+                width="300px"
+                img1="https://res.cloudinary.com/djuzpmqlp/image/upload/v1687107016/assets/intro2_lic3eu.jpg"
+                img2="https://res.cloudinary.com/djuzpmqlp/image/upload/v1687107013/assets/intro1_z0brj3.jpg"
+               
+            />
             <NewProducts />
 
             <Banner1
@@ -35,7 +48,7 @@ const Home = () => {
             />
 
             <FeaturedArtists />
-            
+
             <Banner1
                 imgNum={1}
                 bg="antiquewhite"
@@ -46,10 +59,7 @@ const Home = () => {
                 paraWidth="500px"
                 color="#404048"
                 width="600px"
-              
             />
-            
-          
         </>
     );
 };
