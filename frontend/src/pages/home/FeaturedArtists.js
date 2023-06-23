@@ -24,10 +24,10 @@ export const FeaturedArtists = () => {
 
     return (
         <div className="px-[250px] mt-[30px] text-center">
-            <Heading2 text="Featured Artists" />
+            <Heading2>Featured Artists</Heading2>
             <div className="w-[500px] text-center m-auto">
-                <hr className="h-[2.5px] bg-black my-[20px]" />
-                <p>
+                {/* <hr className="h-[2.5px] bg-black my-[20px]" /> */}
+                <p className="font-slab mt-5">
                     Discover top creators around you. Explore each of their
                     artworks and find the designs you love from a wide range of
                     artworks.

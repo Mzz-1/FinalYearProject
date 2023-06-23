@@ -15,6 +15,9 @@ const loginRoute = {
         if (!user) {
             return res.sendStatus(401);
         }
+        if (user.isVerified===false) {
+            return res.sendStatus(403);
+        }
 
         const { _id: id, isVerified, passwordHash, role } = user;
 

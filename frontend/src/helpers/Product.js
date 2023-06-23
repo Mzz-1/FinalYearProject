@@ -21,7 +21,7 @@ export const deleteProducts = async (id) => {
 };
 
 export const addProduct = async (data, artistName) => {
-
+console.log(artistName)
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("artist", artistName);

@@ -4,6 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
 import axios from "axios";
 import { useToken } from "../service/useToken";
+import { BiArrowBack } from "react-icons/bi";
+import { ErrorToast } from "../helpers/Toast";
 
 function Register() {
     const [token, setToken] = useToken();
@@ -38,14 +40,25 @@ function Register() {
                     role: userType,
                 }
             );
-            console.log(confirmPassword, email);
-            console.log(response.data);
-            const { token } = response.data;
-            console.log(token);
-            setToken(token);
+            // console.log(confirmPassword, email);
+            // console.log(response.data);
+            // const { token } = response.data;
+            // console.log(token);
+            // setToken(token);
             navigate("/verify-email");
         } catch (err) {
-            console.log(`err:${err}`);
+            if (err.response) {
+                // Error with response received
+                const status = err.response.status;
+                if (status === 409) {
+                    // Conflict error (e.g., username or email already exists)
+                    console.log("Conflict error:", err.response.data.message);
+                    ErrorToast("User Alredy Exists");
+                } 
+            } else {
+                // Other errors
+                console.log("Error:", err.message);
+            }
         }
     };
     watch();
@@ -61,16 +74,16 @@ function Register() {
     };
 
     return (
-        <div className="grid grid-rows-1 grid-cols-2 h-[100%] text-[#9F7E7E] bg-[#F4F4F2] 2xl:px-[8vw] py-[40px]">
+        <div className="grid grid-rows-1 grid-cols-2 h-[100vh] text-[#9F7E7E] bg-[#F4F4F2] 2xl:px-[8vw] py-[40px] font-slab">
             <div className="flex items-center justify-center justify-items-start flex-col gap-[20px] px-[6vw]">
-                <h1 className="text-7xl font-bold">SimplyArt</h1>
+                <h1 className="text-7xl font-bold font-libre">SimplyArt</h1>
                 <p className="text-2xl font-medium text-center">
                     SimplyArt is an online platform for exploring artists,
                     artworks and exhibitions. Sign up to continue!
                 </p>
             </div>
             <div className="flex flex-col items-center justify-center gap-[10px]">
-                <h2 className="text-5xl font-semibold ">Register</h2>
+                <h2 className="text-5xl font-semibold font-libre">Register</h2>
                 <form
                     className="flex flex-col gap-[25px] my-[20px]"
                     onSubmit={handleSubmit(handleFormSubmit)}
@@ -126,13 +139,25 @@ function Register() {
 
                     <p>{errors.confirmPassword?.message}</p>
                     <Controller
-                        name="role"
+                        name="receiveEmail"
                         control={control}
                         defaultValue={false}
                         render={({ field }) => (
                             <label>
                                 <input type="checkbox" {...field} />
-                                Do you wnat to sign up as an artist?
+                                Do you want receive email alerts about upcomming
+                                art events?
+                            </label>
+                        )}
+                    />
+                    <Controller
+                        name="role"
+                        control={control}
+                        defaultValue={false}
+                        render={({ field }) => (
+                            <label className="">
+                                <input className="" type="checkbox" {...field} />
+                                Do you want to sign up as an artist?
                             </label>
                         )}
                     />
@@ -142,7 +167,15 @@ function Register() {
                 </form>
 
                 <p>
-                    Already have an account?<Link to="/login">Log in.</Link>{" "}
+                    Already have an account?<Link to="/login"> Log in.</Link>{" "}
+                </p>
+                <p>
+                    <button
+                        className="flex gap-2 justify-start items-center  mb-[20px]"
+                        onClick={() => navigate("/")}
+                    >
+                        <BiArrowBack /> HOME
+                    </button>
                 </p>
             </div>
         </div>

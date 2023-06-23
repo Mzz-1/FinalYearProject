@@ -5,6 +5,7 @@ import { ArtistList } from "./ArtistList";
 import { Banner } from "../../components/Banner";
 import { useForm } from "react-hook-form";
 import { Search } from "../../components/Search";
+import { Heading } from "../../components/Heading";
 
 const ArtistPage = () => {
     const [artists, setArtists] = useState([]);
@@ -51,24 +52,29 @@ const ArtistPage = () => {
     };
 
     return (
-        <div className="bg-[#F4F4F2]  px-[10%]">
-            <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center">
-                <Banner heading="Featured Artists" img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1681497000/assets/birmingham-museums-trust-8FNuCxFfbFw-unsplash_uaudjs.jpg"/>
-                <div className="flex gap-[50px] justify-end items-center">
-                <Search
-                    register={{
-                        ...register("searchItem", {
-                            required: "Please enter a product name.",
-                        }),
-                    }}
-                    onClick={() =>
-                        getArtists({ searchItem: getValues("searchItem") })
-                    }
+        <div className="  px-[10%]">
+            <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center mb-[50px]">
+                <Banner
+                    heading="Featured Artists"
+                    img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1681497000/assets/birmingham-museums-trust-8FNuCxFfbFw-unsplash_uaudjs.jpg"
                 />
+                <div className="flex gap-[50px] justify-end items-center absolute top-[400px] " data-aos="fade-down">
+                    <Search
+                        register={{
+                            ...register("searchItem", {
+                                required: "Please enter a product name.",
+                            }),
+                        }}
+                        onClick={() =>
+                            getArtists({ searchItem: getValues("searchItem") })
+                        }
+                    />
                 </div>
             </div>
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
+                <Heading>Featured Artists !</Heading>
+                <hr className="bg-[#65635F] " />
                 <ArtistList artists={artists} />
                 {loading && <p>Loading...</p>}
                 {!loading && artists.length < totalArtists && (

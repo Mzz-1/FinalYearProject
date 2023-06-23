@@ -27,10 +27,10 @@ export const Navbar = () => {
     };
 
     return (
-        <header>
-            <nav className="grid grid-rows-1 grid-cols-2 px-[50px] h-[80px] shadow-lg items-center ">
-                <p className="font-medium text-2xl">SimplyArt</p>
-                <ul className="flex gap-[20px] text-[12px] justify-end">
+        <header className="sticky top-0 z-[9999999999]">
+            <nav className="grid grid-rows-1 grid-cols-2 px-[50px] h-[80px] shadow-lg items-center bg-[#fdfdfd]">
+                <p className="font-medium text-2xl text-[#9F7E7E] font-libre">SimplyArt</p>
+                <ul className="flex gap-[20px] text-[12px] justify-end font-slab">
                     {items.map((items, i) => (
                         <li key={i} className="">
                             <Link to={items.link}>{items.itemName}</Link>

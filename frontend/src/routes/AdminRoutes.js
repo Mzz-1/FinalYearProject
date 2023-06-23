@@ -19,7 +19,7 @@ const AdminRoutes = () => {
 
             <Routes>
                 <Route path="/admin-dashboard">
-                    <Route path="control-panel" element={<AdminDashboard />} />
+                    <Route path="" element={<AdminDashboard />} />
                     <Route path="add-event" element={<AddEventPage />} />
                     <Route path="update-event/:id" element={<AddEventPage />} />
                     <Route path="add-product" element={<AddProductPage />} />

@@ -44,6 +44,18 @@ const AddProductPage = () => {
     } = useForm();
     watch("image");
 
+    const getArtist = async (data) => {
+        const response = await axios.get(
+            `http://localhost:5000/api/artist/${user.id}`
+        );
+
+        setArtistName(response.data.artist.name);
+    };
+
+    useEffect(() => {
+        getArtist();
+    });
+
     const ProductAction = async (data) => {
         const response = await axios.get(
             `http://localhost:5000/api/artist/${user.id}`
@@ -51,7 +63,7 @@ const AddProductPage = () => {
 
         setArtistName(response.data.artist.name);
         console.log(response.data.artist.name);
-        console.log(artistName);
+        console.log("artistname", artistName);
         if (!productToEdit) {
             addProduct(data, artistName);
             SuccessToast("Product has been added.");

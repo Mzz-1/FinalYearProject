@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Heading2, Heading } from "../../components/Heading";
+import { Heading2, Heading, Heading1 } from "../../components/Heading";
 import { ProductList } from "../store/ProductList";
+import { ArtistNavbar } from "../../components/ArtistNavbar";
 
 const ArtistPortfolio = () => {
     const [bio, setBio] = useState([]);
@@ -42,27 +43,17 @@ const ArtistPortfolio = () => {
         }
     }, [bio.name]);
 
-    const links = [
-        { itemName: "BIOGRAPHY", link: `/artist-profile/biography/${id}` },
-        { itemName: "PORTFOLIO", link: `/artist-profile/portfolio/${id}` },
-        { itemName: "EXHIBITION", link: `/artist-profile/exhibition/${id}` },
-    ];
-
     return (
         <div className=" max-w-[1340px] m-auto">
-            <h2 className="mt-[40px] text-[30px]">{bio.name}</h2>
-            <div>
-                <ul className="flex gap-[20px] text-[12px] justify-end my-[20px] ">
-                    {links.map((link, i) => (
-                        <li key={i} className="">
-                            <Link to={link.link}>{link.itemName}</Link>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <h2
+                className=" text-[26px] font-slab mt-11 text-[#3C3737]"
+                data-aos="fade-down"
+            >
+                Featured Works
+            </h2>
+            <ArtistNavbar id={id} />
 
-                <ProductList products={portfolio} gridSize={2} />
-            
+            <ProductList products={portfolio} gridSize={1} type="gallery" />
         </div>
     );
 };

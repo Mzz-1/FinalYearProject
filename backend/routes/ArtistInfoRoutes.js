@@ -4,9 +4,23 @@ const jwt = require("jsonwebtoken");
 const connectCloudinary = require("../db/Cloudinary");
 const cloudinary = require("cloudinary").v2;
 const { Artist, Exhibition } = require("../models/Artist");
+const Product = require("../models/Products")
 const multer = require("multer");
 
 const upload = multer({ dest: "uploads/" });
+
+const getArtistProduct = {
+    path: "/api/artist-products/:id",
+    method: "get",
+    handler: async (req, res) => {
+        const { id: artistName } = req.params;
+        const product = await Product.find({ artist: artistName });
+        if (!product) {
+            return res.sendStatus(400);
+        }
+        res.status(200).json({ product });
+    },
+};
 
 const addBiography = {
     path: "/api/biography",
@@ -265,4 +279,5 @@ module.exports = {
     deleteExhibition,
     updateArtistEvent,
     getExhibitions,
+    getArtistProduct
 };

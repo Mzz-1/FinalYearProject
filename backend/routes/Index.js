@@ -5,6 +5,7 @@ const verifyEmailRoute = require("./VerifyEmailRoute");
 const forgotPasswordRoute = require("./ForgotPasswordRoute");
 const resetPasswordRoute = require("./ResetPasswordRoute");
 const khaltiPayment = require("./Khalti");
+const {addOrder,getAllOrders,getOrder} = require("./OrderRoute");
 
 const { getAllUsers, getUser, deleteUser, updateUser } = require("./UserRoute");
 
@@ -19,6 +20,7 @@ const {
     deleteExhibition,
     updateArtistEvent,
     getExhibitions,
+    getArtistProduct
 } = require("./ArtistInfoRoutes");
 
 const {
@@ -43,6 +45,7 @@ const {
     getCartDetails,
     getCartProductDetails,
     deleteCartProduct,
+    deleteCart
 } = require("./CartRoute");
 
 const { addDelivery, getDeliveryDetails } = require("./DeliveryRoute");
@@ -84,13 +87,21 @@ const routes = [
     getBiography,
     deleteExhibition,
     getExhibitions,
+    getArtistProduct,
+
     addToCart,
     getCartDetails,
     getCartProductDetails,
     deleteCartProduct,
+    deleteCart,
 
     addDelivery,
     getDeliveryDetails,
+
+    addOrder,
+    getAllOrders,
+    getOrder,
+
     testEmailTemplate,
 
     khaltiPayment,

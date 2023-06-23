@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { useNavigate } from "react-router-dom";
+import { Banner } from "../pages/home/Banner";
 
 export const ProductSlideShow = () => {
     const options = {
@@ -36,16 +37,17 @@ export const ProductSlideShow = () => {
 
     return (
         <Splide options={options}>
-            {events.map((events) => (
+            
                 <SplideSlide key={events._id}>
-                    <img
+                    {/* <img
                         className="h-[600px] w-full object-cover cursor-pointer"
                         src={events.url}
                         alt={events.title}
                         onClick={()=>navigate(`/product/${events._id}`)}
-                    />
+                    /> */}
+                    <Banner/>
                 </SplideSlide>
-            ))}
+            
         </Splide>
     );
 };

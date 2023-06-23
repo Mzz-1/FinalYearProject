@@ -2,37 +2,50 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const ProductList = ({ products,gridSize }) => {
+export const ProductList = ({ products, gridSize, type }) => {
     console.log(products);
 
-    const navigate= useNavigate()
+    const navigate = useNavigate();
 
-    const getProducts = async (id) =>{
-    const productData = await axios.get(`http://localhost:5000/api/products/${id}`)
-    console.log(productData.data.product)
+    const getProducts = async (id) => {
+        const productData = await axios.get(
+            `http://localhost:5000/api/products/${id}`
+        );
+        console.log(productData.data.product);
 
-    navigate(`/product/${id}`)
-
-    }
-
-
+        navigate(`/product/${id}`);
+    };
 
     return (
-        <div className={`grid grid-row-auto grid-cols-${gridSize} bg-[] justify-center items-center gap-[100px] my-[50px]`}>
+        <div
+            className={`grid grid-row-auto grid-cols-${gridSize} bg-[] justify-center items-center gap-[50px] mt-[20px]`}
+        >
             {products.map((product) => {
                 return (
-                    <div className="relative cursor-pointer" onClick={()=>getProducts(product._id)}>
+                    <div
+                        className={`relative cursor-pointer ${
+                            type === "gallery"
+                                ? "grid grid-cols-custom-2 items-center"
+                                : "group"
+                        }  `}
+                        data-aos="fade-up"
+                        onClick={() => getProducts(product._id)}
+                    >
                         <img
                             src={product.url}
-                            className=" mb-[10px] w-[100%] h-[500px] object-cover"
+                            className={`${
+                                type === "gallery"
+                                    ? "w-[auto] h-[75vh] m-auto"
+                                    : "w-[100%] h-[500px]"
+                            } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75`}
                             alt="product"
                         />
-                        <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px]">
-                            <li className="font-medium text-[18px]">
+                        <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] text-center font-slab">
+                            <li className=" text-[28px] font-libre text-[#65635F]">
                                 {product.name}
                             </li>
                             <li className="text-[#65635F] text-[15px]">
-                                {product.artist}
+                                By {product.artist}
                             </li>
                             <li className="text-[#65635F] text-[15px]">
                                 {product.category}
@@ -40,14 +53,28 @@ export const ProductList = ({ products,gridSize }) => {
                             <li className="text-[#65635F] text-[15px]">
                                 {product.dimensions}
                             </li>
-                            <li className=" text-[18px]">
-                                Rs {product.price}
-                            </li>
+                            {type === "gallery" ? (
+                                ""
+                            ) : (
+                                <li className=" text-[28px] font-libre text-[#65635F]">
+                                    Rs {product.price}
+                                </li>
+                            )}
                         </ul>
-                        <button className="flex justify-center items-center h-[40px] w-[100px] absolute bottom-[10px] right-[10px] border-black border-[1px] rounded-[3px]">
-                            {" "}
-                            <AiOutlineShoppingCart size={20} />
-                        </button>
+                        {type === "gallery" ? (
+                            ""
+                        ) : (
+                            <button className="flex justify-center items-center h-[40px] w-[150px]  border-black border-[1px] rounded-[3px] m-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {" "}
+                                {product.quantity <= 0 ? (
+                                    <span className="font-slab">SOLD OUT</span>
+                                ) : (
+                                    <span className="font-slab">
+                                        ADD TO CART
+                                    </span>
+                                )}
+                            </button>
+                        )}
                     </div>
                 );
             })}

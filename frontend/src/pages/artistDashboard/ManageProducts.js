@@ -12,24 +12,35 @@ import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
 import { Modal, LargeModal } from "../../components/Modal";
 import { getAllProducts, deleteProducts } from "../../helpers/Product";
 import { SuccessToast } from "../../helpers/Toast";
+import { useUser } from "../../service/useUser";
 
 export const ManageProducts = () => {
     const [products, setProducts] = useState([]);
-    const [viewEvents, setViewEvents] = useState();
+    const [name,setName] =useState("")
+    const user = useUser();
     const navigate = useNavigate();
 
-    
-   
+    const getBio = async () => {
+        const productsData = await axios.get(
+            `http://localhost:5000/api/biography/${user.id}`
+        );
+
+        const data = await productsData.data.artist;
+     setName(data.name)
+        console.log("getBio", data);
+    };
 
     const getProducts = async () => {
         const productsData = await axios.get(
-            `http://localhost:5000/api/products`
+            `http://localhost:5000/api/artist-products/${name}`
         );
 
         const data = await productsData.data.product;
-        setProducts(data);
-        console.log("getEvents", data);
+        setProducts(data)
+        console.log("products", data);
+     
     };
+    
 
     const deleteProduct = async (id) => {
         const deleteData = await axios.delete(
@@ -40,14 +51,17 @@ export const ManageProducts = () => {
     };
 
  
-
     const updateProduct = (id) => {
         navigate(`/artist-dashboard/edit-product/${id}`);
     };
 
     useEffect(() => {
-        getProducts();
+        getBio();
     }, []);
+
+    useEffect(() => {    
+        getProducts();
+    }, [name]);
 
     return (
         <div className="flex flex-col gap-[40px] h-[100%] ">

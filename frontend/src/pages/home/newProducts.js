@@ -9,7 +9,7 @@ export const NewProducts = () => {
 
     const getProducts = async () => {
         const productsData = await axios.get(
-            `http://localhost:5000/api/products?limit=3`
+            `http://localhost:5000/api/products?limit=4&sort=Newest to oldest`
         );
 
         const data = await productsData.data.product;
@@ -22,9 +22,10 @@ export const NewProducts = () => {
     }, []);
 
     return (
-        <div className="px-[50px]">
-            <Heading2 text="New" />
-            <ProductList products={products} gridSize={3} />
+        <div className="px-[50px]" >
+            <Heading2>Discover Latest Artworks !</Heading2>
+            <br></br>
+            <ProductList products={products} gridSize={4} />
             <div className="text-center">
                 <BlackButton text="Visit Store" link="/store" />
             </div>

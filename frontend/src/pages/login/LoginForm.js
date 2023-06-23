@@ -6,7 +6,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useToken } from "../../service/useToken";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { SuccessToast } from "../../helpers/Toast";
+import { SuccessToast, ErrorToast } from "../../helpers/Toast";
+import { BiArrowBack } from "react-icons/bi";
 
 export const LoginForm = ({ formHeading }) => {
     const [token, setToken] = useToken();
@@ -14,23 +15,55 @@ export const LoginForm = ({ formHeading }) => {
     const navigate = useNavigate();
 
     const handleLogin = async ({ email, password }) => {
-        const response = await axios.post("http://localhost:5000/api/login", {
-            email: email,
-            password: password,
-        });
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/api/login",
+                {
+                    email: email,
+                    password: password,
+                }
+            );
 
-        const { token } = response.data;
-        setToken(token);
+            const { token } = response.data;
+            setToken(token);
 
-        if (formHeading === "Admin") {
-            navigate("/admin-dashboard");
-            window.location.reload(true)
-            
-        } else {
-            navigate("/");
+            if (formHeading === "Admin") {
+                navigate("/admin-dashboard");
+                window.location.reload(true);
+            } else {
+                navigate("/");
+            }
+
+            SuccessToast("Log In Successful");
+        } catch (err) {
+            if (err.response) {
+                // Error with response received
+                const status = err.response.status;
+                if (status === 403) {
+                    ErrorToast("Please verify your account first..");
+                    console.log("Conflict error:", err.response.data.message);
+                } else if (status === 401) {
+                    // Unauthorized error (e.g., invalid credentials)
+                    console.log(
+                        "Unauthorized error:",
+                        err.response.data.message
+                    );
+                    ErrorToast("Invalid Credentials");
+                } else {
+                    // Other errors
+                    console.log(
+                        "Error with response:",
+                        err.response.data.message
+                    );
+                }
+            } else if (err.request) {
+                // Error making the request
+                console.log("Error making request:", err.request);
+            } else {
+                // Other errors
+                console.log("Error:", err.message);
+            }
         }
-
-        SuccessToast("Log In Successful");
     };
 
     const {
@@ -43,9 +76,15 @@ export const LoginForm = ({ formHeading }) => {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     return (
-        <div className="flex flex-col items-center justify-center gap-[10px] text-[#9F7E7E]">
+        <div className="flex flex-col items-center justify-center gap-[10px] text-[#9F7E7E]  font-slab">
+            <button
+                className="flex gap-2 items-center self-start px-12 ml-[8vw] mb-[20px]"
+                onClick={() => navigate("/")}
+            >
+                <BiArrowBack /> HOME
+            </button>
             <div className="bg-white shadow-xl py-[60px] px-[40px] flex flex-col items-center justify-center gap-[30px] rounded-[20px] border-[#9F7E7E] border-[px]">
-                <h1 className="text-5xl font-semibold ">{formHeading}</h1>
+                <h1 className="text-5xl font-semibold font-libre">{formHeading}</h1>
                 <form
                     className="flex flex-col gap-[30px] my-[20px] rounded-[20px]"
                     onSubmit={handleSubmit(handleLogin)}
@@ -91,7 +130,6 @@ export const LoginForm = ({ formHeading }) => {
                     </div>
                 )}
             </div>
-            
         </div>
     );
 };

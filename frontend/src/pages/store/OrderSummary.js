@@ -5,17 +5,21 @@ import { useState, useEffect } from "react";
 import { Banner } from "../../components/Banner";
 import { ProductList } from "./ProductList";
 import { useUser } from "../../service/useUser";
-import { InfoToast } from "../../helpers/Toast";
+import { InfoToast, SuccessToast } from "../../helpers/Toast";
 import { Heading, Heading2 } from "../../components/Heading";
 import KhaltiCheckout from "khalti-checkout-web";
 import { Config } from "../../components/khalti/KhaltiConfig";
 
 export const OrderSummary = () => {
+    
+        let checkout = new KhaltiCheckout(Config)
 
-    let checkout = new KhaltiCheckout(Config);
+    
+    
 
     const [products, setProducts] = useState([]);
     const [delivery, setDelivery] = useState();
+    const [disable, setDisable] = useState(true);
     const user = useUser();
     const [cart, setCart] = useState();
     const [subTotal, setSubTotal] = useState(0);
@@ -65,8 +69,6 @@ export const OrderSummary = () => {
         }
     };
 
-   
-
     useEffect(() => {
         getProducts();
         getDelivery();
@@ -84,17 +86,57 @@ export const OrderSummary = () => {
         }
     }, [cart, products]);
 
+    const handlePaymentSuccess = async () => {
+        try {
+            // Make an API request to create the order
+            const response = await axios.post(
+                "http://localhost:5000/api/add-order",
+                {
+                    userId: user.id,
+                    products: products.map((product) => ({
+                        productId: product._id,
+                        quantity: cart.items.find(
+                            (item) => item.productID === product._id
+                        ).quantity,
+                        artist: product.artist,
+                        // Include other relevant product details in the order if needed
+                    })),
+                    total: subTotal,
+                }
+            );
+
+            // If the order creation is successful
+            setDisable(false)
+
+            await axios.delete(
+                `http://localhost:5000/api/delete-cart/${user.id}`
+            );
+            // Display a success message to the user
+            SuccessToast("Order placed successfully!");
+
+            // Redirect the user to the order confirmation or thank you page
+           
+        } catch (error) {
+            console.error("Error creating order:", error);
+            // Display an error message to the user
+            InfoToast("Error creating order. Please try again.");
+        }
+    };
+
     return (
         <div className="bg-gray-100 min-h-screen px-[50px]">
             <div className="text-center py-[40px]">
                 {" "}
-                <Heading text="Order Summary" />
+                <h2 className="text-5xl font-light text-[#9F7E7E]">
+                    Order Summary
+                </h2>
             </div>
 
             <div className="flex gap-10">
-                <table className="bg-white  border-gray-300 w-[70%] rounded-md shadow-sm">
+                
+                <table className="bg-white  border-gray-300 w-[70%] rounded-md shadow-sm h-[100px]">
                     <thead className="text-left">
-                        <tr className=" ">
+                        <tr className="text-[#9F7E7E] ">
                             <th className=" text-center text-lg font-semibold">
                                 SN
                             </th>
@@ -154,7 +196,7 @@ export const OrderSummary = () => {
                         })}
                     </tbody>
                 </table>
-                <div className="bg-white h-[360px] w-[400px] py-[20px] px-[30px] rounded-md">
+                <div className="bg-white h-[440px] w-[400px] py-[20px] px-[30px] rounded-md flex-1">
                     <div className="flex flex-col gap-1 mb-[20px]">
                         <Heading2 text="Delivery Details" />
 
@@ -170,22 +212,33 @@ export const OrderSummary = () => {
                         <p className="text-[#65635F] text-[16px]">
                             Contact Number: {delivery?.contactNo}
                         </p>
-                    </div>
-                    <div  className="flex flex-col gap-1">
-                        <Heading2 text="Payment Details" />
-                        <p className="text-[#65635F] text-[16px] mt-[10px]">Subtotal: {subTotal}</p>
                         <div className="flex items-center justify-between py-4">
-                    <button
-                        onClick={() => checkout.show({ amount: 1000 })}
-                        className="bg-[#602c8c] text-white border border-gray-300 px-4 py-2 rounded-md shadow-sm"
-                    >
-                        Pay with Khalti
-                    </button>
-                </div>
+                        
+                        <button
+                            onClick={() => handlePaymentSuccess()}
+                            className="bg-[#29CC97] text-white border border-gray-300 px-4 py-2 rounded-md shadow-sm"
+                        >
+                            Confirm Order
+                        </button>
+                    </div>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        <Heading2 text="Payment Details" />
+                        <p className="text-[#65635F] text-[16px] mt-[10px]">
+                            Subtotal: Rs {subTotal}
+                        </p>
+                        <div className="flex items-center justify-between py-4">
+                        
+                            <button
+                                onClick={() => checkout.show({ amount: 1000 })} disabled={disable}
+                                className="bg-[#602c8c] text-white border border-gray-300 px-4 py-2 rounded-md shadow-sm"
+                            >
+                                Pay with Khalti
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-           
         </div>
     );
 };

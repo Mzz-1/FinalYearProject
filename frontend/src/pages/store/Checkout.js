@@ -48,7 +48,9 @@ const CheckoutPage = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px] py-[50px]">
-            <h2 className="text-5xl font-semibold ">Delivery Details</h2>
+            <h2 className="text-5xl font-light text-[#9F7E7E]">
+                Delivery Details
+            </h2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(addDelivery)}

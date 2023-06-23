@@ -3,6 +3,7 @@ import axios from "axios";
 import { Modal } from "./Modal";
 import { ModalHeading } from "./Heading";
 import { ModalPara } from "./Paragraph";
+import { SuccessToast } from "../helpers/Toast";
 
 export const UserTable = ({ userType }) => {
     const [userList, setUserList] = useState([]);
@@ -21,6 +22,7 @@ export const UserTable = ({ userType }) => {
         const deleteData = await axios.delete(
             `http://localhost:5000/api/users/${id}`
         );
+        SuccessToast("User has been deleted.")
         getUsers();
     };
 
@@ -55,7 +57,7 @@ export const UserTable = ({ userType }) => {
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{newDateCreatred}</td>
-                            <td>{user.isVerified}</td>
+                            <td>{user.isVerified ? "Verified" : "Not Verified"}</td>
                             <td className="">
                                 <Modal onClick={() => deleteUser(user._id)}>
                                     <ModalHeading>Remove user?</ModalHeading>

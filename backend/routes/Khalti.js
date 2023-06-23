@@ -1,5 +1,6 @@
 const axios = require("axios");
 
+
 const khaltiPayment = {
     path: "/api/v2/khalti/verify",
     method: "post",
@@ -24,6 +25,7 @@ const khaltiPayment = {
 
             console.log(response);
             console.log("data", response.data);
+            
             // If the payment is successful, complete the order and send a success response to the frontend
 
             // TODO: Complete the order and send a success response to the frontend

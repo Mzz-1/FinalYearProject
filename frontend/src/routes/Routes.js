@@ -21,6 +21,7 @@ import { OrderSummary } from "../pages/store/OrderSummary";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 
+
 export const AllRoutes = () => {
     const location = useLocation();
 

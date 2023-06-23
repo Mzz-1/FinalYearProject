@@ -3,8 +3,8 @@ import { Heading } from "../../components/Heading";
 
 export const AboutUs = () => {
     return (
-        <div className="h-[560px] bg-[#9F7E7E] text-[white] grid items-center justify-center">
-            <h2 className="text-center">ABOUT US</h2>
+        <div className="h-[65vh] bg-[#4d4d57] text-[#fefefe] grid items-center justify-center">
+            <h2 className="text-center font-semibold">ABOUT US</h2>
             <div className="grid grid-rows-1 grid-cols-2 items-center justify-center gap-[150px]">
                 <div className="flex items-center justify-center">
                     <img
@@ -14,7 +14,7 @@ export const AboutUs = () => {
                     />
                 </div>
                 <div className="w-[500px] text-center">
-                   <h3 className="text-[35px] mb-[10px]">SimplyArt</h3>
+                   <h3 className="text-[35px] mb-[10px] font-libre">SimplyArt</h3>
                     <p>
                         At SimplyArt, we make it our mission to help you
                         discover and buy from the best emerging artists around

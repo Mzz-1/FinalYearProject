@@ -7,9 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../service/useUser";
 import { getProducts } from "../../helpers/Product";
 import { SuccessToast, InfoToast } from "../../helpers/Toast";
+import {
+    FrequentlyBoughtTogether,
+    RelatedProducts,
+} from "@algolia/recommend-react";
+import recommend from "@algolia/recommend";
 
 export const ProductDetails = () => {
     const [product, setProducts] = useState([]);
+    const [isButtonDisabled, setIsButtonDisplayed] = useState(false);
 
     const user = useUser();
 
@@ -25,11 +31,10 @@ export const ProductDetails = () => {
     //     setProducts(productData.data.product);
     // };
 
-   
     useEffect(() => {
         const fetchData = async () => {
-          const event = await getProducts(id);
-          setProducts(event);
+            const event = await getProducts(id);
+            setProducts(event);
         };
         fetchData();
     }, [id]);
@@ -57,7 +62,11 @@ export const ProductDetails = () => {
         }
     };
 
-    console.log(product);
+    useEffect(() => {
+        if (product.quantity <= 0) {
+            setIsButtonDisplayed(true);
+        }
+    });
 
     return (
         <div className="grid grid-row-auto grid-cols-2 bg-[] justify-center gap-[100px] ">
@@ -70,16 +79,16 @@ export const ProductDetails = () => {
             </div>
 
             <div className="relative w-[420px]">
-                <ul className="flex flex-col gap-[2px] relative px-[10px] py-[100px]">
+                <ul className="flex flex-col gap-[2px] relative px-[10px] py-[100px] font-slab">
                     <button
-                        className="flex gap-2 items-center"
+                        className="flex gap-2 items-center mb-9"
                         onClick={() => navigate(-1)}
                     >
                         <BiArrowBack /> BACK
                     </button>
-                    <li className="text-[48px]">{product.name}</li>
-                    <li className="text-[#65635F] text-[25px] mb-[30px]">
-                        {product.artist}
+                    <li className="text-[34px] fo">{product.name}</li>
+                    <li className="text-[#65635F] text-[18px] mb-[30px]">
+                        By {product.artist}
                     </li>
                     <li className="text-[#65635F] text-[15px]">
                         {product.category}
@@ -97,8 +106,13 @@ export const ProductDetails = () => {
                     <button
                         className="flex justify-center items-center h-[40px] w-[350px] bg-[#161412] text-white rounded-[3px]"
                         onClick={addToCart}
+                        disabled={isButtonDisabled}
                     >
-                        ADD TO CART
+                        {product.quantity <= 0 ? (
+                            <span>Sold Out</span>
+                        ) : (
+                            <span>ADD TO CART</span>
+                        )}
                     </button>
                 </ul>
             </div>

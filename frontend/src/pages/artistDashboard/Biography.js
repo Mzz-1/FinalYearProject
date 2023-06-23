@@ -52,7 +52,6 @@ const Biography = () => {
     const biographyContent = watch("biography");
 
     const addBiography = async (data) => {
-
         const formData = new FormData();
         formData.append("userID", user.id);
         formData.append("name", data.name);
@@ -83,7 +82,7 @@ const Biography = () => {
                         },
                     }
                 );
-                SuccessToast("Artist Detail has been added.")
+                SuccessToast("Artist Detail has been added.");
                 console.log(response.data);
             } catch (err) {
                 console.log(`err:${err}`);
@@ -99,7 +98,7 @@ const Biography = () => {
                         },
                     }
                 );
-                SuccessToast("Artist Detail has been updated.")
+                SuccessToast("Artist Detail has been updated.");
                 console.log(response.data);
                 // const { token } = response.data;
                 // console.log(token);

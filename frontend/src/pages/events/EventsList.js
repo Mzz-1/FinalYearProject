@@ -12,7 +12,7 @@ export const EventsList = ({ events, date }) => {
         perPage: 1,
         perMove: 1,
         gap: "1rem",
-        autoplay: true,
+        autoplay: false,
         pauseOnHover: false,
         pagination: true,
         arrows: false,
@@ -75,6 +75,7 @@ export const EventsList = ({ events, date }) => {
                                                     {events.endTime}
                                                 </p>
                                             </span>
+                                            <p> </p>
                                         </div>
                                         <div className="flex justify-center">
                                             <img

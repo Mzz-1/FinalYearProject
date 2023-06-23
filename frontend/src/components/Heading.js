@@ -1,12 +1,18 @@
-export const Heading=({text})=>{
+export const Heading=({children,color})=>{
     return(
-        <h2 className="text-[#3C3737] text-[38px]">{text}</h2>
+        <h2 className="text-[#3C3737] text-[38px] font-libre" >{children}</h2>
     )
 }
 
-export const Heading2=({text})=>{
+export const Heading1=({children,color})=>{
     return(
-        <h2 className="text-[#3C3737] text-[22px] text-center">{text}</h2>
+        <h2 className="text-[#3C3737] text-[34px] font-slab" >{children}</h2>
+    )
+}
+
+export const Heading2=({children})=>{
+    return(
+        <h2 className="text-[#3C3737] text-[32px] font-libre border-b-2">{children}</h2>
     )
 }
 

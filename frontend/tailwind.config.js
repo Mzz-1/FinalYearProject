@@ -5,7 +5,15 @@ module.exports = {
     extend: {
       boxShadow: {
         in: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-      }
+      },
+      fontFamily: {
+        libre: ['"Playfair Display"', 'serif'],
+        roboto: ['"Roboto"', 'sans-serif'],
+        slab: ['"Roboto Slab"', 'serif'],
+      },
+      gridTemplateColumns: {
+        'custom-2': '75% 25%', 
+      },
     },
   },
   plugins: [],

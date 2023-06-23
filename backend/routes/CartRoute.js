@@ -47,6 +47,26 @@ const addToCart = {
     },
 };
 
+const deleteCart = {
+    path: "/api/delete-cart/:id",
+    method: "delete",
+    handler: async (req, res) => {
+        const { id:userID } = req.params;
+        try {
+            // Check if the cart already exists for the user
+            let cart = await Cart.findOneAndDelete({ userID: userID });
+
+            
+            res.status(200).json({
+                message: "Cart Deleted",
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: "Error adding product to cart" });
+        }
+    },
+};
+
 const getCartDetails = {
     path: "/api/cart/:id",
     method: "get",
@@ -141,4 +161,5 @@ module.exports = {
     getCartDetails,
     getCartProductDetails,
     deleteCartProduct,
+    deleteCart
 };

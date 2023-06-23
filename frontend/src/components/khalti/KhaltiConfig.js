@@ -17,6 +17,7 @@ export const Config = {
             };
 
             let config = {};
+            
 
             axios
                 .post(
@@ -26,7 +27,7 @@ export const Config = {
                 )
                 .then((response) => {
                     console.log(response.data);
-                    SuccessToast('Order has been confirmed')
+                    SuccessToast('Payment Successful')
 
                 })
                 .catch((error) => {

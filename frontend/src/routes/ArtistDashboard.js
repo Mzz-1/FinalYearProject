@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation, matchPath } from "react-router-dom";
 
 import AdminDashboard from "../pages/admin/AdminDashboard";
-
+import ArtistDashboard from "../pages/artistDashboard/ArtistDashboard";
 import SplitScreen from "../components/SplitScreen";
 import AddProductPage from "../pages/artistDashboard/AddProductsPage";
 import { ArtistSidebar } from "../pages/artistDashboard/ArtistSidebar";
@@ -30,8 +30,8 @@ export const ArtistRoutes = () => {
                     <Routes>
                         <Route path="/artist-dashboard">
                             <Route
-                                path="control-panel"
-                                element={<AdminDashboard />}
+                                path=""
+                                element={<ArtistDashboard />}
                             />
                             <Route
                                 path="add-product"

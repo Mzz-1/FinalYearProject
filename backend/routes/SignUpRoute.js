@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const { uuid, v4 } = require("uuid");
 const sendEmail = require('../Utils/SendEmail')
+const sendTEmail = require('../Utils/Email')
 
 const signUpRoute = {
     path: "/api/signup",
@@ -33,7 +34,7 @@ const signUpRoute = {
         const { insertedId } = result;
 
         try {
-             sendEmail({
+            sendTEmail({
                 to: email,
                 from: "simply.art213@outlook.com",
                 subject: "Please verify your email",
@@ -42,6 +43,7 @@ const signUpRoute = {
                     http://localhost:3000/verify-email/${verificationString}
                 `,
             });
+
            
         } catch (err) {
             console.log(err);

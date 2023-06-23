@@ -3,8 +3,13 @@ import { AllRoutes } from "./routes/Routes";
 import { ArtistRoutes } from "./routes/ArtistDashboard";
 import AdminRoutes from "./routes/AdminRoutes";
 import { BrowserRouter } from "react-router-dom";
+import { useEffect } from "react";
+
 
 function App() {
+
+    
+
     const user = useUser();
     var role;
     if (user) {

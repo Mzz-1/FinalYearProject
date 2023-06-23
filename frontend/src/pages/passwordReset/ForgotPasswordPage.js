@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Input from "../../components/Input";
+import { Heading, Heading1 } from "../../components/Heading";
 
 const ForgotPasswordPage = () => {
     const {
@@ -29,13 +30,14 @@ const ForgotPasswordPage = () => {
     };
     watch();
     return success ? (
-        <div>
-            <h1>Success</h1>
+        <div className="w-full h-[70vh] text-center pt-[10%] flex flex-col gap-5 font-slab bg-[#4d4d57] text-[#fefefe]">
+            <h1 className="text-[30px] font-bold">Success</h1>
             <p>Check your email for a reset link.</p>
         </div>
     ) : (
-        <div>
-            <h1>Forgot Password</h1>
+        <div className="w-full h-[70vh] text-center pt-[10%] flex flex-col gap-5 font-slab bg-[#4d4d57] text-[#fefefe]">
+            <h1 className="text-[30px] font-bold">Forgot Password?</h1>
+           
             <p>Enter your email and we'll send you a reset link.</p>
             {errorMessage && <div>{errorMessage}</div>}
             <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -49,7 +51,7 @@ const ForgotPasswordPage = () => {
                     }}
                 />
                 <p>{errors.username?.message}</p>
-                <button disabled={!values.resetPasswordEmail}>
+                <button className="mt-5 p-3 border" disabled={!values.resetPasswordEmail}>
                     Send Reset Link
                 </button>
             </form>
