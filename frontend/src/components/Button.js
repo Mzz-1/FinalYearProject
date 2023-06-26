@@ -93,17 +93,32 @@ export const BlueButton = ({ children, link, register }) => {
     );
 };
 
-export const BlackButton = ({ text, link, register }) => {
+export const BlackButton = ({ children, link, register }) => {
     const navigate = useNavigate();
 
     return (
         <button
-            className="px-[10px] py-[10px] border-black border mb-[20px] text-[black] text-center font-slab"
+            className="px-[10px] py-[10px] w-[200px] border-black border mb-[20px] text-[black] text-center rounded-md  font-slab" data-aos="fade-up"
             onClick={() => {
                 navigate(`${link}`);
             }}
         >
-            {text}
+            {children}
+        </button>
+    );
+};
+
+
+
+export const BrownButton = ({ children, onclick, link }) => {
+    const navigate = useNavigate();
+
+    return (
+        <button
+            className="p-3 border-2 w-[200px] h-[70px]  m-auto font-slab bg-[#9F7E7E] font-medium text-[#fefefe] rounded-lg"
+            onClick={onclick}
+        >
+            {children}
         </button>
     );
 };

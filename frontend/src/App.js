@@ -4,11 +4,14 @@ import { ArtistRoutes } from "./routes/ArtistDashboard";
 import AdminRoutes from "./routes/AdminRoutes";
 import { BrowserRouter } from "react-router-dom";
 import { useEffect } from "react";
-
+import "aos/dist/aos.css";
+import Aos from "aos";
 
 function App() {
 
-    
+    useEffect(() => {
+        Aos.init({ duration: 1500, once: true });
+    }, []);
 
     const user = useUser();
     var role;

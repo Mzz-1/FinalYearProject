@@ -8,23 +8,20 @@ import { ProductSlideShow } from "../../components/ProductsSlideshow";
 import { Banner } from "./Banner";
 import Banner1 from "./Banner1";
 
-import "aos/dist/aos.css";
-import Aos from "aos";
+
 import { useEffect } from "react";
 
 const Home = () => {
-    useEffect(() => {
-        Aos.init({ duration: 1500, once: true });
-    }, []);
+   
     return (
         <>
             <Banner1
                 imgNum={2}
                 bg="antiquewhite"
-                button="Get Started"
-                heading="ARE YOU AN ARTIST?"
+                button="View Artworks"
+                heading="ART LOVER?"
                 headingColor="#aaaaa8"
-                para="Create Your Own Portfolio Today!"
+                para="You came to the right place!"
                 paraWidth="500px"
                 color="#404048"
                 width="300px"

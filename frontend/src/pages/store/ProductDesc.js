@@ -7,11 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../service/useUser";
 import { getProducts } from "../../helpers/Product";
 import { SuccessToast, InfoToast } from "../../helpers/Toast";
-import {
-    FrequentlyBoughtTogether,
-    RelatedProducts,
-} from "@algolia/recommend-react";
-import recommend from "@algolia/recommend";
 
 export const ProductDetails = () => {
     const [product, setProducts] = useState([]);
@@ -78,7 +73,7 @@ export const ProductDetails = () => {
                 />
             </div>
 
-            <div className="relative w-[420px]">
+            <div className="relative w-[420px] ">
                 <ul className="flex flex-col gap-[2px] relative px-[10px] py-[100px] font-slab">
                     <button
                         className="flex gap-2 items-center mb-9"
@@ -109,7 +104,7 @@ export const ProductDetails = () => {
                         disabled={isButtonDisabled}
                     >
                         {product.quantity <= 0 ? (
-                            <span>Sold Out</span>
+                            <span>SOLD OUT</span>
                         ) : (
                             <span>ADD TO CART</span>
                         )}

@@ -3,24 +3,26 @@ import axios from "axios";
 import { ProductList } from "../store/ProductList";
 import { Heading2 } from "../../components/Heading";
 import { ArtistList } from "../artist/ArtistList";
-import { BlackButton } from "../../components/Button";
+import { BlackButton, BrownButton } from "../../components/Button";
+import { fetchAllArtists } from "../../store/artistSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const FeaturedArtists = () => {
-    const [artists, setArtists] = useState([]);
+    const dispatch = useDispatch();
 
+    const { artist } = useSelector((state) => state);
+
+    const { data, fetchStatus } = artist;
     const getArtists = async () => {
-        const artistData = await axios.get(
-            `http://localhost:5000/api/artists?limit=4`
-        );
-
-        const data = await artistData.data.artist;
-        setArtists(data);
-        console.log("getProducts", data);
+        dispatch(fetchAllArtists({ limit: 3,searchItem:"",page:"" }));
+      
     };
+
+    console.log("aaa",data)
 
     useEffect(() => {
         getArtists();
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className="px-[250px] mt-[30px] text-center">
@@ -33,8 +35,13 @@ export const FeaturedArtists = () => {
                     artworks.
                 </p>
             </div>
-            <ArtistList artists={artists} />
-            <BlackButton text="Browse Artists" link="/artists" />
+            {fetchStatus !== "success" ? (
+                "loading..."
+            ) : (
+                <ArtistList artists={data.artist} />
+            )}
+
+            <BlackButton>View Artists</BlackButton>
         </div>
     );
 };

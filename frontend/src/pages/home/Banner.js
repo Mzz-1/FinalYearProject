@@ -3,7 +3,6 @@ import axios from "axios";
 import { ProductList } from "../store/ProductList";
 import { Heading2 } from "../../components/Heading";
 import { BlackRButton } from "../../components/Button";
-import { Product } from "../../components/Product";
 
 export const Banner = (heading,paragraph,button,alignment) => {
    

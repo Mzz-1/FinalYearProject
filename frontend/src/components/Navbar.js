@@ -1,5 +1,3 @@
-import { IonIcon } from "@ionic/react";
-import { search, cart } from "ionicons/icons";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../service/useUser";
 import { LogOutModal } from "./Modal";

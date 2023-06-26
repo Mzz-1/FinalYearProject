@@ -1,9 +1,9 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
 
 export const ArtistList = ({ artists }) => {
-    console.log(artists);
 
     const navigate = useNavigate();
 
@@ -31,8 +31,8 @@ export const ArtistList = ({ artists }) => {
                             alt="product"
                         />
                         <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px]">
-                            <li className=" text-[20px] text-center font-libre flex items-center gap-4 justify-center ">
-                                <hr className="w-[50px] h-[2px] bg-black justify-self-start"></hr>{" "}
+                            <li className=" text-[22px] text-center font-libre flex items-center gap-4 justify-center text-[#65635F]">
+                                <hr className="w-[50px] h-[2px] bg-[#65635F] justify-self-start"></hr>{" "}
                                 {artist.name}
                             </li>
                         </ul>

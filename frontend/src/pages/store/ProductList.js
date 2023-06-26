@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const ProductList = ({ products, gridSize, type }) => {
-    console.log(products);
 
     const navigate = useNavigate();
 
@@ -64,13 +63,13 @@ export const ProductList = ({ products, gridSize, type }) => {
                         {type === "gallery" ? (
                             ""
                         ) : (
-                            <button className="flex justify-center items-center h-[40px] w-[150px]  border-black border-[1px] rounded-[3px] m-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <button className="flex justify-center items-center p-3 border-2 w-[200px] mb-5 m-auto font-slab bg-[#9F7E7E] font-medium text-[#fefefe] rounded-lg  opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 {" "}
                                 {product.quantity <= 0 ? (
                                     <span className="font-slab">SOLD OUT</span>
                                 ) : (
                                     <span className="font-slab">
-                                        ADD TO CART
+                                        VIEW DETAILS
                                     </span>
                                 )}
                             </button>

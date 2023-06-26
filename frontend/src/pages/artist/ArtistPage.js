@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Product } from "../../components/Product";
 import { ArtistList } from "./ArtistList";
 import { Banner } from "../../components/Banner";
 import { useForm } from "react-hook-form";
 import { Search } from "../../components/Search";
 import { Heading } from "../../components/Heading";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllArtists } from "../../store/artistSlice";
 
 const ArtistPage = () => {
-    const [artists, setArtists] = useState([]);
-    const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
-    const [totalArtists, setTotalArtists] = useState(0);
+    const dispatch = useDispatch();
+
+    const { artist } = useSelector((state) => state);
+
+    const { data, fetchStatus } = artist;
 
     const {
         register,
@@ -21,35 +23,29 @@ const ArtistPage = () => {
         formState: { errors },
     } = useForm();
 
-    const getArtists = async ({ searchItem = "" }) => {
-        setLoading(true);
-        const artistData = await axios.get(
-            `http://localhost:5000/api/artists?name=${searchItem}&page=${page}`
-        );
+    const getArtists = async () => {
+        const { searchItem } = getValues();
 
-        const data = await artistData.data.artist;
-        setArtists(data);
-        setTotalArtists(artistData.data.total);
-        setLoading(false);
-        console.log("getArtists", data);
+        dispatch(
+            fetchAllArtists({ page: "", searchItem: searchItem, limit: "" })
+        );
     };
 
     useEffect(() => {
-        setPage(1);
-        getArtists({});
+        getArtists();
     }, []);
 
-    const handleLoadMore = async () => {
-        const { searchItem } = getValues();
-        setPage(page + 1);
-        const artistData = await axios.get(
-            `http://localhost:5000/api/artists?name=${searchItem}&page=${
-                page + 1
-            }`
-        );
-        const newData = await artistData.data.artist;
-        setArtists([...artists, ...newData]);
-    };
+    // const handleLoadMore = async () => {
+    //     const { searchItem } = getValues();
+    //     setPage(page + 1);
+    //     const artistData = await axios.get(
+    //         `http://localhost:5000/api/artists?name=${searchItem}&page=${
+    //             page + 1
+    //         }`
+    //     );
+    //     const newData = await artistData.data.artist;
+    //     setArtists([...artists, ...newData]);
+    // };
 
     return (
         <div className="  px-[10%]">
@@ -58,7 +54,10 @@ const ArtistPage = () => {
                     heading="Featured Artists"
                     img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1681497000/assets/birmingham-museums-trust-8FNuCxFfbFw-unsplash_uaudjs.jpg"
                 />
-                <div className="flex gap-[50px] justify-end items-center absolute top-[400px] " data-aos="fade-down">
+                <div
+                    className="flex gap-[50px] justify-end items-center absolute top-[400px] "
+                    data-aos="fade-down"
+                >
                     <Search
                         register={{
                             ...register("searchItem", {
@@ -66,7 +65,7 @@ const ArtistPage = () => {
                             }),
                         }}
                         onClick={() =>
-                            getArtists({ searchItem: getValues("searchItem") })
+                            getArtists()
                         }
                     />
                 </div>
@@ -75,11 +74,9 @@ const ArtistPage = () => {
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
                 <Heading>Featured Artists !</Heading>
                 <hr className="bg-[#65635F] " />
-                <ArtistList artists={artists} />
-                {loading && <p>Loading...</p>}
-                {!loading && artists.length < totalArtists && (
-                    <button onClick={handleLoadMore}>Load More</button>
-                )}
+               {fetchStatus !=="success" ? "loading..." : <ArtistList artists={data.artist} />}
+               
+                
             </div>
         </div>
     );

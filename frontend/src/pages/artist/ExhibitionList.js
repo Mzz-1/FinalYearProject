@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const ExhibitionList = ({ exhibition }) => {
-
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
     return (
         <div className="grid grid-row-auto grid-cols-3 bg-[] justify-center items-center gap-[80px] my-[50px] ">
@@ -38,7 +37,6 @@ export const ExhibitionList = ({ exhibition }) => {
                                 {newStartDate} - {newEndDate}
                             </li>
                         </ul>
-                   
                     </div>
                 );
             })}
