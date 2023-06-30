@@ -8,17 +8,15 @@ import { useForm } from "react-hook-form";
 import { Select } from "../../components/Select";
 import { Heading, Heading1 } from "../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
-import productSlice from "../../store/productSlice";
-import { fetchAllProducts } from "../../store/productSlice";
+import productSlice from "../../redux-store/productSlice";
+import { fetchAllProducts } from "../../redux-store/productSlice";
 import { BrownButton } from "../../components/Button";
 
 const Store = () => {
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
 
-    const state = useSelector((state) => state);
-
-    const { product } = state;
+    const product = useSelector((state) => state.product);
 
     const { fetchStatus, data: products } = product;
 
@@ -122,9 +120,7 @@ const Store = () => {
                                     required: "Please enter a product name.",
                                 }),
                             }}
-                            onClick={() =>
-                                fetchProducts()
-                            }
+                            onClick={() => fetchProducts()}
                         />
 
                         <BrownButton onclick={fetchProducts}>

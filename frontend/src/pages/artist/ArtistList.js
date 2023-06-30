@@ -1,18 +1,9 @@
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
 
 export const ArtistList = ({ artists }) => {
-
     const navigate = useNavigate();
 
     const getArtist = async (id) => {
-        const productData = await axios.get(
-            `http://localhost:5000/api/biography/${id}`
-        );
-        console.log(productData.data.product);
-
         navigate(`/artist-profile/biography/${id}`);
     };
 

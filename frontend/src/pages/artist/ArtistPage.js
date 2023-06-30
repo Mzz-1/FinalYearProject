@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { Search } from "../../components/Search";
 import { Heading } from "../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllArtists } from "../../store/artistSlice";
+import { fetchAllArtists } from "../../redux-store/artistSlice";
 
 const ArtistPage = () => {
     const dispatch = useDispatch();
@@ -64,9 +64,7 @@ const ArtistPage = () => {
                                 required: "Please enter a product name.",
                             }),
                         }}
-                        onClick={() =>
-                            getArtists()
-                        }
+                        onClick={() => getArtists()}
                     />
                 </div>
             </div>
@@ -74,9 +72,11 @@ const ArtistPage = () => {
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
                 <Heading>Featured Artists !</Heading>
                 <hr className="bg-[#65635F] " />
-               {fetchStatus !=="success" ? "loading..." : <ArtistList artists={data.artist} />}
-               
-                
+                {fetchStatus !== "success" ? (
+                    "loading..."
+                ) : (
+                    <ArtistList artists={data.artist} />
+                )}
             </div>
         </div>
     );

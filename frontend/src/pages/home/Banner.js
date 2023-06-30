@@ -1,7 +1,4 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { ProductList } from "../store/ProductList";
-import { Heading2 } from "../../components/Heading";
+
 import { BlackRButton } from "../../components/Button";
 
 export const Banner = (heading,paragraph,button,alignment) => {

@@ -29,6 +29,7 @@ export const ProductList = ({ products, gridSize, type }) => {
                         }  `}
                         data-aos="fade-up"
                         onClick={() => getProducts(product._id)}
+                        key={product._id}
                     >
                         <img
                             src={product.url}

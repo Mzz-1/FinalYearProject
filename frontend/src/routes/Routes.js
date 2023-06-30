@@ -21,7 +21,6 @@ import { OrderSummary } from "../pages/store/OrderSummary";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 
-
 export const AllRoutes = () => {
     const location = useLocation();
 
@@ -86,6 +85,7 @@ export const AllRoutes = () => {
                     path="/order-summary/:id"
                     element={<PrivateRoute Component={OrderSummary} />}
                 />
+                <Route path="*" element={<h1>page not found user</h1>} />
             </Routes>
             {!shouldHide && <Footer />}
         </div>

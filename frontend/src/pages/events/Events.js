@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { EventsList } from "./EventsList";
+import { useEffect } from "react";
 import { Heading1 } from "../../components/Heading";
 import { EventList } from "./EventList";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllEvents } from "../../redux-store/eventSlice";
 
 const Events = () => {
-    const [events, setEvents] = useState([]);
+    const dispatch = useDispatch();
+
+    const event = useSelector((state) => state.event);
+
+    const { fetchStatus, data } = event;
 
     const today = new Date();
     const dateToday = today.toDateString();
 
     const getEvents = async () => {
-        const productsData = await axios.get(
-            `http://localhost:5000/api/events`
-        );
-
-        const data = await productsData.data.event;
-        setEvents(data);
-        console.log("getEvents", data);
+        dispatch(fetchAllEvents());
     };
 
     useEffect(() => {
@@ -35,8 +33,11 @@ const Events = () => {
                         </h3>
                         <hr className="  my-[20px] w-[100%] m-auto"></hr>
                     </div>
-
-                    <EventList events={events} date="ongoing" />
+                    {fetchStatus !== "success" ? (
+                        "loading..."
+                    ) : (
+                        <EventList events={data.event} date="ongoing" />
+                    )}
 
                     <div className="flex gap-5 mt-10 items-center ">
                         <h3 className="text-[#3C3737] text-[18px] font-slab">
@@ -44,7 +45,11 @@ const Events = () => {
                         </h3>
                         <hr className="  my-[20px] w-[100%] m-auto"></hr>
                     </div>
-                    <EventsList events={events} date="upcomming" />
+                    {fetchStatus !== "success" ? (
+                        "loading..."
+                    ) : (
+                        <EventList events={data.event} date="upcomming" />
+                    )}
                 </div>
             </div>
         </>

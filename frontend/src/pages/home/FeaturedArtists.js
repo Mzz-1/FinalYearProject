@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ProductList } from "../store/ProductList";
 import { Heading2 } from "../../components/Heading";
 import { ArtistList } from "../artist/ArtistList";
 import { BlackButton, BrownButton } from "../../components/Button";
-import { fetchAllArtists } from "../../store/artistSlice";
+import { fetchAllArtists } from "../../redux-store/artistSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const FeaturedArtists = () => {
@@ -14,11 +13,10 @@ export const FeaturedArtists = () => {
 
     const { data, fetchStatus } = artist;
     const getArtists = async () => {
-        dispatch(fetchAllArtists({ limit: 3,searchItem:"",page:"" }));
-      
+        dispatch(fetchAllArtists({ limit: 3, searchItem: "", page: "" }));
     };
 
-    console.log("aaa",data)
+    console.log("aaa", data);
 
     useEffect(() => {
         getArtists();

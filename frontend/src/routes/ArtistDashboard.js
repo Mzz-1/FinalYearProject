@@ -30,7 +30,7 @@ export const ArtistRoutes = () => {
                     <Routes>
                         <Route path="/artist-dashboard">
                             <Route
-                                path=""
+                                index
                                 element={<ArtistDashboard />}
                             />
                             <Route
@@ -63,6 +63,7 @@ export const ArtistRoutes = () => {
                                 element={<ManageOrders />}
                             />
                         </Route>
+                        <Route path="*" element={<h1>page not found artist</h1>} />
                     </Routes>
                 </SplitScreen>
             )}

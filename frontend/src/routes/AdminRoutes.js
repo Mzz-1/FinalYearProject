@@ -27,6 +27,7 @@ const AdminRoutes = () => {
                     <Route path="events" element={<AdminEventPage />} />
                     <Route path="users" element={<UserList />} />
                     <Route path="artists" element={<ArtistList />} />
+                    <Route path="*" element={<h1>page not found admin</h1>} />
                 </Route>
             </Routes>
         </SplitScreen>
@@ -34,5 +35,3 @@ const AdminRoutes = () => {
 };
 
 export default AdminRoutes;
-
-

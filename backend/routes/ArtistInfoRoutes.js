@@ -177,8 +177,7 @@ const getArtistExhibitions = {
     method: "get",
     handler: async (req, res) => {
         const { id: artistID } = req.params;
-        console.log(artistID);
-        const artist = await Artist.findOne({ name: artistID }).populate(
+        const artist = await Artist.findOne({ _id: artistID }).populate(
             "exhibitions"
         );
         const exhibitions = artist.exhibitions;

@@ -1,22 +1,9 @@
-import { useState } from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
-
 export const EventList = ({ events, date }) => {
     // const [formattedStartDate,setStartDate] = useState();
     // const [formattedEndDate,setEndDate] = useState();
     // const [formattedStartTime,setStartTime] = useState();
     // const [formattedEndTime,setEndTime] = useState();
-    const options = {
-        type: "loop",
-        perPage: 1,
-        perMove: 1,
-        gap: "1rem",
-        autoplay: false,
-        pauseOnHover: false,
-        pagination: true,
-        arrows: false,
-    };
+
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
     return (
         <div className="my-[50px]">
@@ -47,7 +34,7 @@ export const EventList = ({ events, date }) => {
                             {" "}
                             {datebool ? (
                                
-                                    <div className="grid grid-rows-1 grid-cols-2 gap-[80px] justify-center items-center font-slab mb-[70px] " data-aos="fade-up">
+                                    <div className="grid grid-rows-1 grid-cols-2 gap-[80px] justify-center items-center font-slab mb-[70px] "  data-aos="fade-up">
                                         <div className="flex justify-center">
                                             <img
                                                 src={events.url}

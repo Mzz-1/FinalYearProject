@@ -3,7 +3,7 @@ import axios from "axios";
 import { ProductList } from "../store/ProductList";
 import { Heading2 } from "../../components/Heading";
 import { BlackButton, BlueButton, BrownButton } from "../../components/Button";
-import { fetchAllProducts } from "../../store/productSlice";
+import { fetchAllProducts } from "../../redux-store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 export const NewProducts = () => {
     const dispatch = useDispatch();

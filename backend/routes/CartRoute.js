@@ -113,7 +113,7 @@ const getCartProductDetails = {
 
 const deleteCartProduct = {
     path: "/api/remove-from-cart/:userID/:productID",
-    method: "post",
+    method: "get",
     handler: async (req, res) => {
         const { userID, productID } = req.params;
         console.log(userID, productID);
