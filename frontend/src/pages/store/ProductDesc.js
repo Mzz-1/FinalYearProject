@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../service/useUser";
-import { getProducts } from "../../helpers/Product";
 import { SuccessToast, InfoToast } from "../../helpers/Toast";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, fetchCartProducts } from "../../redux-store/cartSlice";
 
 export const ProductDetails = () => {
     const [product, setProducts] = useState([]);
@@ -16,39 +17,38 @@ export const ProductDetails = () => {
 
     const { id } = useParams();
 
+    const dispatch = useDispatch();
+
+    const cart = useSelector((state) => state.cart);
+
+    const { fetchStatus, data } = cart;
+
     const navigate = useNavigate();
 
-    // const getProducts = async () => {
-    //     const productData = await axios.get(
-    //         `http://localhost:5000/api/products/${id}`
-    //     );
-    //     console.log(productData.data.product);
-    //     setProducts(productData.data.product);
-    // };
+    const getProducts = async () => {
+        const productData = await axios.get(
+            `http://localhost:5000/api/products/${id}`
+        );
+        setProducts(productData.data.product);
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            const event = await getProducts(id);
-            setProducts(event);
-        };
-        fetchData();
+        getProducts();
     }, [id]);
 
     useEffect(() => getProducts, []);
 
-    const addToCart = async () => {
+    const addProductToCart = async () => {
         try {
-            const response = await axios.post(
-                "http://localhost:5000/api/add-to-cart",
-                {
-                    userID: user.id,
-                    productID: product._id,
-                    quantity: 1,
-                }
-            );
-            console.log(response.data);
-            navigate("/cart");
-            SuccessToast("Product added to cart.");
+            const userID = user.id;
+            const productID = product._id;
+            dispatch(addToCart({ userID, productID, quantity: 1 }));
+
+           
+            if (fetchStatus === "success") {
+                navigate("/cart");
+                SuccessToast("Product added to cart.");
+            }
         } catch (error) {
             console.error(error);
 
@@ -100,7 +100,7 @@ export const ProductDetails = () => {
                     </li>
                     <button
                         className="flex justify-center items-center h-[40px] w-[350px] bg-[#161412] text-white rounded-[3px]"
-                        onClick={addToCart}
+                        onClick={addProductToCart}
                         disabled={isButtonDisabled}
                     >
                         {product.quantity <= 0 ? (

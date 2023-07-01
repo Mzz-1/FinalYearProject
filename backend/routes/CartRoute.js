@@ -38,7 +38,7 @@ const addToCart = {
 
             await cart.save();
             res.status(200).json({
-                message: "Product added to cart successfully",
+              product
             });
         } catch (error) {
             console.log(error);
