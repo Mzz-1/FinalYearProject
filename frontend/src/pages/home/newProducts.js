@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { ProductList } from "../store/ProductList";
 import { Heading2 } from "../../components/Heading";
 import { BlackButton, BlueButton, BrownButton } from "../../components/Button";
@@ -28,8 +29,9 @@ export const NewProducts = () => {
 
     return (
         <div className="px-[50px]">
-            <Heading2>Discover Latest Artworks !</Heading2>
+            <Heading2>Recently Added</Heading2>
             <br></br>
+            <p className="font-montserrat text-center border-[#3E3E42] m-auto border-b w-[65px]">View All</p>
             {fetchStatus !== "success" ? (
                 <p>Loading...</p>
             ) : data.product.length > 0 ? (

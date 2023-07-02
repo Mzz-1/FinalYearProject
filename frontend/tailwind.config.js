@@ -10,6 +10,9 @@ module.exports = {
         libre: ['"Playfair Display"', 'serif'],
         roboto: ['"Roboto"', 'sans-serif'],
         slab: ['"Roboto Slab"', 'serif'],
+        cinzel: ['"Cinzel"', 'serif'],
+        montserrat: ['"Montserrat"', 'sans-serif'],
+        playfair: ['"Playfair"', 'serif'],
       },
       gridTemplateColumns: {
         'custom-2': '75% 25%', 

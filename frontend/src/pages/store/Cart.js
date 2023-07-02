@@ -28,7 +28,7 @@ export const Cart = () => {
             );
             const cart = cartData.data.cart;
 
-            console.log(cart,"cart")
+            console.log(cart, "cart");
             setCart(cart);
         } catch (err) {}
     };
@@ -52,7 +52,7 @@ export const Cart = () => {
     useEffect(() => {
         getCart();
         getProducts();
-    }, [subTotal,dispatch,removeStatus]);
+    }, [subTotal, dispatch, removeStatus]);
 
     const calculateTotal = () => {
         if (cart?.items && data.products) {
@@ -73,7 +73,7 @@ export const Cart = () => {
     useEffect(() => {
         calculateTotal();
     }, [cart, data.products]);
-console.log(data.products?.length,"length")
+    console.log(data.products?.length, "length");
     return (
         <div className="bg-gray-100 min-h-screen px-[50px]">
             <div className="text-center py-[40px]">
@@ -83,7 +83,7 @@ console.log(data.products?.length,"length")
                 "loading..."
             ) : (
                 <>
-                    {data.products?.length > 0  ? (
+                    {data.products?.length > 0 ? (
                         <div className="">
                             <table className="bg-white  border-gray-300 w-[100%] rounded-md shadow-sm">
                                 <thead className="text-left text-[#9F7E7E]">

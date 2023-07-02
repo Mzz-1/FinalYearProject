@@ -12,7 +12,7 @@ export const Heading1=({children,color})=>{
 
 export const Heading2=({children})=>{
     return(
-        <h2 className="text-[#9F7E7E] text-[32px] font-libre border-b-2">{children}</h2>
+        <h2 className="text-[#3E3E42] text-opacity-90 text-[65px] text-center font-playfair font-medium">{children}</h2>
     )
 }
 
