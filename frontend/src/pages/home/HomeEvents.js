@@ -1,5 +1,5 @@
 import { EventsSlideShow } from "../../components/EventsSlideShow";
-import { WhiteButton } from "../../components/Button";
+
 
 export const HomeEvents = () => {
     return (
@@ -24,7 +24,7 @@ export const HomeEvents = () => {
                         world's most talented artists. Browse our listings now
                         and plan your next artistic adventure."
                     </p>
-                    <WhiteButton text="Explore Events" link="/events" />
+                  
                 </div>
             </div>
         </div>

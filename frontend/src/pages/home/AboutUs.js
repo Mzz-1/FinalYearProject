@@ -1,4 +1,4 @@
-import { WhiteButton } from "../../components/Button";
+
 import { Heading } from "../../components/Heading";
 
 export const AboutUs = () => {
@@ -24,7 +24,7 @@ export const AboutUs = () => {
                         your portal to all those services. Join now and discover
                         thousands of original works by today’s top artists
                     </p>
-                    <WhiteButton text="Sign Up Now" link="register" />
+                   
                 </div>
             </div>
         </div>

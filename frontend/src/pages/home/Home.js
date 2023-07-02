@@ -7,7 +7,7 @@ import { FeaturedArtists } from "./FeaturedArtists";
 import { ProductSlideShow } from "../../components/ProductsSlideshow";
 import { Banner } from "./Banner";
 import Banner1 from "./Banner1";
-
+import { Banner2 } from "../../components/Banner2";
 
 import { useEffect } from "react";
 
@@ -15,7 +15,8 @@ const Home = () => {
    
     return (
         <>
-            <Banner1
+        <Banner2/>
+            {/* <Banner1
                 imgNum={2}
                 bg="antiquewhite"
                 button="View Artworks"
@@ -28,7 +29,7 @@ const Home = () => {
                 img1="https://res.cloudinary.com/djuzpmqlp/image/upload/v1687107016/assets/intro2_lic3eu.jpg"
                 img2="https://res.cloudinary.com/djuzpmqlp/image/upload/v1687107013/assets/intro1_z0brj3.jpg"
                
-            />
+            /> */}
             <NewProducts />
 
             <Banner1

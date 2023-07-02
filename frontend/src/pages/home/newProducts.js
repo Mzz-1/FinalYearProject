@@ -6,7 +6,14 @@ import { Heading2 } from "../../components/Heading";
 import { BlackButton, BlueButton, BrownButton } from "../../components/Button";
 import { fetchAllProducts } from "../../redux-store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Carousel } from "../../components/Carousel";
+
+
 export const NewProducts = () => {
+
+  
+
+
     const dispatch = useDispatch();
     const { product } = useSelector((state) => state);
 
@@ -32,10 +39,14 @@ export const NewProducts = () => {
             <Heading2>Recently Added</Heading2>
             <br></br>
             <p className="font-montserrat text-center border-[#3E3E42] m-auto border-b w-[65px]">View All</p>
+         
+            <br></br>
+            <br></br>
             {fetchStatus !== "success" ? (
                 <p>Loading...</p>
             ) : data.product.length > 0 ? (
-                <ProductList products={data.product} gridSize={4} />
+          
+                <Carousel products={data.product}/>
             ) : (
                 <p className="font-libre font-[35px] text-center font">
                     There are no products available at the moment.

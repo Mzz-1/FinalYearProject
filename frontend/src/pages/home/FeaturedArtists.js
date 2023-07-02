@@ -5,6 +5,8 @@ import { ArtistList } from "../artist/ArtistList";
 import { BlackButton, BrownButton } from "../../components/Button";
 import { fetchAllArtists } from "../../redux-store/artistSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { ViewAllButton } from "../../components/Button";
+import { Carousel } from "../../components/Carousel";
 
 export const FeaturedArtists = () => {
     const dispatch = useDispatch();
@@ -23,23 +25,23 @@ export const FeaturedArtists = () => {
     }, [dispatch]);
 
     return (
-        <div className="px-[250px] mt-[30px] text-center">
-            <Heading2>Featured Artists</Heading2>
+        <div className="px-[0px] mt-[30px] text-center">
+            <Heading2>Meet The Artists</Heading2>
+            <br></br>
+            <ViewAllButton border="black" link="/artists" align="center">View All</ViewAllButton>
+            <br></br>
+            <br></br>
             <div className="w-[500px] text-center m-auto">
                 {/* <hr className="h-[2.5px] bg-black my-[20px]" /> */}
-                <p className="font-slab mt-5">
-                    Discover top creators around you. Explore each of their
-                    artworks and find the designs you love from a wide range of
-                    artworks.
-                </p>
+                
             </div>
             {fetchStatus !== "success" ? (
                 "loading..."
             ) : (
-                <ArtistList artists={data.artist} />
+                <Carousel artists={data.artist} />
             )}
 
-            <BlackButton>View Artists</BlackButton>
+          
         </div>
     );
 };

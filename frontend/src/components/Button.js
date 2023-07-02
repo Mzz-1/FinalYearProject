@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const ViewButton = ({ onClick }) => {
     return (
@@ -10,6 +11,20 @@ export const ViewButton = ({ onClick }) => {
         </button>
     );
 };
+
+export const ViewAllButton = ({ children,link,align,border }) => {
+    return (
+        <p className={`font-montserrat ${border === "black" ? "border-[#3E3E42]" : "border-[#fefefe] hover:border-[#3E3E42] duration-500"} ${align === "center" ? "m-auto" : ""} border-b w-fit` }><Link to={link}>{children}</Link></p>
+    );
+};
+
+export const WhiteButton = ({ children,link,align }) => {
+    return (
+        <p className={`font-montserrat bg-[#f4f4f4] mb-5 text-[#3E3E42] w-[200px] h-[45px] text-center font-semibold rounded-lg` }><Link to={link}>{children}</Link></p>
+    );
+};
+
+
 
 export const EditButton = ({onClick}) => {
     return (
@@ -52,31 +67,9 @@ export const NoButton = ({ children, onClick }) => {
     );
 };
 
-export const VisitButton = ({ deleteEvent }) => {
-    return (
-        <button
-            className="h-[30px] w-[80px] bg-[#29CC97] text-white text-center rounded-[10px] ml-[20px]"
-            onClick={deleteEvent}
-        >
-            Delete
-        </button>
-    );
-};
 
-export const WhiteButton = ({ text, link, register }) => {
-    const navigate = useNavigate();
 
-    return (
-        <button
-            className="px-[10px] py-[10px] border mt-[20px]"
-            onClick={() => {
-                navigate(`${link}`);
-            }}
-        >
-            {text}
-        </button>
-    );
-};
+
 
 export const BlueButton = ({ children, link, register }) => {
     const navigate = useNavigate();
@@ -93,20 +86,6 @@ export const BlueButton = ({ children, link, register }) => {
     );
 };
 
-export const BlackButton = ({ children, link, register }) => {
-    const navigate = useNavigate();
-
-    return (
-        <button
-            className="px-[10px] py-[10px] w-[200px] border-black border mb-[20px] text-[black] text-center rounded-md  font-slab" data-aos="fade-up"
-            onClick={() => {
-                navigate(`${link}`);
-            }}
-        >
-            {children}
-        </button>
-    );
-};
 
 
 
