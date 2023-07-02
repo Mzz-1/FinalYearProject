@@ -1,32 +1,51 @@
-import { EventsSlideShow } from "../../components/EventsSlideShow";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Heading2 } from "../../components/Heading";
+import { ArtistList } from "../artist/ArtistList";
+import { BlackButton, BrownButton } from "../../components/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { ViewAllButton } from "../../components/Button";
+import { fetchAllEvents } from "../../redux-store/eventSlice";
 
+import { Carousel } from "../../components/Carousel";
 
 export const HomeEvents = () => {
+    const event = useSelector((state) => state.event);
+
+    const dispatch = useDispatch()
+
+    const { fetchStatus, data } = event;
+
+    const today = new Date();
+    const dateToday = today.toDateString();
+
+    const getEvents = async () => {
+        dispatch(fetchAllEvents());
+    };
+
+    useEffect(() => {
+        getEvents();
+    }, []);
+
+
     return (
-        <div className="h-[750px] bg-[#9F7E7E] text-[white] grid items-center justify-center">
-            <h2 className="text-center">EXPLORE EVENTS</h2>
-            <div className="grid grid-rows-1 grid-cols-2 items-center justify-center gap-[150px] w-[70%] m-auto">
-                <div className="">
-                    <EventsSlideShow />
-                </div>
-                <div className="w-[500px] text-center">
-                    <p>
-                        "Discover Upcoming and Ongoing Exhibitions. Explore the
-                        latest in contemporary art, classical masterpieces, and
-                        everything in between. Our website showcases a diverse
-                        range of art exhibitions from galleries and museums
-                        around the world. Stay informed and plan your visit by
-                        browsing our comprehensive listings of upcoming and
-                        ongoing art exhibitions. From solo shows to group
-                        exhibitions, our website provides an immersive platform
-                        for art enthusiasts of all levels. Don't miss out on the
-                        opportunity to be inspired by the creativity of the
-                        world's most talented artists. Browse our listings now
-                        and plan your next artistic adventure."
-                    </p>
-                  
-                </div>
+        <div className="px-[0px] mt-[30px] text-center">
+            <Heading2>Exhibitions</Heading2>
+            <br></br>
+            <ViewAllButton border="black" link="/artists" align="center">View All</ViewAllButton>
+            <br></br>
+            <br></br>
+            <div className="w-[500px] text-center m-auto">
+                {/* <hr className="h-[2.5px] bg-black my-[20px]" /> */}
+                
             </div>
+            {fetchStatus !== "success" ? (
+                "loading..."
+            ) : (
+                <Carousel events={data.event} />
+            )}
+
+          
         </div>
     );
 };

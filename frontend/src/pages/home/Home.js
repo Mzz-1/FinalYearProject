@@ -32,7 +32,7 @@ const Home = () => {
             /> */}
             <NewProducts />
 
-            <Banner1
+            {/* <Banner1
                 imgNum={1}
                 bg="antiquewhite"
                 button="Get Started"
@@ -43,11 +43,12 @@ const Home = () => {
                 color="#404048"
                 width="600px"
                 img1="https://res.cloudinary.com/djuzpmqlp/image/upload/v1687111060/assets/create3_i1zzjv.jpg"
-            />
-
+            /> */}
+<AboutUs/>
             <FeaturedArtists />
-
-            <Banner1
+            <hr className="h-[2px] bg-black"></hr>
+            <HomeEvents/>
+            {/* <Banner1
                 imgNum={1}
                 bg="antiquewhite"
                 button="Explore Events"
@@ -57,7 +58,7 @@ const Home = () => {
                 paraWidth="500px"
                 color="#404048"
                 width="600px"
-            />
+            /> */}
         </>
     );
 };

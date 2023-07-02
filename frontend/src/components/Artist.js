@@ -20,14 +20,14 @@ export const Artist = ({ artist, type }) => {
                 className=" mb-[10px] w-[100%] h-[450px] object-cover m-auto"
                 alt="product"
             />
-            <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px]">
-                <li className=" text-[22px]  font-cinzel flex  gap-4  mb-4 text-[#65635F]">
+            <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] font-playfair">
+                <li className=" text-[22px] font-cinzel flex  gap-4  mb-4 text-[#65635F]">
                     {/* <hr className="w-[50px] h-[2px] bg-[#65635F] justify-self-start"></hr>{" "} */}
                     {artist.name}
                 </li>
                 <li>
                 <div
-                                className="mb-4 font-montserrat text-[#3C3737]  text-justify myHtmlStyles"
+                                className="mb-4  text-[#3C3737]  text-justify myHtmlStyles"
                                 dangerouslySetInnerHTML={{
                                     __html: artist.aboutArtist,
                                 }}

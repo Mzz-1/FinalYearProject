@@ -1,9 +1,9 @@
 import { WhiteButton, ViewAllButton } from "./Button";
 export const Banner2 = () => {
     return (
-        <div className="font-playfair text-[#fefefe] h-[90vh] w-[100vw] flex justify-center items-center mb-9 bg-cover bg-center bg-opacity-50 bg-[url('https://res.cloudinary.com/djuzpmqlp/image/upload/v1688291407/assets/dannie-jing-3GZlhROZIQg-unsplash_zeyvsp.jpg')]">
+        <div className="font-playfair text-[#fefefe] h-[90vh] w-[100vw] flex justify-center items-center mb-9 bg-cover bg-center bg-[url('https://res.cloudinary.com/djuzpmqlp/image/upload/v1688291407/assets/dannie-jing-3GZlhROZIQg-unsplash_zeyvsp.jpg')]">
  
-            <div className=" absolute bottom-[7%]  text-center  w-[40%] m-auto" data-aos="fade-up">
+            <div className=" absolute bottom-[7%]  text-center  w-[40%] m-auto bg-opacity-50" data-aos="fade-up">
                 <p className=" text-[55px] border-b-2">
                     Art that inspires
                 </p>

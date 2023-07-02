@@ -1,17 +1,18 @@
 import Slider from "react-slick";
 import { Product } from "./Product";
 import { Artist } from "./Artist";
+import { Event } from "./Event";
 import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
     BsArrowDownRightCircle
 } from "react-icons/bs";
 
-export const Carousel = ({ products,artists }) => {
+export const Carousel = ({ products,artists,events }) => {
     const sliderSettings = {
         dots: true, // Show navigation dots
         infinite: true, // Enable infinite looping
-        // Enable center mode
+      
         slidesToShow: 3, // Number of slides to show at a time
         slidesToScroll: 1, // Number of slides to scroll at a time
        arrows:true,
@@ -27,6 +28,9 @@ export const Carousel = ({ products,artists }) => {
                 })}
                 {artists && artists.map((artist) => {
                     return <Artist artist={artist} type="carousel" />;
+                })}
+                {events && events.map((event) => {
+                    return <Event events={event} type="carousel" />;
                 })}
             </Slider>
         </div>
