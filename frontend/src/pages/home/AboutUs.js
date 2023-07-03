@@ -3,7 +3,7 @@ import { Heading } from "../../components/Heading";
 export const AboutUs = () => {
     return (
         <div className="h-[75%] py-9  border-black border-b-[1px] border-t-[1px] text-center text-[#4d4d57] flex flex-col items-center justify-center">
-            <h2 className="font-playfair text-[35px] ">About Us</h2>
+            <h2 className="font-playfair text-[30px] ">About Us</h2>
             <p className="font-playfair text-[55px] w-[75vw] m-auto">
                 Our gallery features original works by{" "}
                 <span className="font-libre border-black border-b">
