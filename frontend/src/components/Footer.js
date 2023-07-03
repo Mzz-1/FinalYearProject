@@ -14,7 +14,7 @@ export const Footer = () => {
                 <FooterList items={artists} />
             </div>
             <p className="text-[12px] font-medium text-center">
-                SimplyArt, All rights reserved.
+                @SimplyArt, All rights reserved.
             </p>
         </footer>
     );

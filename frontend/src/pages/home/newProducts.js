@@ -7,7 +7,7 @@ import { BlackButton, BlueButton, BrownButton } from "../../components/Button";
 import { fetchAllProducts } from "../../redux-store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Carousel } from "../../components/Carousel";
-
+import { Loader } from "../../components/LoaderWrapper";
 
 export const NewProducts = () => {
 
@@ -43,7 +43,7 @@ export const NewProducts = () => {
             <br></br>
             <br></br>
             {fetchStatus !== "success" ? (
-                <p>Loading...</p>
+                <Loader/>
             ) : data.product.length > 0 ? (
           
                 <Carousel products={data.product}/>

@@ -7,6 +7,7 @@ import { Heading, Heading2 } from "../../components/Heading";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCartProducts, removeFromCart } from "../../redux-store/cartSlice";
+import { Loader } from "../../components/LoaderWrapper";
 
 export const Cart = () => {
     const user = useUser();
@@ -80,7 +81,7 @@ export const Cart = () => {
                 <h2 className="text-5xl font-light text-[#9F7E7E]">My Cart</h2>
             </div>
             {fetchStatus !== "success" ? (
-                "loading..."
+                <Loader />
             ) : (
                 <>
                     {data.products?.length > 0 ? (
@@ -104,7 +105,7 @@ export const Cart = () => {
                                 </thead>
                                 <tbody>
                                     {fetchStatus !== "success" ? (
-                                        "loading..."
+                                        <Loader />
                                     ) : (
                                         <>
                                             {data.products?.map(

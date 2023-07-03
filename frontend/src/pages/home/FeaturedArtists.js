@@ -7,6 +7,7 @@ import { fetchAllArtists } from "../../redux-store/artistSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ViewAllButton } from "../../components/Button";
 import { Carousel } from "../../components/Carousel";
+import { Loader } from "../../components/LoaderWrapper";
 
 export const FeaturedArtists = () => {
     const dispatch = useDispatch();
@@ -18,14 +19,12 @@ export const FeaturedArtists = () => {
         dispatch(fetchAllArtists({ limit: 3, searchItem: "", page: "" }));
     };
 
-    console.log("aaa", data);
-
     useEffect(() => {
         getArtists();
     }, [dispatch]);
 
     return (
-        <div className="px-[0px] mt-[30px] text-center">
+        <div className="px-[30px] mt-[30px] text-center">
             <Heading2>Meet The Artists</Heading2>
             <br></br>
             <ViewAllButton border="black" link="/artists" align="center">View All</ViewAllButton>
@@ -36,7 +35,7 @@ export const FeaturedArtists = () => {
                 
             </div>
             {fetchStatus !== "success" ? (
-                "loading..."
+               <Loader/>
             ) : (
                 <Carousel artists={data.artist} />
             )}

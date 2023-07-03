@@ -12,6 +12,7 @@ import { ArtistNavbar } from "../../components/ArtistNavbar";
 import { RiDoubleQuotesL, RiDoubleQuotesR } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArtistBio } from "../../redux-store/artistBioSlice";
+import { Loader } from "../../components/LoaderWrapper";
 
 const ArtistBiography = () => {
     const { id } = useParams();
@@ -33,27 +34,28 @@ const ArtistBiography = () => {
     return (
         <div className=" max-w-[1340px] m-auto ">
             <h2
-                className=" text-[26px] font-slab mt-11 text-[#3C3737]"
+                className=" text-[26px] font-cinzel mt-11 text-[#3C3737]"
                 data-aos="fade-down"
             >
                 Biography
             </h2>
+            
             <ArtistNavbar id={id} />
             {fetchStatus !== "success" ? (
-                "loading..."
+                <Loader/>
             ) : (
                 <div className="grid grid-row-auto grid-cols-2 bg-[] justify-center gap-[100px] ">
-                    <div className="relative w-[] h-[70%] m-auto flex flex-col gap-[50px]">
+                    <div className="relative w-[] h-[70%] m-auto flex flex-col gap-[40px]">
                         <div data-aos="fade-down">
                             <h2
-                                className="text-[#9F7E7E] text-[26px] font-slab"
+                                className="text-[#9F7E7E] text-[26px] font-playfair"
                                 data-aos="fade-down"
                             >
                                 About The Artist
                             </h2>
 
                             <h2
-                                className="my-[30px] text-[38px] font-medium font-libre text-[#3C3737]"
+                                className="my-[30px] text-[38px] font-medium font-cinzel text-[#3C3737]"
                                 data-aos="fade-down"
                             >
                                 {data.artist.name}
@@ -61,7 +63,7 @@ const ArtistBiography = () => {
                             <hr></hr>
 
                             <div
-                                className="h-[auto] w-[600px] mt-[20px] font-slab text-justify myHtmlStyles"
+                                className="h-[auto] w-[600px] mt-[20px] font-montserrat text-justify myHtmlStyles"
                                 dangerouslySetInnerHTML={{
                                     __html: data.artist.biography,
                                 }}
@@ -71,7 +73,7 @@ const ArtistBiography = () => {
                             <RiDoubleQuotesL size={50} />
 
                             <div
-                                className="h-[auto] w-[600px] mt-[10px] font-libre text-[#3C3737] ml-4 text-justify myHtmlStyles"
+                                className="h-[auto] w-[600px] mt-[10px] font-playfair text-[#3C3737] ml-4 text-justify myHtmlStyles"
                                 dangerouslySetInnerHTML={{
                                     __html: data.artist.aboutArtist,
                                 }}

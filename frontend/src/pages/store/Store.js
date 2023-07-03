@@ -6,11 +6,12 @@ import { TfiSearch } from "react-icons/tfi";
 import { Search } from "../../components/Search";
 import { useForm } from "react-hook-form";
 import { Select } from "../../components/Select";
-import { Heading, Heading1 } from "../../components/Heading";
+import { Heading, Heading2 } from "../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import productSlice from "../../redux-store/productSlice";
 import { fetchAllProducts } from "../../redux-store/productSlice";
 import { BrownButton } from "../../components/Button";
+import { Loader } from "../../components/LoaderWrapper";
 
 const Store = () => {
     const [page, setPage] = useState(1);
@@ -83,7 +84,7 @@ const Store = () => {
         <div className=" px-[5%]">
             <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center">
                 <Banner
-                    heading="STORE"
+                    heading="THE ART STORE"
                     img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1681139641/assets/banner_yo00ky.jpg"
                 />
                 <div
@@ -132,15 +133,18 @@ const Store = () => {
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto mt-[150px]">
                 <div className="flex justify-between items-center">
-                    <Heading>Shop Our Latest Products !</Heading>
-                    <p className="font-slab font-semibold text-[#9F7E7E]">
+                    
+                    <p className="font-slab font-semibold text-[#605e5e]">
+                        Home / Store
+                    </p>
+                    <p className="font-slab font-semibold text-[#605e5e]">
                         {fetchStatus === "success" && products.product.length}{" "}
                         Artworks:
                     </p>
                 </div>
                 <hr className="bg-[#65635F] " />
                 {fetchStatus !== "success" ? (
-                    <p>Loading...</p>
+                   <Loader/>
                 ) : products.product.length > 0 ? (
                     <ProductList products={products.product} gridSize={3} />
                 ) : (

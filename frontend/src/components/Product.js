@@ -14,10 +14,10 @@ export const Product = ({product,type})=>{
     };
     return (
         <div
-            className={`relative cursor-pointer hover:bg-[#f4f6f6] hover:scale-110 font-playfair ${
+            className={`relative cursor-pointer font-playfair ${
                 type === "gallery"
                     ? "grid grid-cols-custom-2 items-center"
-                    : "group"
+                    : "group hover:bg-[#f4f6f6]"
             } 
             ${
                 type === "carousel"
@@ -38,7 +38,7 @@ export const Product = ({product,type})=>{
                 alt="product"
             />
             <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] text-center ">
-                <li className=" text-[34px] font-cinzel text-[#3C3737]">
+                <li className=" text-[30px] font-cinzel text-[#3C3737]">
                     {product.name}
                 </li>
                 <li className="text-[#65635F] text-[18px]">

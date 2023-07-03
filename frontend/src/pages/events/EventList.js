@@ -43,7 +43,7 @@ export const EventList = ({ events, date }) => {
                                             />
                                         </div>
                                         <div className="text-[20px] w-[500px]  text-[#3C3737] ">
-                                            <h3 className="text-[34px]  mb-5 ">
+                                            <h3 className="text-[34px] font-cinzel mb-5 ">
                                                 {events.name}
                                             </h3>
                                           

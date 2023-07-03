@@ -6,6 +6,7 @@ import { BlackButton, BrownButton } from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { ViewAllButton } from "../../components/Button";
 import { fetchAllEvents } from "../../redux-store/eventSlice";
+import { Loader } from "../../components/LoaderWrapper";
 
 import { Carousel } from "../../components/Carousel";
 
@@ -40,7 +41,7 @@ export const HomeEvents = () => {
                 
             </div>
             {fetchStatus !== "success" ? (
-                "loading..."
+                <Loader/>
             ) : (
                 <Carousel events={data.event} />
             )}

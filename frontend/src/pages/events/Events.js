@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { Heading1 } from "../../components/Heading";
+import { Heading1,Heading2 } from "../../components/Heading";
 import { EventList } from "./EventList";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllEvents } from "../../redux-store/eventSlice";
-
+import { Loader } from "../../components/LoaderWrapper";
 const Events = () => {
     const dispatch = useDispatch();
 
@@ -22,11 +22,13 @@ const Events = () => {
         getEvents();
     }, []);
 
+  
+
     return (
         <>
             <div className=" py-[30px]">
                 <div className="max-w-[1400px] m-auto">
-                    <Heading1>Exhibitions</Heading1>
+                    <Heading1 color="black">Exhibitions</Heading1>
                     <div className="flex gap-5 mt-10 items-center ">
                         <h3 className="text-[#3C3737] text-[18px] font-slab">
                             Current
@@ -34,7 +36,8 @@ const Events = () => {
                         <hr className="  my-[20px] w-[100%] m-auto"></hr>
                     </div>
                     {fetchStatus !== "success" ? (
-                        "loading..."
+                       <Loader/>
+                       
                     ) : (
                         <EventList events={data.event} date="ongoing" />
                     )}
@@ -46,7 +49,7 @@ const Events = () => {
                         <hr className="  my-[20px] w-[100%] m-auto"></hr>
                     </div>
                     {fetchStatus !== "success" ? (
-                        "loading..."
+                      <Loader/>
                     ) : (
                         <EventList events={data.event} date="upcomming" />
                     )}

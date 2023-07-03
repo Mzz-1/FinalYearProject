@@ -6,6 +6,8 @@ import { ExhibitionList } from "./ExhibitionList";
 import { ArtistNavbar } from "../../components/ArtistNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchExhibition } from "../../redux-store/exhibitionSlice";
+import { Loader } from "../../components/LoaderWrapper";
+
 const ArtistExhibition = () => {
     const { id } = useParams();
 
@@ -22,7 +24,7 @@ const ArtistExhibition = () => {
     return (
         <div className=" max-w-[1340px] m-auto">
             <h2
-                className=" text-[26px] font-slab mt-11 text-[#3C3737]"
+                className=" text-[26px] font-cinzel mt-11 text-[#3C3737]"
                 data-aos="fade-down"
             >
                 Featured Exibitions
@@ -30,7 +32,7 @@ const ArtistExhibition = () => {
 
             <ArtistNavbar id={id} />
             {fetchStatus !== "success" ? (
-                "loading..."
+                <Loader/>
             ) : (
                 <ExhibitionList exhibition={data.exhibitions} />
             )}

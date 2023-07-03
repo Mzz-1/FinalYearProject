@@ -6,7 +6,7 @@ export const Heading=({children,color})=>{
 
 export const Heading1=({children,color})=>{
     return(
-        <h2 className="text-[#9F7E7E] text-[34px] font-slab" >{children}</h2>
+        <h2 className={`${color==="black" ? "text-[#3E3E42]" :"text-[#9F7E7E]"} text-[34px] font-slab`} >{children}</h2>
     )
 }
 

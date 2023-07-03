@@ -6,6 +6,7 @@ import { ProductList } from "../store/ProductList";
 import { ArtistNavbar } from "../../components/ArtistNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArtistProduct } from "../../redux-store/artistProductSlice";
+import { Loader } from "../../components/LoaderWrapper";
 
 const ArtistPortfolio = () => {
     const [bio, setBio] = useState([]);
@@ -38,19 +39,19 @@ const ArtistPortfolio = () => {
     return (
         <div className=" max-w-[1340px] m-auto">
             <h2
-                className=" text-[26px] font-slab mt-11 text-[#3C3737]"
+                className=" text-[26px] font-cinzel mt-11 text-[#3C3737]"
                 data-aos="fade-down"
             >
                 Featured Works
             </h2>
             <ArtistNavbar id={id} />
             {fetchStatus !== "success" ? (
-                "loading..."
+                <Loader/>
             ) : (
                 <ProductList
                     products={data.product}
                     gridSize={1}
-                    type="gallery"
+                    type={"gallery"}
                 />
             )}
         </div>

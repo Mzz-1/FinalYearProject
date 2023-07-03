@@ -26,7 +26,7 @@ export const ExhibitionList = ({ exhibition }) => {
                             alt="product"
                         />
                         <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] font-slab">
-                            <li className="font-medium font-libre text-[20px] text-center">
+                            <li className="font-medium font-cinzel text-[20px] text-center">
                                 {exhibition.name}
                             </li>
                             <hr></hr>
