@@ -6,7 +6,7 @@ export const Heading=({children,color})=>{
 
 export const Heading1=({children,color})=>{
     return(
-        <h2 className={`${color==="black" ? "text-[#3E3E42]" :"text-[#9F7E7E]"} text-[34px] font-slab`} >{children}</h2>
+        <h2 className={`${color==="black" ? "text-[#3E3E42]" :"text-[#9F7E7E]"} text-[34px] font-cinzel`} >{children}</h2>
     )
 }
 
@@ -36,7 +36,7 @@ export const ModalHeading=({children, color})=>{
 
 export const DashboardHeading=({children, color})=>{
     return(
-        <h2 className="text-5xl font-light w-[fit-content] border-b-[2px] pb-2 border-black ">{children}</h2>
+        <h2 className="text-5xl font-light w-[fit-content] font-slab border-b-[2px] pb-2 border-black ">{children}</h2>
     )
 }
 

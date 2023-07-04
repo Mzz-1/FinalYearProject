@@ -49,13 +49,14 @@ const ArtistPage = () => {
     // };
 
     return (
-        <div className="  px-[10%]">
-            <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center ">
+        <div className="max-w-[1800px] m-auto px-[10%]">
+           
                
                 <div
-                    className="flex gap-[50px] justify-end items-center absolute top-[80px] right-[9vw]"
+                    className="flex  justify-between items-center  "
                     data-aos="fade-down"
                 >
+                     <Heading1 color="black">Artists</Heading1>
                     <Search
                         register={{
                             ...register("searchItem", {
@@ -65,13 +66,11 @@ const ArtistPage = () => {
                         onClick={() => getArtists()}
                     />
                 </div>
-            </div>
+           
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
-            <p className="font-slab font-semibold text-[#605e5e]">
-                        
-                    </p>
-                    <Heading1 color="black">Artists</Heading1>
+ 
+                   
                 <hr className="bg-[#65635F] " />
                 {fetchStatus !== "success" ? (
                      <Loader/>

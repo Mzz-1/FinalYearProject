@@ -16,10 +16,12 @@ import ArtistBiography from "../pages/artist/ArtistBiography";
 import ArtistPortfolio from "../pages/artist/ArtistPortfolio";
 import ArtistExhibition from "../pages/artist/ArtistExhibition";
 import CheckoutPage from "../pages/store/Checkout";
+import Page404 from "../pages/404page";
 import { Cart } from "../pages/store/Cart";
 import { OrderSummary } from "../pages/store/OrderSummary";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
+
 
 export const AllRoutes = () => {
     const location = useLocation();
@@ -85,7 +87,7 @@ export const AllRoutes = () => {
                     path="/order-summary/:id"
                     element={<PrivateRoute Component={OrderSummary} />}
                 />
-                <Route path="*" element={<h1>page not found user</h1>} />
+                <Route path="*" element={<Page404/>} />
             </Routes>
             {!shouldHide && <Footer />}
         </div>

@@ -21,7 +21,7 @@ export const Carousel = ({ products,artists,events }) => {
         draggable: false,
     };
     return (
-        <div className="mb-11">
+        <div className="mb">
             <Slider {...sliderSettings}>
                 {products && products.map((product) => {
                     return <Product product={product} type="carousel" />;

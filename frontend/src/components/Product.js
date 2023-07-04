@@ -16,18 +16,19 @@ export const Product = ({product,type})=>{
         <div
             className={`relative cursor-pointer font-playfair ${
                 type === "gallery"
-                    ? "grid grid-cols-custom-2 items-center"
+                    ? "grid grid-cols-custom-2 items-center gap-11"
                     : "group hover:bg-[#f4f6f6]"
             } 
             ${
                 type === "carousel"
-                    ? "mx-5"
+                    ? "mx-5 mb-7"
                     : ""
             } `}
             data-aos="fade-up"
             onClick={() => getProducts(product._id)}
             key={product._id}
         >
+            <div className={`${type === "gallery" ? "" : "bg-black"}`}>
             <img
                 src={product.url}
                 className={`${
@@ -37,10 +38,12 @@ export const Product = ({product,type})=>{
                 } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75`}
                 alt="product"
             />
+            </div>
             <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] text-center ">
                 <li className=" text-[30px] font-cinzel text-[#3C3737]">
                     {product.name}
                 </li>
+                {type === "gallery" ? <hr></hr> :""}
                 <li className="text-[#65635F] text-[18px]">
                     By {product.artist}
                 </li>

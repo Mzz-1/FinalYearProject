@@ -1,4 +1,4 @@
-export const Event = ({ events, date }) => {
+export const Event = ({ events, date,type }) => {
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
 
     var startDateTime = new Date(events.startDate);
@@ -16,7 +16,7 @@ export const Event = ({ events, date }) => {
         datebool = startDateTime > today;
     }
     return (
-        <div className="mx-5 font-playfair">
+        <div className={`mx-5 font-playfair ${type==="carousel" ? "mb-12" :""}`}>
             <div className="flex justify-center">
                 <img
                     src={events.url}
@@ -32,7 +32,7 @@ export const Event = ({ events, date }) => {
                         {newStartDate} - {newEndDate}
                     </p>
                 </span>
-                <hr className="h-[1px] bg-[#0a0a0a] my-[15px]"></hr>
+                <hr className="h-[1px]  my-[15px]"></hr>
                 <span className="flex justify-center gap-2 text-[16px]">
                     <p>{events.location}</p>
                 </span>

@@ -44,7 +44,6 @@ export const ProductDetails = () => {
             const productID = product._id;
             dispatch(addToCart({ userID, productID, quantity: 1 }));
 
-           
             if (fetchStatus === "success") {
                 navigate("/cart");
                 SuccessToast("Product added to cart.");

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import SplitScreen from "../components/SplitScreen";
-
+import Page404 from "../pages/404page";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import { AdminSidebar } from "../pages/admin/AdminSidebar";
 import { PrivateRouteAdmin } from "../service/Auth";
@@ -27,7 +27,7 @@ const AdminRoutes = () => {
                     <Route path="events" element={<AdminEventPage />} />
                     <Route path="users" element={<UserList />} />
                     <Route path="artists" element={<ArtistList />} />
-                    <Route path="*" element={<h1>page not found admin</h1>} />
+                    <Route path="*" element={<Page404/>} />
                 </Route>
             </Routes>
         </SplitScreen>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Box } from "../../components/DashboardBox";
-import { AdminHeading } from "../../components/Heading";
+import { AdminHeading, Heading2 } from "../../components/Heading";
 import { useUser } from "../../service/useUser";
 import { useState,useEffect } from "react";
 
@@ -56,7 +56,8 @@ const ArtistDashboard = () => {
 
     return (
         <>
-            <AdminHeading>Dashboard</AdminHeading>
+            
+            <Heading2>Dashboard</Heading2>
             <div className="grid grid-cols-3 grid-rows-2 gap-11 justify-center mt-9">
                 <Box number={totalProducts}>Total Products</Box>
                 <Box number={totalProducts}>Total Orders</Box>

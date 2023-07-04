@@ -7,7 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import { Label } from "../../components/Label";
 import { UpdateButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";
-import { DashboardHeading } from "../../components/Heading";
+import { DashboardHeading, Heading2 } from "../../components/Heading";
 import { SuccessToast } from "../../helpers/Toast";
 
 const Biography = () => {
@@ -110,12 +110,12 @@ const Biography = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <DashboardHeading>Biography</DashboardHeading>
+            <Heading2>Biography</Heading2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(addBiography)}
             >
-                <div className="grid grid-rows-1 grid-cols-1 gap-[30px]">
+                <div className="grid grid-rows-1 grid-cols-1 gap-[30px] font-slab">
                     <div className="flex flex-col gap-[20px]">
                         <Label>Name</Label>
                         <Input

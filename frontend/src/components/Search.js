@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const Search = ({ heading, onClick, register }) => {
     return (
-        <>
+        <div>
             <input
                 type="text"
                 placeholder="KEYWORDS"
@@ -16,9 +16,9 @@ export const Search = ({ heading, onClick, register }) => {
                 <TfiSearch
                     size={30}
                     color="grey"
-                    className="absolute right-[60px] top-[-15px]"
+                    className="absolute right-[20px] top-[-20px]"
                 />
             </button>
-        </>
+        </div>
     );
 };

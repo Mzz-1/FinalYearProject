@@ -8,7 +8,7 @@ import { PromiseToast, SuccessToast } from "../../helpers/Toast";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../../helpers/Product";
 import { addProduct, updateProduct } from "../../helpers/Product";
-import { DashboardHeading } from "../../components/Heading";
+import { DashboardHeading, Heading2 } from "../../components/Heading";
 import { Textarea } from "../../components/Input";
 
 const AddProductPage = () => {
@@ -76,14 +76,12 @@ const AddProductPage = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <DashboardHeading>
-                {productToEdit ? "Update Product Details" : "Add Product"}
-            </DashboardHeading>
+            <Heading2>    {productToEdit ? "Update Product Details" : "Add Product"}</Heading2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(ProductAction)}
             >
-                <div className="grid grid-rows-1 grid-cols-2 gap-[30px]">
+                <div className="grid grid-rows-1 grid-cols-2 gap-[30px] font-slab">
                     <div className="flex flex-col gap-[20px]">
                         <label>Product Name</label>
                         <Input

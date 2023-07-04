@@ -3,6 +3,7 @@ import axios from "axios";
 import {
     AdminHeading,
     AdminHeading2,
+    Heading2,
     ModalHeading,
 } from "../../components/Heading";
 import { ModalPara } from "../../components/Paragraph";
@@ -53,7 +54,7 @@ export const ManageEvents = () => {
 
     return (
         <div className="flex flex-col gap-[40px] h-[100%] ">
-            <DashboardHeading>Featured Events</DashboardHeading>
+            <Heading2>Featured Events</Heading2>
             <div className="flex flex-col gap-[20px] border rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white">
                 <AdminHeading2> All Events </AdminHeading2>
                 <div className="overflow-scroll">

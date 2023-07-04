@@ -14,7 +14,7 @@ import {
     getSingleExhibition,
 } from "../../helpers/Exhibition";
 import { PromiseToast, SuccessToast } from "../../helpers/Toast";
-import { DashboardHeading } from "../../components/Heading";
+import { DashboardHeading, Heading2 } from "../../components/Heading";
 
 const FeaturedEvents = () => {
     const user = useUser();
@@ -53,14 +53,12 @@ const FeaturedEvents = () => {
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <DashboardHeading>
-                {eventToEdit ? "Update Event Details" : "Add Featured Events"}
-            </DashboardHeading>
+            <Heading2>  {eventToEdit ? "Update Event Details" : "Add Featured Events"}</Heading2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(ExhibitionAction)}
             >
-                <div className="grid grid-rows-1 grid-cols-1 gap-[30px]">
+                <div className="grid grid-rows-1 grid-cols-1 gap-[30px] font-slab">
                     <div className="flex flex-col gap-[20px]">
                         <Label>Event Name</Label>
                         <Input

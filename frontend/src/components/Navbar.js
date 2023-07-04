@@ -83,8 +83,9 @@ export const Navbar = () => {
                                 </li>
                             )}
                             {user && (
-                                <button className="" onClick={LogOut}>
-                                    LOGOUT
+                                <button  onClick={LogOut}>
+                                    <span className="hover:border-b-2 pb-1 border-[#9F7E7E]"> LOGOUT</span>
+                                   
                                 </button>
                             )}
                         </ul>

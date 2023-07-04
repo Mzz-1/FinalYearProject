@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation, matchPath } from "react-router-dom";
-
+import Page404 from "../pages/404page";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import ArtistDashboard from "../pages/artistDashboard/ArtistDashboard";
 import SplitScreen from "../components/SplitScreen";
@@ -63,7 +63,7 @@ export const ArtistRoutes = () => {
                                 element={<ManageOrders />}
                             />
                         </Route>
-                        <Route path="*" element={<h1>page not found artist</h1>} />
+                        <Route path="*" element={<Page404/>} />
                     </Routes>
                 </SplitScreen>
             )}
