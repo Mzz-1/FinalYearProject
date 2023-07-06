@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { SuccessToast, PromiseToast } from "../../helpers/Toast";
 import { getSingleEvent, updateEvent, addEvent } from "../../helpers/Events";
 import { DashboardActionButton } from "../../components/Button";
+import { Heading2 } from "../../components/Heading";
 
 const AddEventPage = () => {
     const {
@@ -43,10 +44,8 @@ const AddEventPage = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center gap-[20px]">
-            <h2 className="text-5xl font-light border-b-[2px] pb-2 border-black ">
-                {eventToEdit ? "Update Event" : "Add Event"}
-            </h2>
+        <div className="flex flex-col items-center justify-center gap-[20px] font-slab">
+            <Heading2> {eventToEdit ? "Update Event" : "Add Event"}</Heading2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(EventAction)}

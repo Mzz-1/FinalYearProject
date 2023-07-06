@@ -45,7 +45,7 @@ const addEvents = {
                 endTime,
             });
 
-            const users = await User.find({ isVerified: true });
+            const users = await User.find({ receiveEmail: true });
 
             sendEventsEmail({
                 users: users,

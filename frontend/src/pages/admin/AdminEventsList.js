@@ -3,6 +3,7 @@ import axios from "axios";
 import {
     AdminHeading,
     AdminHeading2,
+    Heading2,
     ModalHeading,
 } from "../../components/Heading";
 import { ModalPara } from "../../components/Paragraph";
@@ -61,10 +62,8 @@ export const AdminEvent = () => {
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
 
     return (
-        <div className="flex flex-col gap-[40px] h-[100%] ">
-           <h2 className="text-5xl font-light w-[fit-content] border-b-[2px] pb-2 border-black ">
-                Event
-            </h2>
+        <div className="flex flex-col gap-[40px] h-[100%] font-slab">
+            <Heading2>Event</Heading2>
             <div className="flex flex-col gap-[20px] border rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white">
                 <AdminHeading2> All Events </AdminHeading2>
                 <div className="overflow-scroll">

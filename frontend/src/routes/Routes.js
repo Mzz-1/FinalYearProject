@@ -19,6 +19,7 @@ import CheckoutPage from "../pages/store/Checkout";
 import Page404 from "../pages/404page";
 import { Cart } from "../pages/store/Cart";
 import { OrderSummary } from "../pages/store/OrderSummary";
+import UserProfilePage from "../pages/user/UserProfile";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 
@@ -86,6 +87,10 @@ export const AllRoutes = () => {
                 <Route
                     path="/order-summary/:id"
                     element={<PrivateRoute Component={OrderSummary} />}
+                />
+                 <Route
+                    path="/user-profile"
+                    element={<PrivateRoute Component={UserProfilePage} />}
                 />
                 <Route path="*" element={<Page404/>} />
             </Routes>

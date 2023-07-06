@@ -50,37 +50,36 @@ const ArtistPage = () => {
 
     return (
         <div className="max-w-[1800px] m-auto px-[10%]">
-           
-               
-                <div
-                    className="flex  justify-between items-center  "
-                    data-aos="fade-down"
-                >
-                     <Heading1 color="black">Artists</Heading1>
-                    <Search
-                        register={{
-                            ...register("searchItem", {
-                                required: "Please enter a product name.",
-                            }),
-                        }}
-                        onClick={() => getArtists()}
-                    />
-                </div>
-           
+            <div
+                className="flex  justify-between items-center  "
+                data-aos="fade-down"
+            >
+                <Heading1 color="black">Artists</Heading1>
+                <Search
+                    register={{
+                        ...register("searchItem", {
+                            required: "Please enter a product name.",
+                        }),
+                    }}
+                    onClick={() => getArtists()}
+                />
+            </div>
 
             <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
- 
-                   
                 <hr className="bg-[#65635F] " />
                 {fetchStatus !== "success" ? (
-                     <Loader/>
-                ) : (
+                    <Loader />
+                ) : data.artist.length > 0 ? (
                     <>
-                    <ArtistList artists={data.artist} />
-                    <ArtistList artists={data.artist} />
-                    <ArtistList artists={data.artist} />
-                    <ArtistList artists={data.artist} />
+                        <ArtistList artists={data.artist} />
+                        <ArtistList artists={data.artist} />
+                        <ArtistList artists={data.artist} />
+                        <ArtistList artists={data.artist} />
                     </>
+                ) : (
+                    <div className=" h-[50vh] flex items-center justify-center">
+                    <Heading1> Artist Not Found.</Heading1>
+                </div>
                 )}
             </div>
         </div>

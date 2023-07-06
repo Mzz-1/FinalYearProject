@@ -6,7 +6,7 @@ import { TfiSearch } from "react-icons/tfi";
 import { Search } from "../../components/Search";
 import { useForm } from "react-hook-form";
 import { Select } from "../../components/Select";
-import { Heading, Heading2 } from "../../components/Heading";
+import { Heading, Heading1, Heading2 } from "../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import productSlice from "../../redux-store/productSlice";
 import { fetchAllProducts } from "../../redux-store/productSlice";
@@ -148,9 +148,9 @@ const Store = () => {
                 ) : products.product.length > 0 ? (
                     <ProductList products={products.product} gridSize={3} />
                 ) : (
-                    <p className="font-libre font-[35px] text-center font">
-                        There are no products available at the moment.
-                    </p>
+                    <div className=" h-[50vh] flex items-center justify-center">
+                        <Heading1> There are no products available at the moment.</Heading1>
+                    </div>
                 )}
                 {fetchStatus === "success" && products.product.length > 0 && (
                     <button

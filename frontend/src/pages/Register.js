@@ -144,7 +144,7 @@ function Register() {
                         defaultValue={false}
                         render={({ field }) => (
                             <label>
-                                <input type="checkbox" {...field} />
+                                <input className="mr-2" type="checkbox" {...field} />
                                 Do you want receive email alerts about upcomming
                                 art events?
                             </label>
@@ -156,7 +156,7 @@ function Register() {
                         defaultValue={false}
                         render={({ field }) => (
                             <label className="">
-                                <input className="" type="checkbox" {...field} />
+                                <input className="mr-2" type="checkbox" {...field} />
                                 Do you want to sign up as an artist?
                             </label>
                         )}

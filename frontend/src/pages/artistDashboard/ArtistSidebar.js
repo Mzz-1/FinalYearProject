@@ -6,7 +6,7 @@ import { Sidebar } from "../../components/Sidebar";
 
 export const ArtistSidebar = () => {
     const items = [
-        { itemName: "Dashboard", link: "", icon: <RxDashboard /> },
+        { itemName: "Dashboard", link: "/artist-dashboard", icon: <RxDashboard /> },
         {
             itemName: "Products",
             subItems: [
@@ -31,7 +31,7 @@ export const ArtistSidebar = () => {
                 },
                 
             ],
-            link: "",
+            link: "/artist-dashboard/biography",
             icon: <AiOutlineUser />,
         },
         {
@@ -46,7 +46,7 @@ export const ArtistSidebar = () => {
                     link: "/artist-dashboard/manage-events",
                 },
             ],
-            link: "",
+            link: "/artist-dashboard/manage-events",
             icon: <AiOutlineUser />,
         },
         {
@@ -57,7 +57,7 @@ export const ArtistSidebar = () => {
                     link: "/artist-dashboard/orders",
                 },
             ],
-            link: "",
+            link: "/artist-dashboard/orders",
             icon: <AiOutlineUser />,
         },
     ];

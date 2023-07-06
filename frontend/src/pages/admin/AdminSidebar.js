@@ -9,7 +9,7 @@ import { Sidebar } from "../../components/Sidebar";
 
 export const AdminSidebar = () => {
     const items = [
-        { itemName: "Dashboard", link: "", icon: <RxDashboard /> },
+        { itemName: "Dashboard", link: "/admin-dashboard", icon: <RxDashboard /> },
         {
             itemName: "Events",
             subItems: [
@@ -33,7 +33,7 @@ export const AdminSidebar = () => {
                     link: "/admin-dashboard/artists",
                 },
             ],
-            link: "",
+            link: "/admin-dashboard/artists",
             icon: <AiOutlineUser />,
         },
         {
@@ -44,7 +44,7 @@ export const AdminSidebar = () => {
                     link: "/admin-dashboard/users",
                 },
             ],
-            link: "",
+            link: "/admin-dashboard/users",
             icon: <AiOutlineUser />,
         },     
     ];

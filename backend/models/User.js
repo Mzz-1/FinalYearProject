@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
         
     },
     receiveEmail:{
-        type:String,
+        type:Boolean,
     },
     isVerified: {
         type: Boolean,

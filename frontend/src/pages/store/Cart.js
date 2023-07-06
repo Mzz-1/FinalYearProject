@@ -6,13 +6,15 @@ import { InfoToast, SuccessToast } from "../../helpers/Toast";
 import { Heading, Heading2 } from "../../components/Heading";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCartProducts, removeFromCart } from "../../redux-store/cartSlice";
+import { fetchCartProducts, removeFromCart,cTotal } from "../../redux-store/cartSlice";
 import { Loader } from "../../components/LoaderWrapper";
+import cartSlice from "../../redux-store/cartSlice";
 
 export const Cart = () => {
     const user = useUser();
     const [cart, setCart] = useState();
     const [subTotal, setSubTotal] = useState(0);
+
 
     const dispatch = useDispatch();
 
@@ -29,7 +31,7 @@ export const Cart = () => {
             );
             const cart = cartData.data.cart;
 
-            console.log(cart, "cart");
+          
             setCart(cart);
         } catch (err) {}
     };
@@ -38,12 +40,12 @@ export const Cart = () => {
         InfoToast("Please log in to use the cart.");
     }
 
-    const getProducts = async (id) => {
+    const getProducts =  (id) => {
         const userID = user.id;
         dispatch(fetchCartProducts({ userID }));
     };
 
-    const removeProductFromCart = async (productID) => {
+    const removeProductFromCart =  (productID) => {
         const userID = user.id;
         dispatch(removeFromCart({ userID, productID }));
         SuccessToast("Product has been removed from cart");
@@ -53,8 +55,10 @@ export const Cart = () => {
     useEffect(() => {
         getCart();
         getProducts();
+console.log(data.products,"data products")
+      
+      
     }, [subTotal, dispatch, removeStatus]);
-
     const calculateTotal = () => {
         if (cart?.items && data.products) {
             let total = 0;
@@ -76,7 +80,7 @@ export const Cart = () => {
     }, [cart, data.products]);
     console.log(data.products?.length, "length");
     return (
-        <div className="bg-gray-100 min-h-screen px-[50px]">
+        <div className="bg-gray-100 min-h-screen px-[50px] font-slab">
             <div className="text-center py-[40px]">
                 <h2 className="text-5xl font-light text-[#9F7E7E]">My Cart</h2>
             </div>
@@ -110,10 +114,7 @@ export const Cart = () => {
                                         <>
                                             {data.products?.map(
                                                 (product, i) => {
-                                                    console.log(
-                                                        "product",
-                                                        product
-                                                    );
+                                                   
 
                                                     const item =
                                                         cart?.items.find(
@@ -140,22 +141,22 @@ export const Cart = () => {
                                                                         alt=""
                                                                     />
                                                                     <div>
-                                                                        <p className="text-lg font-semibold">
+                                                                        <p className="text-lg font-medium">
                                                                             {
-                                                                                product.name
+                                                                                product?.name
                                                                             }
                                                                         </p>
                                                                         <p className="text-gray-500">
                                                                             Rs{" "}
                                                                             {
-                                                                                product.price
+                                                                                product?.price
                                                                             }
                                                                         </p>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td className="text-center">
-                                                                <span className="text-lg font-semibold">
+                                                                <span className="text-lg ">
                                                                     {
                                                                         item?.quantity
                                                                     }

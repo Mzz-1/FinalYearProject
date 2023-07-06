@@ -9,7 +9,7 @@ export const Search = ({ heading, onClick, register }) => {
                 type="text"
                 placeholder="KEYWORDS"
                 {...register}
-                className="w-[450px] relative h-[70px] my-[40px] mr-[0px] ml-auto border-2 outline-none pl-[30px] pr-[80px]"
+                className="w-[450px] relative h-[70px] font-slab my-[40px] mr-[0px] ml-auto border-2 outline-none pl-[30px] pr-[80px]"
             />{" "}
             <button className="relative" onClick={onClick}>
                 {" "}

@@ -10,10 +10,10 @@ const ViewEvents = ({ events, date }) => {
 
     return (
         <div className="my-[50px]">
-            <div className="grid grid-rows-1 grid-cols-2 gap-[0px] justify-center items-center">
-                <div className="text-[24px]">
-                    <h3 className="text-[40px]">{events.name}</h3>
-                    <hr className="h-[2px] bg-black"></hr>
+            <div className="grid grid-rows-1 grid-cols-2 gap-[0px] justify-center items-center font-slab">
+                <div className="text-[18px] w-[80%]">
+                    <h3 className="text-[35px]">{events.name}</h3>
+                    <hr className="h-[2px] bg-black mb-3"></hr>
                     <span className="flex gap-2">
                         <p>At:</p> <p>{events.place}</p>
                     </span>

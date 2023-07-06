@@ -1,4 +1,5 @@
 require("dotenv").config();
+const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 const getAllUsers = {
@@ -16,14 +17,32 @@ const updateUser = {
     path: "/api/users/:id",
     method: "patch",
     handler: async (req, res) => {
-        const { id: userID } = req.params();
-        const users = await User.findOneAndUpdate({ _id: userID }, req.body, {
-            new: true,
-            runValidators: true,
-            useFindAndModify: true,
-        });
+        const { id: userID } = req.params;
+        const { confirmPassword, receiveEmail, role } = req.body;
+        let newPasswordHash;
 
-        res.status(200).json({ users });
+        console.log(confirmPassword, receiveEmail, role);
+        if (confirmPassword) {
+            newPasswordHash = await bcrypt.hash(confirmPassword, 10);
+        }
+        console.log(newPasswordHash);
+        const users = await User.findOneAndUpdate(
+            { _id: userID },
+            {
+                ...(confirmPassword && { passwordHash: newPasswordHash }),
+                ...(receiveEmail === true && { receiveEmail }),
+                ...(receiveEmail === false && { receiveEmail: false }),
+                ...(role === true && { role: "artist" }),
+                ...(role === false && { role: "user" }),
+            },
+            {
+                new: true,
+                runValidators: true,
+                useFindAndModify: true,
+            }
+        );
+
+        res.status(200).json({});
     },
 };
 
@@ -57,5 +76,5 @@ module.exports = {
     getAllUsers,
     getUser,
     deleteUser,
-    updateUser
+    updateUser,
 };

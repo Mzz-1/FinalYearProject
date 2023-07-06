@@ -38,10 +38,29 @@ const cartSlice = createSlice({
     name: "cart",
     initialState: {
         data: [],
+        subtotal: 0,
         fetchStatus: "",
-        removeStatus:""
+        removeStatus: "",
     },
-    reducers: {},
+    reducers: {
+        cTotal: (state, action) => {
+            console.log(action.payload, "total total");
+            const { cartItems, products } = action.payload;
+            console.log(cartItems, products, "after decon");
+            for (let i = 0; i < cartItems?.length; i++) {
+                const item = cartItems[i];
+                console.log(item, "items");
+
+                const product = products.find((p) => p._id === item.productID);
+                console.log(action.payload, "total total");
+
+                if (product) {
+                    state.subtotal += item.quantity * product.price;
+                }
+                console.log(state.subtotal, "total sub");
+            }
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchCartProducts.fulfilled, (state, action) => {
@@ -67,12 +86,12 @@ const cartSlice = createSlice({
             })
             .addCase(removeFromCart.fulfilled, (state, action) => {
                 const { productID } = action.meta.arg;
-                console.log(productID,"product to remove")
+                console.log(productID, "product to remove");
                 state.data = state.data.products.filter(
                     (product) => product._id !== productID
                 );
 
-                console.log(state.data,"after remove remove")
+                console.log(state.data, "after remove remove");
                 state.removeStatus = "success";
             })
             .addCase(removeFromCart.pending, (state) => {

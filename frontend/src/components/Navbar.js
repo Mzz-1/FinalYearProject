@@ -5,6 +5,7 @@ import { ModalHeading } from "./Heading";
 import { ModalPara } from "./Paragraph";
 import { SuccessToast } from "../helpers/Toast";
 import { useState, useEffect } from "react";
+import { CgProfile } from "react-icons/cg";
 import Headroom from "react-headroom";
 
 export const Navbar = () => {
@@ -87,6 +88,21 @@ export const Navbar = () => {
                                     <span className="hover:border-b-2 pb-1 border-[#9F7E7E]"> LOGOUT</span>
                                    
                                 </button>
+                            )}
+                            {user && (
+                                <li>
+                                    <NavLink
+                                        to="/user-profile"
+                                        exact
+                                        className={({ isActive }) => {
+                                            return isActive
+                                                ? "border-b-2 pb-1 border-[#9F7E7E] "
+                                                : "hover:border-b-2 pb-1 border-[#9F7E7E]";
+                                        }}
+                                    >
+                                        <CgProfile size={18} color=""/>
+                                    </NavLink>
+                                </li>
                             )}
                         </ul>
                     </nav>
