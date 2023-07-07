@@ -2,16 +2,23 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { AdminHeading, AdminHeading2, Heading2 } from "../../components/Heading";
 import { useUser } from "../../service/useUser";
+import { ArtistNavbar } from "../../components/ArtistNavbar";
 
-export const ManageOrders = () => {
+export const ManageOrders = ({userType}) => {
     const [orders, setOrders] = useState([]);
     const [productDetails, setProductDetails] = useState({});
     const user = useUser();
 
+    const links = [
+        { itemName: "PROFILE", link: `/user-profile/` },
+        { itemName: "ORDERS", link: `/orders` },
+    ];
+
+
     const getOrders = async () => {
         try {
             const orderData = await axios.get(
-                `http://localhost:5000/api/order/${"Pratham Maharjan"}`
+                `http://localhost:5000/api/order/${user.id}`
             );
             const orders = orderData.data.orders;
             console.log("Orders", orders);
@@ -57,12 +64,13 @@ export const ManageOrders = () => {
     }, [user]);
 
     return (
-        <div className="flex flex-col gap-[40px] h-[100%]">
+        <div className={`"flex flex-col gap-[40px] " ${userType==="user" ? "w-[70vw] m-auto h-[75vh]" :"h-[100%]"}`}>
+              {userType==="user" && <> <br/><br/> <ArtistNavbar links={links} /></>  }
             <Heading2>Orders</Heading2>
-            <div className="flex flex-col gap-[20px] border rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white">
-                <AdminHeading2>All Orders</AdminHeading2>
-                <div className="overflow-scroll font-slab">
-                    <table className="w-[100%] text-[#252733]">
+            <div className={`"flex flex-col gap-[20px]  rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white" ${userType==="user" ? "" :""}`}>
+              {userType==="user" &&  <AdminHeading2>All Orders</AdminHeading2>}
+                <div className={` font-slab ${userType==="user" ?"overflow-hidden" : "overflow-hidden"}`}>
+                    <table className={`w-[100%] text-[#252733]  `}>
                         <thead className="text-left top-0">
                             <tr className="text-[#A4A6B3] mx-[0px] my-[0px]">
                                 <th className="font-extralight">SN</th>

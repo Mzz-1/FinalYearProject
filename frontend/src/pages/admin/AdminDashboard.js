@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Box } from "../../components/DashboardBox";
-import { AdminHeading } from "../../components/Heading";
+import { AdminHeading, Heading2 } from "../../components/Heading";
 import { useUser } from "../../service/useUser";
 import { useState, useEffect } from "react";
 
@@ -9,17 +9,15 @@ const AdminDashboard = () => {
     const [totalAmount, setTotalAmount] = useState();
     const [totalArtist, setTotalArtist] = useState("");
     const [totalEvents, setTotalEvents] = useState();
+    const [totalOrders, setTotalOrders] = useState();
     const [totalUser, setTotalUser] = useState();
 
-
     const getUsers = async () => {
-        const userData = await axios.get(
-            `http://localhost:5000/api/users?role=${"user"}`
-        );
+        const userData = await axios.get(`http://localhost:5000/api/users`);
 
         const data = await userData.data.users;
         setTotalUser(data.length);
-        console.log("getEvents", data);
+        console.log("getusers", data);
     };
 
     const getArtists = async () => {
@@ -29,7 +27,7 @@ const AdminDashboard = () => {
 
         const data = await userData.data.users;
         setTotalArtist(data.length);
-        console.log("getEvents", data);
+        console.log("getartists", data);
     };
 
     const getEvents = async () => {
@@ -38,21 +36,20 @@ const AdminDashboard = () => {
         );
 
         const data = await productsData.data.event;
-        setTotalEvents(data.length);
-        console.log("getEvents", data);
+        setTotalEvents(productsData.data.event.length);
+        console.log("getEvents", data.length);
     };
 
     const getOrders = async () => {
         const orderData = await axios.get(`http://localhost:5000/api/orders`);
 
         const data = await orderData.data.order;
-
+        setTotalOrders(data.length);
         let totalAmount = 0;
 
         data.forEach((order) => {
             totalAmount += order.total;
         });
-        setTotalEvents(data.length);
         setTotalAmount(totalAmount);
         console.log("order", data);
     };
@@ -66,12 +63,12 @@ const AdminDashboard = () => {
 
     return (
         <>
-            <AdminHeading>Dashboard</AdminHeading>
+            <Heading2>Dashboard</Heading2>
             <div className="grid grid-cols-3 justify-center mt-9 gap-11">
                 <Box number={totalUser}>Total Users</Box>
                 <Box number={totalArtist}>Total Artists</Box>
                 <Box number={totalEvents}>Total Events</Box>
-                <Box number={totalEvents}>Total Orders</Box>
+                <Box number={totalOrders}>Total Orders</Box>
                 <div className="h-[300px] w-[650px] bg-[#29CC97] shadow-xl text-white text-center rounded-[10px] m-auto col-span-2">
                     <h3 className="text-[30px] mt-7">Total Transaction</h3>
                     <p className="text-[80px] mt-5">{totalAmount}</p>

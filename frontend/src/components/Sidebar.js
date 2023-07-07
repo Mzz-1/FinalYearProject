@@ -29,7 +29,7 @@ export const Sidebar = ({ items }) => {
       };
     
       return (
-        <div className="flex flex-col py-[20px] h-[100%]">
+        <div className="flex flex-col py-[20px] h-[100%] font-slab">
           <AdminHeading2>Welcome</AdminHeading2>
           <div className="flex justify-center mt-[50px]">
             <ul className="w-[100%] flex flex-col gap-[10px]">

@@ -19,6 +19,12 @@ const ArtistPortfolio = () => {
 
     const { id } = useParams();
 
+    const links = [
+        { itemName: "BIOGRAPHY", link: `/artist-profile/biography/${id}` },
+        { itemName: "PORTFOLIO", link: `/artist-profile/portfolio/${id}` },
+        { itemName: "EXHIBITION", link: `/artist-profile/exhibition/${id}` },
+    ];
+
     const getBio = async () => {
         const productsData = await axios.get(
             `http://localhost:5000/api/biography/${id}`
@@ -44,7 +50,7 @@ const ArtistPortfolio = () => {
             >
                 Featured Works
             </h2>
-            <ArtistNavbar id={id} />
+            <ArtistNavbar id={id} links={links} />
             {fetchStatus !== "success" ? (
                 <Loader/>
             ) : (

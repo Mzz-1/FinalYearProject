@@ -11,6 +11,12 @@ import { Loader } from "../../components/LoaderWrapper";
 const ArtistExhibition = () => {
     const { id } = useParams();
 
+    const links = [
+        { itemName: "BIOGRAPHY", link: `/artist-profile/biography/${id}` },
+        { itemName: "PORTFOLIO", link: `/artist-profile/portfolio/${id}` },
+        { itemName: "EXHIBITION", link: `/artist-profile/exhibition/${id}` },
+    ];
+
     const dispatch = useDispatch();
 
     const exhibition = useSelector((state) => state.exhibition);
@@ -30,7 +36,7 @@ const ArtistExhibition = () => {
                 Featured Exibitions
             </h2>
 
-            <ArtistNavbar id={id} />
+            <ArtistNavbar id={id} links={links}/>
             {fetchStatus !== "success" ? (
                 <Loader/>
             ) : (

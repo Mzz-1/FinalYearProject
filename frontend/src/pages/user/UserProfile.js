@@ -7,6 +7,7 @@ import { SuccessToast, InfoToast } from "../../helpers/Toast";
 import { DashboardActionButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";
 import { Heading2 } from "../../components/Heading";
+import { ArtistNavbar } from "../../components/ArtistNavbar";
 
 const UserProfilePage = () => {
     const {
@@ -19,6 +20,11 @@ const UserProfilePage = () => {
     } = useForm();
 
     const user = useUser();
+
+    const links = [
+        { itemName: "PROFILE", link: `/user-profile/` },
+        { itemName: "ORDERS", link: `/orders` },
+    ];
 
     const [userInfo, setUserInfo] = useState();
     const [artistCheck, setartistCheck] = useState();
@@ -70,8 +76,14 @@ const UserProfilePage = () => {
     };
 
     return (
+        <div className=" max-w-[1340px] m-auto ">
+            <br/><br/>
+             <ArtistNavbar links={links}/>
         <div className="flex flex-col items-center justify-center gap-[20px] py-[50px] font-slab">
+                       
+
             <Heading2>Profile</Heading2>
+
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(updateUserInfo)}
@@ -162,6 +174,7 @@ const UserProfilePage = () => {
                     Update Information
                 </DashboardActionButton>
             </form>
+        </div>
         </div>
     );
 };

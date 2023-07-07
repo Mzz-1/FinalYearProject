@@ -20,9 +20,9 @@ import Page404 from "../pages/404page";
 import { Cart } from "../pages/store/Cart";
 import { OrderSummary } from "../pages/store/OrderSummary";
 import UserProfilePage from "../pages/user/UserProfile";
+import { ManageOrders } from "../pages/artistDashboard/Order";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
-
 
 export const AllRoutes = () => {
     const location = useLocation();
@@ -88,11 +88,15 @@ export const AllRoutes = () => {
                     path="/order-summary/:id"
                     element={<PrivateRoute Component={OrderSummary} />}
                 />
-                 <Route
+                <Route
                     path="/user-profile"
                     element={<PrivateRoute Component={UserProfilePage} />}
                 />
-                <Route path="*" element={<Page404/>} />
+                <Route
+                    path="/orders"
+                    element={<PrivateRoute Component={ManageOrders} userType={"user"}/>}
+                />
+                <Route path="*" element={<Page404 />} />
             </Routes>
             {!shouldHide && <Footer />}
         </div>

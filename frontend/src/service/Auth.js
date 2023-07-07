@@ -12,7 +12,7 @@ const PrivateRoutes = (props) => {
 };
 
 const PrivateRoute = (props) => {
-    const { Component } = props;
+    const { Component,userType } = props;
     const navigate = useNavigate();
     const user = useUser();
     useEffect(() => {
@@ -20,6 +20,9 @@ const PrivateRoute = (props) => {
             navigate("/login");
         }
     }, []);
+    if(userType){
+        return <Component userType={userType}/>
+    }
     return <Component />;
 };
 

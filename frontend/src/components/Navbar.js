@@ -17,6 +17,8 @@ export const Navbar = () => {
         { itemName: "CART", link: "/cart" },
     ];
 
+    const [logoutTrigger, setLogoutTrigger] = useState(false);
+
     const user = useUser();
     const navigate = useNavigate();
 

@@ -68,12 +68,12 @@ const getAllOrders = {
 };
 
 const getOrder = {
-    path: "/api/order/:artistName",
+    path: "/api/order/:userId",
     method: "get",
     handler: async (req, res) => {
-        const { artistName } = req.params;
+        const { userId } = req.params;
 
-        const orders = await Order.find({ "products.artist": artistName });
+        const orders = await Order.find({ "userId": userId });
             res.status(200).json({ orders });
         
     },
