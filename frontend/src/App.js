@@ -22,18 +22,17 @@ function App() {
     }
 
     return (
-        <>
-           
+        <BrowserRouter>
                 {role === "anon" || role === "user" || role === "artist" ? (
                     <AllRoutes />
                 ) : (
                     <></>
                 )}
-                {role === "artist" ? <ArtistRoutes /> : <></>}
-                {role === "admin" ? <AdminRoutes /> : <></>}
+                {role === "artist" && <ArtistRoutes />}
+                {role === "admin" && <AdminRoutes />}
            
            
-        </>
+        </BrowserRouter>
     );
 }
 

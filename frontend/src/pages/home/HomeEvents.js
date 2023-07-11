@@ -13,7 +13,7 @@ import { Carousel } from "../../components/Carousel";
 export const HomeEvents = () => {
     const event = useSelector((state) => state.event);
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const { fetchStatus, data } = event;
 
@@ -28,25 +28,23 @@ export const HomeEvents = () => {
         getEvents();
     }, []);
 
-
     return (
         <div className="px-[0px] mt-[30px] text-center">
             <Heading2>Exhibitions</Heading2>
             <br></br>
-            <ViewAllButton border="black" link="/artists" align="center">View All</ViewAllButton>
+            <ViewAllButton border="black" link="/artists" align="center">
+                View All
+            </ViewAllButton>
             <br></br>
             <br></br>
             <div className="w-[500px] text-center m-auto">
                 {/* <hr className="h-[2.5px] bg-black my-[20px]" /> */}
-                
             </div>
             {fetchStatus !== "success" ? (
-                <Loader/>
+                <Loader />
             ) : (
                 <Carousel events={data.event} />
             )}
-
-          
         </div>
     );
 };

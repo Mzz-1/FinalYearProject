@@ -1,8 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../service/useUser";
-import { LogOutModal } from "./Modal";
-import { ModalHeading } from "./Heading";
-import { ModalPara } from "./Paragraph";
 import { SuccessToast } from "../helpers/Toast";
 import { useState, useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
@@ -17,15 +14,22 @@ export const Navbar = () => {
         { itemName: "CART", link: "/cart" },
     ];
 
-    const [logoutTrigger, setLogoutTrigger] = useState(false);
+    
 
     const user = useUser();
+
+    const [loggedIn, setLoggedIn] = useState(user===null?false:true);
+
+    console.log(user,"uu")
+
+    console.log(loggedIn,"ll")
+
     const navigate = useNavigate();
 
     const LogOut = () => {
         localStorage.removeItem("token");
         SuccessToast("Logged out.");
-        window.location.reload(true);
+        setLoggedIn(!loggedIn);
         navigate("/");
     };
 
@@ -70,7 +74,14 @@ export const Navbar = () => {
                                     </NavLink>
                                 </li>
                             )}
-                            {!user && (
+                            {user && loggedIn ? (
+                                <button onClick={LogOut}>
+                                    <span className="hover:border-b-2 pb-1 border-[#9F7E7E]">
+                                        {" "}
+                                        LOGOUT
+                                    </span>
+                                </button>
+                            ) : (
                                 <li>
                                     <NavLink
                                         to="/login"
@@ -85,13 +96,8 @@ export const Navbar = () => {
                                     </NavLink>
                                 </li>
                             )}
-                            {user && (
-                                <button  onClick={LogOut}>
-                                    <span className="hover:border-b-2 pb-1 border-[#9F7E7E]"> LOGOUT</span>
-                                   
-                                </button>
-                            )}
-                            {user && (
+
+                            
                                 <li>
                                     <NavLink
                                         to="/user-profile"
@@ -102,10 +108,10 @@ export const Navbar = () => {
                                                 : "hover:border-b-2 pb-1 border-[#9F7E7E]";
                                         }}
                                     >
-                                        <CgProfile size={18} color=""/>
+                                        <CgProfile size={18} color="" />
                                     </NavLink>
                                 </li>
-                            )}
+                            
                         </ul>
                     </nav>
                 </div>

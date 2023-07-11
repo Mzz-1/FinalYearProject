@@ -3,6 +3,7 @@ import { Box } from "../../components/DashboardBox";
 import { AdminHeading, Heading2 } from "../../components/Heading";
 import { useUser } from "../../service/useUser";
 import { useState,useEffect } from "react";
+import { LineChart } from "../../components/Charts";
 
 const ArtistDashboard = () => {
     const user = useUser();
@@ -58,11 +59,14 @@ const ArtistDashboard = () => {
         <>
             
             <Heading2>Dashboard</Heading2>
+            
+            <div className="w-[80%] m-auto bg-white shadow-lg p-11">  <LineChart/></div>
             <div className="grid grid-cols-3 grid-rows-2 gap-11 justify-center mt-9">
                 <Box number={totalProducts}>Total Products</Box>
                 <Box number={totalProducts}>Total Orders</Box>
                 <Box number={totalEvents}>Total Events</Box>
-               
+              
+             
             </div>
         </>
     );

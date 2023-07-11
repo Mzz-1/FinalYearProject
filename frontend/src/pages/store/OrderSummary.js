@@ -99,7 +99,6 @@ export const OrderSummary = () => {
                             (item) => item.productID === product._id
                         ).quantity,
                         artist: product.artist,
-                        // Include other relevant product details in the order if needed
                     })),
                     total: subTotal,
                 }

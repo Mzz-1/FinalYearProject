@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const connectCloudinary = require("../db/Cloudinary");
 const cloudinary = require("cloudinary").v2;
 const { Artist, Exhibition } = require("../models/Artist");
-const Product = require("../models/Products")
+const Product = require("../models/Products");
 const multer = require("multer");
 
 const upload = multer({ dest: "uploads/" });
@@ -177,11 +177,19 @@ const getArtistExhibitions = {
     method: "get",
     handler: async (req, res) => {
         const { id: artistID } = req.params;
-        const artist = await Artist.findOne({ _id: artistID }).populate(
+
+        let artist = await Artist.findOne({ _id: artistID }).populate(
             "exhibitions"
         );
+        if (!artist) {
+            artist = await Artist.findOne({ userID: artistID }).populate(
+                "exhibitions"
+            );
+            if (!artist) {
+                return res.sendStatus(400);
+            }
+        }
         const exhibitions = artist.exhibitions;
-
         res.status(200).json({ exhibitions });
     },
 };
@@ -278,5 +286,5 @@ module.exports = {
     deleteExhibition,
     updateArtistEvent,
     getExhibitions,
-    getArtistProduct
+    getArtistProduct,
 };

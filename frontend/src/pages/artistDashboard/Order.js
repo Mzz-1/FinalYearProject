@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { AdminHeading, AdminHeading2, Heading2 } from "../../components/Heading";
+import {
+    AdminHeading,
+    AdminHeading2,
+    Heading2,
+} from "../../components/Heading";
 import { useUser } from "../../service/useUser";
 import { ArtistNavbar } from "../../components/ArtistNavbar";
 
-export const ManageOrders = ({userType}) => {
+export const ManageOrders = ({ userType }) => {
     const [orders, setOrders] = useState([]);
     const [productDetails, setProductDetails] = useState({});
     const user = useUser();
@@ -14,6 +18,20 @@ export const ManageOrders = ({userType}) => {
         { itemName: "ORDERS", link: `/orders` },
     ];
 
+    const [bio, setBio] = useState([]);
+
+    const getBio = async () => {
+        try {
+            const productsData = await axios.get(
+                `http://localhost:5000/api/biography/${user.id}`
+            );
+
+            const data = await productsData.data.artist;
+            setBio(data);
+        } catch {
+            setBio("None");
+        }
+    };
 
     const getOrders = async () => {
         try {
@@ -21,12 +39,32 @@ export const ManageOrders = ({userType}) => {
                 `http://localhost:5000/api/order/${user.id}`
             );
             const orders = orderData.data.orders;
-            console.log("Orders", orders);
             setOrders(orders);
         } catch (err) {
             console.log(err);
         }
     };
+    const getArtistOrders = async () => {
+        try {
+            const orderData = await axios.get(
+                `http://localhost:5000/api/artist-order/${bio.name}`
+            );
+            const orders = orderData.data.orders;
+            setOrders(orders);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        getBio();
+    }, []);
+
+    useEffect(() => {
+        if (userType === "artist") {
+            getArtistOrders();
+        }
+    }, [bio]);
 
     const getProductDetails = async (productId) => {
         try {
@@ -60,16 +98,40 @@ export const ManageOrders = ({userType}) => {
     }, [orders]);
 
     useEffect(() => {
-        getOrders();
+        if (userType === "user") {
+            getOrders();
+        }
     }, [user]);
 
     return (
-        <div className={`"flex flex-col gap-[40px] " ${userType==="user" ? "w-[70vw] m-auto h-[75vh]" :"h-[100%]"}`}>
-              {userType==="user" && <> <br/><br/> <ArtistNavbar links={links} /></>  }
+        <div
+            className={`"flex flex-col gap-[40px] " ${
+                userType === "user" ? "w-[70vw] m-auto h-[75vh]" : "h-[100%]"
+            }`}
+        >
+            {userType === "user" && (
+                <>
+                    {" "}
+                    <br />
+                    <br /> <ArtistNavbar links={links} />
+                </>
+            )}
             <Heading2>Orders</Heading2>
-            <div className={`"flex flex-col gap-[20px]  rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white" ${userType==="user" ? "" :""}`}>
-              {userType==="user" &&  <AdminHeading2>All Orders</AdminHeading2>}
-                <div className={` font-slab ${userType==="user" ?"overflow-hidden" : "overflow-hidden"}`}>
+            <div
+                className={`"flex flex-col gap-[20px]  rounded-[10px] h-[90%] py-[30px] px-[20px] bg-white" ${
+                    userType === "user" ? "" : ""
+                }`}
+            >
+                {userType === "user" && (
+                    <AdminHeading2>All Orders</AdminHeading2>
+                )}
+                <div
+                    className={` font-slab ${
+                        userType === "user"
+                            ? "overflow-hidden"
+                            : "overflow-hidden"
+                    }`}
+                >
                     <table className={`w-[100%] text-[#252733]  `}>
                         <thead className="text-left top-0">
                             <tr className="text-[#A4A6B3] mx-[0px] my-[0px]">
@@ -80,7 +142,6 @@ export const ManageOrders = ({userType}) => {
                                 <th className="font-extralight">Category</th>
                                 <th className="font-extralight">Dimensions</th>
                                 <th className="font-extralight">Quantity</th>
-                                <th className="font-extralight">Payment</th>
                             </tr>
                         </thead>
                         <tbody className="overflow-scroll">
@@ -121,7 +182,6 @@ export const ManageOrders = ({userType}) => {
                                         <td key={idx}>{product.quantity}</td>
                                     ))}
 
-                                    <td className="">Successful</td>
                                 </tr>
                             ))}
                         </tbody>

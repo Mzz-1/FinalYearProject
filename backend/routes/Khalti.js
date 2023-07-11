@@ -7,7 +7,6 @@ const khaltiPayment = {
     handler: async (req, res) => {
         const { token, amount } = req.body; // Extract payment details from request body
 
-        console.log("token", token, amount);
         try {
             // Send the payment verification request using the Khalti API
             const response = await axios.post(

@@ -79,9 +79,20 @@ const getOrder = {
     },
 };
 
+const getArtistOrder = {
+  path: "/api/artist-order/:artistName",
+  method: "get",
+  handler: async (req, res) => {
+      const { artistName } = req.params;
+      const orders = await Order.find({ "products.artist": artistName });
+          res.status(200).json({ orders });
+      
+  },
+};
 
 module.exports = {
     addOrder,
     getAllOrders,
-    getOrder
+    getOrder,
+    getArtistOrder
 };

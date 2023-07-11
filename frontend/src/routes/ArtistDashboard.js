@@ -60,7 +60,7 @@ export const ArtistRoutes = () => {
                             />
                             <Route
                                 path="orders"
-                                element={<ManageOrders />}
+                                element={<ManageOrders userType={"artist"}/>}
                             />
                         </Route>
                         <Route path="*" element={<Page404/>} />

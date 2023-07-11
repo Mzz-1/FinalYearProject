@@ -21,6 +21,11 @@ const UserProfilePage = () => {
 
     const user = useUser();
 
+    
+    if(user===null){
+        InfoToast("Please Log In to view your profile and orders.")
+    }
+
     const links = [
         { itemName: "PROFILE", link: `/user-profile/` },
         { itemName: "ORDERS", link: `/orders` },
@@ -42,7 +47,6 @@ const UserProfilePage = () => {
             `http://localhost:5000/api/users/${user.id}`
         );
         setUserInfo(response.data.user);
-        console.log(response.data.user);
         setartistCheck(response.data.user.role === "artist" ? true : false);
     };
 
@@ -63,7 +67,6 @@ const UserProfilePage = () => {
                     }
                 );
 
-                console.log(response.data);
                 SuccessToast("Your information has been updated.");
             } catch (err) {
                 console.log(`err:${err}`);
