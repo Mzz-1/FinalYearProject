@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Product = ({product,type})=>{
+export const Product = ({ product, type }) => {
     const navigate = useNavigate();
 
     const getProducts = async (id) => {
@@ -19,31 +19,27 @@ export const Product = ({product,type})=>{
                     ? "grid grid-cols-custom-2 items-center gap-11"
                     : "group hover:bg-[#f4f6f6]"
             } 
-            ${
-                type === "carousel"
-                    ? "mx-5 mb-7"
-                    : ""
-            } `}
+            ${type === "carousel" ? "mx-5 mb-7" : ""} `}
             data-aos="fade-up"
             onClick={() => getProducts(product._id)}
             key={product._id}
         >
             <div className={`${type === "gallery" ? "" : "bg-black"}`}>
-            <img
-                src={product.url}
-                className={`${
-                    type === "gallery"
-                        ? "w-[auto] h-[75vh] m-auto"
-                        : "w-[100%] h-[500px]"
-                } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75`}
-                alt="product"
-            />
+                <img
+                    src={product.url}
+                    className={`${
+                        type === "gallery"
+                            ? "w-[auto] h-[75vh] m-auto"
+                            : "w-[100%] h-[500px]"
+                    } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75`}
+                    alt="product"
+                />
             </div>
             <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] text-center ">
                 <li className=" text-[30px] font-cinzel text-[#3C3737]">
                     {product.name}
                 </li>
-                {type === "gallery" ? <hr></hr> :""}
+                {type === "gallery" ? <hr></hr> : ""}
                 <li className="text-[#65635F] text-[18px]">
                     By {product.artist}
                 </li>
@@ -65,13 +61,13 @@ export const Product = ({product,type})=>{
                 ""
             ) : (
                 <button className="flex justify-center items-center absolute top-[35%] left-[50%] transform translate-x-[-50%] -translate-y-[-50%] p-3 border-2 w-[200px] mb-5 m-auto font-slab font-medium text-[#fefefe] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-  {product.quantity <= 0 ? (
-    <span className="font-slab">SOLD OUT</span>
-  ) : (
-    <span className="font-slab">VIEW DETAILS</span>
-  )}
-</button>
+                    {product.quantity <= 0 ? (
+                        <span className="font-slab">SOLD OUT</span>
+                    ) : (
+                        <span className="font-slab">VIEW DETAILS</span>
+                    )}
+                </button>
             )}
         </div>
     );
-}
+};

@@ -7,6 +7,9 @@ import { SuccessToast } from "../../helpers/Toast";
 import { DashboardActionButton } from "../../components/Button";
 
 const CheckoutPage = () => {
+    useEffect(() => {
+        document.title = 'Checkout'; 
+      }, []);
     const {
         register,
         handleSubmit,

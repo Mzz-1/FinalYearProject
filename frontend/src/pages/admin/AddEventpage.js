@@ -30,6 +30,11 @@ const AddEventPage = () => {
         fetchData();
     }, [id]);
 
+    useEffect(()=>{
+        document.title = "Add Events | Admin Dashboard"; 
+
+    },[])
+
     const EventAction = async (data) => {
         if (id) {
             // await updateEvent(data,eventToEdit._id)

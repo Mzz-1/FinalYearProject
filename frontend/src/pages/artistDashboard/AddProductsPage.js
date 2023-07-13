@@ -54,7 +54,8 @@ const AddProductPage = () => {
 
     useEffect(() => {
         getArtist();
-    });
+        document.title = "Add Products | Artist Dashboard"; 
+    },[]);
 
     const ProductAction = async (data) => {
         const response = await axios.get(

@@ -15,7 +15,7 @@ export const NewProducts = () => {
 
 
     const dispatch = useDispatch();
-    const { product } = useSelector((state) => state);
+    const  product  = useSelector((state) => state.product);
 
     const { data, fetchStatus } = product;
 

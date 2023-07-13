@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import {
-    AdminHeading,
-    AdminHeading2,
-    Heading2,
-} from "../../components/Heading";
+import { Heading2 } from "../../components/Heading";
 import { useUser } from "../../service/useUser";
 import { ArtistNavbar } from "../../components/ArtistNavbar";
 
 export const ManageOrders = ({ userType }) => {
+    useEffect(() => {
+        document.title = 'Your Orders | View your Orders'; 
+      }, []);
     const [orders, setOrders] = useState([]);
     const [productDetails, setProductDetails] = useState({});
     const user = useUser();
@@ -58,6 +57,8 @@ export const ManageOrders = ({ userType }) => {
 
     useEffect(() => {
         getBio();
+        document.title = "View Orders | Artist Dashboard"; 
+
     }, []);
 
     useEffect(() => {
@@ -122,9 +123,6 @@ export const ManageOrders = ({ userType }) => {
                     userType === "user" ? "" : ""
                 }`}
             >
-                {userType === "user" && (
-                    <AdminHeading2>All Orders</AdminHeading2>
-                )}
                 <div
                     className={` font-slab ${
                         userType === "user"
@@ -181,7 +179,6 @@ export const ManageOrders = ({ userType }) => {
                                     {order.products.map((product, idx) => (
                                         <td key={idx}>{product.quantity}</td>
                                     ))}
-
                                 </tr>
                             ))}
                         </tbody>

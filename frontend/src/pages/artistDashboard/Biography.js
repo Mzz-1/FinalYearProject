@@ -27,6 +27,8 @@ const Biography = () => {
 
     useEffect(() => {
         getBio();
+        document.title = "Update Biography | Artist Dashboard"; 
+
     }, []);
 
     const {

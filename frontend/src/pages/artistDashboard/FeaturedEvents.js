@@ -2,8 +2,6 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Input from "../../components/Input";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { Label } from "../../components/Label";
 import { UpdateButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";

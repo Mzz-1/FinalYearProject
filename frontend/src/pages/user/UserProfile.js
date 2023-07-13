@@ -1,8 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Input from "../../components/Input";
-import { useParams } from "react-router-dom";
 import { SuccessToast, InfoToast } from "../../helpers/Toast";
 import { DashboardActionButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";
@@ -10,11 +9,13 @@ import { Heading2 } from "../../components/Heading";
 import { ArtistNavbar } from "../../components/ArtistNavbar";
 
 const UserProfilePage = () => {
+    useEffect(() => {
+        document.title = 'Your Profile | View Your Profile'; 
+      }, []);
     const {
         register,
         handleSubmit,
         watch,
-        getValues,
         control,
         formState: { errors },
     } = useForm();
@@ -22,9 +23,14 @@ const UserProfilePage = () => {
     const user = useUser();
 
     
-    if(user===null){
-        InfoToast("Please Log In to view your profile and orders.")
-    }
+    const isToastShownRef = useRef(false);
+
+    useEffect(() => {
+        if (!user && !isToastShownRef.current) {
+            InfoToast("Please Log In to view your profile and orders.")
+            isToastShownRef.current = true; // Update the ref value
+        }
+    }, [user]);
 
     const links = [
         { itemName: "PROFILE", link: `/user-profile/` },
@@ -43,11 +49,13 @@ const UserProfilePage = () => {
     };
 
     const getUser = async () => {
+        if(user){
         const response = await axios.get(
             `http://localhost:5000/api/users/${user.id}`
         );
         setUserInfo(response.data.user);
         setartistCheck(response.data.user.role === "artist" ? true : false);
+        }
     };
 
     useEffect(() => {

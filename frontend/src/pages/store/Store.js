@@ -14,6 +14,10 @@ import { BrownButton } from "../../components/Button";
 import { Loader } from "../../components/LoaderWrapper";
 
 const Store = () => {
+    useEffect(() => {
+        document.title = 'The Art Store'; 
+      }, []);
+
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
 

@@ -1,16 +1,17 @@
 
 import {
-    AdminHeading,
-    AdminHeading2,
+    
     Heading2,
-    ModalHeading,
 } from "../../components/Heading";
 import { UserTable } from "../../components/UserTable";
-
+import { useEffect } from "react";
 
 
 const UserList = () => {
-   
+    useEffect(()=>{
+        document.title = "Add Events | Admin Dashboard"; 
+
+    },[])
     return (
         <div className="flex flex-col gap-[40px] h-[100%] font-slab">
             <Heading2>Users</Heading2>

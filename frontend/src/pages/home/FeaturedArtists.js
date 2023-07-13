@@ -12,7 +12,7 @@ import { Loader } from "../../components/LoaderWrapper";
 export const FeaturedArtists = () => {
     const dispatch = useDispatch();
 
-    const { artist } = useSelector((state) => state);
+    const artist  = useSelector((state) => state.artist);
 
     const { data, fetchStatus } = artist;
     const getArtists = async () => {

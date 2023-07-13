@@ -14,15 +14,9 @@ export const Navbar = () => {
         { itemName: "CART", link: "/cart" },
     ];
 
-    
-
     const user = useUser();
 
     const [loggedIn, setLoggedIn] = useState(user===null?false:true);
-
-    console.log(user,"uu")
-
-    console.log(loggedIn,"ll")
 
     const navigate = useNavigate();
 

@@ -40,6 +40,7 @@ const cartSlice = createSlice({
         data: [],
         subtotal: 0,
         fetchStatus: "",
+        addToCartStatus:"",
         removeStatus: "",
     },
     reducers: {
@@ -75,7 +76,9 @@ const cartSlice = createSlice({
                 state.fetchStatus = "error";
             })
             .addCase(addToCart.fulfilled, (state, action) => {
-                state.data.products.push(action.payload.product);
+                const newProduct = action.payload; // New product returned by the API
+                state.data.push(newProduct); // Add the new product to the existing products array
+                state.addToCartStatus = "success";
                 state.fetchStatus = "success";
             })
             .addCase(addToCart.pending, (state) => {

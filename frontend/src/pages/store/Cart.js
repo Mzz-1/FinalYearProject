@@ -1,20 +1,26 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import { useUser } from "../../service/useUser";
 import { InfoToast, SuccessToast } from "../../helpers/Toast";
-import { Heading, Heading2 } from "../../components/Heading";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCartProducts, removeFromCart,cTotal } from "../../redux-store/cartSlice";
+import {
+    fetchCartProducts,
+    removeFromCart,
+    cTotal,
+} from "../../redux-store/cartSlice";
 import { Loader } from "../../components/LoaderWrapper";
 import cartSlice from "../../redux-store/cartSlice";
 
 export const Cart = () => {
+    useEffect(() => {
+        document.title = 'Your Cart'; 
+      }, []);
     const user = useUser();
     const [cart, setCart] = useState();
     const [subTotal, setSubTotal] = useState(0);
-
+    const isToastShownRef = useRef(false);
 
     const dispatch = useDispatch();
 
@@ -26,41 +32,48 @@ export const Cart = () => {
 
     const getCart = async () => {
         try {
-            const cartData = await axios.get(
-                `http://localhost:5000/api/cart/${user.id}`
-            );
-            const cart = cartData.data.cart;
+            if (user) {
+                const cartData = await axios.get(
+                    `http://localhost:5000/api/cart/${user.id}`
+                );
+                const cart = cartData.data.cart;
 
-          
-            setCart(cart);
-        } catch (err) {}
+                setCart(cart);
+            } else {
+                // Handle the case when user.id is undefined or falsy
+                // For example, show an error message or redirect the user
+            }
+        } catch (err) {
+            // Handle any errors that occur during the API request
+        }
     };
+    useEffect(() => {
+        if (!user && !isToastShownRef.current) {
+            InfoToast("Please log in to use the cart.");
+            isToastShownRef.current = true; // Update the ref value
+        }
+    }, [user]);
 
-    if (!user) {
-        InfoToast("Please log in to use the cart.");
-    }
-
-    const getProducts =  (id) => {
-        const userID = user.id;
+    const getProducts = () => {
+        const userID = user?.id;
         dispatch(fetchCartProducts({ userID }));
     };
 
-    const removeProductFromCart =  (productID) => {
-        const userID = user.id;
+    const removeProductFromCart = (productID) => {
+        const userID = user?.id;
         dispatch(removeFromCart({ userID, productID }));
         SuccessToast("Product has been removed from cart");
         calculateTotal();
     };
 
     useEffect(() => {
-        getCart();
-        getProducts();
-console.log(data.products,"data products")
-      
-      
-    }, [subTotal, dispatch, removeStatus]);
+        if (user) {
+            getCart();
+            getProducts();
+        }
+    }, [user, dispatch, removeStatus]);
     const calculateTotal = () => {
-        if (cart?.items && data.products) {
+        if (cart?.items && data?.products) {
             let total = 0;
             for (let i = 0; i < cart.items.length; i++) {
                 const item = cart.items[i];
@@ -78,7 +91,6 @@ console.log(data.products,"data products")
     useEffect(() => {
         calculateTotal();
     }, [cart, data.products]);
-    console.log(data.products?.length, "length");
     return (
         <div className="bg-gray-100 min-h-screen px-[50px] font-slab">
             <div className="text-center py-[40px]">
@@ -88,7 +100,7 @@ console.log(data.products,"data products")
                 <Loader />
             ) : (
                 <>
-                    {data.products?.length > 0 ? (
+                    {data?.products.length > 0 ? (
                         <div className="">
                             <table className="bg-white  border-gray-300 w-[100%] rounded-md shadow-sm">
                                 <thead className="text-left text-[#9F7E7E]">
@@ -114,8 +126,6 @@ console.log(data.products,"data products")
                                         <>
                                             {data.products?.map(
                                                 (product, i) => {
-                                                   
-
                                                     const item =
                                                         cart?.items.find(
                                                             (item) =>
@@ -212,6 +222,7 @@ console.log(data.products,"data products")
                             Your Cart Is Currently Empty.
                         </span>
                     )}
+                    
                 </>
             )}
         </div>

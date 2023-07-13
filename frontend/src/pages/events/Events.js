@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllEvents } from "../../redux-store/eventSlice";
 import { Loader } from "../../components/LoaderWrapper";
 const Events = () => {
+    useEffect(() => {
+        document.title = 'Featured Events | Ongoing and Upcomming Events'; 
+      }, []);
     const dispatch = useDispatch();
 
     const event = useSelector((state) => state.event);

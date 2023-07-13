@@ -12,6 +12,10 @@ import { Loader } from "../../components/LoaderWrapper";
 const ArtistPage = () => {
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        document.title = 'Featured Artist'; 
+      }, []);
+
     const { artist } = useSelector((state) => state);
 
     const { data, fetchStatus } = artist;

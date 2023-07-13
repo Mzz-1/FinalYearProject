@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../service/useUser";
-import { SuccessToast, InfoToast } from "../../helpers/Toast";
+import { SuccessToast, InfoToast, ErrorToast } from "../../helpers/Toast";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, fetchCartProducts } from "../../redux-store/cartSlice";
 
@@ -36,6 +36,11 @@ export const ProductDetails = () => {
         getProducts();
     }, [id]);
 
+    useEffect(() => {
+        const pageTitle = product.name + " | SimplyArt"
+        document.title = pageTitle; 
+      }, [product]);
+
     useEffect(() => getProducts, []);
 
     const addProductToCart = async () => {
@@ -47,6 +52,8 @@ export const ProductDetails = () => {
             if (fetchStatus === "success") {
                 navigate("/cart");
                 SuccessToast("Product added to cart.");
+            } else {
+                ErrorToast("Something went wrong.");
             }
         } catch (error) {
             console.error(error);
@@ -61,6 +68,8 @@ export const ProductDetails = () => {
             setIsButtonDisplayed(true);
         }
     });
+
+    
 
     return (
         <div className="grid grid-row-auto grid-cols-2 bg-[] justify-center gap-[100px] ">
@@ -80,7 +89,7 @@ export const ProductDetails = () => {
                     >
                         <BiArrowBack /> BACK
                     </button>
-                    <li className="text-[34px] fo">{product.name}</li>
+                    <li className="text-[34px] ">{product.name}</li>
                     <li className="text-[#65635F] text-[18px] mb-[30px]">
                         By {product.artist}
                     </li>

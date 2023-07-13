@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import {
-    AdminHeading,
-    AdminHeading2,
-    Heading2,
-    ModalHeading,
-} from "../../components/Heading";
+import { Heading2, ModalHeading } from "../../components/Heading";
 import { ModalPara } from "../../components/Paragraph";
 import { useNavigate } from "react-router-dom";
 import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
@@ -20,7 +15,7 @@ export const ManageEvents = () => {
     const [viewEvents, setViewEvents] = useState();
     const navigate = useNavigate();
 
-    const user = useUser()
+    const user = useUser();
 
     const getExhibitions = async () => {
         const exhibitionsData = await axios.get(
@@ -36,11 +31,9 @@ export const ManageEvents = () => {
         const deleteData = await axios.delete(
             `http://localhost:5000/api/artist-exhibitions/${id}`
         );
-        SuccessToast("Event has been deleted.")
-        getExhibitions()
+        SuccessToast("Event has been deleted.");
+        getExhibitions();
     };
-
- 
 
     const updateEvent = (id) => {
         navigate(`/artist-dashboard/edit-event/${id}`);
@@ -48,6 +41,8 @@ export const ManageEvents = () => {
 
     useEffect(() => {
         getExhibitions();
+        document.title = "Manage Exhibitions | Artist Dashboard"; 
+
     }, []);
 
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
@@ -70,7 +65,9 @@ export const ManageEvents = () => {
                         </thead>
                         <tbody className="overflow-scroll">
                             {exhibitions.map((exhibition, index) => {
-                                var startDateTime = new Date(exhibition.startDate);
+                                var startDateTime = new Date(
+                                    exhibition.startDate
+                                );
                                 const newStartDate =
                                     startDateTime.toLocaleDateString(
                                         "en-US",
@@ -91,7 +88,6 @@ export const ManageEvents = () => {
                                         <td>{newStartDate}</td>
                                         <td>{newEndDate}</td>
                                         <td className="">
-                                        
                                             <EditButton
                                                 onClick={() =>
                                                     updateEvent(exhibition._id)
@@ -100,7 +96,9 @@ export const ManageEvents = () => {
 
                                             <Modal
                                                 onClick={() =>
-                                                    deleteExhibition(exhibition._id)
+                                                    deleteExhibition(
+                                                        exhibition._id
+                                                    )
                                                 }
                                             >
                                                 <ModalHeading>

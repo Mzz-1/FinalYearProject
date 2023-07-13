@@ -1,5 +1,10 @@
 import { ViewAllButton } from "../components/Button";
+import { useEffect } from "react";
 const Page404 = () => {
+    useEffect(()=>{
+        document.title = "404 Error | Page not found"; 
+
+    },[])
     return (
         <div className="w-full h-[75vh] text-center flex justify-center bg-black">
             <img

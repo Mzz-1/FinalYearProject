@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 const ViewEvents = ({ events, date }) => {
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
@@ -7,7 +7,10 @@ const ViewEvents = ({ events, date }) => {
 
     var endDateTime = new Date(events.endDate);
     const newEndDate = endDateTime.toLocaleDateString("en-US", dateOptions);
+    useEffect(()=>{
+        document.title = "View Events | Admin Dashboard"; 
 
+    },[])
     return (
         <div className="my-[50px]">
             <div className="grid grid-rows-1 grid-cols-2 gap-[0px] justify-center items-center font-slab">

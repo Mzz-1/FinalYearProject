@@ -12,6 +12,10 @@ import { Services } from "../../components/ServicesGrid";
 import { useEffect } from "react";
 
 const Home = () => {
+    useEffect(() => {
+        document.title = 'SimplyArt | Home'; 
+      }, []);
+       
     return (
         <>
             <Banner2 />

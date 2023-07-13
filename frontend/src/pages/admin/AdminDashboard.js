@@ -7,7 +7,7 @@ import { LineChart, Piechart, VerticalBar } from "../../components/Charts";
 import { formatDataForCharts } from "../../helpers/FormatChartData";
 
 const AdminDashboard = () => {
-    const [artistData, setArtistData] = useState([]);
+  
     const [totalAmount, setTotalAmount] = useState();
     const [totalArtist, setTotalArtist] = useState("");
     const [totalUser, setTotalUser] = useState();
@@ -16,6 +16,11 @@ const AdminDashboard = () => {
         datasets: [],
     });
     const [verticalBarData, setVerticalBarData] = useState({
+        labels: [],
+        datasets: [],
+    });
+
+    const [userData, setUserData] = useState({
         labels: [],
         datasets: [],
     });
@@ -35,71 +40,29 @@ const AdminDashboard = () => {
 
         const data = await userData.data.users;
         setTotalArtist(data.length);
-        setArtistData(data);
+     
+        const chartData = formatDataForCharts(data);
+        const labels = chartData.map((dataPoint) => dataPoint.monthYear);
+        const artistCounts = chartData.map((dataPoint) => dataPoint.data);
+        setUserData({
+            labels: labels,
+            datasets: [
+                {
+                    label: "No of Artists",
+                    data: artistCounts,
+                    borderColor: "rgb(255, 99, 132)",
+                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                    fill: true,
+                    tension: 0.4,
+                },
+            ],
+        });
         console.log("getartists", data);
     };
 
-    const formatDataForChart = () => {
-        const formattedData = [];
-        const cumulativeArtistsByMonth = {};
+    
 
-        // Find the minimum and maximum dates from the artist data
-        const dates = artistData.map((artist) => new Date(artist.createdAt));
-        const minDate = new Date(Math.min(...dates));
-        const maxDate = new Date(Math.max(...dates));
 
-        // Generate all months between the minimum and maximum dates
-        const currentDate = new Date(minDate);
-        while (currentDate <= maxDate) {
-            const month = currentDate.toLocaleString("en-US", {
-                month: "short",
-            });
-            const year = currentDate.getFullYear();
-            const monthYear = `${month} ${year}`;
-
-            cumulativeArtistsByMonth[monthYear] = 0;
-
-            // Move to the next month
-            currentDate.setMonth(currentDate.getMonth() + 1);
-        }
-
-        // Accumulate the artist count for each month
-        artistData.forEach((artist) => {
-            const createdAt = new Date(artist.createdAt);
-            const month = createdAt.toLocaleString("en-US", { month: "short" });
-            const year = createdAt.getFullYear();
-            const monthYear = `${month} ${year}`;
-
-            cumulativeArtistsByMonth[monthYear] += 1;
-        });
-
-        Object.entries(cumulativeArtistsByMonth).forEach(
-            ([monthYear, artists]) => {
-                formattedData.push({ monthYear, artists });
-            }
-        );
-
-        return formattedData;
-    };
-
-    const chartData = formatDataForChart();
-
-    const labels = chartData.map((dataPoint) => dataPoint.monthYear);
-    const artistCounts = chartData.map((dataPoint) => dataPoint.artists);
-
-    const data = {
-        labels,
-        datasets: [
-            {
-                label: "Number of Artists",
-                data: artistCounts,
-                borderColor: "rgb(255, 99, 132)",
-                backgroundColor: "rgba(255, 99, 132, 0.5)",
-                fill: true,
-                tension: 0.4,
-            },
-        ],
-    };
 
     const getEvents = async () => {
         const productsData = await axios.get(
@@ -180,9 +143,11 @@ const AdminDashboard = () => {
         getEvents();
         getArtists();
         getOrders();
+        document.title = "Admin Dashboard | SimplyArt"; 
+
     }, []);
 
-    console.log(data, "cd");
+    
 
     return (
         <>
@@ -193,7 +158,7 @@ const AdminDashboard = () => {
                     <h2 className="font-slab text-[#3E3E42] text-[20px] font-semibold">
                         User Growth
                     </h2>
-                    <LineChart data={data} />
+                    <LineChart data={userData} />
                 </div>
                 <div className="bg-white h-[99%] col-span-1 row-span-1 p-9 shadow-lg rounded-lg">
                     <h2 className="font-slab text-[#3E3E42] text-[20px] font-semibold mb-6 text-center">

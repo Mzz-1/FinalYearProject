@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../components/Input";
@@ -72,6 +72,11 @@ function Register() {
         }
         return error || true;
     };
+
+    useEffect(()=>{
+        document.title = "Sign up | SimplyArt"; 
+
+    },[])
 
     return (
         <div className="grid grid-rows-1 grid-cols-2 h-[100vh] text-[#9F7E7E] bg-[#F4F4F2] 2xl:px-[8vw] py-[40px] font-slab">

@@ -25,6 +25,8 @@ const ArtistExhibition = () => {
 
     useEffect(() => {
         dispatch(fetchExhibition({ id }));
+        const pageTitle = "Featured Artist Exhibition | SimplyArt"
+        document.title = pageTitle; 
     }, []);
 
     return (

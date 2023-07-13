@@ -11,11 +11,10 @@ import KhaltiCheckout from "khalti-checkout-web";
 import { Config } from "../../components/khalti/KhaltiConfig";
 
 export const OrderSummary = () => {
-    
-        let checkout = new KhaltiCheckout(Config)
-
-    
-    
+    useEffect(() => {
+        document.title = "Order Summary";
+    }, []);
+    let checkout = new KhaltiCheckout(Config);
 
     const [products, setProducts] = useState([]);
     const [delivery, setDelivery] = useState();
@@ -105,7 +104,7 @@ export const OrderSummary = () => {
             );
 
             // If the order creation is successful
-            setDisable(false)
+            setDisable(false);
 
             await axios.delete(
                 `http://localhost:5000/api/delete-cart/${user.id}`
@@ -114,7 +113,6 @@ export const OrderSummary = () => {
             SuccessToast("Order placed successfully!");
 
             // Redirect the user to the order confirmation or thank you page
-           
         } catch (error) {
             console.error("Error creating order:", error);
             // Display an error message to the user
@@ -132,7 +130,6 @@ export const OrderSummary = () => {
             </div>
 
             <div className="flex gap-10">
-                
                 <table className="bg-white  border-gray-300 w-[70%] rounded-md shadow-sm h-[100px]">
                     <thead className="text-left">
                         <tr className="text-[#9F7E7E] ">
@@ -212,14 +209,13 @@ export const OrderSummary = () => {
                             Contact Number: {delivery?.contactNo}
                         </p>
                         <div className="flex items-center justify-between py-4">
-                        
-                        <button
-                            onClick={() => handlePaymentSuccess()}
-                            className="bg-[#29CC97] text-white border border-gray-300 px-4 py-2 rounded-md shadow-sm"
-                        >
-                            Confirm Order
-                        </button>
-                    </div>
+                            <button
+                                onClick={() => handlePaymentSuccess()}
+                                className="bg-[#29CC97] text-white border border-gray-300 px-4 py-2 rounded-md shadow-sm"
+                            >
+                                Confirm Order
+                            </button>
+                        </div>
                     </div>
                     <div className="flex flex-col gap-1">
                         <Heading2 text="Payment Details" />
@@ -227,9 +223,9 @@ export const OrderSummary = () => {
                             Subtotal: Rs {subTotal}
                         </p>
                         <div className="flex items-center justify-between py-4">
-                        
                             <button
-                                onClick={() => checkout.show({ amount: 1000 })} disabled={disable}
+                                onClick={() => checkout.show({ amount: 1000 })}
+                                disabled={disable}
                                 className="bg-[#602c8c] text-white border border-gray-300 px-4 py-2 rounded-md shadow-sm"
                             >
                                 Pay with Khalti

@@ -49,6 +49,8 @@ export const AdminEvent = () => {
 
     useEffect(() => {
         getEvents();
+        document.title = "Manage Events | Admin Dashboard"; 
+
     }, []);
 
     const viewEvent = async (id) => {

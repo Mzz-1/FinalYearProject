@@ -6,6 +6,7 @@ import { ProductList } from "../store/ProductList";
 import { ArtistNavbar } from "../../components/ArtistNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArtistProduct } from "../../redux-store/artistProductSlice";
+import { fetchArtistBio } from "../../redux-store/artistBioSlice";
 import { Loader } from "../../components/LoaderWrapper";
 
 const ArtistPortfolio = () => {
@@ -14,6 +15,10 @@ const ArtistPortfolio = () => {
     const dispatch = useDispatch();
 
     const artistProduct = useSelector((state) => state.artistProduct);
+
+    const artistBio = useSelector((state) => state.artistBio);
+
+    const { fetchStatus:bioStatus, data:bioData } = artistBio;
 
     const { fetchStatus, data } = artistProduct;
 
@@ -26,20 +31,21 @@ const ArtistPortfolio = () => {
     ];
 
     const getBio = async () => {
-        const productsData = await axios.get(
-            `http://localhost:5000/api/biography/${id}`
-        );
-        const data = await productsData.data.artist;
-        setBio(data);
+        dispatch(fetchArtistBio({ id }));
+       
     };
 
     useEffect(() => {
         getBio();
+        
     }, []);
 
+
     useEffect(() => {
-        const name = bio.name;
+        const name = bioData.artist.name;
         dispatch(fetchArtistProduct({ name }));
+        const pageTitle = bioData.artist.name + " - Works | SimplyArt"
+        document.title = pageTitle; 
     }, [bio.name]);
 
     return (

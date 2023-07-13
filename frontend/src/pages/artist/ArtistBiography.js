@@ -35,10 +35,18 @@ const ArtistBiography = () => {
 
     useEffect(() => {
         getBio();
+       
     }, []);
 
+    useEffect(() => {
+       
+        const pageTitle = data.artist.name + " -About Artist | Featured Artist"
+        document.title = pageTitle; 
+    }, [data]);
+
+
     return (
-        <div className=" max-w-[1340px] m-auto ">
+        <div className=" max-w-[1340px] m-auto">
             <h2
                 className=" text-[26px] font-cinzel mt-11 text-[#3C3737]"
                 data-aos="fade-down"

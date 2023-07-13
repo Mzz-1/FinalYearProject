@@ -1,12 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import {
-    AdminHeading,
-    AdminHeading2,
-    ModalHeading,
-    DashboardHeading,
-    Heading2
-} from "../../components/Heading";
+import { ModalHeading, Heading2 } from "../../components/Heading";
 import { ModalPara } from "../../components/Paragraph";
 import { useNavigate } from "react-router-dom";
 import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
@@ -17,7 +11,7 @@ import { useUser } from "../../service/useUser";
 
 export const ManageProducts = () => {
     const [products, setProducts] = useState([]);
-    const [name,setName] =useState("")
+    const [name, setName] = useState("");
     const user = useUser();
     const navigate = useNavigate();
 
@@ -27,7 +21,7 @@ export const ManageProducts = () => {
         );
 
         const data = await productsData.data.artist;
-     setName(data.name)
+        setName(data.name);
         console.log("getBio", data);
     };
 
@@ -37,30 +31,28 @@ export const ManageProducts = () => {
         );
 
         const data = await productsData.data.product;
-        setProducts(data)
+        setProducts(data);
         console.log("products", data);
-     
     };
-    
 
     const deleteProduct = async (id) => {
         const deleteData = await axios.delete(
             `http://localhost:5000/api/products/${id}`
         );
-        getProducts()
-        SuccessToast("Product has been deleted.")
+        getProducts();
+        SuccessToast("Product has been deleted.");
     };
 
- 
     const updateProduct = (id) => {
         navigate(`/artist-dashboard/edit-product/${id}`);
     };
 
     useEffect(() => {
         getBio();
+        document.title = "Manage Products | Artist Dashboard"; 
     }, []);
 
-    useEffect(() => {    
+    useEffect(() => {
         getProducts();
     }, [name]);
 
@@ -73,7 +65,9 @@ export const ManageProducts = () => {
                         <thead className="text-left top-0">
                             <tr className="text-[#A4A6B3] mx-[0px] my-[0px]">
                                 <th className="font-extralight">SN</th>
-                                <th className="font-extralight">Product Name</th>
+                                <th className="font-extralight">
+                                    Product Name
+                                </th>
                                 <th className="font-extralight">Category</th>
                                 <th className="font-extralight">Dimensions</th>
                                 <th className="font-extralight">Quantity</th>
@@ -82,7 +76,6 @@ export const ManageProducts = () => {
                         </thead>
                         <tbody className="overflow-scroll">
                             {products.map((product, index) => {
-                               
                                 return (
                                     <tr className="border-b divide-slate-400/25 h-[60px] first:border-t">
                                         <td>{index + 1}</td>
@@ -91,7 +84,6 @@ export const ManageProducts = () => {
                                         <td>{product.dimensions}</td>
                                         <td>{product.quantity}</td>
                                         <td className="">
-                                        
                                             <EditButton
                                                 onClick={() =>
                                                     updateProduct(product._id)

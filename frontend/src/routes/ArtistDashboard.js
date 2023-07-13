@@ -1,6 +1,5 @@
-import { BrowserRouter, Routes, Route, useLocation, matchPath } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Page404 from "../pages/404page";
-import AdminDashboard from "../pages/admin/AdminDashboard";
 import ArtistDashboard from "../pages/artistDashboard/ArtistDashboard";
 import SplitScreen from "../components/SplitScreen";
 import AddProductPage from "../pages/artistDashboard/AddProductsPage";
