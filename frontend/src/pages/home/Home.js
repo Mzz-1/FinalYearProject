@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 const Home = () => {
     useEffect(() => {
-        document.title = 'SimplyArt | Home'; 
+        document.title = 'SimplyArt - Explore Artworks, Events and Artists'; 
       }, []);
        
     return (
@@ -54,13 +54,13 @@ const Home = () => {
             <HomeEvents />
             <Services
                 heading="For Artists"
-                para="Connect with an art advisor, free of charge, to find the perfect artwork for your home. They will curate options specifically for you, answer any questions, and coordinate your artwork from order to install."
+                para="Showcase, sell, and connect. Display your portfolio, feature exhibitions, and sell your artwork. Engage with a vibrant artist community and seize exciting opportunities. Join us and elevate your artistry."
                 img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1688373594/assets/frankie-cordoba-fPYJeMmYWM4-unsplash_dno2kd.jpg"
                 button="Get Started"
             />
             <Services
                 heading="For Individuals"
-                para="Connect with an art advisor, free of charge, to find the perfect artwork for your home. They will curate options specifically for you, answer any questions, and coordinate your artwork from order to install."
+                para="Discover, connect, and be inspired. Browse artist products, explore portfolios, and stay notified about art events. Engage with a vibrant community of fellow art enthusiasts. Join us and unlock the world of art."
                 img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1688291397/assets/abbie-bernet-04X58d_hHv8-unsplash_w1mh2i.jpg"
                 button="Sign Up"
             />

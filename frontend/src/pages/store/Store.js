@@ -85,12 +85,13 @@ const Store = () => {
     // };
 
     return (
-        <div className=" px-[5%]">
-            <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center">
-                <Banner
+        <div className=" ">
+            <Banner
                     heading="THE ART STORE"
                     img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1681139641/assets/banner_yo00ky.jpg"
                 />
+            <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center px-[5%]">
+                
                 <div
                     className=" top-[450px] bg-white h-[230px] border px-12 py-9 absolute "
                     data-aos="fade-down"
@@ -162,6 +163,14 @@ const Store = () => {
                         // onClick={handleLoadMore}
                     >
                         LOAD MORE
+                    </button>
+                )}
+                {fetchStatus === "success" && products.product.length <= 0 && (
+                    <button
+                        className="p-3 border-2 w-[200px] mb-5 m-auto font-slab bg-[#9F7E7E] font-medium text-[#fefefe] rounded-lg"
+                        // onClick={handleLoadMore}
+                    >
+                        No more roducts to show.
                     </button>
                 )}
             </div>
