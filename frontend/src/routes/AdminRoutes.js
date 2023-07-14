@@ -14,23 +14,35 @@ import AdminLogin from "../pages/login/AdminLogin";
 
 const AdminRoutes = () => {
     return (
-        <SplitScreen>
-            <AdminSidebar />
+        <>
+                          
+        <Route path="/admin-dashboard">
+            <Route index element={<PrivateRouteAdmin Component={AdminDashboard} />} />
+            <Route
+                path="add-event"
+                element={<PrivateRouteAdmin Component={AddEventPage} />}
+            />
+            <Route
+                path="update-event/:id"
+                element={<PrivateRouteAdmin Component={AddEventPage} />}
+            />
 
-            <Routes>
-                <Route path="/admin-dashboard">
-                    <Route path="" element={<AdminDashboard />} />
-                    <Route path="add-event" element={<AddEventPage />} />
-                    <Route path="update-event/:id" element={<AddEventPage />} />
-                    <Route path="add-product" element={<AddProductPage />} />
-
-                    <Route path="events" element={<AdminEventPage />} />
-                    <Route path="users" element={<UserList />} />
-                    <Route path="artists" element={<ArtistList />} />
-                    <Route path="*" element={<Page404/>} />
-                </Route>
-            </Routes>
-        </SplitScreen>
+            <Route
+                path="events"
+                element={<PrivateRouteAdmin Component={AdminEventPage} />}
+            />
+            <Route
+                path="users"
+                element={<PrivateRouteAdmin Component={UserList} />}
+            />
+            <Route
+                path="artists"
+                element={<PrivateRouteAdmin Component={ArtistList} />}
+            />
+          
+        </Route>
+  
+</>
     );
 };
 

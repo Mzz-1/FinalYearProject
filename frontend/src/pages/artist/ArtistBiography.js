@@ -35,7 +35,8 @@ const ArtistBiography = () => {
 
     useEffect(() => {
         getBio();
-       
+        const pageTitle = data.artist.name + " -About Artist | Featured Artist"
+        document.title = pageTitle; 
     }, []);
 
     useEffect(() => {

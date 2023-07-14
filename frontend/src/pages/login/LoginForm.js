@@ -8,12 +8,12 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { SuccessToast, ErrorToast } from "../../helpers/Toast";
 import { BiArrowBack } from "react-icons/bi";
+import { useUser } from "../../service/useUser";
 
 export const LoginForm = ({ formHeading }) => {
     const [token, setToken] = useToken();
 
     const navigate = useNavigate();
-
     const handleLogin = async ({ email, password }) => {
         try {
             const response = await axios.post(
@@ -26,6 +26,7 @@ export const LoginForm = ({ formHeading }) => {
 
             const { token } = response.data;
             setToken(token);
+           
 
             if (formHeading === "Admin") {
                 navigate("/admin-dashboard");

@@ -3,6 +3,7 @@ import { redirect, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useUser } from "./useUser";
 import Login from "../pages/login/Login";
+import Page404 from "../pages/404page";
 
 const PrivateRoutes = (props) => {
     const { component } = props;
@@ -26,13 +27,29 @@ const PrivateRoute = (props) => {
     return <Component />;
 };
 
+export const PrivateRouteArtist = (props) => {
+    const { Component,userType } = props;
+    const navigate = useNavigate();
+    const user = useUser();
+    useEffect(() => {
+        if (user == null) {
+            navigate("/access-denied");
+        }
+    }, []);
+    if(user.role==="artist" && userType){
+        return <Component userType={userType}/>
+    }
+    return <Component />;
+};
+
+
 export const PrivateRouteAdmin = (props) => {
     const { Component } = props;
     const navigate = useNavigate();
     const user = useUser();
     useEffect(() => {
-        if (user.role !== "admin") {
-            navigate("/login");
+        if (user?.role !== "admin") {
+            navigate("/access-denied");
         }
     }, []);
 

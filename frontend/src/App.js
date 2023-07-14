@@ -3,7 +3,7 @@ import { AllRoutes } from "./routes/Routes";
 import { ArtistRoutes } from "./routes/ArtistDashboard";
 import AdminRoutes from "./routes/AdminRoutes";
 import { BrowserRouter, useLocation, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "aos/dist/aos.css";
 import Aos from "aos";
 import { Navbar } from "./components/Navbar";
@@ -39,6 +39,7 @@ import Biography from "./pages/artistDashboard/Biography";
 import FeaturedEvents from "./pages/artistDashboard/FeaturedEvents";
 import { ManageProducts } from "./pages/artistDashboard/ManageProducts";
 import { ManageEvents } from "./pages/artistDashboard/ManageEvents";
+import { PrivateRouteArtist } from "./service/Auth";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AddEventPage from "./pages/admin/AddEventpage";
@@ -46,6 +47,9 @@ import AdminEventPage from "./pages/admin/AdminEvents";
 import UserList from "./pages/admin/UsersList";
 import ArtistList from "./pages/admin/ArtistList";
 import { AdminSidebar } from "./pages/admin/AdminSidebar";
+import { PrivateRouteAdmin } from "./service/Auth";
+
+
 
 function App() {
     useEffect(() => {
@@ -86,21 +90,15 @@ function App() {
             typeof location.pathname === "string" &&
             location.pathname.match(path)
     );
-    const user = useUser();
-    var role;
-    if (user) {
-        role = user.role;
-    } else {
-        role = "anon";
-    }
 
     return (
         <>
             {!shouldHide && <Navbar />}
             <SplitScreen>
                 {shouldDisplayDashboard ? <ArtistSidebar /> : shouldDisplayAdminDashboard ? <AdminSidebar /> :<></>}
+                
                 <Routes>
-                    {role === "anon" || role === "user" || role === "artist" || role === "admin" ? (
+                  
                         <>
                             <Route path="/" element={<Home />} />
                             <Route path="/login" element={<Login />} />
@@ -174,89 +172,89 @@ function App() {
                                     />
                                 }
                             />
-                            <Route path="*" element={<Page404 />} />
+                          
                         </>
-                    ) : (
-                        <></>
-                    )}
-                    {role === "artist" && (
+                   
+                  
                         <>
-                            {shouldDisplayDashboard && (
+                         
                                 <Route path="/artist-dashboard">
                                     <Route
                                         index
-                                        element={<ArtistDashboard />}
+                                        element={<PrivateRouteArtist Component={ArtistDashboard} />}
                                     />
                                     <Route
                                         path="add-product"
-                                        element={<AddProductPage />}
+                                        element={<PrivateRouteArtist Component={AddProductPage} />}
                                     />
                                     <Route
                                         path="edit-product/:id"
-                                        element={<AddProductPage />}
+                                        element={<PrivateRouteArtist Component={AddProductPage} />}
                                     />
                                     <Route
                                         path="manage-products"
-                                        element={<ManageProducts />}
+                                        element={<PrivateRouteArtist Component={ManageProducts} />}
                                     />
                                     <Route
                                         path="biography"
-                                        element={<Biography />}
+                                        element={<PrivateRouteArtist Component={Biography} />}
                                     />
                                     <Route
                                         path="add-event"
-                                        element={<FeaturedEvents />}
+                                        element={<PrivateRouteArtist Component={FeaturedEvents} />}
                                     />
                                     <Route
                                         path="edit-event/:id"
-                                        element={<FeaturedEvents />}
+                                        element={<PrivateRouteArtist Component={FeaturedEvents} />}
                                     />
                                     <Route
                                         path="manage-events"
-                                        element={<ManageEvents />}
+                                        element={<PrivateRouteArtist Component={ArtistDashboard} />}
                                     />
                                     <Route
                                         path="orders"
                                         element={
-                                            <ManageOrders userType={"artist"} />
+                                            <PrivateRouteArtist  Component={ManageOrders}
+                                            userType={"artist"} />
                                         }
                                     />
                                 </Route>
-                            )}
+                        
                         </>
-                    )}
-                    {role === "admin" && (
+                    
+                  
                         <>
-                            {shouldDisplayAdminDashboard && (
+                          
                                 <Route path="/admin-dashboard">
-                                    <Route index element={<AdminDashboard />} />
+                                    <Route index element={<PrivateRouteAdmin Component={AdminDashboard} />} />
                                     <Route
                                         path="add-event"
-                                        element={<AddEventPage />}
+                                        element={<PrivateRouteAdmin Component={AddEventPage} />}
                                     />
                                     <Route
                                         path="update-event/:id"
-                                        element={<AddEventPage />}
+                                        element={<PrivateRouteAdmin Component={AddEventPage} />}
                                     />
 
                                     <Route
                                         path="events"
-                                        element={<AdminEventPage />}
+                                        element={<PrivateRouteAdmin Component={AdminEventPage} />}
                                     />
                                     <Route
                                         path="users"
-                                        element={<UserList />}
+                                        element={<PrivateRouteAdmin Component={UserList} />}
                                     />
                                     <Route
                                         path="artists"
-                                        element={<ArtistList />}
+                                        element={<PrivateRouteAdmin Component={ArtistList} />}
                                     />
                                   
                                 </Route>
-                            )}
+                          
                         </>
-                    )}
-                    {/* {role === "admin" && <AdminRoutes />} */}
+                  
+                      <Route path="/*" element={<Page404 />} />
+                      <Route path="/access-denied" element={<Page404 error={"notAuthorized"}/>} />
                 </Routes>
             </SplitScreen>
             {!shouldHide && <Footer />}
