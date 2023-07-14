@@ -1,10 +1,7 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { AdminHeading2 } from "../../components/Heading";
-import { RiArrowRightSLine, RiCalendarEventLine } from "react-icons/ri";
+
+import { RiCalendarEventLine } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
 import { AiOutlineUser } from "react-icons/ai";
-import {MdLogout} from "react-icons/md";
 import { Sidebar } from "../../components/Sidebar";
 
 export const AdminSidebar = () => {

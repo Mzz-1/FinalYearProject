@@ -44,9 +44,8 @@ export const AllRoutes = () => {
             location.pathname.match(path)
     );
     return (
-        <div>
-            {!shouldHide && <Navbar />}
-            <Routes>
+        <>
+          
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin" element={<AdminLogin />} />
@@ -97,8 +96,7 @@ export const AllRoutes = () => {
                     element={<PrivateRoute Component={ManageOrders} userType={"user"}/>}
                 />
                 <Route path="*" element={<Page404 />} />
-            </Routes>
-            {!shouldHide && <Footer />}
-        </div>
+           
+        </>
     );
 };
