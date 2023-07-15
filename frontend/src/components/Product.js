@@ -5,11 +5,6 @@ export const Product = ({ product, type }) => {
     const navigate = useNavigate();
 
     const getProducts = async (id) => {
-        const productData = await axios.get(
-            `http://localhost:5000/api/products/${id}`
-        );
-        console.log(productData.data.product);
-
         navigate(`/product/${id}`);
     };
     return (

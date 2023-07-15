@@ -5,9 +5,18 @@ const verifyEmailRoute = require("./VerifyEmailRoute");
 const forgotPasswordRoute = require("./ForgotPasswordRoute");
 const resetPasswordRoute = require("./ResetPasswordRoute");
 const khaltiPayment = require("./Khalti");
-const {addOrder,getAllOrders,getOrder,getArtistOrder} = require("./OrderRoute");
+const {
+    addOrder,
+    getAllOrders,
+    getOrder,
+    getArtistOrder,
+} = require("./OrderRoute");
 
 const { getAllUsers, getUser, deleteUser, updateUser } = require("./UserRoute");
+
+const getGoogleOauthUrlRoute = require("./GoogleOauthURLroute");
+
+const googleOauthCallbackRoute = require('./GoogleOauthCallbackRoute')
 
 const {
     addBiography,
@@ -20,7 +29,7 @@ const {
     deleteExhibition,
     updateArtistEvent,
     getExhibitions,
-    getArtistProduct
+    getArtistProduct,
 } = require("./ArtistInfoRoutes");
 
 const {
@@ -45,7 +54,7 @@ const {
     getCartDetails,
     getCartProductDetails,
     deleteCartProduct,
-    deleteCart
+    deleteCart,
 } = require("./CartRoute");
 
 const { addDelivery, getDeliveryDetails } = require("./DeliveryRoute");
@@ -106,6 +115,8 @@ const routes = [
     testEmailTemplate,
 
     khaltiPayment,
+    getGoogleOauthUrlRoute,
+    googleOauthCallbackRoute,
 ];
 
 module.exports = routes;
