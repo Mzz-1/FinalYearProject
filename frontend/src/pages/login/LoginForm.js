@@ -1,7 +1,7 @@
 import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate, Link,useParams } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { useToken } from "../../service/useToken";
 import { SuccessToast, ErrorToast } from "../../helpers/Toast";
 import { BiArrowBack } from "react-icons/bi";
@@ -13,9 +13,9 @@ export const LoginForm = ({ formHeading }) => {
 
     const [googleOauthUrl, setGoogleOauthURL] = useState("");
 
-    const {token:oauthToken} = useQueryParams()
+    const { token: oauthToken } = useQueryParams();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadOauthUrl = async () => {
@@ -30,12 +30,12 @@ export const LoginForm = ({ formHeading }) => {
         loadOauthUrl();
     }, []);
 
-    useEffect(()=>{
-        if(oauthToken){
-            setToken(oauthToken)
-           navigate('/')
+    useEffect(() => {
+        if (oauthToken) {
+            setToken(oauthToken);
+            navigate("/");
         }
-    },[oauthToken,setToken,navigate])
+    }, [oauthToken, setToken, navigate]);
 
     const handleLogin = async ({ email, password }) => {
         try {
@@ -139,13 +139,17 @@ export const LoginForm = ({ formHeading }) => {
                     />
                     <p>{errors.password?.message}</p>
 
-                    <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
+                    <button
+                        type="submit"
+                        className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]"
+                    >
                         Log in
                     </button>
                     <button
+                        type="button"
                         disabled={!googleOauthUrl}
                         className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]"
-                        onClick={()=>(window.location.href = googleOauthUrl)}
+                        onClick={() => (window.location.href = googleOauthUrl)}
                     >
                         Log in with Google
                     </button>

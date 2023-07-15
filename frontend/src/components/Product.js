@@ -9,24 +9,24 @@ export const Product = ({ product, type }) => {
     };
     return (
         <div
-            className={`relative cursor-pointer font-playfair ${
+            className={`relative cursor-pointer font-playfair rounded-xl ${
                 type === "gallery"
-                    ? "grid grid-cols-custom-2 items-center gap-11"
-                    : "group hover:bg-[#f4f6f6]"
+                    ? "grid grid-cols-custom-2 items-center gap-11 "
+                    : "group hover:bg-[#f4f6f6] rounded-xl"
             } 
             ${type === "carousel" ? "mx-5 mb-7" : ""} `}
             data-aos="fade-up"
             onClick={() => getProducts(product._id)}
             key={product._id}
         >
-            <div className={`${type === "gallery" ? "" : "bg-black"}`}>
+            <div className={`${type === "gallery" ? "" : "bg-black rounded-xl" }`}>
                 <img
                     src={product.url}
                     className={`${
                         type === "gallery"
                             ? "w-[auto] h-[75vh] m-auto"
                             : "w-[100%] h-[500px]"
-                    } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75`}
+                    } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75 rounded-xl `}
                     alt="product"
                 />
             </div>

@@ -17,7 +17,7 @@ export const Artist = ({ artist, type }) => {
         >
             <img
                 src={artist.profilePhoto}
-                className=" mb-[10px] w-[100%] h-[450px] object-cover m-auto"
+                className=" mb-[10px] w-[100%] h-[450px] object-cover m-auto rounded-xl"
                 alt="product"
             />
             <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] font-montserrat">
