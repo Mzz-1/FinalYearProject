@@ -28,8 +28,8 @@ const Events = () => {
   
 
     return (
-        <>
-            <div className=" py-[30px]">
+     
+            <div className=" py-[30px] px-6">
                 <div className="max-w-[1400px] m-auto">
                     <Heading1 color="black">Exhibitions</Heading1>
                     <div className="flex gap-5 mt-10 items-center ">
@@ -58,7 +58,7 @@ const Events = () => {
                     )}
                 </div>
             </div>
-        </>
+      
     );
 };
 

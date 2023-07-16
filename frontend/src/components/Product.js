@@ -14,8 +14,9 @@ export const Product = ({ product, type }) => {
                     ? "grid 2xl:grid-cols-custom-2 items-center gap-11"
                     : "group hover:bg-[#f4f6f6]"
             } 
-            ${type === "carousel" ? "mx-5 mb-7" : ""} `}
-            data-aos="fade-up"
+            ${type === "carousel" ? "mx-5 mb-7 " : ""} `}
+            data-aos={type !== "carousel" ? "fade-up" : null}
+          
             onClick={() => getProducts(product._id)}
             key={product._id}
         >

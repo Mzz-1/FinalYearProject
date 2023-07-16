@@ -11,9 +11,9 @@ export const Artist = ({ artist, type }) => {
     return (
         <div
             className={`relative cursor-pointer 
-        ${type === "carousel" ? "mx-5" : ""} `}
+        ${type === "carousel" ? "mx-5 w-[600px]" : ""} `}
             onClick={() => getArtist(artist._id)}
-            data-aos="fade-up"
+            data-aos={type !== "carousel" ? "fade-up" : null}
         >
             <img
                 src={artist.profilePhoto}

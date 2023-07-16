@@ -25,7 +25,7 @@ export const NewProducts = () => {
                 searchItem: "",
                 category: "",
                 sort: "Newest to oldest",
-                limit: 4,
+                limit: 5,
             })
         );
     };
@@ -35,7 +35,7 @@ export const NewProducts = () => {
     }, [dispatch]);
 
     return (
-        <div className="px-[50px]">
+        <div className="">
             <Heading2>Recently Added</Heading2>
             <br></br>
             <p className="font-montserrat text-center border-[#3E3E42] m-auto border-b w-[65px]">View All</p>

@@ -16,7 +16,7 @@ export const Event = ({ events, date,type }) => {
         datebool = startDateTime > today;
     }
     return (
-        <div className={`mx-5 font-playfair ${type==="carousel" ? "mb-12" :""}`}>
+        <div className={`mx-5 font-playfair ${type==="carousel" ? "mb-5" :""}`}>
             <div className="flex justify-center">
                 <img
                     src={events.url}

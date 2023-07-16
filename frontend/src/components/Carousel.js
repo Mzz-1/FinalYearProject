@@ -1,28 +1,34 @@
-import Slider from "react-slick";
 import { Product } from "./Product";
 import { Artist } from "./Artist";
 import { Event } from "./Event";
-import {
-    BsFillArrowLeftCircleFill,
-    BsFillArrowRightCircleFill,
-    BsArrowDownRightCircle
-} from "react-icons/bs";
+import React, { useEffect, useRef } from 'react';
+import Flickity from 'flickity';
+import 'flickity/dist/flickity.min.css';
+
 
 export const Carousel = ({ products,artists,events }) => {
-    const sliderSettings = {
-        dots: true, // Show navigation dots
-        infinite: true, // Enable infinite looping
-      
-        slidesToShow: 3, // Number of slides to show at a time
-        slidesToScroll: 1, // Number of slides to scroll at a time
-       arrows:true,
-        prevArrow: <BsArrowDownRightCircle size={32} style={{ backgroundColor: 'black', color: 'white' }}/>, // Custom previous arrow component
-        nextArrow: <BsArrowDownRightCircle />, // Custom next arrow component
-        draggable: false,
-    };
+  
+    const carouselRef = useRef(null);
+
+    useEffect(() => {
+      // Initialize Flickity carousel
+      const flickity = new Flickity(carouselRef.current, {
+        cellAlign: 'center',
+        wrapAround: true,
+        draggable:false,
+        prevNextButtons: true, // Show navigation arrows
+      pageDots: true,
+      });
+  
+      // Clean up the Flickity instance when the component is unmounted
+      return () => {
+        flickity.destroy();
+      };
+    }, []);
+  
     return (
-        <div className="mb">
-            <Slider {...sliderSettings}>
+        <div ref={carouselRef} className="carousel mb-12">
+          
                 {products && products.map((product) => {
                     return <Product product={product} type="carousel" />;
                 })}
@@ -32,7 +38,7 @@ export const Carousel = ({ products,artists,events }) => {
                 {events && events.map((event) => {
                     return <Event events={event} type="carousel" />;
                 })}
-            </Slider>
+           
         </div>
     );
 };
