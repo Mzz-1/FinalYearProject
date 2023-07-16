@@ -1,10 +1,6 @@
-import { Link, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 export const ArtistNavbar =({id,links})=>{
-    // const links = [
-    //     { itemName: "BIOGRAPHY", link: `/artist-profile/biography/${id}` },
-    //     { itemName: "PORTFOLIO", link: `/artist-profile/portfolio/${id}` },
-    //     { itemName: "EXHIBITION", link: `/artist-profile/exhibition/${id}` },
-    // ];
+
     return(
         <div>
                 <ul className="flex gap-[20px] text-[12px] justify-end mb-[20px] font-slab ">

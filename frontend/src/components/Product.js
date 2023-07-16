@@ -4,19 +4,14 @@ import { useNavigate } from "react-router-dom";
 export const Product = ({ product, type }) => {
     const navigate = useNavigate();
 
-    const getProducts = async (id) => {
-        const productData = await axios.get(
-            `http://localhost:5000/api/products/${id}`
-        );
-        console.log(productData.data.product);
-
+    const getProducts =  (id) => {  
         navigate(`/product/${id}`);
     };
     return (
         <div
             className={`relative cursor-pointer font-playfair ${
                 type === "gallery"
-                    ? "grid grid-cols-custom-2 items-center gap-11"
+                    ? "grid 2xl:grid-cols-custom-2 items-center gap-11"
                     : "group hover:bg-[#f4f6f6]"
             } 
             ${type === "carousel" ? "mx-5 mb-7" : ""} `}
@@ -29,9 +24,9 @@ export const Product = ({ product, type }) => {
                     src={product.url}
                     className={`${
                         type === "gallery"
-                            ? "w-[auto] h-[75vh] m-auto"
+                            ? " max-h-[75vh] m-auto rounded-md "
                             : "w-[100%] h-[500px]"
-                    } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75`}
+                    } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75 aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16`}
                     alt="product"
                 />
             </div>

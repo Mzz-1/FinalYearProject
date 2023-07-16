@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const ExhibitionList = ({ exhibition }) => {
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
     return (
-        <div className="grid grid-row-auto grid-cols-3 bg-[] justify-center items-center gap-[80px] my-[50px] ">
+        <div className="grid grid-row-auto grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  justify-center items-center gap-[80px] my-[50px]">
             {exhibition.map((exhibition) => {
                 var startDateTime = new Date(exhibition.startDate);
                 const newStartDate = startDateTime.toLocaleDateString(

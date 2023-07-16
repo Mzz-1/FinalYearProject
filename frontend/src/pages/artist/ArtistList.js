@@ -8,7 +8,7 @@ export const ArtistList = ({ artists }) => {
     };
 
     return (
-        <div className="grid grid-row-auto grid-cols-3 bg-[] cursor-pointer justify-center items-center gap-[30px] my-[20px] ">
+        <div className="grid grid-row-auto lg:grid-cols-3 sm:grid-cols-2 cursor-pointer justify-center items-center gap-[30px] my-[20px] ">
             {artists.map((artist) => {
                 return (
                     <div

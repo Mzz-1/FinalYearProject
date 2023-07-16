@@ -49,7 +49,7 @@ const ArtistPortfolio = () => {
     }, [bio.name]);
 
     return (
-        <div className=" max-w-[1340px] m-auto">
+        <div className=" max-w-[1340px] m-auto px-6">
             <h2
                 className=" text-[26px] font-cinzel mt-11 text-[#3C3737]"
                 data-aos="fade-down"

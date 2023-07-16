@@ -35,19 +35,19 @@ const ArtistBiography = () => {
 
     useEffect(() => {
         getBio();
-        const pageTitle = data.artist.name + " -About Artist | Featured Artist"
+        const pageTitle = data?.artist.name + " -About Artist | Featured Artist"
         document.title = pageTitle; 
     }, []);
 
     useEffect(() => {
        
-        const pageTitle = data.artist.name + " -About Artist | Featured Artist"
+        const pageTitle = data?.artist.name + " -About Artist | Featured Artist"
         document.title = pageTitle; 
     }, [data]);
 
 
     return (
-        <div className=" max-w-[1340px] m-auto">
+        <div className=" max-w-[1340px] m-auto lg:px-6">
             <h2
                 className=" text-[26px] font-cinzel mt-11 text-[#3C3737]"
                 data-aos="fade-down"
@@ -59,8 +59,8 @@ const ArtistBiography = () => {
             {fetchStatus !== "success" ? (
                 <Loader/>
             ) : (
-                <div className="grid grid-row-auto grid-cols-2 bg-[] justify-center gap-[100px] ">
-                    <div className="relative w-[] h-[70%] m-auto flex flex-col gap-[40px]">
+                <div className="grid grid-row-auto lg:grid-cols-2 sm:grid-cols-1 bg-[] justify-center xl:gap-[100px] lg:gap-10 sm:gap-0 ">
+                    <div className="relative lg:w-[100%] h-[70%] m-auto flex flex-col xl:gap-[40px] lg:gap-[20px] sm:order-2 sm:h-auto sm:mb-8">
                         <div data-aos="fade-down">
                             <h2
                                 className="text-[#9F7E7E] text-[26px] font-playfair"
@@ -70,7 +70,7 @@ const ArtistBiography = () => {
                             </h2>
 
                             <h2
-                                className="my-[30px] text-[38px] font-medium font-cinzel text-[#3C3737]"
+                                className="xl:my-[30px] lg:my-[15px] text-[38px] font-medium font-cinzel text-[#3C3737]"
                                 data-aos="fade-down"
                             >
                                 {data.artist.name}
@@ -78,7 +78,7 @@ const ArtistBiography = () => {
                             <hr></hr>
 
                             <div
-                                className="h-[auto] w-[600px] mt-[20px] font-montserrat text-justify myHtmlStyles"
+                                className="h-[auto] w-[600px] lg:w-[100%] mt-[20px] font-montserrat text-justify myHtmlStyles"
                                 dangerouslySetInnerHTML={{
                                     __html: data.artist.biography,
                                 }}
@@ -88,7 +88,7 @@ const ArtistBiography = () => {
                             <RiDoubleQuotesL size={50} />
 
                             <div
-                                className="h-[auto] w-[600px] mt-[10px] font-playfair text-[#3C3737] ml-4 text-justify myHtmlStyles"
+                                className="h-[auto] w-[600px] lg:w-[100%] mt-[10px] font-playfair text-[#3C3737] ml-4 text-justify myHtmlStyles"
                                 dangerouslySetInnerHTML={{
                                     __html: data.artist.aboutArtist,
                                 }}
@@ -97,10 +97,10 @@ const ArtistBiography = () => {
                         </div>
                     </div>
 
-                    <div className=" h-[770px] flex items-center justify-center">
+                    <div className=" h-[770px] flex items-center justify-center sm:order-1 lg:order-3 ">
                         <img
                             src={data.artist.profilePhoto}
-                            className=" mb-[10px] h-[700px] w-[500px] shadow-2xl object-cover"
+                            className=" mb-[10px] h-[700px] w-[500px] shadow-2xl object-cover rounded-lg lg:w-[100%] lg:h-[80%]"
                             data-aos="fade-left"
                             alt="product"
                         />
