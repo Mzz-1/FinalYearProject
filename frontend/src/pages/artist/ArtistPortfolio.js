@@ -36,15 +36,14 @@ const ArtistPortfolio = () => {
     };
 
     useEffect(() => {
-        getBio();
-        
+        getBio();  
     }, []);
 
 
     useEffect(() => {
-        const name = bioData.artist.name;
+        const name = bioData?.artist.name;
         dispatch(fetchArtistProduct({ name }));
-        const pageTitle = bioData.artist.name + " - Works | SimplyArt"
+        const pageTitle = bioData?.artist.name + " - Works | SimplyArt"
         document.title = pageTitle; 
     }, [bio.name]);
 
@@ -57,11 +56,11 @@ const ArtistPortfolio = () => {
                 Featured Works
             </h2>
             <ArtistNavbar id={id} links={links} />
-            {fetchStatus !== "success" ? (
+            {fetchStatus !== "success" && bioStatus !== "success" ? (
                 <Loader/>
             ) : (
                 <ProductList
-                    products={data.product}
+                    products={data?.product}
                     gridSize={1}
                     type={"gallery"}
                 />

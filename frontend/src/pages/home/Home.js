@@ -48,8 +48,8 @@ const Home = () => {
                 img1="https://res.cloudinary.com/djuzpmqlp/image/upload/v1687111060/assets/create3_i1zzjv.jpg"
             /> */}
             <br />
-            <br />
-            <br />
+        
+           
             <AboutUs />
             <HomeEvents />
             <Services

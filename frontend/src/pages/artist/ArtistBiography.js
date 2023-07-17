@@ -73,14 +73,14 @@ const ArtistBiography = () => {
                                 className="xl:my-[30px] lg:my-[15px] text-[38px] font-medium font-cinzel text-[#3C3737]"
                                 data-aos="fade-down"
                             >
-                                {data.artist.name}
+                                {data?.artist.name}
                             </h2>
                             <hr></hr>
 
                             <div
                                 className="h-[auto] w-[600px] lg:w-[100%] mt-[20px] font-montserrat text-justify myHtmlStyles"
                                 dangerouslySetInnerHTML={{
-                                    __html: data.artist.biography,
+                                    __html: data?.artist.biography,
                                 }}
                             />
                         </div>
@@ -90,7 +90,7 @@ const ArtistBiography = () => {
                             <div
                                 className="h-[auto] w-[600px] lg:w-[100%] mt-[10px] font-playfair text-[#3C3737] ml-4 text-justify myHtmlStyles"
                                 dangerouslySetInnerHTML={{
-                                    __html: data.artist.aboutArtist,
+                                    __html: data?.artist.aboutArtist,
                                 }}
                             />
                             <RiDoubleQuotesR size={50} className="ml-auto" />
@@ -99,7 +99,7 @@ const ArtistBiography = () => {
 
                     <div className=" h-[770px] flex items-center justify-center sm:order-1 lg:order-3 ">
                         <img
-                            src={data.artist.profilePhoto}
+                            src={data?.artist.profilePhoto}
                             className=" mb-[10px] h-[700px] w-[500px] shadow-2xl object-cover rounded-lg lg:w-[100%] lg:h-[80%]"
                             data-aos="fade-left"
                             alt="product"

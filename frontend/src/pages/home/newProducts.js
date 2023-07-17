@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { ProductList } from "../store/ProductList";
 import { Heading2 } from "../../components/Heading";
-import { BlackButton, BlueButton, BrownButton } from "../../components/Button";
+import { ViewAllButton } from "../../components/Button";
 import { fetchAllProducts } from "../../redux-store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Carousel } from "../../components/Carousel";
@@ -38,7 +35,7 @@ export const NewProducts = () => {
         <div className="">
             <Heading2>Recently Added</Heading2>
             <br></br>
-            <p className="font-montserrat text-center border-[#3E3E42] m-auto border-b w-[65px]">View All</p>
+            <ViewAllButton border="black" link="/store" align="center">View All</ViewAllButton>
          
             <br></br>
             <br></br>
@@ -52,7 +49,7 @@ export const NewProducts = () => {
                     There are no products available at the moment.
                 </p>
             )}
-            <div className="text-center"></div>
+           
         </div>
     );
 };
