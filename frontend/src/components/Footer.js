@@ -24,13 +24,13 @@ export const Footer = () => {
     ];
     return (
         <footer className="flex flex-col py-[30px] shadow-inner font-slab">
-            <div className="grid grid-rows-2 grid-cols-4 px-[50px] items-center justify-items-center ">
+            <div className="grid grid-rows-2 grid-cols-2 gap-6 sm:grid-cols-4 px-[50px] items-center sm:justify-items-center ">
                 <FooterList items={about} />
                 <FooterList items={events} />
                 <FooterList items={shop} />
                 <FooterList items={artists} />
             </div>
-            <p className="text-[12px] font-medium text-center">
+            <p className="text-[12px] mt-7 sm:mt-0 font-medium text-center">
                 @SimplyArt, All rights reserved.
             </p>
         </footer>

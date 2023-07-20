@@ -4,7 +4,7 @@ import { Event } from "./Event";
 import React, { useEffect, useRef } from 'react';
 import Flickity from 'flickity';
 import 'flickity/dist/flickity.min.css';
-
+import "../styles/dots.css"
 
 export const Carousel = ({ products,artists,events }) => {
   
@@ -21,9 +21,7 @@ export const Carousel = ({ products,artists,events }) => {
       });
   
       // Clean up the Flickity instance when the component is unmounted
-      return () => {
-        flickity.destroy();
-      };
+     
     }, []);
   
     return (

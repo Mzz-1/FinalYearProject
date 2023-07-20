@@ -26,20 +26,20 @@ export const Product = ({ product, type }) => {
                     className={`${
                         type === "gallery"
                             ? " max-h-[75vh] m-auto rounded-md "
-                            : "w-[100%] h-[500px]"
+                            : "w-[100%] sm:h-[500px]"
                     } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75 aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16`}
                     alt="product"
                 />
             </div>
-            <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] text-center ">
-                <li className=" text-[30px] font-cinzel text-[#3C3737]">
+            <ul className=" text-[14px] sm:text-[16px] flex flex-col gap-[px] relative px-[10px] py-[10px] text-center ">
+                <li className="text-[22px] sm:text-[30px] font-cinzel text-[#3C3737] border-b">
                     {product.name}
                 </li>
                 {type === "gallery" ? <hr></hr> : ""}
-                <li className="text-[#65635F] text-[18px]">
+                <li className="text-[#65635F] ">
                     By {product.artist}
                 </li>
-                <li className="text-[#65635F] text-[18px]">
+                <li className="text-[#65635F] ">
                     {product.category}
                 </li>
                 {/* <li className="text-[#65635F] text-[18px]">
@@ -48,7 +48,7 @@ export const Product = ({ product, type }) => {
                 {type === "gallery" ? (
                     ""
                 ) : (
-                    <li className=" text-[28px]  text-[#65635F]">
+                    <li className=" text-[20px]  text-[#65635F]">
                         Rs {product.price}
                     </li>
                 )}

@@ -5,7 +5,7 @@ export const Services = ({ heading, para, img,button }) => {
         <div className="grid lg:grid-cols-2  items-center border-black border-y-[1px] divide-black divide-x-[1px] pb-10 lg:pb-0">
             <div className="flex flex-col order-2   justify-center items-center max-w-[570px] w-[80%] lg:w-[60%] m-auto text-center ">
                 <Heading2>{heading}</Heading2>
-                <p className="font-montserrat mb-5">{para}</p>
+                <p className="text-[14px] sm:text-[16px] font-montserrat mb-5">{para}</p>
                 <ViewAllButton border="black" link="/register">
                   {button}
                 </ViewAllButton>

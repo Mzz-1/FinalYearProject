@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import { Artist } from "../../components/Artist";
 export const ArtistList = ({ artists }) => {
     const navigate = useNavigate();
 
@@ -8,26 +8,11 @@ export const ArtistList = ({ artists }) => {
     };
 
     return (
-        <div className="grid grid-row-auto lg:grid-cols-3 sm:grid-cols-2 cursor-pointer justify-center items-center gap-[30px] my-[20px] ">
+        <div className="grid grid-row-auto lg:grid-cols-3 grid-cols-2 cursor-pointer justify-center sm:items-center gap-4 sm:gap-[30px] my-[20px] ">
             {artists.map((artist) => {
+               
                 return (
-                    <div
-                        className="relative"
-                        onClick={() => getArtist(artist._id)}
-                        data-aos="fade-up"
-                    >
-                        <img
-                            src={artist.profilePhoto}
-                            className=" mb-[10px] w-[100%] h-[350px] object-cover m-auto"
-                            alt="product"
-                        />
-                        <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px]">
-                            <li className=" text-[22px] text-center font-cinzel flex items-center gap-4 justify-start text-[#65635F]">
-                                {/* <hr className="w-[50px] h-[2px] bg-[#65635F] justify-self-start"></hr>{" "} */}
-                                {artist.name}
-                            </li>
-                        </ul>
-                    </div>
+                    <Artist artist={artist}/>
                 );
             })}
         </div>

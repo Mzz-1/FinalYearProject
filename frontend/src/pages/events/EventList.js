@@ -42,7 +42,7 @@ export const EventList = ({ events, date }) => {
                                                 className=" aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16"
                                             />
                                         </div>
-                                        <div className="text-[20px] w-[500px] m-auto  text-[#3C3737] ">
+                                        <div className="text-[20px] sm:w-[500px] m-auto  text-[#3C3737] ">
                                             <h3 className="text-[34px] font-cinzel mb-5 ">
                                                 {events.name}
                                             </h3>

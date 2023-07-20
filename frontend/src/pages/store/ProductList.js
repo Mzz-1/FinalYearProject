@@ -6,7 +6,7 @@ export const ProductList = ({ products, gridSize, type }) => {
 
     return (
         <div
-            className={`grid grid-row-auto grid-cols-${gridSize}  justify-center items-center gap-[50px] mt-[20px]`}
+            className={`grid grid-row-auto grid-cols-2 sm:grid-cols-${gridSize}  justify-center items-center gap-5 sm:gap-[50px] mt-[20px] px-5 sm:px-0`}
         >
             {products.map((product) => {
                 return (

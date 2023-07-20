@@ -1,9 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useUser } from "../service/useUser";
 import { SuccessToast } from "../helpers/Toast";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import Headroom from "react-headroom";
+import { RxHamburgerMenu,RxCross1 } from "react-icons/rx";
+import {VscMenu} from "react-icons/vsc";
+import "../styles/navbar.css";
 
 export const Navbar = () => {
     const items = [
@@ -18,7 +21,13 @@ export const Navbar = () => {
 
     const [loggedIn, setLoggedIn] = useState(user===null?false:true);
 
+    const [showNavbar, setShowNavbar] = useState(false);
+
     const navigate = useNavigate();
+
+    const toggleNavbar=()=>{
+        setShowNavbar(!showNavbar)
+    }
 
     const LogOut = () => {
         localStorage.removeItem("token");
@@ -32,12 +41,15 @@ export const Navbar = () => {
             <Headroom>
                 <div className="bg-[#fdfdfd]">
                     <nav
-                        className={` grid grid-rows-1 grid-cols-2 px-[50px] h-[80px] shadow-lg items-center } `}
+                        className={` grid grid-rows-1 grid-cols-2 px-5 sm:px-[50px] h-[80px] shadow-lg items-center  `}
                     >
                         <p className="font-medium text-2xl text-[#9F7E7E] font-libre">
                             SimplyArt
                         </p>
-                        <ul className="flex gap-[20px] text-[12px] justify-end font-slab">
+                       
+                        <ul className={` gap-[20px] text-[12px] justify-end  font-slab ${showNavbar ? "flex" :"hidden"}`}>
+                        <div className="absolute flex items-center justify-center flex-col gap-5 text-[20px] h-[100vh] bg-[#fefefe] right-0 top-0 w-[100%]">
+                            <button className="absolute top-5 right-5" onClick={toggleNavbar}><RxCross1 size={30}/></button>
                             {items.map((item, i) => (
                                 <li key={i}>
                                     <NavLink
@@ -105,8 +117,11 @@ export const Navbar = () => {
                                         <CgProfile size={18} color="" />
                                     </NavLink>
                                 </li>
-                            
+                                </div>
                         </ul>
+                        <button onClick={toggleNavbar}>
+                            <VscMenu className="ml-auto" size={30}/>
+                        </button>
                     </nav>
                 </div>
             </Headroom>

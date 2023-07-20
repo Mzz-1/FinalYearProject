@@ -53,12 +53,13 @@ const ArtistPage = () => {
     // };
 
     return (
-        <div className="max-w-[1800px] m-auto px-[10%]">
+        <div className="max-w-[1800px] m-auto px-[5%] sm:px-[10%]">
             <div
-                className="flex  justify-between items-center  "
+                className="flex flex-col-reverse justify-between items-center  "
                 data-aos="fade-down"
             >
                 <Heading1 color="black">Artists</Heading1>
+              
                 <Search
                     register={{
                         ...register("searchItem", {
@@ -69,7 +70,7 @@ const ArtistPage = () => {
                 />
             </div>
 
-            <div className="flex flex-col justify-center gap-[40px] max-w-[1440px] m-auto">
+            <div className="flex flex-col justify-center max-w-[1440px] m-auto mt-6 sm:mt-0">
                 <hr className="bg-[#65635F] " />
                 {fetchStatus !== "success" ? (
                     <Loader />
