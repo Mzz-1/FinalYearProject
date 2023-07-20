@@ -41,7 +41,7 @@ export const Navbar = () => {
             <Headroom>
                 <div className="bg-[#fdfdfd]">
                     <nav
-                        className={` grid grid-rows-1 grid-cols-2 px-5 sm:px-[50px] h-[80px] shadow-lg items-center  `}
+                        className={` grid grid-rows-1 grid-cols-2 px-5 sm:px-[50px] h-[80px] shadow-lg items-center transition-all duration-300 ease-in `}
                     >
                         <p className="font-medium text-2xl text-[#9F7E7E] font-libre">
                             SimplyArt
@@ -51,9 +51,10 @@ export const Navbar = () => {
                         <div className="absolute flex items-center justify-center flex-col gap-5 text-[20px] h-[100vh] bg-[#fefefe] right-0 top-0 w-[100%]">
                             <button className="absolute top-5 right-5" onClick={toggleNavbar}><RxCross1 size={30}/></button>
                             {items.map((item, i) => (
-                                <li key={i}>
+                                <li key={i} >
                                     <NavLink
                                         to={item.link}
+                                        onClick={()=> setShowNavbar(!showNavbar)}
                                         exact
                                         className={({ isActive }) => {
                                             return isActive
