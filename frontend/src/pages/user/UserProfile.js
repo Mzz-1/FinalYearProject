@@ -99,8 +99,8 @@ const UserProfilePage = () => {
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(updateUserInfo)}
             >
-                <div className="grid grid-rows-1 justify-center gap-[30px]">
-                    <div className="flex flex-col gap-[20px]">
+                <div className="grid grid-rows-1 justify-center gap-[30px] w-[90%] m-auto">
+                    <div className="flex flex-col gap-[20px] ">
                         <label>Username</label>
                         <Input
                             type="text"

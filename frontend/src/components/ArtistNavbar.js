@@ -3,7 +3,7 @@ export const ArtistNavbar =({id,links})=>{
 
     return(
         <div>
-                <ul className="flex gap-[20px] text-[12px] justify-end mb-[20px] font-slab ">
+                <ul className="px-5 flex gap-[20px] text-[12px] justify-end mb-[20px] font-slab ">
                     
                      {links.map((item, i) => (
                         <li key={i}>

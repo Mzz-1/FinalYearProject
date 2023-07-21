@@ -79,16 +79,16 @@ function Register() {
     },[])
 
     return (
-        <div className="grid grid-rows-1 grid-cols-2 h-[100vh] text-[#9F7E7E] bg-[#F4F4F2] 2xl:px-[8vw] py-[40px] font-slab">
-            <div className="flex items-center justify-center justify-items-start flex-col gap-[20px] px-[6vw]">
+        <div className="grid grid-rows-1 xl:grid-cols-2 h-[100vh] text-[#9F7E7E] bg-[#F4F4F2] 2xl:px-[8vw] py-[40px] font-slab">
+            <div className="xl:flex items-center justify-center justify-items-start flex-col gap-[20px] px-[6vw] hidden">
                 <h1 className="text-7xl font-bold font-libre">SimplyArt</h1>
                 <p className="text-2xl font-medium text-center">
                     SimplyArt is an online platform for exploring artists,
                     artworks and exhibitions. Sign up to continue!
                 </p>
             </div>
-            <div className="flex flex-col items-center justify-center gap-[10px]">
-                <h2 className="text-5xl font-semibold font-libre">Register</h2>
+            <div className="flex flex-col items-center justify-center gap-[10px] px-5 md:w-[500px] m-auto">
+                <h2 className="text-5xl font-semibold font-libre mb-5">Register</h2>
                 <form
                     className="flex flex-col gap-[25px] my-[20px]"
                     onSubmit={handleSubmit(handleFormSubmit)}
@@ -166,7 +166,7 @@ function Register() {
                             </label>
                         )}
                     />
-                    <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
+                    <button className="md:w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
                         Sign up
                     </button>
                 </form>

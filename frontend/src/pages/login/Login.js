@@ -32,9 +32,9 @@ function Login() {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     return (
-        <div className="grid grid-rows-1 grid-cols-2 h-[100vh] text-[#9F7E7E] bg-[#F4F4F2]">
-            <div className="flex justify-center items-center overflow-hidden">
-                <img src="https://res.cloudinary.com/djuzpmqlp/image/upload/v1678250024/assets/moodyfae_p9tpyd.jpg" alt="login" className="w-[50vw] object-cover " />
+        <div className="grid grid-rows-1 xl:grid-cols-2 h-[100vh] text-[#9F7E7E] bg-[#F4F4F2]">
+            <div className=" justify-center items-center overflow-hidden hidden xl:flex">
+                <img src="https://res.cloudinary.com/djuzpmqlp/image/upload/v1678250024/assets/moodyfae_p9tpyd.jpg" alt="login" className="w-[50vw] h-[100vh] object-cover " />
             </div>
             <LoginForm formHeading="SimplyArt"/>
         </div>

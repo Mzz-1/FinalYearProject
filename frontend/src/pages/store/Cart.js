@@ -12,6 +12,7 @@ import {
 } from "../../redux-store/cartSlice";
 import { Loader } from "../../components/LoaderWrapper";
 import cartSlice from "../../redux-store/cartSlice";
+import "../../styles/table.css"
 
 export const Cart = () => {
     useEffect(() => {
@@ -92,9 +93,9 @@ export const Cart = () => {
         calculateTotal();
     }, [cart, data.products]);
     return (
-        <div className="bg-gray-100 min-h-screen px-[50px] font-slab">
-            <div className="text-center py-[40px]">
-                <h2 className="text-5xl font-light text-[#9F7E7E]">My Cart</h2>
+        <div className="bg-gray-100 min-h-screen px-4 md:px-[50px] font-slab">
+            <div className="text-center  py-[40px]">
+                <h2 className="text-5xl font-light text-[#69696b]">My Cart</h2>
             </div>
             {fetchStatus !== "success" ? (
                 <Loader />
@@ -102,10 +103,10 @@ export const Cart = () => {
                 <>
                     {data?.products.length > 0 ? (
                         <div className="">
-                            <table className="bg-white  border-gray-300 w-[100%] rounded-md shadow-sm">
-                                <thead className="text-left text-[#9F7E7E]">
-                                    <tr className=" ">
-                                        <th className=" text-center text-lg font-semibold">
+                            <table className="md:bg-white  md:border-gray-300 w-[100%] rounded-md shadow-sm">
+                                <thead className="text-left text-[#3E3E42]">
+                                    <tr className="hidden md:table-row">
+                                        <th className=" text-center text-lg font-semibold ">
                                             SN
                                         </th>
                                         <th className=" text-lg font-semibold">
@@ -138,16 +139,16 @@ export const Cart = () => {
                                                             key={product._id}
                                                             className=" py-9 border-b-2 first:border-t-2"
                                                         >
-                                                            <td className="text-center">
+                                                            <td className="text-center hidden md:table-cell">
                                                                 {i + 1}
                                                             </td>
                                                             <td>
-                                                                <div className=" py-8 flex flex-col md:flex-row gap-4 md:items-center">
+                                                                <div className=" md:py-8 flex flex-col md:flex-row gap-4 md:items-center">
                                                                     <img
                                                                         src={
                                                                             product.url
                                                                         }
-                                                                        className="h-24 w-24 object-cover"
+                                                                        className="md:h-24 md:w-24 w-[150px] h-auto aspect-w-16 aspect-h-9 m-auto md:m-0 object-cover"
                                                                         alt=""
                                                                     />
                                                                     <div>
@@ -182,14 +183,15 @@ export const Cart = () => {
                                                             </td>
                                                             <td>
                                                                 <span
-                                                                    className="cursor-pointer"
+                                                                    className="cursor-pointer text-sm border-b"
                                                                     onClick={() =>
                                                                         removeProductFromCart(
                                                                             item.productID
                                                                         )
                                                                     }
                                                                 >
-                                                                    <AiTwotoneDelete />
+                                                                    <AiTwotoneDelete className="m-auto" />
+                                                                   
                                                                 </span>
                                                             </td>
                                                         </tr>
@@ -201,7 +203,7 @@ export const Cart = () => {
                                 </tbody>
                             </table>
                             <div className="">
-                                <p className="text-lg font-semibold mt-4 text-[#9F7E7E]">
+                                <p className="text-lg font-semibold mt-4 text-[#3E3E42]">
                                     Subtotal: {subTotal}
                                 </p>
 

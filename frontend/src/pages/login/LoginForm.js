@@ -77,17 +77,17 @@ export const LoginForm = ({ formHeading }) => {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     return (
-        <div className="flex flex-col items-center justify-center gap-[10px] text-[#9F7E7E]  font-slab">
+        <div className="flex flex-col items-center justify-center gap-[10px] text-[#9F7E7E]   font-slab">
             <button
                 className="flex gap-2 items-center self-start px-12 mx-[auto] mb-[20px]"
                 onClick={() => navigate("/")}
             >
                 <BiArrowBack /> HOME
             </button>
-            <div className="bg-white shadow-xl py-[60px] px-[40px] flex flex-col items-center justify-center gap-[30px] rounded-[20px] border-[#9F7E7E] border-[px]">
+            <div className="md:bg-white md:shadow-xl py-[60px] md:px-[40px] flex flex-col items-center justify-center gap-[30px] rounded-[20px] md:border-[#9F7E7E]">
                 <h1 className="text-5xl font-semibold font-libre">{formHeading}</h1>
                 <form
-                    className="flex flex-col gap-[30px] my-[20px] rounded-[20px]"
+                    className="flex flex-col gap-[30px] my-[20px] rounded-[20px] w-[90vw] max-w-[400px] md:max-w-none md:w-auto"
                     onSubmit={handleSubmit(handleLogin)}
                 >
                     <Input
@@ -115,7 +115,7 @@ export const LoginForm = ({ formHeading }) => {
                     />
                     <p>{errors.password?.message}</p>
 
-                    <button className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
+                    <button className="md:w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
                         Log in
                     </button>
                 </form>
