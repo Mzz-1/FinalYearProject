@@ -209,7 +209,7 @@ function App() {
                                     />
                                     <Route
                                         path="manage-events"
-                                        element={<PrivateRouteArtist Component={ArtistDashboard} />}
+                                        element={<PrivateRouteArtist Component={ManageEvents} />}
                                     />
                                     <Route
                                         path="orders"

@@ -181,9 +181,8 @@ const UserProfilePage = () => {
                         />
                     </div>
                 </div>
-                <DashboardActionButton>
-                    Update Information
-                </DashboardActionButton>
+                
+                <button className="w-[200px] py-4 border-2 rounded-lg"> Update Information</button>
             </form>
         </div>
         </div>

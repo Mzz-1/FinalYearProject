@@ -20,7 +20,7 @@ export const ArtistSidebar = () => {
                 },
             ],
             icon: <RiCalendarEventLine />,
-            link: "/admin-dashboard/products",
+            link: "/artist-dashboard/manage-products",
         },
         {
             itemName: "About Artist",
