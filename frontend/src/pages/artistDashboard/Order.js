@@ -145,10 +145,10 @@ export const ManageOrders = ({ userType }) => {
                         <tbody className="overflow-scroll">
                             {orders.map((order, index) => (
                                 <tr
-                                    className="border-b divide-slate-400/25 h-[60px] first:border-t"
+                                    className="border-b divide-slate-400/25 md:h-[60px] first:border-t"
                                     key={order._id}
                                 >
-                                    <td>{index + 1}</td>
+                                    <td className="hidden md:table-cell">{index + 1}</td>
                                     {order.products.map((product, idx) => (
                                         <td key={idx}>
                                             {
