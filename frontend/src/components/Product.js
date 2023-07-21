@@ -28,18 +28,18 @@ export const Product = ({ product, type }) => {
                     type === "gallery"
                         ? ""
                         : type === "store"
-                        ? "h-[480px] bg-[#373739] grid items-center"
+                        ? "h-[100] bg-black"
                         : "bg-black"
                 }`}
             >
-                <div className={`${type==="store" ? "h-[380px] lg:h-[420px] p-5 bg-[#f7f7f6]  flex items-center justify-center m-7 hover:rounded-xl":""}`}>
+                <div className={`${type==="store" ? "h-[200px] sm:h-[300px] md:h-[380px] lg:h-[460px] p-5 bg-[#f7f7f6]  flex items-center justify-center  hover:rounded-xl":""}`}>
                     <img
                         src={product.url}
                         className={`${
                             type === "gallery"
                                 ? " max-h-[75vh] m-auto rounded-md "
                                 : type === "store"
-                                ? " max-h-[350px]  max-w-[300px] shadow-2xl rounded-sm"
+                                ? "max-h-[150px]  max-w-[150px] sm:max-h-[250px]  sm:max-w-[230px] md:max-h-[350px]  md:max-w-[300px] shadow-2xl rounded-sm"
                                 : "w-[100%] md:h-[400px] lg:h-[500px]"
                         }
                     mb-[10px]  object-cover  transition-opacity duration-300  aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16`}

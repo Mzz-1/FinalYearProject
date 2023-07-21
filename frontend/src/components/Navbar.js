@@ -47,9 +47,9 @@ export const Navbar = () => {
                             SimplyArt
                         </p>
                        
-                        <ul className={` gap-[20px] text-[12px] justify-end  font-slab ${showNavbar ? "flex" :"hidden"}`}>
-                        <div className="absolute flex items-center justify-center flex-col gap-5 text-[20px] h-[100vh] bg-[#fefefe] right-0 top-0 w-[100%]">
-                            <button className="absolute top-5 right-5" onClick={toggleNavbar}><RxCross1 size={30}/></button>
+                        <ul className={`  text-[12px] justify-end  font-slab lg:flex ${showNavbar ? "flex" :"hidden"}`}>
+                        <div className={`${showNavbar ? "absolute flex items-center justify-center flex-col gap-5 text-[20px] h-[100vh] bg-[#fefefe] right-0 top-0 w-[100%]" :"flex gap-[20px]"} `}>
+                            <button className="absolute top-5 right-5 lg:hidden" onClick={toggleNavbar}><RxCross1 size={30}/></button>
                             {items.map((item, i) => (
                                 <li key={i} >
                                     <NavLink
@@ -120,7 +120,7 @@ export const Navbar = () => {
                                 </li>
                                 </div>
                         </ul>
-                        <button onClick={toggleNavbar}>
+                        <button className="lg:hidden" onClick={toggleNavbar}>
                             <VscMenu className="ml-auto" size={30}/>
                         </button>
                     </nav>
