@@ -170,7 +170,7 @@ const Store = () => {
                 {fetchStatus !== "success" ? (
                     <Loader />
                 ) : products.product.length > 0 ? (
-                    <ProductList products={products.product} gridSize={3} />
+                    <ProductList products={products.product} gridSize={3} type={"store"}/>
                 ) : (
                     <div className=" h-[50vh] flex items-center justify-center">
                         <Heading1>

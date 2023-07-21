@@ -73,7 +73,7 @@ export const ProductDetails = () => {
 
     return (
         <div className="grid grid-row-auto lg:grid-cols-2 bg-[] justify-center lg:gap-[100px] ">
-            <div className="bg-[#F4F4F2] lg:h-[770px] w-[100vw] lg:w-[100%] flex items-center justify-center p-7">
+            <div className="bg-[#F4F4F2] lg:h-[770px] w-[100vw] lg:w-[100%] flex items-center justify-center px-12 py-7">
                 <img
                     src={product.url}
                     className=" mb-[10px] aspect-w-16 aspect-h-9 shadow-2xl max-h-[700px]"

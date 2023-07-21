@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const Product = ({ product, type }) => {
     const navigate = useNavigate();
 
-    const getProducts =  (id) => {  
+    const getProducts = (id) => {
         navigate(`/product/${id}`);
     };
     return (
@@ -12,36 +12,48 @@ export const Product = ({ product, type }) => {
             className={`relative cursor-pointer font-playfair ${
                 type === "gallery"
                     ? "grid 2xl:grid-cols-custom-2 items-center gap-11"
-                    : "group hover:bg-[#f4f6f6]"
+                    : type === "carousel"
+                    ? "mx-5 mb-7 group hover:bg-[#f4f6f6]"
+                    : type === "store"
+                    ? " w-[100%] md:h-[500px] lg:h-[600px] group  hover:rounded-xl"
+                    : ""
             } 
-            ${type === "carousel" ? "mx-5 mb-7 " : ""} `}
+          `}
             data-aos={type !== "carousel" ? "fade-up" : null}
-          
             onClick={() => getProducts(product._id)}
             key={product._id}
         >
-            <div className={`${type === "gallery" ? "" : "bg-black"}`}>
-                <img
-                    src={product.url}
-                    className={`${
-                        type === "gallery"
-                            ? " max-h-[75vh] m-auto rounded-md "
-                            : "w-[100%] md:h-[400px] lg:h-[500px]"
-                    } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75 aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16`}
-                    alt="product"
-                />
+            <div
+                className={`${
+                    type === "gallery"
+                        ? ""
+                        : type === "store"
+                        ? "h-[480px] bg-[#373739] grid items-center"
+                        : "bg-black"
+                }`}
+            >
+                <div className={`${type==="store" ? "h-[380px] lg:h-[420px] p-5 bg-[#f7f7f6]  flex items-center justify-center m-7 hover:rounded-xl":""}`}>
+                    <img
+                        src={product.url}
+                        className={`${
+                            type === "gallery"
+                                ? " max-h-[75vh] m-auto rounded-md "
+                                : type === "store"
+                                ? " max-h-[350px]  max-w-[300px] shadow-2xl rounded-sm"
+                                : "w-[100%] md:h-[400px] lg:h-[500px]"
+                        }
+                    mb-[10px]  object-cover  transition-opacity duration-300  aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16`}
+                        alt="product"
+                    />
+                </div>
             </div>
             <ul className=" text-[14px] sm:text-[16px] flex flex-col gap-[px] relative px-[10px] py-[10px] text-center ">
-                <li className="text-[22px] sm:text-[30px] font-cinzel text-[#3C3737] border-b">
+                <li className="text-[22px]  font-cinzel text-[#3C3737] border-b">
                     {product.name}
                 </li>
                 {type === "gallery" ? <hr></hr> : ""}
-                <li className="text-[#65635F] ">
-                    By {product.artist}
-                </li>
-                <li className="text-[#65635F] ">
-                    {product.category}
-                </li>
+                <li className="text-[#65635F] ">By {product.artist}</li>
+                <li className="text-[#65635F] ">{product.category}</li>
                 {/* <li className="text-[#65635F] text-[18px]">
                     {product.dimensions}
                 </li> */}
@@ -53,17 +65,7 @@ export const Product = ({ product, type }) => {
                     </li>
                 )}
             </ul>
-            {type === "gallery" ? (
-                ""
-            ) : (
-                <button className="flex justify-center items-center absolute top-[35%] left-[50%] transform translate-x-[-50%] -translate-y-[-50%] p-3 border-2 w-[200px] mb-5 m-auto font-slab font-medium text-[#fefefe] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {product.quantity <= 0 ? (
-                        <span className="font-slab">SOLD OUT</span>
-                    ) : (
-                        <span className="font-slab">VIEW DETAILS</span>
-                    )}
-                </button>
-            )}
+           
         </div>
     );
 };
