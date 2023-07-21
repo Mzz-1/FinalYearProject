@@ -26,7 +26,7 @@ export const Product = ({ product, type }) => {
                     className={`${
                         type === "gallery"
                             ? " max-h-[75vh] m-auto rounded-md "
-                            : "w-[100%] sm:h-[500px]"
+                            : "w-[100%] md:h-[400px] lg:h-[500px]"
                     } mb-[10px]  object-cover  transition-opacity duration-300 group-hover:opacity-75 aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16`}
                     alt="product"
                 />

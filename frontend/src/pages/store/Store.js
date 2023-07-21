@@ -98,7 +98,7 @@ const Store = () => {
             />
             <div className="max-w-[1440px] m-auto flex flex-col justify-between items-center px-[5%]">
                 <div
-                    className=" top-[450px] bg-white xl:h-[230px] max-w-[1300px] w-[100%] m-auto xl:border px-12 py-9 xl:absolute "
+                    className=" top-[450px] bg-white xl:h-[230px] max-w-[1250px] w-[100%] m-auto xl:border px-10 py-9 xl:absolute "
                     data-aos="fade-down"
                 >
                     <h2 className="text-[#726d6d] text-[18px] text-center xl:text-left font-roboto mb-2">

@@ -72,31 +72,31 @@ export const ProductDetails = () => {
     
 
     return (
-        <div className="grid grid-row-auto grid-cols-2 bg-[] justify-center gap-[100px] ">
-            <div className="bg-[#F4F4F2] h-[770px] flex items-center justify-center">
+        <div className="grid grid-row-auto lg:grid-cols-2 bg-[] justify-center lg:gap-[100px] ">
+            <div className="bg-[#F4F4F2] lg:h-[770px] w-[100vw] lg:w-[100%] flex items-center justify-center p-7">
                 <img
                     src={product.url}
-                    className=" mb-[10px] h-[70%] shadow-2xl"
+                    className=" mb-[10px] aspect-w-16 aspect-h-9 shadow-2xl max-h-[700px]"
                     alt="product"
                 />
             </div>
 
-            <div className="relative w-[420px] ">
-                <ul className="flex flex-col gap-[2px] relative px-[10px] py-[100px] font-slab">
+            <div className="relative w-[90%] m-auto lg:m-0 lg:w-[420px] ">
+                <ul className="flex flex-col gap-[2px] relative px-[10px] py-[40px] lg:py-[100px] font-slab">
                     <button
-                        className="flex gap-2 items-center mb-9"
+                        className="flex gap-2 items-center mb-4 lg:mb-9"
                         onClick={() => navigate(-1)}
                     >
                         <BiArrowBack /> BACK
                     </button>
-                    <li className="text-[34px] ">{product.name}</li>
-                    <li className="text-[#65635F] text-[18px] mb-[30px]">
+                    <li className="sm:text-[34px] text-[23px]">{product.name}</li>
+                    <li className="text-[#65635F] text-[18px] mb-3 lg:mb-[30px]">
                         By {product.artist}
                     </li>
                     <li className="text-[#65635F] text-[15px]">
                         {product.category}
                     </li>
-                    <li className="text-[#65635F] text-[15px] mb-[30px]">
+                    <li className="text-[#65635F] text-[15px] mb-3 lg:mb-[30px]">
                         {product.dimensions}
                     </li>
                     <li className="text-[#65635F] text-[15px]">
