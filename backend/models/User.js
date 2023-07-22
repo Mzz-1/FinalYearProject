@@ -3,7 +3,12 @@ mongoose.set("strictQuery", false);
 const userSchema = mongoose.Schema({
     username:{
         type: String,
-        required: [true, "email is required"],
+     
+        unique: true,
+        trim:true,
+    },
+    googleID:{
+        type: String,
         unique: true,
         trim:true,
     },
@@ -15,7 +20,7 @@ const userSchema = mongoose.Schema({
     },
     passwordHash: {
         type: String,
-        required: [true, "password must be provided"],
+       
         
     },
     receiveEmail:{

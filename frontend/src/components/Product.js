@@ -9,7 +9,7 @@ export const Product = ({ product, type }) => {
     };
     return (
         <div
-            className={`relative cursor-pointer font-playfair ${
+            className={`relative cursor-pointer font-playfair rounded-xl ${
                 type === "gallery"
                     ? "grid 2xl:grid-cols-custom-2 items-center gap-11"
                     : type === "carousel"

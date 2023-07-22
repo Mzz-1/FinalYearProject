@@ -1,19 +1,42 @@
-import React, { useState } from "react";
 import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { useToken } from "../../service/useToken";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { SuccessToast, ErrorToast } from "../../helpers/Toast";
 import { BiArrowBack } from "react-icons/bi";
-import { useUser } from "../../service/useUser";
+import { useState, useEffect } from "react";
+import { useQueryParams } from "../../service/useQueryParams";
 
 export const LoginForm = ({ formHeading }) => {
-    const [token, setToken] = useToken();
+    const [, setToken] = useToken();
+
+    const [googleOauthUrl, setGoogleOauthURL] = useState("");
+
+    const { token: oauthToken } = useQueryParams();
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const loadOauthUrl = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:5000/auth/google/url"
+                );
+                const { url } = response.data;
+                setGoogleOauthURL(url);
+            } catch {}
+        };
+        loadOauthUrl();
+    }, []);
+
+    useEffect(() => {
+        if (oauthToken) {
+            setToken(oauthToken);
+            navigate("/");
+        }
+    }, [oauthToken, setToken, navigate]);
+
     const handleLogin = async ({ email, password }) => {
         try {
             const response = await axios.post(
@@ -26,7 +49,6 @@ export const LoginForm = ({ formHeading }) => {
 
             const { token } = response.data;
             setToken(token);
-           
 
             if (formHeading === "Admin") {
                 navigate("/admin-dashboard");
@@ -115,8 +137,19 @@ export const LoginForm = ({ formHeading }) => {
                     />
                     <p>{errors.password?.message}</p>
 
-                    <button className="md:w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]">
+                    <button
+                        type="submit"
+                        className="md:w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]"
+                    >
                         Log in
+                    </button>
+                    <button
+                        type="button"
+                        disabled={!googleOauthUrl}
+                        className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]"
+                        onClick={() => (window.location.href = googleOauthUrl)}
+                    >
+                        Log in with Google
                     </button>
                 </form>
                 {formHeading !== "Admin" && (
