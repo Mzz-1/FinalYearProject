@@ -30,12 +30,12 @@ const ForgotPasswordPage = () => {
     };
     watch();
     return success ? (
-        <div className="w-full h-[70vh] text-center pt-[10%] flex flex-col gap-5 font-slab bg-[#4d4d57] text-[#fefefe]">
+        <div className="w-full h-[70vh] px-5 text-center  flex flex-col justify-center gap-5 font-slab bg-[#4d4d57] text-[#fefefe]">
             <h1 className="text-[30px] font-bold">Success</h1>
             <p>Check your email for a reset link.</p>
         </div>
     ) : (
-        <div className="w-full h-[70vh] text-center pt-[10%] flex flex-col gap-5 font-slab bg-[#4d4d57] text-[#fefefe]">
+        <div className="w-full h-[70vh] px-5 text-center  flex flex-col justify-center gap-5 font-slab bg-[#4d4d57] text-[#fefefe]">
             <h1 className="text-[30px] font-bold">Forgot Password?</h1>
            
             <p>Enter your email and we'll send you a reset link.</p>
