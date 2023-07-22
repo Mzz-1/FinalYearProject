@@ -39,7 +39,7 @@ export const Product = ({ product, type }) => {
                             type === "gallery"
                                 ? " max-h-[75vh] m-auto rounded-md "
                                 : type === "store"
-                                ? "max-h-[150px]  max-w-[150px] sm:max-h-[250px]  sm:max-w-[230px] md:max-h-[350px]  md:max-w-[300px] shadow-2xl rounded-sm"
+                                ? "max-h-[150px]  max-w-[120px] sm:max-h-[250px]  sm:max-w-[230px] md:max-h-[350px]  md:max-w-[300px] shadow-2xl rounded-sm"
                                 : "w-[100%] md:h-[400px] lg:h-[500px]"
                         }
                     mb-[10px]  object-cover  transition-opacity duration-300  aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16`}

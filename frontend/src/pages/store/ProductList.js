@@ -1,6 +1,3 @@
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { Product } from "../../components/Product";
 export const ProductList = ({ products, gridSize, type }) => {
 

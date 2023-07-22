@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductList } from "./ProductList";
 import { Banner } from "../../components/Banner";
-import { TfiSearch } from "react-icons/tfi";
+import { GrFormPrevious,GrFormNext } from "react-icons/gr";
 import { Search } from "../../components/Search";
 import { useForm } from "react-hook-form";
 import { Select } from "../../components/Select";
 import { Heading, Heading1, Heading2 } from "../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import productSlice from "../../redux-store/productSlice";
-import { fetchAllProducts } from "../../redux-store/productSlice";
+import { fetchAllProducts, loadProducts } from "../../redux-store/productSlice";
 import { BrownButton } from "../../components/Button";
 import { Loader } from "../../components/LoaderWrapper";
 
@@ -60,6 +60,31 @@ const Store = () => {
             })
         );
     };
+    const handleLoadMore = async () => {
+        const { searchItem, category, sort } = getValues();
+        dispatch(
+            loadProducts({
+                searchItem: searchItem,
+                category: category,
+                sort: sort,
+                page: page + 1,
+            })
+        );
+        setPage(page+1);
+    };
+
+    const prevPage = async () => {
+        const { searchItem, category, sort } = getValues();
+        dispatch(
+            loadProducts({
+                searchItem: searchItem,
+                category: category,
+                sort: sort,
+                page: page - 1,
+            })
+        );
+        setPage(page-1);
+    };
 
     useEffect(() => {
         fetchProducts();
@@ -75,20 +100,6 @@ const Store = () => {
     const toggleFilters = () => {
         setShowFilters(!showFilters);
     };
-
-    // const handleLoadMore = async () => {
-    //     const { searchItem, category, sort } = getValues();
-    //     setPage(page + 1);
-    //     setLoading(true);
-    //     const productsData = await axios.get(
-    //         `http://localhost:5000/api/products?name=${searchItem}&category=${category}&sort=${sort}&page=${
-    //             page + 1
-    //         }`
-    //     );
-    //     const newProducts = productsData.data.product;
-    //     setProducts([...products, ...newProducts]);
-    //     setLoading(false);
-    // };
 
     return (
         <div className=" ">
@@ -147,10 +158,14 @@ const Store = () => {
                                 FILTER
                             </BrownButton>
                         </div>
-                         
+
                         <div className="absolute top-[45%] flex justify-center xl:hidden">
-                           
-                            <button className="absolute top-[90px] w-[120px] border-b " onClick={fetchProducts}>Show Results</button>
+                            <button
+                                className="absolute top-[90px] w-[120px] border-b "
+                                onClick={fetchProducts}
+                            >
+                                Show Results
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -170,7 +185,11 @@ const Store = () => {
                 {fetchStatus !== "success" ? (
                     <Loader />
                 ) : products.product.length > 0 ? (
-                    <ProductList products={products.product} gridSize={3} type={"store"}/>
+                    <ProductList
+                        products={products.product}
+                        gridSize={3}
+                        type={"store"}
+                    />
                 ) : (
                     <div className=" h-[50vh] flex items-center justify-center">
                         <Heading1>
@@ -180,21 +199,26 @@ const Store = () => {
                     </div>
                 )}
                 {fetchStatus === "success" && products.product.length > 0 && (
-                    <button
-                        className="p-3 border-2 w-[200px] mb-5 m-auto font-slab bg-[#9F7E7E] font-medium text-[#fefefe] rounded-lg"
-                        // onClick={handleLoadMore}
-                    >
-                        LOAD MORE
-                    </button>
+                    <div className="m-auto mb-5 flex">
+                        <button
+                            className=" w-[100px]  m-auto font-slab  font-medium  rounded-lg"
+                            onClick={prevPage}
+                            disabled={page===1 ? true : false}
+                        >
+                          <GrFormPrevious size={25} className="m-auto" />
+                        </button>
+                        <p className="font-slab">{page}</p>
+                        <button
+                            className="  w-[100px]  m-auto font-slab  font-medium  rounded-lg"
+                            onClick={handleLoadMore}
+                           
+                        >
+                           <GrFormNext size={25} className="m-auto"/>
+                        </button>
+                    </div>
                 )}
-                {fetchStatus === "success" && products.product.length <= 0 && (
-                    <button
-                        className="p-3 border-2 w-[200px] mb-5 m-auto font-slab bg-[#9F7E7E] font-medium text-[#fefefe] rounded-lg"
-                        // onClick={handleLoadMore}
-                    >
-                        No more roducts to show.
-                    </button>
-                )}
+
+               
             </div>
         </div>
     );

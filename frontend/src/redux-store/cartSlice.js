@@ -45,7 +45,7 @@ const cartSlice = createSlice({
     },
     reducers: {
         cTotal: (state, action) => {
-            console.log(action.payload, "total total");
+            // console.log(action.payload, "total total");
             const { cartItems, products } = action.payload;
             console.log(cartItems, products, "after decon");
             for (let i = 0; i < cartItems?.length; i++) {
