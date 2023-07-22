@@ -17,7 +17,7 @@ export const Artist = ({ artist, type }) => {
         >
             <img
                 src={artist.profilePhoto}
-                className={` mb-[10px] w-[100%]  sm:h-[450px] object-cover m-auto rounded-md ${type==="carousel" ? "" :"h-[50vw]"} `}
+                className={` mb-[10px] w-[100%]  md:h-[450px] object-cover m-auto rounded-md ${type==="carousel" ? "" :"h-[50vw]"} `}
                 alt="product"
             />
             <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] font-montserrat">

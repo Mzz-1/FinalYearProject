@@ -29,10 +29,10 @@ const ArtistPage = () => {
     } = useForm();
 
     const getArtists = async () => {
-        const { searchItem } = getValues();
+        
 
         dispatch(
-            fetchAllArtists({ page: "", searchItem: searchItem, limit: "" })
+            fetchAllArtists({ page: "", limit: "" })
         );
     };
 
@@ -40,38 +40,20 @@ const ArtistPage = () => {
         getArtists();
     }, []);
 
-    // const handleLoadMore = async () => {
-    //     const { searchItem } = getValues();
-    //     setPage(page + 1);
-    //     const artistData = await axios.get(
-    //         `http://localhost:5000/api/artists?name=${searchItem}&page=${
-    //             page + 1
-    //         }`
-    //     );
-    //     const newData = await artistData.data.artist;
-    //     setArtists([...artists, ...newData]);
-    // };
 
     return (
         <div className="max-w-[1800px] m-auto px-[5%] sm:px-[10%]">
             <div
-                className="flex flex-col-reverse justify-between items-center  "
-                data-aos="fade-down"
+                className="md:my-7 my-3"
+                
             >
                 <Heading1 color="black">Artists</Heading1>
               
-                <Search
-                    register={{
-                        ...register("searchItem", {
-                            required: "Please enter a product name.",
-                        }),
-                    }}
-                    onClick={() => getArtists()}
-                />
+            
             </div>
 
-            <div className="flex flex-col justify-center max-w-[1440px] m-auto mt-6 sm:mt-0">
-                <hr className="bg-[#65635F] " />
+            <div className="flex flex-col justify-center max-w-[1440px] m-auto mt-3 md:mt-6 sm:mt-0">
+                <hr className="bg-[#65635F] mb-3 md:mb-7" />
                 {fetchStatus !== "success" ? (
                     <Loader />
                 ) : data.artist.length > 0 ? (

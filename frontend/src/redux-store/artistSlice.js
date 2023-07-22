@@ -4,8 +4,8 @@ import axios from "axios";
 
 export const fetchAllArtists = createAsyncThunk(
     "fetch-all-artists",
-    async ({ limit, searchItem, page }) => {
-        const apiUri = `http://localhost:5000/api/artists?name=${searchItem}&page=${page}&limit=${limit}`;
+    async ({ limit, page }) => {
+        const apiUri = `http://localhost:5000/api/artists?page=${page}&limit=${limit}`;
         const response = await axios.get(apiUri);
         return response.data;
     }
