@@ -1,4 +1,3 @@
-
 import { RiCalendarEventLine } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
 import { AiOutlineUser } from "react-icons/ai";
@@ -6,7 +5,11 @@ import { Sidebar } from "../../components/Sidebar";
 
 export const AdminSidebar = () => {
     const items = [
-        { itemName: "Dashboard", link: "/admin-dashboard", icon: <RxDashboard /> },
+        {
+            itemName: "Dashboard",
+            link: "/admin-dashboard",
+            icon: <RxDashboard />,
+        },
         {
             itemName: "Events",
             subItems: [
@@ -43,10 +46,8 @@ export const AdminSidebar = () => {
             ],
             link: "/admin-dashboard/users",
             icon: <AiOutlineUser />,
-        },     
+        },
     ];
 
-    return (
-        <Sidebar items={items}/>
-    );
+    return <Sidebar items={items} />;
 };

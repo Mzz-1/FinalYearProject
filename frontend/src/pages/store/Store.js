@@ -79,7 +79,7 @@ const Store = () => {
     // const handleLoadMore = async () => {
     //     const { searchItem, category, sort } = getValues();
     //     setPage(page + 1);
-    //     setLoading(true);
+       
     //     const productsData = await axios.get(
     //         `http://localhost:5000/api/products?name=${searchItem}&category=${category}&sort=${sort}&page=${
     //             page + 1
@@ -87,7 +87,7 @@ const Store = () => {
     //     );
     //     const newProducts = productsData.data.product;
     //     setProducts([...products, ...newProducts]);
-    //     setLoading(false);
+        
     // };
 
     return (

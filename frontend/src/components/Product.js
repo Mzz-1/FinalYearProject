@@ -15,7 +15,7 @@ export const Product = ({ product, type }) => {
                     : type === "carousel"
                     ? "mx-5 mb-7 group hover:bg-[#f4f6f6]"
                     : type === "store"
-                    ? " w-[100%] md:h-[500px] lg:h-[600px] group  hover:rounded-xl"
+                    ? " w-[100%] md:h-[500px] lg:h-[600px] hover:rounded-xl"
                     : ""
             } 
           `}
