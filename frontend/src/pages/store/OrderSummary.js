@@ -129,8 +129,8 @@ export const OrderSummary = () => {
                 </h2>
             </div>
 
-            <div className="flex gap-10">
-                <table className="bg-white  border-gray-300 w-[70%] rounded-md shadow-sm h-[100px]">
+            <div className="flex flex-col lg:flex-row gap-10">
+                <table className="bg-white  border-gray-300 w-[70%] m-auto lg:m-0 rounded-md shadow-sm lg:h-[100px]">
                     <thead className="text-left">
                         <tr className="text-[#9F7E7E] ">
                             <th className=" text-center text-lg font-semibold">
@@ -160,10 +160,10 @@ export const OrderSummary = () => {
                                 >
                                     <td className="text-center">{i + 1}</td>
                                     <td>
-                                        <div className=" py-8 flex flex-col md:flex-row gap-4 md:items-center">
+                                        <div className=" py-8 flex  flex-col md:flex-row gap-4 md:items-center">
                                             <img
                                                 src={product.url}
-                                                className="h-24 w-24 object-cover"
+                                                className="h-24 w-24 m-auto lg:m-0 object-cover"
                                                 alt=""
                                             />
                                             <div>
@@ -192,7 +192,7 @@ export const OrderSummary = () => {
                         })}
                     </tbody>
                 </table>
-                <div className="bg-white h-[440px] w-[400px] py-[20px] px-[30px] rounded-md flex-1">
+                <div className="bg-white md:w-[400px] m-auto py-[20px] px-[30px] rounded-md flex-1 mb-7">
                     <div className="flex flex-col gap-1 mb-[20px]">
                         <Heading2 text="Delivery Details" />
 
