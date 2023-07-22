@@ -29,20 +29,20 @@ export const Product = ({ product, type }) => {
                         ? ""
                         : type === "store"
                         ? "h-[100] bg-black"
-                        : "bg-black"
+                        : "bg-black h-[310px] md:h-auto md:block grid items-center"
                 }`}
             >
-                <div className={`${type==="store" ? "h-[200px] sm:h-[300px] md:h-[380px] lg:h-[460px] p-5 bg-[#f7f7f6]  flex items-center justify-center  hover:rounded-xl":""}`}>
+                <div className={`${type==="store" ? "h-[200px] sm:h-[300px] md:h-[380px] lg:h-[460px] p-5 bg-[#f7f7f6]  flex items-center justify-center  hover:rounded-xl":"h-[300px] md:h-auto bg-[#f7f7f6] flex items-center justify-center m-1 md:m-0 px-2 md:p-0 md:bg-white  lg:block "}`}>
                     <img
                         src={product.url}
                         className={`${
                             type === "gallery"
-                                ? " max-h-[75vh] m-auto rounded-md "
+                                ? " max-h-[75vh] m-auto rounded-md mb-[10px]"
                                 : type === "store"
-                                ? "max-h-[150px]  max-w-[120px] sm:max-h-[250px]  sm:max-w-[230px] md:max-h-[350px]  md:max-w-[300px] shadow-2xl rounded-sm"
-                                : "w-[100%] md:h-[400px] lg:h-[500px]"
+                                ? "max-h-[150px] mb-[10px]  max-w-[120px] sm:max-h-[250px]  sm:max-w-[230px] md:max-h-[350px]  md:max-w-[300px] shadow-2xl rounded-sm"
+                                : "max-h-[250px] max-w-[280px] md:max-w-none md:max-h-[none] md:h-[400px] lg:h-[500px] "
                         }
-                    mb-[10px]  object-cover  transition-opacity duration-300  aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16`}
+                      object-cover   aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16`}
                         alt="product"
                     />
                 </div>
