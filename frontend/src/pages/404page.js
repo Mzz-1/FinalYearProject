@@ -2,7 +2,7 @@ import { ViewAllButton } from "../components/Button";
 import { useEffect } from "react";
 const Page404 = ({error}) => {
     useEffect(()=>{
-        document.title = "404 Error | Page not found"; 
+        document.title = "Error | Page not found"; 
 
     },[])
     return (

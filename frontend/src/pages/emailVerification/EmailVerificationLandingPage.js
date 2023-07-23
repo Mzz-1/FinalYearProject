@@ -11,7 +11,10 @@ const EmailVerificationPage = () => {
     const { verificationString } = useParams();
     const [, setToken] = useToken();
 
-    console.log(verificationString);
+    useEffect(() => {
+        const pageTitle = "Verify Your Email | SimplyArt";
+        document.title = pageTitle;
+    }, []);
 
     useEffect(() => {
         const loadVerification = async () => {

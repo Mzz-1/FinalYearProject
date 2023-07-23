@@ -1,7 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const PasswordResetFail = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const pageTitle = "Reset Password | SimplyArt";
+        document.title = pageTitle;
+    }, []);
 
     return (
         <div>

@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 const VerifyEmailPage = () => {
     const navigate = useNavigate();
-
+    useEffect(() => {
+        const pageTitle = "Verify Your Email | SimplyArt";
+        document.title = pageTitle;
+    }, []);
     useEffect(() => {
         setTimeout(() => {
             navigate("/");

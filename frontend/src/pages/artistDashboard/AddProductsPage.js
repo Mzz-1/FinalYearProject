@@ -6,25 +6,32 @@ import { useUser } from "../../service/useUser";
 import { DashboardActionButton } from "../../components/Button";
 import { PromiseToast, SuccessToast } from "../../helpers/Toast";
 import { useParams } from "react-router-dom";
-import { getProducts } from "../../helpers/Product";
-import { addProduct, updateProduct } from "../../helpers/Product";
-import { DashboardHeading, Heading2 } from "../../components/Heading";
+import {  Heading2 } from "../../components/Heading";
 import { Textarea } from "../../components/Input";
+import { updateProducts,addProducts,getProduct } from "../../redux-store/productSlice";
+import { useDispatch,useSelector } from "react-redux";
 
 const AddProductPage = () => {
     const user = useUser();
 
     const { id } = useParams();
 
+const [productEditID, setProductUpdateID] = useState(id);
     const [productToEdit, setProductToUpdate] = useState();
 
+    const dispatch = useDispatch();
+
+    const product = useSelector((state)=>state.product)
+
+    const {productData, getStatus} = product
+
     useEffect(() => {
-        const fetchData = async () => {
-            const event = await getProducts(id);
-            setProductToUpdate(event);
-        };
-        fetchData();
-    }, [id]);
+       
+
+        dispatch(getProduct({id}))
+        setProductToUpdate(productData.product);
+      
+    }, [dispatch,id]);
 
     const [artistName, setArtistName] = useState("");
 
@@ -54,8 +61,9 @@ const AddProductPage = () => {
 
     useEffect(() => {
         getArtist();
-        document.title = "Add Products | Artist Dashboard"; 
-    },[]);
+        document.title = "Add Products | Artist Dashboard";
+        setProductUpdateID(id)
+    }, []);
 
     const ProductAction = async (data) => {
         const response = await axios.get(
@@ -63,21 +71,22 @@ const AddProductPage = () => {
         );
 
         setArtistName(response.data.artist.name);
-        console.log(response.data.artist.name);
-        console.log("artistname", artistName);
         if (!productToEdit) {
-            addProduct(data, artistName);
+           
+            dispatch( addProducts({data, artistName}))
             SuccessToast("Product has been added.");
         } else {
-            updateProduct(data, artistName, productToEdit._id);
-
+            dispatch(updateProducts({data, artistName,productEditID }));
             SuccessToast("Product has been updated.");
         }
     };
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <Heading2>    {productToEdit ? "Update Product Details" : "Add Product"}</Heading2>
+            <Heading2>
+                {" "}
+                {productToEdit ? "Update Product Details" : "Add Product"}
+            </Heading2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(ProductAction)}
@@ -91,7 +100,7 @@ const AddProductPage = () => {
                             defaultValue={productToEdit?.name}
                             register={{
                                 ...register("name", {
-                                    required: "Please enter your username.",
+                                    required: "Please enter the product name.",
                                 }),
                             }}
                         />

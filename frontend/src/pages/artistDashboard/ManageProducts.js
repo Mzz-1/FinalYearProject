@@ -5,15 +5,18 @@ import { ModalPara } from "../../components/Paragraph";
 import { useNavigate } from "react-router-dom";
 import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
 import { Modal, LargeModal } from "../../components/Modal";
-import { getAllProducts, deleteProducts } from "../../helpers/Product";
 import { SuccessToast } from "../../helpers/Toast";
 import { useUser } from "../../service/useUser";
+import { deleteProduct } from "../../redux-store/productSlice";
+import { useDispatch } from "react-redux";
 
 export const ManageProducts = () => {
     const [products, setProducts] = useState([]);
     const [name, setName] = useState("");
     const user = useUser();
     const navigate = useNavigate();
+
+    const dispatch = useDispatch()
 
     const getBio = async () => {
         const productsData = await axios.get(
@@ -35,10 +38,8 @@ export const ManageProducts = () => {
         console.log("products", data);
     };
 
-    const deleteProduct = async (id) => {
-        const deleteData = await axios.delete(
-            `http://localhost:5000/api/products/${id}`
-        );
+    const deleteProducts = async (id) => {
+        dispatch(deleteProduct({id}))
         getProducts();
         SuccessToast("Product has been deleted.");
     };
@@ -54,7 +55,7 @@ export const ManageProducts = () => {
 
     useEffect(() => {
         getProducts();
-    }, [name]);
+    }, [deleteProducts]);
 
     return (
         <div className="flex flex-col gap-[40px] h-[100%] ">
@@ -92,7 +93,7 @@ export const ManageProducts = () => {
 
                                             <Modal
                                                 onClick={() =>
-                                                    deleteProduct(product._id)
+                                                    deleteProducts(product._id)
                                                 }
                                             >
                                                 <ModalHeading>

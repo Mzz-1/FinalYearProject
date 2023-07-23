@@ -1,4 +1,3 @@
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -8,9 +7,10 @@ import { useUser } from "../../service/useUser";
 import { SuccessToast, InfoToast, ErrorToast } from "../../helpers/Toast";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, fetchCartProducts } from "../../redux-store/cartSlice";
+import { getProduct } from "../../redux-store/productSlice";
+import { Loader } from "../../components/LoaderWrapper";
 
 export const ProductDetails = () => {
-    const [product, setProducts] = useState([]);
     const [isButtonDisabled, setIsButtonDisplayed] = useState(false);
 
     const user = useUser();
@@ -19,29 +19,25 @@ export const ProductDetails = () => {
 
     const dispatch = useDispatch();
 
+    const product = useSelector((state) => state.product);
+
+    const { getStatus, productData } = product;
+
     const cart = useSelector((state) => state.cart);
 
     const { fetchStatus, data } = cart;
 
     const navigate = useNavigate();
 
-    const getProducts = async () => {
-        const productData = await axios.get(
-            `http://localhost:5000/api/products/${id}`
-        );
-        setProducts(productData.data.product);
-    };
-
-    useEffect(() => {
-        getProducts();
-    }, [id]);
-
     useEffect(() => {
         const pageTitle = product.name + " | SimplyArt"
         document.title = pageTitle; 
       }, [product]);
 
-    useEffect(() => getProducts, []);
+    useEffect(() => {
+        dispatch(getProduct({id})) 
+        console.log(productData,"f")
+}, [dispatch,id]);
 
     const addProductToCart = async () => {
         try {
@@ -73,9 +69,12 @@ export const ProductDetails = () => {
 
     return (
         <div className="grid grid-row-auto lg:grid-cols-2 bg-[] justify-center lg:gap-[100px] ">
-            <div className="bg-[#F4F4F2] lg:h-[770px] w-[100vw] lg:w-[100%] flex items-center justify-center px-12 py-7">
+            {getStatus === "success" ?
+           ( 
+            <>
+           <div className="bg-[#F4F4F2] lg:h-[770px] w-[100vw] lg:w-[100%] flex items-center justify-center px-12 py-7">
                 <img
-                    src={product.url}
+                    src={productData.product.url}
                     className=" mb-[10px] aspect-w-16 aspect-h-9 shadow-2xl max-h-[700px]"
                     alt="product"
                 />
@@ -89,22 +88,22 @@ export const ProductDetails = () => {
                     >
                         <BiArrowBack /> BACK
                     </button>
-                    <li className="sm:text-[34px] text-[23px]">{product.name}</li>
+                    <li className="sm:text-[34px] text-[23px]">{productData.product.name}</li>
                     <li className="text-[#65635F] text-[18px] mb-3 lg:mb-[30px]">
-                        By {product.artist}
+                        By {productData.product.artist}
                     </li>
                     <li className="text-[#65635F] text-[15px]">
-                        {product.category}
+                        {productData.product.category}
                     </li>
                     <li className="text-[#65635F] text-[15px] mb-3 lg:mb-[30px]">
-                        {product.dimensions}
+                        {productData.product.dimensions}
                     </li>
                     <li className="text-[#65635F] text-[15px]">
-                        {product.description}
+                        {productData.description}
                     </li>
                     <hr className="h-[2px] bg-[#65635F] my-[30px]" />
                     <li className="text-[25px] mb-[30px] font-medium">
-                        Rs {product.price}
+                        Rs {productData.product.price}
                     </li>
                     <button
                         className="flex justify-center items-center h-[40px] w-[350px] bg-[#161412] text-white rounded-[3px]"
@@ -119,6 +118,9 @@ export const ProductDetails = () => {
                     </button>
                 </ul>
             </div>
+            </>
+    )
+            :<Loader/>}
         </div>
     );
 };

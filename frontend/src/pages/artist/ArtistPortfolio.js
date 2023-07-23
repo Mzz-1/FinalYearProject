@@ -41,7 +41,7 @@ const ArtistPortfolio = () => {
 
     return (
         <div className=" max-w-[1340px] m-auto px-6">
-            <div className="flex flex-col-reverse mt-6">
+            <div className="flex flex-col-reverse md:flex-col mt-6">
                 <h2
                     className=" text-[26px] px-5 font-cinzel mt-6 md:mt-11 text-[#3C3737]"
                     data-aos="fade-down"

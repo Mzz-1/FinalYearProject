@@ -136,9 +136,21 @@ const addProducts = {
 const updateProducts = {
     path: "/api/products/:id",
     method: "patch",
-    handler: async (req, res) => {
+    handler: [
+        upload.single("image", { dest: null }),
+        async (req, res) => {
         const { id: productID } = req.params;
-
+        const {
+            name,
+            artist,
+            category,
+            description,
+            quantity,
+            dimensions,
+            price,
+        } = req.body;
+        console.log(category,description,name,"c")
+        console.log(req.body,"cd")
         const product = await Product.findOneAndUpdate(
             { _id: productID },
             req.body,
@@ -154,7 +166,7 @@ const updateProducts = {
         }
 
         res.status(200).json({ product });
-    },
+    },]
 };
 
 const deleteProduct = {

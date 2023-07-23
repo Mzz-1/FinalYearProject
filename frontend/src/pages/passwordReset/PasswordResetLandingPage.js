@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import PasswordResetFail from "./PasswordResetFail";
@@ -17,6 +17,11 @@ const PasswordResetLandingPage = () => {
     watch();
 
     const values = getValues();
+
+    useEffect(() => {
+        const pageTitle = "Reset Password | SimplyArt";
+        document.title = pageTitle;
+    }, []);
 
     const [isSuccess, setIsSuccess] = useState(false);
     const [isFailure, setIsFailure] = useState(false);

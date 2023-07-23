@@ -5,7 +5,6 @@ import { ModalPara } from "../../components/Paragraph";
 import { useNavigate } from "react-router-dom";
 import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
 import { Modal, LargeModal } from "../../components/Modal";
-import { getAllProducts, deleteProducts } from "../../helpers/Product";
 import { useUser } from "../../service/useUser";
 import { DashboardHeading } from "../../components/Heading";
 import { SuccessToast } from "../../helpers/Toast";

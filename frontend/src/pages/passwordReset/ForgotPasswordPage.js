@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Input from "../../components/Input";
-import { Heading, Heading1 } from "../../components/Heading";
 
 const ForgotPasswordPage = () => {
     const {
@@ -18,6 +17,11 @@ const ForgotPasswordPage = () => {
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
     const values = getValues();
+
+    useEffect(() => {
+        const pageTitle = "Reset Password | SimplyArt";
+        document.title = pageTitle;
+    }, []);
 
     const handleFormSubmit = async () => {
         await axios.put(
