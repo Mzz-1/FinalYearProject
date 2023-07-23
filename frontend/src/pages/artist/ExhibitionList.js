@@ -1,6 +1,3 @@
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export const ExhibitionList = ({ exhibition }) => {
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
@@ -22,18 +19,18 @@ export const ExhibitionList = ({ exhibition }) => {
                     <div className="relative" data-aos="fade-up">
                         <img
                             src={exhibition.image}
-                            className=" mb-[10px] w-[400px] h-[450px] object-cover m-auto"
+                            className=" mb-[10px] sm:w-[400px] sm:h-[450px] object-cover m-auto"
                             alt="product"
                         />
-                        <ul className="flex flex-col gap-[2px] relative px-[10px] py-[10px] font-slab">
+                        <ul className="flex flex-col text-[14px] gap-[2px] relative px-[10px] py-[10px] font-slab">
                             <li className="font-medium font-cinzel text-[20px] text-center">
                                 {exhibition.name}
                             </li>
                             <hr></hr>
-                            <li className="font-medium text-[15px] text-center">
+                            <li className="font-medium text-center">
                                 {exhibition.location}
                             </li>
-                            <li className="font-medium text-[15px] text-center">
+                            <li className="font-medium text-center">
                                 {newStartDate} - {newEndDate}
                             </li>
                         </ul>

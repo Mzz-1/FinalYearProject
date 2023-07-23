@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Heading2, Heading } from "../../components/Heading";
 import { ExhibitionList } from "./ExhibitionList";
 import { ArtistNavbar } from "../../components/ArtistNavbar";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,22 +23,24 @@ const ArtistExhibition = () => {
 
     useEffect(() => {
         dispatch(fetchExhibition({ id }));
-        const pageTitle = "Featured Artist Exhibition | SimplyArt"
-        document.title = pageTitle; 
+        const pageTitle = "Featured Artist Exhibition | SimplyArt";
+        document.title = pageTitle;
     }, []);
 
     return (
-        <div className=" max-w-[1340px] m-auto lg:px-6">
-            <h2
-                className=" text-[26px] font-cinzel mt-11 text-[#3C3737]"
-                data-aos="fade-down"
-            >
-                Featured Exibitions
-            </h2>
-
-            <ArtistNavbar id={id} links={links}/>
+        <div className=" max-w-[1340px] m-auto px-5">
+            <div className="flex flex-col-reverse mt-6">
+                <h2
+                    className=" text-[26px] px-5 font-cinzel mt-6 md:mt-11 text-[#3C3737]"
+                    data-aos="fade-down"
+                >
+                    Featured Exibitions
+                </h2>
+                <ArtistNavbar id={id} links={links} />
+            </div>
+           
             {fetchStatus !== "success" ? (
-                <Loader/>
+                <Loader />
             ) : (
                 <ExhibitionList exhibition={data.exhibitions} />
             )}

@@ -26,14 +26,13 @@ export const Navbar = () => {
     const navigate = useNavigate();
 
     const toggleNavbar = () => {
-       console.log(window.innerWidth )
         if (window.innerWidth > 1024) {
             setShowNavbar(false);
-        }else{
+        } else {
             setShowNavbar(!showNavbar);
         }
     };
-   
+
     const LogOut = () => {
         localStorage.removeItem("token");
         SuccessToast("Logged out.");
@@ -74,9 +73,7 @@ export const Navbar = () => {
                                     <li key={i}>
                                         <NavLink
                                             to={item.link}
-                                            onClick={() =>
-                                                toggleNavbar
-                                            }
+                                            onClick={toggleNavbar}
                                             exact
                                             className={({ isActive }) => {
                                                 return isActive
@@ -92,6 +89,7 @@ export const Navbar = () => {
                                     <li>
                                         <NavLink
                                             to="/artist-dashboard"
+                                            onClick={toggleNavbar}
                                             exact
                                             className={({ isActive }) => {
                                                 return isActive
@@ -115,6 +113,7 @@ export const Navbar = () => {
                                         <NavLink
                                             to="/login"
                                             exact
+                                            onClick={toggleNavbar}
                                             className={({ isActive }) => {
                                                 return isActive
                                                     ? "border-b-2 pb-1 border-[#9F7E7E] "
@@ -130,6 +129,7 @@ export const Navbar = () => {
                                     <NavLink
                                         to="/user-profile"
                                         exact
+                                        onClick={toggleNavbar}
                                         className={({ isActive }) => {
                                             return isActive
                                                 ? "border-b-2 pb-1 border-[#9F7E7E] "

@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 import { ArtistList } from "./ArtistList";
-import { Banner } from "../../components/Banner";
 import { useForm } from "react-hook-form";
-import { Search } from "../../components/Search";
-import { Heading, Heading1 } from "../../components/Heading";
+import {  Heading1 } from "../../components/Heading";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllArtists } from "../../redux-store/artistSlice";
 import { Loader } from "../../components/LoaderWrapper";

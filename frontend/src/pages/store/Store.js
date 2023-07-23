@@ -95,14 +95,10 @@ const Store = () => {
         // getProducts({});
     }, []);
 
-    const [showFilters, setShowFilters] = useState(false);
-
-    const toggleFilters = () => {
-        setShowFilters(!showFilters);
-    };
+    
 
     return (
-        <div className=" ">
+        <>
             <Banner
                 heading="THE ART STORE"
                 img="https://res.cloudinary.com/djuzpmqlp/image/upload/v1681139641/assets/banner_yo00ky.jpg"
@@ -220,7 +216,7 @@ const Store = () => {
 
                
             </div>
-        </div>
+        </>
     );
 };
 
