@@ -5,9 +5,10 @@ import Input from "../../components/Input";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import { SuccessToast, PromiseToast } from "../../helpers/Toast";
-import { getSingleEvent, updateEvent, addEvent } from "../../helpers/Events";
 import { DashboardActionButton } from "../../components/Button";
 import { Heading2 } from "../../components/Heading";
+import { addEvents, updateEvents,fetchEvent } from "../../redux-store/eventSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddEventPage = () => {
     const {
@@ -20,37 +21,35 @@ const AddEventPage = () => {
 
     const { id } = useParams();
 
-    const [eventToEdit, setEventToUpdate] = useState();
+    const dispatch = useDispatch();
+
+    const event = useSelector((state) => state.event);
+    const { eventUpdateID,eventData,getStatus } = event   
 
     useEffect(() => {
-        const fetchData = async () => {
-            const event = await getSingleEvent(id);
-            setEventToUpdate(event);
-        };
-        fetchData();
-    }, [id]);
+        dispatch(fetchEvent({id}))
+        document.title = "Events | Admin Dashboard";   
+    }, []);
 
-    useEffect(()=>{
-        document.title = "Add Events | Admin Dashboard"; 
-
-    },[])
-
-    const EventAction = async (data) => {
+    const EventAction = (data) => {
         if (id) {
-            // await updateEvent(data,eventToEdit._id)
             PromiseToast(
                 "Event has been updated.",
-                updateEvent(data, eventToEdit._id)
+                dispatch(updateEvents({ data, id:eventUpdateID }))
             );
+            console.log(eventUpdateID, "updatei");
         } else {
-            addEvent(data);
-            SuccessToast("Event has been added.");
+            PromiseToast(
+                "Event has been added.",
+                dispatch(addEvents({ data }))
+            );
         }
     };
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px] font-slab">
-            <Heading2> {eventToEdit ? "Update Event" : "Add Event"}</Heading2>
+            <Heading2> {eventData ? "Update Event" : "Add Event"}</Heading2>
+            {getStatus === "success" ?
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(EventAction)}
@@ -61,7 +60,7 @@ const AddEventPage = () => {
                         <Input
                             type="text"
                             placeholder="Name"
-                            defaultValue={eventToEdit?.name}
+                            defaultValue={eventData.event?.name}
                             register={{
                                 ...register("name", {
                                     required: "Please enter the event name.",
@@ -73,11 +72,10 @@ const AddEventPage = () => {
                         <Input
                             type="text"
                             placeholder="Place"
-                            defaultValue={eventToEdit?.place}
+                            defaultValue={eventData.event?.place}
                             register={{
                                 ...register("place", {
-                                    required:
-                                        "Please enter the event venue.",
+                                    required: "Please enter the event venue.",
                                 }),
                             }}
                         />
@@ -86,7 +84,7 @@ const AddEventPage = () => {
                         <Input
                             type="text"
                             placeholder="Location"
-                            defaultValue={eventToEdit?.location}
+                            defaultValue={eventData.event?.location}
                             register={{
                                 ...register("location", {
                                     required: "Please enter event location.",
@@ -108,7 +106,7 @@ const AddEventPage = () => {
                         <label>Start Date</label>
                         <Input
                             type="date"
-                            defaultValue={eventToEdit?.startDate}
+                            defaultValue={eventData.event?.startDate}
                             register={{
                                 ...register("startDate", {
                                     required: "Please enter the start date.",
@@ -119,7 +117,7 @@ const AddEventPage = () => {
                         <label>End Date</label>
                         <Input
                             type="date"
-                            defaultValue={eventToEdit?.endDate}
+                            defaultValue={eventData.event?.endDate}
                             register={{
                                 ...register("endDate", {
                                     required: "Please enter the end date.",
@@ -130,7 +128,7 @@ const AddEventPage = () => {
                         <label>Start Time</label>
                         <Input
                             type="time"
-                            defaultValue={eventToEdit?.startTime}
+                            defaultValue={eventData.event?.startTime}
                             register={{
                                 ...register("startTime", {
                                     required: "Please enter the start time.",
@@ -141,7 +139,7 @@ const AddEventPage = () => {
                         <label>End Time</label>
                         <Input
                             type="time"
-                            defaultValue={eventToEdit?.endTime}
+                            defaultValue={eventData.event?.endTime}
                             register={{
                                 ...register("endTime", {
                                     required: "Please enter the end time.",
@@ -153,9 +151,10 @@ const AddEventPage = () => {
                 </div>
 
                 <DashboardActionButton>
-                    {eventToEdit ? "Update Event" : "Add Event"}
+                    {eventData ? "Update Event" : "Add Event"}
                 </DashboardActionButton>
             </form>
+            :""}
         </div>
     );
 };

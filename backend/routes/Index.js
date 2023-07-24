@@ -1,6 +1,5 @@
 const signUpRoute = require("./SignUpRoute");
 const loginRoute = require("./LoginRoute");
-const testEmailRoute = require("./Email");
 const verifyEmailRoute = require("./VerifyEmailRoute");
 const forgotPasswordRoute = require("./ForgotPasswordRoute");
 const resetPasswordRoute = require("./ResetPasswordRoute");
@@ -59,7 +58,7 @@ const {
 
 const { addDelivery, getDeliveryDetails } = require("./DeliveryRoute");
 
-const testEmailTemplate = require("./Template");
+
 
 const routes = [
     signUpRoute,
@@ -67,7 +66,7 @@ const routes = [
     forgotPasswordRoute,
     resetPasswordRoute,
     loginRoute,
-    testEmailRoute,
+    
 
     getAllUsers,
     getUser,
@@ -112,7 +111,7 @@ const routes = [
     getOrder,
     getArtistOrder,
 
-    testEmailTemplate,
+    
 
     khaltiPayment,
     getGoogleOauthUrlRoute,

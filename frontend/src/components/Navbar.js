@@ -85,7 +85,7 @@ export const Navbar = () => {
                                         </NavLink>
                                     </li>
                                 ))}
-                                {user?.role === "artist" && (
+                                {user?.role === "artist" && loggedIn && (
                                     <li>
                                         <NavLink
                                             to="/artist-dashboard"

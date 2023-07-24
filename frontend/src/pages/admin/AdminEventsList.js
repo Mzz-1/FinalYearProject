@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import {
-    AdminHeading,
-    AdminHeading2,
+    
     Heading2,
     ModalHeading,
 } from "../../components/Heading";
@@ -11,21 +10,20 @@ import { useNavigate } from "react-router-dom";
 import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
 import { Modal, LargeModal } from "../../components/Modal";
 import ViewEvents from "./ViewEvent";
+import { fetchAllEvents } from "../../redux-store/eventSlice";
+import { useDispatch,useSelector } from "react-redux";
 
 export const AdminEvent = () => {
-    const [events, setEvents] = useState([]);
     const [viewEvents, setViewEvents] = useState([]);
     const navigate = useNavigate();
 
-    const getEvents = async () => {
-        const productsData = await axios.get(
-            `http://localhost:5000/api/events`
-        );
+    const dispatch= useDispatch()
 
-        const data = await productsData.data.event;
-        setEvents(data);
-        console.log("getEvents", data);
-    };
+    const event = useSelector((state)=>state.event)
+
+    const {data, fetchStatus} = event
+
+   
 
     // const viewEvent = async (id) => {
     //     const viewData = await axios.get(
@@ -39,7 +37,7 @@ export const AdminEvent = () => {
         const deleteData = await axios.delete(
             `http://localhost:5000/api/events/${id}`
         );
-        getEvents();
+       
     };
 
     const updateEvent = (id) => {
@@ -48,7 +46,7 @@ export const AdminEvent = () => {
     };
 
     useEffect(() => {
-        getEvents();
+       dispatch(fetchAllEvents())
         document.title = "Manage Events | Admin Dashboard"; 
 
     }, []);
@@ -57,7 +55,6 @@ export const AdminEvent = () => {
         const viewData = await axios.get(
             `http://localhost:5000/api/events/${id}`
         );
-        console.log("view event", viewData.data.event);
         setViewEvents(viewData.data.event);
     };
 
@@ -80,7 +77,8 @@ export const AdminEvent = () => {
                             </tr>
                         </thead>
                         <tbody className="overflow-scroll">
-                            {events.map((events, index) => {
+                            {fetchStatus === "success" &&<>
+                            {data.event.map((events, index) => {
                                 var startDateTime = new Date(events.startDate);
                                 const newStartDate =
                                     startDateTime.toLocaleDateString(
@@ -133,7 +131,7 @@ export const AdminEvent = () => {
                                         </td>
                                     </tr>
                                 );
-                            })}
+                            })}</>}
                         </tbody>
                     </table>
                 </div>

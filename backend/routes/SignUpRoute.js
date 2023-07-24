@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const { uuid, v4 } = require("uuid");
-const sendEmail = require('../Utils/SendEmail')
 const sendTEmail = require('../Utils/Email')
 
 const signUpRoute = {

@@ -45,7 +45,6 @@ const cartSlice = createSlice({
     },
     reducers: {
         cTotal: (state, action) => {
-            // console.log(action.payload, "total total");
             const { cartItems, products } = action.payload;
             console.log(cartItems, products, "after decon");
             for (let i = 0; i < cartItems?.length; i++) {
@@ -79,13 +78,12 @@ const cartSlice = createSlice({
                 const newProduct = action.payload; // New product returned by the API
                 state.data.push(newProduct); // Add the new product to the existing products array
                 state.addToCartStatus = "success";
-                state.fetchStatus = "success";
             })
             .addCase(addToCart.pending, (state) => {
-                state.fetchStatus = "loading";
+                state.addToCartStatus = "loading";
             })
             .addCase(addToCart.rejected, (state) => {
-                state.fetchStatus = "error";
+                state.addToCartStatus = "error";
             })
             .addCase(removeFromCart.fulfilled, (state, action) => {
                 const { productID } = action.meta.arg;

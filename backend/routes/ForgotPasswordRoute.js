@@ -1,7 +1,6 @@
 require("dotenv").config();
 const { v4 } = require("uuid");
 const User = require('../models/User')
-const sendEmail = require("../Utils/SendEmail");
 const sendTEmail = require("../Utils/Email");
 
 const forgoPasswordRoute={

@@ -62,32 +62,6 @@ const addEvents = {
     ],
 };
 
-// const sendEventMail = {
-//     path: "/api/sendEmail",
-//     method: "post",
-//     handler: async (req, res) => {
-//         const { name, location, startDate, endDate,image } = req.body;
-
-//         const users = await User.find({});
-//         console.log(users);
-//         users.map((user) => {
-//             if (user.role !== "admin" && user.isVerified === true) {
-//                 console.log(user.username);
-//                 sendEventsEmail({
-//                     to: user.email,
-//                     name:user.username,
-//                     location:location,
-//                     startDate:startDate,
-//                     emdDate:endDate,
-//                     image:image,
-
-//                 });
-//             }
-//         });
-//         res.status(200).json({ users });
-//     },
-// };
-
 const getAllEvents = {
     path: "/api/events",
     method: "get",
@@ -118,6 +92,7 @@ const updateEvents = {
         upload.single("image", { dest: null }),
         async (req, res) => {
             const { id: eventID } = req.params;
+           
             const {
                 name,
                 place,
@@ -134,6 +109,7 @@ const updateEvents = {
                 folder: "events",
             });
             console.log(req.body);
+         
             const event = await Event.findOneAndUpdate(
                 { _id: eventID },
                 {
@@ -152,6 +128,8 @@ const updateEvents = {
                     useFindAndModify: true,
                 }
             );
+
+            console.log(2);
 
             if (!event) {
                 return res.status(404);

@@ -107,7 +107,9 @@ export const LoginForm = ({ formHeading }) => {
                 <BiArrowBack /> HOME
             </button>
             <div className="md:bg-white md:shadow-xl py-[60px] md:px-[40px] flex flex-col items-center justify-center gap-[30px] rounded-[20px] md:border-[#9F7E7E]">
-                <h1 className="text-5xl font-semibold font-libre">{formHeading}</h1>
+                <h1 className="text-5xl font-semibold font-libre">
+                    {formHeading}
+                </h1>
                 <form
                     className="flex flex-col gap-[30px] my-[20px] rounded-[20px] w-[90vw] max-w-[400px] md:max-w-none md:w-auto"
                     onSubmit={handleSubmit(handleLogin)}
@@ -139,18 +141,25 @@ export const LoginForm = ({ formHeading }) => {
 
                     <button
                         type="submit"
-                        className="md:w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]"
+                        className="md:w-[210px]  m-auto h-[45px] bg-[#9F7E7E] text-white text-xl rounded-lg"
                     >
                         Log in
                     </button>
+                    {formHeading === "Admin" && (
                     <button
                         type="button"
                         disabled={!googleOauthUrl}
-                        className="w-[440px] h-[50px] bg-[#9F7E7E] text-white text-2xl rounded-[10px]"
+                        className="px-4 py-2 text-center w-[210px] m-auto border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
                         onClick={() => (window.location.href = googleOauthUrl)}
                     >
-                        Log in with Google
+                        <img
+                            className="w-6 h-6"
+                            src="https://www.svgrepo.com/show/475656/google-color.svg"
+                            alt="google logo"
+                        />
+                        <span>Login with Google</span>
                     </button>
+                    )}
                 </form>
                 {formHeading !== "Admin" && (
                     <div className="flex flex-col justify-center items-center">

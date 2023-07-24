@@ -25,32 +25,28 @@ export const ProductDetails = () => {
 
     const cart = useSelector((state) => state.cart);
 
-    const { fetchStatus, data } = cart;
+    const { addToCartStatus, data } = cart;
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const pageTitle = product.name + " | SimplyArt"
+        const pageTitle = productData?.product?.name + " | SimplyArt"
         document.title = pageTitle; 
-      }, [product]);
+      }, [id]);
 
     useEffect(() => {
         dispatch(getProduct({id})) 
-        console.log(productData,"f")
-}, [dispatch,id]);
+}, [id]);
 
     const addProductToCart = async () => {
         try {
-            const userID = user.id;
-            const productID = product._id;
+            const userID = user?.id;
+            const productID = productData?.product?._id;
             dispatch(addToCart({ userID, productID, quantity: 1 }));
 
-            if (fetchStatus === "success") {
                 navigate("/cart");
                 SuccessToast("Product added to cart.");
-            } else {
-                ErrorToast("Something went wrong.");
-            }
+           
         } catch (error) {
             console.error(error);
 
@@ -99,7 +95,7 @@ export const ProductDetails = () => {
                         {productData.product.dimensions}
                     </li>
                     <li className="text-[#65635F] text-[15px]">
-                        {productData.description}
+                        {productData.product.description}
                     </li>
                     <hr className="h-[2px] bg-[#65635F] my-[30px]" />
                     <li className="text-[25px] mb-[30px] font-medium">
