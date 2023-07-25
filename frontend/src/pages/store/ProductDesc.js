@@ -44,8 +44,13 @@ export const ProductDetails = () => {
             const productID = productData?.product?._id;
             dispatch(addToCart({ userID, productID, quantity: 1 }));
 
+            if (addToCartStatus === "success") {
                 navigate("/cart");
                 SuccessToast("Product added to cart.");
+            }else{
+                navigate("/login");
+                InfoToast("Please log in to use the cart.");
+            }
            
         } catch (error) {
             console.error(error);

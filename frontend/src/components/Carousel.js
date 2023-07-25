@@ -6,14 +6,14 @@ import Flickity from "flickity";
 
 import "flickity/dist/flickity.min.css";
 import "../styles/dots.css";
-import  "flickity-imagesloaded";
+import "flickity-imagesloaded";
 
 export const Carousel = ({ products, artists, events }) => {
     const flickityOptions = {
         cellAlign: "center",
         wrapAround: true,
-        draggable: false,
-        prevNextButtons: true,
+        draggable: window.innerWidth < 768 ? true : false,
+        prevNextButtons: window.innerWidth < 768 ? false : true,
         pageDots: true,
         imagesLoaded: true,
     };
@@ -23,26 +23,39 @@ export const Carousel = ({ products, artists, events }) => {
 
     useEffect(() => {
         // Initialize Flickity carousel after the content is fully loaded
-        flickityInstance.current = new Flickity(carouselRef.current, flickityOptions);
-
-       
-      
+        flickityInstance.current = new Flickity(
+            carouselRef.current,
+            flickityOptions
+        );
     }, []);
 
     return (
-        <div ref={carouselRef}  className="carousel mb-12" >
-            
+        <div ref={carouselRef} className="carousel mb-12">
             {products &&
                 products.map((product) => {
-                    return <Product key={product._id} product={product} type="carousel" />;
+                    return (
+                        <Product
+                            key={product._id}
+                            product={product}
+                            type="carousel"
+                        />
+                    );
                 })}
             {artists &&
                 artists.map((artist) => {
-                    return <Artist key={artist._id} artist={artist} type="carousel" />;
+                    return (
+                        <Artist
+                            key={artist._id}
+                            artist={artist}
+                            type="carousel"
+                        />
+                    );
                 })}
             {events &&
                 events.map((event) => {
-                    return <Event key={event._id} events={event} type="carousel" />;
+                    return (
+                        <Event key={event._id} events={event} type="carousel" />
+                    );
                 })}
         </div>
     );

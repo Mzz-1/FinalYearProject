@@ -106,12 +106,12 @@ export const LoginForm = ({ formHeading }) => {
             >
                 <BiArrowBack /> HOME
             </button>
-            <div className="md:bg-white md:shadow-xl py-[60px] md:px-[40px] flex flex-col items-center justify-center gap-[30px] rounded-[20px] md:border-[#9F7E7E]">
+            <div className="md:bg-white md:shadow-xl py-[60px] md:px-[40px] flex flex-col items-center justify-center gap-[30px] border-y-2 md:rounded-[20px] border-[#9F7E7E] md:border-none">
                 <h1 className="text-5xl font-semibold font-libre">
                     {formHeading}
                 </h1>
                 <form
-                    className="flex flex-col gap-[30px] my-[20px] rounded-[20px] w-[90vw] max-w-[400px] md:max-w-none md:w-auto"
+                    className="flex flex-col gap-[30px] mt-[20px] rounded-[20px] w-[90vw] max-w-[400px] md:max-w-none md:w-auto"
                     onSubmit={handleSubmit(handleLogin)}
                 >
                     <Input
@@ -141,7 +141,7 @@ export const LoginForm = ({ formHeading }) => {
 
                     <button
                         type="submit"
-                        className="md:w-[210px]  m-auto h-[45px] bg-[#9F7E7E] text-white text-xl rounded-lg"
+                        className="w-[210px]  m-auto h-[45px] bg-[#9F7E7E] text-white text-xl rounded-lg"
                     >
                         Log in
                     </button>

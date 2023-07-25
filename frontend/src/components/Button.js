@@ -14,7 +14,7 @@ export const ViewButton = ({ onClick }) => {
 
 export const ViewAllButton = ({ children,link,align,border }) => {
     return (
-        <p className={`font-montserrat text-[14px] sm:text-[18px] ${border === "black" ? "border-[#3E3E42]" : "border-[#fefefe] hover:border-[#3E3E42] duration-500"} ${align === "center" ? "m-auto" : ""} border-b w-fit` }><Link to={link}>{children}</Link></p>
+        <p className={`font-montserrat text-[14px] min-w-[80px] text-center sm:text-[18px] ${border === "black" ? "border-[#3E3E42]" : "border-[#fefefe] hover:border-[#3E3E42] duration-500"} ${align === "center" ? "m-auto" : ""} border-b w-fit` }><Link to={link}>{children}</Link></p>
     );
 };
 
