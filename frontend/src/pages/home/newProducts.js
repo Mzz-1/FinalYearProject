@@ -7,12 +7,8 @@ import { Carousel } from "../../components/Carousel";
 import { Loader } from "../../components/LoaderWrapper";
 
 export const NewProducts = () => {
-
-  
-
-
     const dispatch = useDispatch();
-    const  product  = useSelector((state) => state.product);
+    const product = useSelector((state) => state.product);
 
     const { data, fetchStatus } = product;
 
@@ -35,21 +31,21 @@ export const NewProducts = () => {
         <div className="">
             <Heading2>Recently Added</Heading2>
             <br></br>
-            <ViewAllButton border="black" link="/store" align="center">View All</ViewAllButton>
-         
+            <ViewAllButton border="black" link="/store" align="center">
+                View All
+            </ViewAllButton>
+
             <br></br>
             <br></br>
-            {fetchStatus !== "success" ? (
-                <Loader/>
-            ) : data.product.length > 0 ? (
-          
-                <Carousel products={data.product}/>
+            {fetchStatus === "success" && data.product.length > 0 ? (
+                <Carousel products={data.product} />
+            ) : fetchStatus === "loading" ? (
+                <Loader />
             ) : (
                 <p className="font-libre font-[35px] text-center font">
                     There are no products available at the moment.
                 </p>
             )}
-           
         </div>
     );
 };

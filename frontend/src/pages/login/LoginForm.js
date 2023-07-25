@@ -145,7 +145,7 @@ export const LoginForm = ({ formHeading }) => {
                     >
                         Log in
                     </button>
-                    {formHeading === "Admin" && (
+                    {formHeading !== "Admin" && (
                     <button
                         type="button"
                         disabled={!googleOauthUrl}

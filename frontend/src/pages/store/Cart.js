@@ -8,10 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     fetchCartProducts,
     removeFromCart,
-    cTotal,
 } from "../../redux-store/cartSlice";
 import { Loader } from "../../components/LoaderWrapper";
-import cartSlice from "../../redux-store/cartSlice";
 import "../../styles/table.css"
 
 export const Cart = () => {
@@ -93,14 +91,15 @@ export const Cart = () => {
         calculateTotal();
     }, [cart, data.products]);
     return (
-        <div className="bg-gray-100 min-h-screen px-4 md:px-[50px] font-slab">
+        <div className="bg-gray-100 min-h-screen px-4 md:px-[50px] font-roboto md:font-slab">
             <div className="text-center  py-[40px]">
-                <h2 className="text-5xl font-light text-[#69696b]">My Cart</h2>
+                <h2 className="text-5xl font-light font-libre text-[#69696b]">My Cart</h2>
             </div>
             {fetchStatus === "success" ? (
                   <>
                   {data?.products?.length > 0 ? (
                       <div className="">
+                        <p className="md:hidden font-libre text-[22px] mb-7 text-[#69696b]">Total Items: ( {data?.products?.length} )</p>
                           <table className="md:bg-white  md:border-gray-300 w-[100%] rounded-md shadow-sm">
                               <thead className="text-left text-[#3E3E42]">
                                   <tr className="hidden md:table-row">
@@ -135,22 +134,22 @@ export const Cart = () => {
                                                   return (
                                                       <tr
                                                           key={product._id}
-                                                          className=" py-9 border-b-2 first:border-t-2"
+                                                          className=" py-9 border-b-2 first:border-t-2 md:text-lg text-sm"
                                                       >
                                                           <td className="text-center hidden md:table-cell">
                                                               {i + 1}
                                                           </td>
-                                                          <td>
-                                                              <div className=" md:py-8 flex flex-col md:flex-row gap-4 md:items-center">
+                                                          <td className=" ">
+                                                              <div className=" md:py-8 flex items-center md:flex-row gap-4 ">
                                                                   <img
                                                                       src={
                                                                           product.url
                                                                       }
-                                                                      className="md:h-24 md:w-24 w-[150px] h-auto aspect-w-16 aspect-h-9 m-auto md:m-0 object-cover"
+                                                                      className="md:h-24 md:w-24 w-[50px] h-auto aspect-w-16 aspect-h-9  md:m-0 object-cover"
                                                                       alt=""
                                                                   />
-                                                                  <div>
-                                                                      <p className="text-lg font-medium">
+                                                                  <div className="text-left">
+                                                                      <p className=" font-medium">
                                                                           {
                                                                               product?.name
                                                                           }
@@ -164,33 +163,36 @@ export const Cart = () => {
                                                                   </div>
                                                               </div>
                                                           </td>
-                                                          <td className="text-center">
-                                                              <span className="text-lg ">
+                                                          <td className="text-left md:text-center">
+                                                            <span className="md:hidden">Qty: </span>
+                                                              <span className=" ">
                                                                   {
                                                                       item?.quantity
                                                                   }
                                                               </span>
                                                           </td>
 
-                                                          <td className="text-center">
-                                                              <p className="text-gray-500">
+                                                          <td className="text-left md:text-center">
+                                                          <span className="md:hidden font-medium">Total Price: </span>
+                                                              <span className="text-gray-500">
                                                                   Rs{" "}
                                                                   {item?.quantity *
                                                                       product.price}
-                                                              </p>
+                                                              </span>
                                                           </td>
-                                                          <td>
+                                                          <td className="text-left md:text-center ">
                                                               <span
-                                                                  className="cursor-pointer text-sm border-b"
+                                                                  className="cursor-pointer text-sm  flex items-center gap-2"
                                                                   onClick={() =>
                                                                       removeProductFromCart(
                                                                           item.productID
                                                                       )
                                                                   }
                                                               >
-                                                                  <AiTwotoneDelete className="m-auto" />
-                                                                 
+                                                                  <AiTwotoneDelete className="md:m-auto" />
+                                                                  <span className="border-black border-b-[1px] md:hidden">Remove</span>
                                                               </span>
+                                                             
                                                           </td>
                                                       </tr>
                                                   );
@@ -201,8 +203,8 @@ export const Cart = () => {
                               </tbody>
                           </table>
                           <div className="">
-                              <p className="text-lg font-semibold mt-4 text-[#3E3E42]">
-                                  Subtotal: {subTotal}
+                              <p className="text-lg font-medium font-libre mt-4 text-[#3E3E42]">
+                                  Subtotal: Rs {subTotal}
                               </p>
 
                               <div className="flex items-center justify-between py-4">
