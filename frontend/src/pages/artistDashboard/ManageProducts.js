@@ -8,7 +8,7 @@ import { Modal, LargeModal } from "../../components/Modal";
 import { SuccessToast } from "../../helpers/Toast";
 import { useUser } from "../../service/useUser";
 import { deleteProduct } from "../../redux-store/productSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 
 export const ManageProducts = () => {
     const [products, setProducts] = useState([]);
@@ -17,6 +17,10 @@ export const ManageProducts = () => {
     const navigate = useNavigate();
 
     const dispatch = useDispatch()
+
+    const product = useSelector((state) => state.product)
+
+    const {deleteStatus} = product
 
     const getBio = async () => {
         const productsData = await axios.get(
@@ -55,7 +59,7 @@ export const ManageProducts = () => {
 
     useEffect(() => {
         getProducts();
-    }, [deleteProducts]);
+    }, [name,deleteStatus]);
 
     return (
         <div className="flex flex-col gap-[40px] h-[100%] ">

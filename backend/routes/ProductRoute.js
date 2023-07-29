@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const Product = require("../models/Products");
 const multer = require("multer");
 
-const upload = multer({ dest: null });
+const upload = multer({ dest: "null" });
 
 const getAllProducts = {
     path: "/api/products",
@@ -82,7 +82,7 @@ const addProducts = {
     path: "/api/products",
     method: "post",
     handler: [
-        upload.single("image", { dest: null }),
+        upload.single("image"),
         async (req, res) => {
             try {
                 const {
@@ -95,12 +95,6 @@ const addProducts = {
                     price,
                 } = req.body;
                 const file = req.file;
-
-                if (!file) {
-                    return res
-                        .status(400)
-                        .json({ message: "No file was uploaded" });
-                }
 
                 connectCloudinary();
 
@@ -122,9 +116,9 @@ const addProducts = {
 
                 return res
                     .status(200)
-                    .json({ message: "Product created successfully", product });
+                    .json({ message: "Product created successfully" });
             } catch (error) {
-                console.log(error);
+                console.log(error, "err");
                 return res
                     .status(500)
                     .json({ message: "Something went wrong" });
@@ -139,34 +133,35 @@ const updateProducts = {
     handler: [
         upload.single("image", { dest: null }),
         async (req, res) => {
-        const { id: productID } = req.params;
-        const {
-            name,
-            artist,
-            category,
-            description,
-            quantity,
-            dimensions,
-            price,
-        } = req.body;
-        console.log(category,description,name,"c")
-        console.log(req.body,"cd")
-        const product = await Product.findOneAndUpdate(
-            { _id: productID },
-            req.body,
-            {
-                new: true,
-                runValidators: true,
-                useFindAndModify: true,
+            const { id: productID } = req.params;
+            const {
+                name,
+                artist,
+                category,
+                description,
+                quantity,
+                dimensions,
+                price,
+            } = req.body;
+            console.log(category, description, name, "c");
+            console.log(req.body, "cd");
+            const product = await Product.findOneAndUpdate(
+                { _id: productID },
+                req.body,
+                {
+                    new: true,
+                    runValidators: true,
+                    useFindAndModify: true,
+                }
+            );
+
+            if (!product) {
+                return res.status(404);
             }
-        );
 
-        if (!product) {
-            return res.status(404);
-        }
-
-        res.status(200).json({ product });
-    },]
+            res.status(200).json({ product });
+        },
+    ],
 };
 
 const deleteProduct = {

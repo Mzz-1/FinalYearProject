@@ -13,9 +13,10 @@ import { SuccessToast } from "../../helpers/Toast";
 const Biography = () => {
     const user = useUser();
 
-    const [bio, setBio] = useState([]);
+    const [bio, setBio] = useState();
 
     const getBio = async () => {
+        try{
         const productsData = await axios.get(
             `http://localhost:5000/api/biography/${user.id}`
         );
@@ -23,6 +24,9 @@ const Biography = () => {
         const data = await productsData.data.artist;
         setBio(data);
         console.log("getEvents", data);
+        }catch{
+            console.log("werror")
+        }
     };
 
     useEffect(() => {
@@ -61,19 +65,8 @@ const Biography = () => {
         formData.append("biography", data.biography);
 
         formData.append("image", data.image[0]);
-
-        console.log(user.id, data.name, data.aboutContent, data.biography);
-
-        try {
-            const response = await axios.get(
-                `http://localhost:5000/api/artist/${user.id}`
-            );
-            console.log(response.data);
-            setDoesExist(true);
-        } catch (err) {
-            console.log(`err:${err}`);
-        }
-        if (!exist) {
+       
+        if (bio) {
             try {
                 const response = await axios.patch(
                     `http://localhost:5000/api/biography/${user.id}`,
@@ -84,7 +77,7 @@ const Biography = () => {
                         },
                     }
                 );
-                SuccessToast("Artist Detail has been added.");
+                SuccessToast("Artist Detail has been updated.");
                 console.log(response.data);
             } catch (err) {
                 console.log(`err:${err}`);
@@ -100,7 +93,7 @@ const Biography = () => {
                         },
                     }
                 );
-                SuccessToast("Artist Detail has been updated.");
+                SuccessToast("Artist Detail has been added.");
                 console.log(response.data);
                 // const { token } = response.data;
                 // console.log(token);
@@ -123,7 +116,7 @@ const Biography = () => {
                         <Input
                             type="text"
                             placeholder="Name"
-                            defaultValue={bio.name}
+                            defaultValue={bio?.name}
                             register={{
                                 ...register("name", {
                                     required: "Please enter your name.",
@@ -144,7 +137,7 @@ const Biography = () => {
                         <ReactQuill
                             className="h-[400px] w-[800px] mb-[20px]"
                             theme="snow"
-                            value={aboutArtistContent || bio.aboutArtist}
+                            value={aboutArtistContent || bio?.aboutArtist}
                             onChange={onEditorStateChange}
                         />
                         <p>{errors.aboutContent?.message}</p>
@@ -152,7 +145,7 @@ const Biography = () => {
                         <ReactQuill
                             className="h-[400px] w-[800px] mb-[40px]"
                             theme="snow"
-                            value={biographyContent || bio.biography}
+                            value={biographyContent || bio?.biography}
                             onChange={onEditorStateChange2}
                         />
                         <p>{errors.biographyContent?.message}</p>

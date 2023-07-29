@@ -7,7 +7,7 @@ const { Artist, Exhibition } = require("../models/Artist");
 const Product = require("../models/Products");
 const multer = require("multer");
 
-const upload = multer({ dest: null });
+const upload = multer({ dest: "null" });
 
 const getArtistProduct = {
     path: "/api/artist-products/:id",
@@ -26,7 +26,7 @@ const addBiography = {
     path: "/api/biography",
     method: "post",
     handler: [
-        upload.single("image", { dest: null }),
+        upload.single("image"),
         async (req, res) => {
             const { userID, name, aboutContent, biography } = req.body;
             const file = req.file;
@@ -36,9 +36,7 @@ const addBiography = {
                 folder: "artist",
             });
 
-            //const url = cloudinary.url(name);
             console.log("node 1");
-            console.log(name, aboutContent, biography);
 
             const artist = await Artist.create({
                 userID,
@@ -237,11 +235,11 @@ const updateBiography = {
     path: "/api/biography/:id",
     method: "patch",
     handler: [
-        upload.single("image", { dest: null }),
+        upload.single("image"),
         async (req, res) => {
             const { id: bioID } = req.params;
             const { userID, name, aboutContent, biography } = req.body;
-            console.log(name, aboutContent, biography);
+            console.log("update");
             const file = req.file;
             connectCloudinary();
 

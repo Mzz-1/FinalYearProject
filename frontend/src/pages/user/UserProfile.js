@@ -127,7 +127,7 @@ const UserProfilePage = () => {
                         <Input
                             type="text"
                             placeholder="Password"
-                            disabled={userInfo?.password ===undefined}
+                            disabled={userInfo?.passwordHash ===undefined}
                             register={{
                                 ...register("password"),
                             }}
@@ -138,7 +138,7 @@ const UserProfilePage = () => {
                         <Input
                             type="text"
                             placeholder="Confirm Password"
-                            disabled={userInfo?.password ===undefined}
+                            disabled={userInfo?.passwordHash ===undefined}
                             register={{
                                 ...register("confirmPassword", {
                                     validate: validateConfirmPassword,

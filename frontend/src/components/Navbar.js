@@ -4,7 +4,7 @@ import { SuccessToast } from "../helpers/Toast";
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import Headroom from "react-headroom";
-import {  RxCross1 } from "react-icons/rx";
+import { RxCross1 } from "react-icons/rx";
 import { VscMenu } from "react-icons/vsc";
 import "../styles/navbar.css";
 
@@ -41,14 +41,20 @@ export const Navbar = () => {
     };
 
     return (
-        <header className={`bg-[#fdfdfd] z-[9999999999] ${showNavbar ? "fixed w-full" :""}`}>
+        <header
+            className={`bg-[#fdfdfd] z-[9999999999] ${
+                showNavbar ? "fixed w-full" : ""
+            }`}
+        >
             <Headroom disable={showNavbar}>
                 <div className={`bg-[#fdfdfd]`}>
                     <nav
                         className={` grid grid-rows-1 grid-cols-2 px-5 sm:px-[50px] h-[80px] shadow-lg items-center transition-all duration-300 ease-in `}
                     >
                         <p className="font-medium text-2xl text-[#9F7E7E] font-libre">
-                            SimplyArt
+                            <NavLink to={"/"} exact>
+                                SimplyArt
+                            </NavLink>
                         </p>
 
                         <ul

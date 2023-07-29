@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Box } from "../../components/DashboardBox";
 import { Heading2 } from "../../components/Heading";
 import { useUser } from "../../service/useUser";
 import { useState, useEffect } from "react";

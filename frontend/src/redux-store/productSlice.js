@@ -31,6 +31,8 @@ export const addProducts = createAsyncThunk(
         formData.append("quantity", data.quantity);
         formData.append("price", data.price);
         formData.append("dimensions", `${data.length} X ${data.breadth} in`);
+        console.log(data.image[0], "ima");
+        console.log(data, "dat");
         formData.append("image", data.image[0]);
         const apiUri = "http://localhost:5000/api/products";
         const response = await axios.post(apiUri, formData, {
@@ -45,7 +47,7 @@ export const addProducts = createAsyncThunk(
 export const updateProducts = createAsyncThunk(
     "update-product",
     async ({ data, artistName, productEditID }) => {
-        console.log(productEditID,"dd")
+        console.log(productEditID, "dd");
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("artist", artistName);
@@ -66,33 +68,30 @@ export const updateProducts = createAsyncThunk(
     }
 );
 
-export const getProduct = createAsyncThunk(
-    "get-product",
-    async ({ id}) => {
-        const apiUri =  `http://localhost:5000/api/products/${id}`;
-        const response = await axios.get(apiUri);
-        return response.data;
-    }
-);
+export const getProduct = createAsyncThunk("get-product", async ({ id }) => {
+    const apiUri = `http://localhost:5000/api/products/${id}`;
+    const response = await axios.get(apiUri);
+    return response.data;
+});
 
 export const deleteProduct = createAsyncThunk(
     "delete-product",
-    async ({ id}) => {
-        const apiUri =  `http://localhost:5000/api/products/${id}`;
+    async ({ id }) => {
+        const apiUri = `http://localhost:5000/api/products/${id}`;
         const response = await axios.delete(apiUri);
         return response.data;
     }
 );
 
-
 const productSlice = createSlice({
     name: "product",
     initialState: {
         data: [],
-        productData : {},
+        productData: {},
         fetchStatus: "",
         addStatus: "",
         getStatus: "",
+        deleteStatus: "",
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -127,7 +126,7 @@ const productSlice = createSlice({
                 state.addStatus = "error";
             })
             .addCase(getProduct.fulfilled, (state, action) => {
-                state.productData = action.payload
+                state.productData = action.payload;
                 state.getStatus = "success";
             })
             .addCase(getProduct.pending, (state) => {
@@ -135,6 +134,15 @@ const productSlice = createSlice({
             })
             .addCase(getProduct.rejected, (state) => {
                 state.getStatus = "error";
+            })
+            .addCase(deleteProduct.fulfilled, (state, action) => {
+                state.deleteStatus = "success";
+            })
+            .addCase(deleteProduct.pending, (state) => {
+                state.deleteStatus = "loading";
+            })
+            .addCase(deleteProduct.rejected, (state) => {
+                state.deleteStatus = "error";
             });
     },
 });

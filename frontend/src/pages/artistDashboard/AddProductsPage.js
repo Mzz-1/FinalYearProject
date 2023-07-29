@@ -6,34 +6,44 @@ import { useUser } from "../../service/useUser";
 import { DashboardActionButton } from "../../components/Button";
 import { PromiseToast, SuccessToast } from "../../helpers/Toast";
 import { useParams } from "react-router-dom";
-import {  Heading2 } from "../../components/Heading";
+import { Heading2 } from "../../components/Heading";
 import { Textarea } from "../../components/Input";
-import { updateProducts,addProducts,getProduct } from "../../redux-store/productSlice";
-import { useDispatch,useSelector } from "react-redux";
+import {
+    updateProducts,
+    addProducts,
+    getProduct,
+} from "../../redux-store/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchArtists } from "../../redux-store/artistSlice";
 
 const AddProductPage = () => {
     const user = useUser();
 
     const { id } = useParams();
 
-const [productEditID, setProductUpdateID] = useState(id);
+    const [productEditID, setProductUpdateID] = useState(id);
     const [productToEdit, setProductToUpdate] = useState();
 
     const dispatch = useDispatch();
 
-    const product = useSelector((state)=>state.product)
+    const product = useSelector((state) => state.product);
 
-    const {productData, getStatus} = product
+    const artist = useSelector((state) => state.artist);
+
+    const { productData, getStatus } = product;
+
+    const { artist: artistData, getStatus: artistGetStatus } = artist;
 
     useEffect(() => {
-       
+        if (id) {
+            dispatch(getProduct({ id }));
+        }
 
-        dispatch(getProduct({id}))
         setProductToUpdate(productData.product);
-      
-    }, [dispatch,id]);
-
-    const [artistName, setArtistName] = useState("");
+        const userID = user.id;
+        dispatch(fetchArtists({ userID }));
+    }, [dispatch, id, user.id, productData.product]);
+    console.log(artistData, "data");
 
     const categories = [
         "Painting",
@@ -51,32 +61,22 @@ const [productEditID, setProductUpdateID] = useState(id);
     } = useForm();
     watch("image");
 
-    const getArtist = async (data) => {
-        const response = await axios.get(
-            `http://localhost:5000/api/artist/${user.id}`
-        );
-
-        setArtistName(response.data.artist.name);
-    };
 
     useEffect(() => {
-        getArtist();
         document.title = "Add Products | Artist Dashboard";
-        setProductUpdateID(id)
+        setProductUpdateID(id);
     }, []);
 
     const ProductAction = async (data) => {
-        const response = await axios.get(
-            `http://localhost:5000/api/artist/${user.id}`
-        );
-
-        setArtistName(response.data.artist.name);
         if (!productToEdit) {
-           
-            dispatch( addProducts({data, artistName}))
+            console.log(data.image[0])
+            const artistName = artistData.artist.name
+            dispatch(addProducts({ data, artistName }))
+            
             SuccessToast("Product has been added.");
         } else {
-            dispatch(updateProducts({data, artistName,productEditID }));
+            const artistName = artistData.artist.name
+            dispatch(updateProducts({ data, artistName, productEditID }));
             SuccessToast("Product has been updated.");
         }
     };
@@ -87,120 +87,125 @@ const [productEditID, setProductUpdateID] = useState(id);
                 {" "}
                 {productToEdit ? "Update Product Details" : "Add Product"}
             </Heading2>
-            <form
-                className="flex flex-col gap-[20px] my-[20px]"
-                onSubmit={handleSubmit(ProductAction)}
-            >
-                <div className="grid grid-rows-1 grid-cols-2 gap-[30px] font-slab">
-                    <div className="flex flex-col gap-[20px]">
-                        <label>Product Name</label>
-                        <Input
-                            type="text"
-                            placeholder="Name"
-                            defaultValue={productToEdit?.name}
-                            register={{
-                                ...register("name", {
-                                    required: "Please enter the product name.",
-                                }),
-                            }}
-                        />
-                        <p>{errors.name?.message}</p>
-                        <label>Category</label>
+            {artistGetStatus === "success" ? (
+                <form
+                    className="flex flex-col gap-[20px] my-[20px]"
+                    onSubmit={handleSubmit(ProductAction)}
+                >
+                    <div className="grid grid-rows-1 grid-cols-2 gap-[30px] font-slab">
+                        <div className="flex flex-col gap-[20px]">
+                            <label>Product Name</label>
+                            <Input
+                                type="text"
+                                placeholder="Name"
+                                defaultValue={productToEdit?.name}
+                                register={{
+                                    ...register("name", {
+                                        required:
+                                            "Please enter the product name.",
+                                    }),
+                                }}
+                            />
+                            <p>{errors.name?.message}</p>
+                            <label>Category</label>
 
-                        <select
-                            className="w-[440px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
-                            {...register("category", {
-                                required: "Please select a category.",
-                            })}
-                            defaultValue={productToEdit?.category}
-                        >
-                            <option value="">Select a category</option>
-                            {categories.map((category, i) => (
-                                <option key={i} value={category}>
-                                    {category}
-                                </option>
-                            ))}
-                        </select>
-                        <p>{errors.category?.message}</p>
+                            <select
+                                className="w-[440px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                                {...register("category", {
+                                    required: "Please select a category.",
+                                })}
+                                defaultValue={productToEdit?.category}
+                            >
+                                <option value="">Select a category</option>
+                                {categories.map((category, i) => (
+                                    <option key={i} value={category}>
+                                        {category}
+                                    </option>
+                                ))}
+                            </select>
+                            <p>{errors.category?.message}</p>
 
-                        <label>Description</label>
-                        <Textarea
-                            type="text"
-                            placeholder="Description"
-                            defaultValue={productToEdit?.description}
-                            register={{
-                                ...register("description", {
-                                    required: "Please enter Description.",
-                                }),
-                            }}
-                        />
-                        <p>{errors.description?.message}</p>
-                        <label>Image</label>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            {...register("image", {
-                                required: "Please enter an image.",
-                            })}
-                        />
-                        <p>{errors.image?.message}</p>
-                    </div>
-                    <div className="flex flex-col  gap-[20px]">
-                        <label>Quantity</label>
-                        <Input
-                            type="number"
-                            defaultValue={productToEdit?.quantity}
-                            register={{
-                                ...register("quantity", {
-                                    required: "Please enter quantity.",
-                                }),
-                            }}
-                        />
-                        <p>{errors.quantity?.message}</p>
-                        <label>Dimentions</label>
-                        <div className="flex gap-[20px] items-center">
+                            <label>Description</label>
+                            <Textarea
+                                type="text"
+                                placeholder="Description"
+                                defaultValue={productToEdit?.description}
+                                register={{
+                                    ...register("description", {
+                                        required: "Please enter Description.",
+                                    }),
+                                }}
+                            />
+                            <p>{errors.description?.message}</p>
+                            <label>Image</label>
                             <input
-                                className="w-[130px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
-                                type="number"
-                                placeholder="length"
-                                {...register("length", {
-                                    required: "Please enter the length.",
+                                type="file"
+                                accept="image/*"
+                                {...register("image", {
+                                    required: "Please enter an image.",
                                 })}
                             />
-                            <p>{errors.length?.message}</p>
-
-                            <p>X</p>
-
-                            <input
-                                className="w-[130px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
-                                type="number"
-                                placeholder="breadth"
-                                {...register("breadth", {
-                                    required: "Please enter the breadth.",
-                                })}
-                            />
-                            <p>{errors.breadth?.message}</p>
-                            <p>Inches</p>
+                            <p>{errors.image?.message}</p>
                         </div>
+                        <div className="flex flex-col  gap-[20px]">
+                            <label>Quantity</label>
+                            <Input
+                                type="number"
+                                defaultValue={productToEdit?.quantity}
+                                register={{
+                                    ...register("quantity", {
+                                        required: "Please enter quantity.",
+                                    }),
+                                }}
+                            />
+                            <p>{errors.quantity?.message}</p>
+                            <label>Dimentions</label>
+                            <div className="flex gap-[20px] items-center">
+                                <input
+                                    className="w-[130px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                                    type="number"
+                                    placeholder="length"
+                                    {...register("length", {
+                                        required: "Please enter the length.",
+                                    })}
+                                />
+                                <p>{errors.length?.message}</p>
 
-                        <label>Price</label>
-                        <Input
-                            type="number"
-                            placeholder="Price"
-                            defaultValue={productToEdit?.price}
-                            register={{
-                                ...register("price", {
-                                    required: "Please enter the price.",
-                                }),
-                            }}
-                        />
-                        <p>{errors.price?.message}</p>
+                                <p>X</p>
+
+                                <input
+                                    className="w-[130px] shadow-in h-[45px] placeholder-[#9F7E7E] px-[30px]"
+                                    type="number"
+                                    placeholder="breadth"
+                                    {...register("breadth", {
+                                        required: "Please enter the breadth.",
+                                    })}
+                                />
+                                <p>{errors.breadth?.message}</p>
+                                <p>Inches</p>
+                            </div>
+
+                            <label>Price</label>
+                            <Input
+                                type="number"
+                                placeholder="Price"
+                                defaultValue={productToEdit?.price}
+                                register={{
+                                    ...register("price", {
+                                        required: "Please enter the price.",
+                                    }),
+                                }}
+                            />
+                            <p>{errors.price?.message}</p>
+                        </div>
                     </div>
-                </div>
-                <DashboardActionButton>
-                    {productToEdit ? "Update Product" : "Add Product"}
-                </DashboardActionButton>
-            </form>
+                    <DashboardActionButton>
+                        {productToEdit ? "Update Product" : "Add Product"}
+                    </DashboardActionButton>
+                </form>
+            ) : (
+                "loading"
+            )}
         </div>
     );
 };

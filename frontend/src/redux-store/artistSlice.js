@@ -11,11 +11,23 @@ export const fetchAllArtists = createAsyncThunk(
     }
 );
 
+export const fetchArtists = createAsyncThunk(
+    "fetch-artists",
+    async ({ userID }) => {
+        console.log(userID,"ii")
+        const apiUri = `http://localhost:5000/api/artist/${userID}`;
+        const response = await axios.get(apiUri);
+        return response.data;
+    }
+);
+
 const artistSlice = createSlice({
     name: "artist",
     initialState: {
         data: [],
+        artist:{},
         fetchStatus: "",
+        getStatus: "",
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -30,7 +42,16 @@ const artistSlice = createSlice({
             .addCase(fetchAllArtists.rejected, (state) => {
                 state.fetchStatus = "error";
             })
-
+            .addCase(fetchArtists.fulfilled, (state, action) => {
+                state.artist = action.payload;
+                state.getStatus = "success";
+            })
+            .addCase(fetchArtists.pending, (state) => {
+                state.getStatus = "loading";
+            })
+            .addCase(fetchArtists.rejected, (state) => {
+                state.getStatus = "error";
+            });
     },
 });
 
