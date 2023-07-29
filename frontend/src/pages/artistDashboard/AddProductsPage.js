@@ -1,10 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Input from "../../components/Input";
 import { useUser } from "../../service/useUser";
 import { DashboardActionButton } from "../../components/Button";
-import { PromiseToast, SuccessToast } from "../../helpers/Toast";
+import { ErrorToast } from "../../helpers/Toast";
 import { useParams } from "react-router-dom";
 import { Heading2 } from "../../components/Heading";
 import { Textarea } from "../../components/Input";
@@ -21,9 +20,6 @@ const AddProductPage = () => {
 
     const { id } = useParams();
 
-    const [productEditID, setProductUpdateID] = useState(id);
-    const [productToEdit, setProductToUpdate] = useState();
-
     const dispatch = useDispatch();
 
     const product = useSelector((state) => state.product);
@@ -38,11 +34,9 @@ const AddProductPage = () => {
         if (id) {
             dispatch(getProduct({ id }));
         }
-
-        setProductToUpdate(productData.product);
         const userID = user.id;
         dispatch(fetchArtists({ userID }));
-    }, [dispatch, id, user.id, productData.product]);
+    }, [id]);
     console.log(artistData, "data");
 
     const categories = [
@@ -64,28 +58,30 @@ const AddProductPage = () => {
 
     useEffect(() => {
         document.title = "Add Products | Artist Dashboard";
-        setProductUpdateID(id);
     }, []);
 
     const ProductAction = async (data) => {
-        if (!productToEdit) {
-            console.log(data.image[0])
+        try{
+         
+        if (getStatus!=="success") {
             const artistName = artistData.artist.name
             dispatch(addProducts({ data, artistName }))
-            
-            SuccessToast("Product has been added.");
         } else {
             const artistName = artistData.artist.name
-            dispatch(updateProducts({ data, artistName, productEditID }));
-            SuccessToast("Product has been updated.");
+            const productEditID =  productData.product._id
+            console.log("proID",productEditID)
+            dispatch(updateProducts({ data, artistName,productEditID  }));     
         }
+    }catch{
+        ErrorToast("Something went wrong")
+    }
     };
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
             <Heading2>
                 {" "}
-                {productToEdit ? "Update Product Details" : "Add Product"}
+                {getStatus!=="success" ? "Add Product" : "Update Product"}
             </Heading2>
             {artistGetStatus === "success" ? (
                 <form
@@ -98,7 +94,7 @@ const AddProductPage = () => {
                             <Input
                                 type="text"
                                 placeholder="Name"
-                                defaultValue={productToEdit?.name}
+                                defaultValue={productData.product?.name}
                                 register={{
                                     ...register("name", {
                                         required:
@@ -114,7 +110,7 @@ const AddProductPage = () => {
                                 {...register("category", {
                                     required: "Please select a category.",
                                 })}
-                                defaultValue={productToEdit?.category}
+                                defaultValue={productData?.product?.category}
                             >
                                 <option value="">Select a category</option>
                                 {categories.map((category, i) => (
@@ -129,7 +125,7 @@ const AddProductPage = () => {
                             <Textarea
                                 type="text"
                                 placeholder="Description"
-                                defaultValue={productToEdit?.description}
+                                defaultValue={productData?.product?.description}
                                 register={{
                                     ...register("description", {
                                         required: "Please enter Description.",
@@ -151,7 +147,7 @@ const AddProductPage = () => {
                             <label>Quantity</label>
                             <Input
                                 type="number"
-                                defaultValue={productToEdit?.quantity}
+                                defaultValue={productData?.product?.quantity}
                                 register={{
                                     ...register("quantity", {
                                         required: "Please enter quantity.",
@@ -189,7 +185,7 @@ const AddProductPage = () => {
                             <Input
                                 type="number"
                                 placeholder="Price"
-                                defaultValue={productToEdit?.price}
+                                defaultValue={productData?.product?.price}
                                 register={{
                                     ...register("price", {
                                         required: "Please enter the price.",
@@ -200,7 +196,7 @@ const AddProductPage = () => {
                         </div>
                     </div>
                     <DashboardActionButton>
-                        {productToEdit ? "Update Product" : "Add Product"}
+                        {getStatus!=="success" ? "Add Product" : "Update Product"}
                     </DashboardActionButton>
                 </form>
             ) : (

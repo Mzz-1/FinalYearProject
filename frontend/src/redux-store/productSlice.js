@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { ErrorToast,SuccessToast } from "../helpers/Toast";
 
 export const fetchAllProducts = createAsyncThunk(
     "fetch-all-products",
@@ -47,6 +48,7 @@ export const addProducts = createAsyncThunk(
 export const updateProducts = createAsyncThunk(
     "update-product",
     async ({ data, artistName, productEditID }) => {
+        try{
         console.log(productEditID, "dd");
         const formData = new FormData();
         formData.append("name", data.name);
@@ -64,7 +66,11 @@ export const updateProducts = createAsyncThunk(
                 "Content-Type": "multipart/form-data",
             },
         });
+        SuccessToast("Product has been updated.")
         return response.data;
+    }catch{
+        ErrorToast("Something went wrong.")
+    }
     }
 );
 

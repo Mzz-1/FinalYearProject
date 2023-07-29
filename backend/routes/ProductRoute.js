@@ -143,11 +143,26 @@ const updateProducts = {
                 dimensions,
                 price,
             } = req.body;
-            console.log(category, description, name, "c");
-            console.log(req.body, "cd");
+            const file = req.file;
+
+                connectCloudinary();
+
+                const result = await cloudinary.uploader.upload(file.path, {
+                    folder: "products",
+                });
             const product = await Product.findOneAndUpdate(
                 { _id: productID },
-                req.body,
+                {
+                    name,
+                    artist,
+                    category,
+                    description,
+                    url: result.secure_url,
+
+                    quantity,
+                    price,
+                    dimensions,
+                },
                 {
                     new: true,
                     runValidators: true,

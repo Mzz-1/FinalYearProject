@@ -2,11 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchExhibition = createAsyncThunk("fetch-all-exhibition", async ({id}) => {
-    const apiUri = `http://localhost:5000/api/artist-exhibitions/${id}`;
-    const response = await axios.get(apiUri);
-    return response.data;
-});
+export const fetchExhibition = createAsyncThunk(
+    "fetch-all-exhibition",
+    async ({ id }) => {
+        const apiUri = `http://localhost:5000/api/artist-exhibitions/${id}`;
+        const response = await axios.get(apiUri);
+        return response.data;
+    }
+);
 
 const exhibitionSlice = createSlice({
     name: "exhibition",

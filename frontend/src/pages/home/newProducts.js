@@ -18,7 +18,7 @@ export const NewProducts = () => {
                 searchItem: "",
                 category: "",
                 sort: "Newest to oldest",
-                limit: 5,
+                limit: 6,
             })
         );
     };
