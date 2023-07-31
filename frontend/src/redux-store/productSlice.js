@@ -1,29 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ErrorToast,SuccessToast } from "../helpers/Toast";
+import { ErrorToast } from "../helpers/Toast";
 
 export const fetchAllProducts = createAsyncThunk(
     "fetch-all-products",
     async ({ searchItem, category, sort, page, limit }) => {
+        try{
         const apiUri = `http://localhost:5000/api/products?name=${searchItem}&category=${category}&sort=${sort}&page=${page}&limit=${limit}`;
         const response = await axios.get(apiUri);
         return response.data;
+        }catch{
+            ErrorToast("Something went wrong")
+        }
     }
 );
 
 export const loadProducts = createAsyncThunk(
     "load-products",
     async ({ searchItem, category, sort, page, limit }) => {
+        try{
         const apiUri = `http://localhost:5000/api/products?name=${searchItem}&category=${category}&sort=${sort}&page=${page}&limit=${limit}`;
         const response = await axios.get(apiUri);
         return response.data;
+        }catch{
+            ErrorToast("Something went wrong")
+        }
     }
 );
 
 export const addProducts = createAsyncThunk(
     "add-product",
     async ({ data, artistName }) => {
+        try{
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("artist", artistName);
@@ -42,6 +51,9 @@ export const addProducts = createAsyncThunk(
             },
         });
         return response.data;
+    }catch{
+        ErrorToast("Something went wrong")
+    }
     }
 );
 
@@ -49,7 +61,6 @@ export const updateProducts = createAsyncThunk(
     "update-product",
     async ({ data, artistName, productEditID }) => {
         try{
-        console.log(productEditID, "dd");
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("artist", artistName);
@@ -66,7 +77,7 @@ export const updateProducts = createAsyncThunk(
                 "Content-Type": "multipart/form-data",
             },
         });
-        SuccessToast("Product has been updated.")
+      
         return response.data;
     }catch{
         ErrorToast("Something went wrong.")
@@ -75,17 +86,25 @@ export const updateProducts = createAsyncThunk(
 );
 
 export const getProduct = createAsyncThunk("get-product", async ({ id }) => {
+    try{
     const apiUri = `http://localhost:5000/api/products/${id}`;
     const response = await axios.get(apiUri);
     return response.data;
+    }catch{
+        ErrorToast("Something went wrong.")
+    }
 });
 
 export const deleteProduct = createAsyncThunk(
     "delete-product",
     async ({ id }) => {
+        try{
         const apiUri = `http://localhost:5000/api/products/${id}`;
         const response = await axios.delete(apiUri);
         return response.data;
+        }catch{
+            ErrorToast("Something went wrong")
+        }
     }
 );
 
@@ -94,6 +113,7 @@ const productSlice = createSlice({
     initialState: {
         data: [],
         productData: {},
+        totalProducts:0,
         fetchStatus: "",
         addStatus: "",
         getStatus: "",
@@ -104,6 +124,7 @@ const productSlice = createSlice({
         builder
             .addCase(fetchAllProducts.fulfilled, (state, action) => {
                 state.data = action.payload;
+                state.totalProducts = state.data.product.length
                 state.fetchStatus = "success";
             })
             .addCase(fetchAllProducts.pending, (state) => {

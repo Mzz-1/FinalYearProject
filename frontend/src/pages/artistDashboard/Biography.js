@@ -7,32 +7,45 @@ import "react-quill/dist/quill.snow.css";
 import { Label } from "../../components/Label";
 import { UpdateButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";
-import { DashboardHeading, Heading2 } from "../../components/Heading";
-import { SuccessToast } from "../../helpers/Toast";
+import { Heading2 } from "../../components/Heading";
+import { PromiseToast } from "../../helpers/Toast";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    fetchArtistBio,
+    addArtistBio,
+    updateArtistBio,
+} from "../../redux-store/artistBioSlice";
 
 const Biography = () => {
     const user = useUser();
 
     const [bio, setBio] = useState();
 
-    const getBio = async () => {
-        try{
-        const productsData = await axios.get(
-            `http://localhost:5000/api/biography/${user.id}`
-        );
+    const dispatch = useDispatch();
+    const artistBio = useSelector((state) => state.artistBio);
 
-        const data = await productsData.data.artist;
-        setBio(data);
-        console.log("getEvents", data);
-        }catch{
-            console.log("werror")
+    const { data, fetchStatus } = artistBio;
+
+    const getBio = async () => {
+        try {
+            const productsData = await axios.get(
+                `http://localhost:5000/api/biography/${user.id}`
+            );
+
+            const data = await productsData.data.artist;
+            setBio(data);
+            console.log("getEvents", data);
+        } catch {
+            console.log("werror");
         }
     };
 
     useEffect(() => {
         getBio();
-        document.title = "Update Biography | Artist Dashboard"; 
-
+        const id = user.id;
+        dispatch(fetchArtistBio({ id }));
+        console.log(artistBio);
+        document.title = "Update Biography | Artist Dashboard";
     }, []);
 
     const {
@@ -43,8 +56,6 @@ const Biography = () => {
         formState: { errors },
     } = useForm();
     watch("image");
-
-    const [exist, setDoesExist] = useState(false);
 
     const onEditorStateChange = (editorState) => {
         setValue("aboutContent", editorState);
@@ -58,48 +69,17 @@ const Biography = () => {
     const biographyContent = watch("biography");
 
     const addBiography = async (data) => {
-        const formData = new FormData();
-        formData.append("userID", user.id);
-        formData.append("name", data.name);
-        formData.append("aboutContent", data.aboutContent);
-        formData.append("biography", data.biography);
-
-        formData.append("image", data.image[0]);
-       
+        const userID = user.id;
         if (bio) {
-            try {
-                const response = await axios.patch(
-                    `http://localhost:5000/api/biography/${user.id}`,
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                );
-                SuccessToast("Artist Detail has been updated.");
-                console.log(response.data);
-            } catch (err) {
-                console.log(`err:${err}`);
-            }
+            PromiseToast(
+                "Biography has been updated",
+                dispatch(updateArtistBio({ data, userID }))
+            );
         } else {
-            try {
-                const response = await axios.post(
-                    "http://localhost:5000/api/biography",
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                );
-                SuccessToast("Artist Detail has been added.");
-                console.log(response.data);
-                // const { token } = response.data;
-                // console.log(token);
-            } catch (err) {
-                console.log(`err:${err}`);
-            }
+            PromiseToast(
+                "Biography has been added",
+                dispatch(addArtistBio({ data, userID }))
+            );
         }
     };
 
@@ -116,7 +96,7 @@ const Biography = () => {
                         <Input
                             type="text"
                             placeholder="Name"
-                            defaultValue={bio?.name}
+                            defaultValue={data?.artist?.name}
                             register={{
                                 ...register("name", {
                                     required: "Please enter your name.",
@@ -137,7 +117,9 @@ const Biography = () => {
                         <ReactQuill
                             className="h-[400px] w-[800px] mb-[20px]"
                             theme="snow"
-                            value={aboutArtistContent || bio?.aboutArtist}
+                            value={
+                                aboutArtistContent || data?.artist?.aboutArtist
+                            }
                             onChange={onEditorStateChange}
                         />
                         <p>{errors.aboutContent?.message}</p>
@@ -145,7 +127,7 @@ const Biography = () => {
                         <ReactQuill
                             className="h-[400px] w-[800px] mb-[40px]"
                             theme="snow"
-                            value={biographyContent || bio?.biography}
+                            value={biographyContent || data?.artist?.biography}
                             onChange={onEditorStateChange2}
                         />
                         <p>{errors.biographyContent?.message}</p>

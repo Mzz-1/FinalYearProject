@@ -23,6 +23,8 @@ export const OrderSummary = () => {
     const [cart, setCart] = useState();
     const [subTotal, setSubTotal] = useState(0);
 
+    const [isOrderPlaced,setIsOrderPlaced] =useState(false)
+
     const { id: deliveryID } = useParams();
 
     const navigate = useNavigate();
@@ -86,6 +88,7 @@ export const OrderSummary = () => {
     }, [cart, products]);
 
     const handlePaymentSuccess = async () => {
+        if(!isOrderPlaced){
         try {
             // Make an API request to create the order
             const response = await axios.post(
@@ -111,13 +114,16 @@ export const OrderSummary = () => {
             );
             // Display a success message to the user
             SuccessToast("Order placed successfully!");
-
+            setIsOrderPlaced(true)
             // Redirect the user to the order confirmation or thank you page
         } catch (error) {
             console.error("Error creating order:", error);
             // Display an error message to the user
             InfoToast("Error creating order. Please try again.");
         }
+    }else{
+        InfoToast("Order Has already been placed")
+    }
     };
 
     return (
@@ -130,68 +136,91 @@ export const OrderSummary = () => {
             </div>
 
             <div className="flex flex-col lg:flex-row gap-10">
-                <table className="bg-white  border-gray-300 w-[70%] m-auto lg:m-0 rounded-md shadow-sm lg:h-[100px]">
-                    <thead className="text-left">
-                        <tr className="text-[#9F7E7E] ">
-                            <th className=" text-center text-lg font-semibold">
-                                SN
-                            </th>
-                            <th className=" text-lg font-semibold">Product</th>
-                            <th className="text-center  text-lg font-semibold">
-                                Quantity
-                            </th>
-                            <th className="text-center  text-lg font-semibold">
-                                Total
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products?.map((product, i) => {
-                            console.log("product", product);
+            <table className="md:bg-white  md:border-gray-300 w-[100%] rounded-md shadow-sm lg:h-[100px] lg:w-[70%]">
+                              <thead className="text-left text-[#3E3E42]">
+                                  <tr className="hidden md:table-row">
+                                      <th className=" text-center text-lg font-semibold ">
+                                          SN
+                                      </th>
+                                      <th className=" text-lg font-semibold">
+                                          Product
+                                      </th>
+                                      <th className="text-center  text-lg font-semibold">
+                                          Quantity
+                                      </th>
+                                      <th className="text-center  text-lg font-semibold">
+                                          Total
+                                      </th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                 
+                                          {products?.map(
+                                              (product, i) => {
+                                                  const item =
+                                                      cart?.items.find(
+                                                          (item) =>
+                                                              item.productID ===
+                                                              product._id
+                                                      );
 
-                            const item = cart.items.find(
-                                (item) => item.productID === product._id
-                            );
+                                                  return (
+                                                      <tr
+                                                          key={product._id}
+                                                          className=" py-9 border-b-2  first:border-t-2 md:text-lg text-sm"
+                                                      >
+                                                          <td className="text-center hidden md:table-cell">
+                                                              {i + 1}
+                                                          </td>
+                                                          <td className=" ">
+                                                              <div className=" md:py-8 flex items-center md:flex-row gap-4 ">
+                                                                  <img
+                                                                      src={
+                                                                          product.url
+                                                                      }
+                                                                      className="md:h-24 md:w-24 w-[50px] h-auto aspect-w-16 aspect-h-9  md:m-0 object-cover"
+                                                                      alt=""
+                                                                  />
+                                                                  <div className="text-left">
+                                                                      <p className=" font-medium">
+                                                                          {
+                                                                              product?.name
+                                                                          }
+                                                                      </p>
+                                                                      <p className="text-gray-500">
+                                                                          Rs{" "}
+                                                                          {
+                                                                              product?.price
+                                                                          }
+                                                                      </p>
+                                                                  </div>
+                                                              </div>
+                                                          </td>
+                                                          <td className="text-left md:text-center">
+                                                            <span className="md:hidden">Qty: </span>
+                                                              <span className=" ">
+                                                                  {
+                                                                      item?.quantity
+                                                                  }
+                                                              </span>
+                                                          </td>
 
-                            return (
-                                <tr
-                                    key={product._id}
-                                    className=" py-9 border-b-2 first:border-t-2"
-                                >
-                                    <td className="text-center">{i + 1}</td>
-                                    <td>
-                                        <div className=" py-8 flex  flex-col md:flex-row gap-4 md:items-center">
-                                            <img
-                                                src={product.url}
-                                                className="h-24 w-24 m-auto lg:m-0 object-cover"
-                                                alt=""
-                                            />
-                                            <div>
-                                                <p className="text-lg font-semibold">
-                                                    {product.name}
-                                                </p>
-                                                <p className="text-gray-500">
-                                                    Rs {product.price}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="text-center">
-                                        <span className="text-lg font-semibold">
-                                            {item.quantity}
-                                        </span>
-                                    </td>
-
-                                    <td className="text-center">
-                                        <p className="text-gray-500">
-                                            Rs {item.quantity * product.price}
-                                        </p>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                                                          <td className="text-left md:text-center">
+                                                          <span className="md:hidden font-medium">Total Price: </span>
+                                                              <span className="text-gray-500">
+                                                                  Rs{" "}
+                                                                  {item?.quantity *
+                                                                      product.price}
+                                                              </span>
+                                                          </td>
+                                                          
+                                                      </tr>
+                                                  );
+                                              }
+                                          )}
+                              
+                              </tbody>
+                          </table>
                 <div className="bg-white md:w-[400px] m-auto py-[20px] px-[30px] rounded-md flex-1 mb-7">
                     <div className="flex flex-col gap-1 mb-[20px]">
                         <Heading2 text="Delivery Details" />

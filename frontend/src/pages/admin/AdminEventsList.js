@@ -23,16 +23,6 @@ export const AdminEvent = () => {
 
     const {data, fetchStatus} = event
 
-   
-
-    // const viewEvent = async (id) => {
-    //     const viewData = await axios.get(
-    //         `http://localhost:5000/api/events/${id}`
-    //     );
-    //     console.log("view event", viewData.data.event);
-    //     setViewEvents(viewData.data.event);
-    // };
-
     const deleteEvent = async (id) => {
         const deleteData = await axios.delete(
             `http://localhost:5000/api/events/${id}`
@@ -41,7 +31,6 @@ export const AdminEvent = () => {
     };
 
     const updateEvent = (id) => {
-        console.log("clicked");
         navigate(`/admin-dashboard/update-event/${id}`);
     };
 

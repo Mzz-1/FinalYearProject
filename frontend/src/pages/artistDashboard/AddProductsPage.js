@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Input from "../../components/Input";
 import { useUser } from "../../service/useUser";
 import { DashboardActionButton } from "../../components/Button";
-import { ErrorToast } from "../../helpers/Toast";
+import { ErrorToast, PromiseToast } from "../../helpers/Toast";
 import { useParams } from "react-router-dom";
 import { Heading2 } from "../../components/Heading";
 import { Textarea } from "../../components/Input";
@@ -55,33 +55,39 @@ const AddProductPage = () => {
     } = useForm();
     watch("image");
 
-
     useEffect(() => {
         document.title = "Add Products | Artist Dashboard";
     }, []);
 
     const ProductAction = async (data) => {
-        try{
-         
-        if (getStatus!=="success") {
-            const artistName = artistData.artist.name
-            dispatch(addProducts({ data, artistName }))
-        } else {
-            const artistName = artistData.artist.name
-            const productEditID =  productData.product._id
-            console.log("proID",productEditID)
-            dispatch(updateProducts({ data, artistName,productEditID  }));     
+        try {
+            if (getStatus !== "success") {
+                const artistName = artistData.artist.name;
+                PromiseToast(
+                    "Product has been added",
+                    dispatch(addProducts({ data, artistName }))
+                );
+            } else {
+                const artistName = artistData.artist.name;
+                const productEditID = productData.product._id;
+                console.log("proID", productEditID);
+                PromiseToast(
+                    "Product has been updated",
+                    dispatch(
+                        updateProducts({ data, artistName, productEditID })
+                    )
+                );
+            }
+        } catch {
+            ErrorToast("Something went wrong");
         }
-    }catch{
-        ErrorToast("Something went wrong")
-    }
     };
 
     return (
         <div className="flex flex-col items-center justify-center gap-[20px]">
             <Heading2>
                 {" "}
-                {getStatus!=="success" ? "Add Product" : "Update Product"}
+                {getStatus !== "success" ? "Add Product" : "Update Product"}
             </Heading2>
             {artistGetStatus === "success" ? (
                 <form
@@ -196,7 +202,9 @@ const AddProductPage = () => {
                         </div>
                     </div>
                     <DashboardActionButton>
-                        {getStatus!=="success" ? "Add Product" : "Update Product"}
+                        {getStatus !== "success"
+                            ? "Add Product"
+                            : "Update Product"}
                     </DashboardActionButton>
                 </form>
             ) : (

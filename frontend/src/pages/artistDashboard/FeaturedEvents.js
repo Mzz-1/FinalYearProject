@@ -1,18 +1,19 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Input from "../../components/Input";
 import { Label } from "../../components/Label";
 import { UpdateButton } from "../../components/Button";
 import { useUser } from "../../service/useUser";
 import { useParams } from "react-router-dom";
+import { PromiseToast } from "../../helpers/Toast";
+import { Heading2 } from "../../components/Heading";
 import {
+    fetchExhibition,
     addExhibition,
     updateExhibition,
-    getSingleExhibition,
-} from "../../helpers/Exhibition";
-import { PromiseToast, SuccessToast } from "../../helpers/Toast";
-import { DashboardHeading, Heading2 } from "../../components/Heading";
+} from "../../redux-store/exhibitionSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { FormatDate } from "../../helpers/FormatDate";
 
 const FeaturedEvents = () => {
     const user = useUser();
@@ -21,37 +22,47 @@ const FeaturedEvents = () => {
 
     const [eventToEdit, setEventToUpdate] = useState();
 
+    const dispatch = useDispatch();
+
+    const exhibition = useSelector((state) => state.exhibition);
+
+    const { data:eventData, fetchStatus } = exhibition;
+
     const {
         register,
         handleSubmit,
-        watch,
-        setValue,
         formState: { errors },
     } = useForm();
-    watch("image");
 
     useEffect(() => {
-        const fetchData = async () => {
-            const event = await getSingleExhibition(id);
-            setEventToUpdate(event);
-        };
-        fetchData();
+        dispatch(fetchExhibition({ id }));
     }, [id]);
 
     const ExhibitionAction = async (data) => {
+        const userID = user.id;
+        const eventID = eventData?.exhibition?._id;
         if (id) {
             PromiseToast(
                 "Event has been updated.",
-                updateExhibition(data, user.id, eventToEdit._id)
+                dispatch(updateExhibition({ data, userID, eventID }))
             );
         } else {
-            PromiseToast("Event has been Added.", addExhibition(data, user.id));
+            PromiseToast(
+                "Event has been Added.",
+                dispatch(addExhibition({ data, userID }))
+            );
         }
     };
+    
 
     return (
+        
         <div className="flex flex-col items-center justify-center gap-[20px]">
-            <Heading2>  {eventToEdit ? "Update Event Details" : "Add Featured Events"}</Heading2>
+          
+            <Heading2>
+                {" "}
+                {eventData ? "Update Event Details" : "Add Featured Events"}
+            </Heading2>
             <form
                 className="flex flex-col gap-[20px] my-[20px]"
                 onSubmit={handleSubmit(ExhibitionAction)}
@@ -62,7 +73,7 @@ const FeaturedEvents = () => {
                         <Input
                             type="text"
                             placeholder="Name"
-                            defaultValue={eventToEdit?.name}
+                            defaultValue={eventData?.exhibition?.name}
                             register={{
                                 ...register("name", {
                                     required: "Please enter your name.",
@@ -82,7 +93,7 @@ const FeaturedEvents = () => {
                         <label>Start Date</label>
                         <Input
                             type="date"
-                            value={eventToEdit?.startDate}
+                            defaultValue={eventData?.exhibition?.startDate}
                             register={{
                                 ...register("startDate", {
                                     required: "Please enter your password.",
@@ -93,7 +104,7 @@ const FeaturedEvents = () => {
                         <label>End Date</label>
                         <Input
                             type="date"
-                            defaultValue={eventToEdit?.endDate}
+                            defaultValue={eventData?.exhibition?.endDate}
                             register={{
                                 ...register("endDate", {
                                     required: "Please enter your password.",
@@ -106,7 +117,7 @@ const FeaturedEvents = () => {
                         <Input
                             type="text"
                             placeholder="Location"
-                            defaultValue={eventToEdit?.location}
+                            defaultValue={eventData?.exhibition?.location}
                             register={{
                                 ...register("location", {
                                     required: "Please enter the location.",
@@ -118,9 +129,10 @@ const FeaturedEvents = () => {
                 </div>
 
                 <UpdateButton>
-                    {eventToEdit ? "Update Event" : "Add Event"}
+                    {eventData ? "Update Event" : "Add Event"}
                 </UpdateButton>
             </form>
+
         </div>
     );
 };

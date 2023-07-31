@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { ExhibitionList } from "./ExhibitionList";
 import { ArtistNavbar } from "../../components/ArtistNavbar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchExhibition } from "../../redux-store/exhibitionSlice";
+import { fetchArtistExhibition } from "../../redux-store/exhibitionSlice";
 import { Loader } from "../../components/LoaderWrapper";
 
 const ArtistExhibition = () => {
@@ -22,7 +22,8 @@ const ArtistExhibition = () => {
     const { fetchStatus, data } = exhibition;
 
     useEffect(() => {
-        dispatch(fetchExhibition({ id }));
+        dispatch(fetchArtistExhibition({ id }));
+        console.log(data)
         const pageTitle = "Featured Artist Exhibition | SimplyArt";
         document.title = pageTitle;
     }, []);

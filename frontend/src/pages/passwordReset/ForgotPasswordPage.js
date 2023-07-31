@@ -44,7 +44,7 @@ const ForgotPasswordPage = () => {
            
             <p>Enter your email and we'll send you a reset link.</p>
             {errorMessage && <div>{errorMessage}</div>}
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
+            <form className="text-black" onSubmit={handleSubmit(handleFormSubmit)}>
                 <Input
                     type="text"
                     placeholder="someone@email.com"
@@ -55,7 +55,7 @@ const ForgotPasswordPage = () => {
                     }}
                 />
                 <p>{errors.username?.message}</p>
-                <button className="mt-5 p-3 border" disabled={!values.resetPasswordEmail}>
+                <button className="mt-5 p-3 border text-[#fefefe]" disabled={!values.resetPasswordEmail}>
                     Send Reset Link
                 </button>
             </form>

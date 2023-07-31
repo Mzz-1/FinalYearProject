@@ -18,13 +18,6 @@ export const ViewAllButton = ({ children,link,align,border }) => {
     );
 };
 
-export const WhiteButton = ({ children,link,align }) => {
-    return (
-        <p className={`font-montserrat bg-[#f4f4f4] mb-5 text-[#3E3E42] w-[200px] h-[45px] text-center font-semibold rounded-lg` }><Link to={link}>{children}</Link></p>
-    );
-};
-
-
 
 export const EditButton = ({onClick}) => {
     return (
@@ -71,24 +64,6 @@ export const NoButton = ({ children, onClick }) => {
 
 
 
-export const BlueButton = ({ children, link, register }) => {
-    const navigate = useNavigate();
-
-    return (
-        <button
-            className="px-[30px] py-[8px] font-semibold bg-[#74d6e3] mb-[20px] text-[#fefefe] text-center"
-            onClick={() => {
-                navigate(`${link}`);
-            }}
-        >
-            {children}
-        </button>
-    );
-};
-
-
-
-
 export const BrownButton = ({ children, onclick, link }) => {
     const navigate = useNavigate();
 
@@ -102,20 +77,6 @@ export const BrownButton = ({ children, onclick, link }) => {
     );
 };
 
-export const BlackRButton = ({ children, link, register }) => {
-    const navigate = useNavigate();
-
-    return (
-        <button
-            className="px-[10px] w-[180px] font-medium rounded-3xl m-auto py-[10px] border-black border mb-[20px] text-[black] text-center"
-            onClick={() => {
-                navigate(`${link}`);
-            }}
-        >
-            {children}
-        </button>
-    );
-};
 
 export const UpdateButton = ({ children }) => {
     return (

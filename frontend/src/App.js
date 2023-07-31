@@ -39,12 +39,11 @@ import { PrivateRouteArtist } from "./service/Auth";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AddEventPage from "./pages/admin/AddEventpage";
-import AdminEventPage from "./pages/admin/AdminEvents";
 import UserList from "./pages/admin/UsersList";
 import ArtistList from "./pages/admin/ArtistList";
 import { AdminSidebar } from "./pages/admin/AdminSidebar";
 import { PrivateRouteAdmin } from "./service/Auth";
-
+import { AdminEvent } from "./pages/admin/AdminEventsList";
 
 
 function App() {
@@ -234,7 +233,7 @@ function App() {
 
                                     <Route
                                         path="events"
-                                        element={<PrivateRouteAdmin Component={AdminEventPage} />}
+                                        element={<PrivateRouteAdmin Component={AdminEvent} />}
                                     />
                                     <Route
                                         path="users"

@@ -1,6 +1,6 @@
 import { AboutUs } from "./AboutUs";
 import { HomeEvents } from "./HomeEvents";
-import { NewProducts } from "./newProducts";
+import { NewProducts } from "./HomeProducts";
 import { FeaturedArtists } from "./FeaturedArtists";
 import { Banner2 } from "../../components/Banner2";
 import { Services } from "../../components/ServicesGrid";

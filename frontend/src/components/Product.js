@@ -56,20 +56,18 @@ export const Product = ({ product, type }) => {
                     />
                 </div>
             </div>
-            <ul className=" text-[14px] sm:text-[16px] flex flex-col gap-[px] relative px-[10px] py-[10px] text-center ">
-                <li className="text-[22px]  font-cinzel text-[#3C3737] border-b w-fit m-auto">
+            <ul className=" text-[12px] sm:text-[16px] flex flex-col gap-[px] relative px-[10px] py-[10px] text-center ">
+                <li className="text-[14px] mb-2 sm:text-[22px] font-cinzel text-[#3C3737] border-b w-fit m-auto">
                     {product.name}
                 </li>
                
                 <li className="text-[#65635F] ">By {product.artist}</li>
                 <li className="text-[#65635F] ">{product.category}</li>
-                {/* <li className="text-[#65635F] text-[18px]">
-                    {product.dimensions}
-                </li> */}
+
                 {type === "gallery" ? (
                     ""
                 ) : (
-                    <li className=" text-[20px]  text-[#65635F]">
+                    <li className="text-[16px] sm:text-[20px]  text-[#65635F]">
                         Rs {product.price}
                     </li>
                 )}

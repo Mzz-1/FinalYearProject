@@ -20,8 +20,6 @@ const CheckoutPage = () => {
 
     const navigate = useNavigate();
 
-    const [deliveryID, setDeliveryID] = useState();
-
     const { id: cartID } = useParams();
 
     const addDelivery = async ({ district, city, streetName, contactNo }) => {
@@ -38,10 +36,6 @@ const CheckoutPage = () => {
                     cartID,
                 }
             );
-
-            console.log(response.data.delivery);
-            setDeliveryID(response.data.delivery._id);
-            console.log("deliveryid");
             SuccessToast("Delivery location has been confirmed.");
             navigate(`/order-summary/${response.data.delivery._id}`);
         } catch (err) {

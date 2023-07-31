@@ -23,7 +23,7 @@ const Store = () => {
 
     const product = useSelector((state) => state.product);
 
-    const { fetchStatus, data: products } = product;
+    const { fetchStatus, data: products,totalProducts } = product;
 
     const categories = [
         "Painting",
@@ -173,7 +173,7 @@ const Store = () => {
                     </p>
                     <p className="font-slab font-semibold text-[#605e5e]">
                         {fetchStatus === "success" && products.product.length}{" "}
-                        Artworks:
+                         Artworks:
                     </p>
                 </div>
                 <hr className="bg-[#65635F] " />

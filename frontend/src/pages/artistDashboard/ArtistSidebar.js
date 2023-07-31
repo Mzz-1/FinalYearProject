@@ -1,7 +1,6 @@
-import { RiArrowRightSLine, RiCalendarEventLine } from "react-icons/ri";
+import { RiCalendarEventLine } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
 import { AiOutlineUser } from "react-icons/ai";
-import { AdminHeading } from "../../components/Heading";
 import { Sidebar } from "../../components/Sidebar";
 
 export const ArtistSidebar = () => {

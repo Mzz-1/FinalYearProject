@@ -17,36 +17,8 @@ const addOrder = {
           totalAmount,
         });
 
-        const user = await Order.findOne({
-          _id:userId
-        });
-    
-        // Save the order to the database
-      console.log(products)
-      for (const product of products) {
-        const { productId, quantity } = product;
-
-        // Find the product in the database
-        const productToUpdate = await Product.findOne({_id:productId});
-
-        // Check if the product exists and has sufficient quantity
-        if (!productToUpdate || productToUpdate.quantity < quantity) {
-          return res.status(400).json({ message: "Invalid product quantity" });
-        }
-
-        // Deduct the product quantity
-        productToUpdate.quantity -= quantity;
-
-        // Save the updated product to the database
-        await productToUpdate.save();
-      }
-    
-        // Clear the user's cart or perform other necessary actions
-        // ...
-
-        
-    
-        res.status(201).json("order");
+      
+        res.status(200).json("order");
       
         
     },
