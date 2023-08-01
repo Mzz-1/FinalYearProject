@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import {  useEffect } from "react";
 import {
-    
     Heading2,
     ModalHeading,
 } from "../../components/Heading";
@@ -10,24 +8,20 @@ import { useNavigate } from "react-router-dom";
 import { ViewButton, EditButton, DeleteButton } from "../../components/Button";
 import { Modal, LargeModal } from "../../components/Modal";
 import ViewEvents from "./ViewEvent";
-import { fetchAllEvents } from "../../redux-store/eventSlice";
+import { fetchAllEvents,deleteEvent } from "../../redux-store/eventSlice";
 import { useDispatch,useSelector } from "react-redux";
 
 export const AdminEvent = () => {
-    const [viewEvents, setViewEvents] = useState([]);
     const navigate = useNavigate();
 
     const dispatch= useDispatch()
 
     const event = useSelector((state)=>state.event)
 
-    const {data, fetchStatus} = event
+    const {data, fetchStatus,deleteStatus} = event
 
-    const deleteEvent = async (id) => {
-        const deleteData = await axios.delete(
-            `http://localhost:5000/api/events/${id}`
-        );
-       
+    const deleteEvents = (id) => {
+        dispatch(deleteEvent({id}))   
     };
 
     const updateEvent = (id) => {
@@ -37,15 +31,7 @@ export const AdminEvent = () => {
     useEffect(() => {
        dispatch(fetchAllEvents())
         document.title = "Manage Events | Admin Dashboard"; 
-
-    }, []);
-
-    const viewEvent = async (id) => {
-        const viewData = await axios.get(
-            `http://localhost:5000/api/events/${id}`
-        );
-        setViewEvents(viewData.data.event);
-    };
+    }, [deleteStatus]);
 
     const dateOptions = { day: "numeric", month: "long", year: "numeric" };
 
@@ -90,12 +76,10 @@ export const AdminEvent = () => {
                                         <td>{newEndDate}</td>
                                         <td className="">
                                             <LargeModal
-                                                onClick={() =>
-                                                    viewEvent(events._id)
-                                                }
+                                              
                                             >
                                                 <ViewEvents
-                                                    events={viewEvents}
+                                                    eventID={events._id}
                                                 />
                                             </LargeModal>
                                             <EditButton
@@ -106,7 +90,7 @@ export const AdminEvent = () => {
 
                                             <Modal
                                                 onClick={() =>
-                                                    deleteEvent(events._id)
+                                                    deleteEvents(events._id)
                                                 }
                                             >
                                                 <ModalHeading>

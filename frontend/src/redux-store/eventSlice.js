@@ -8,8 +8,8 @@ export const fetchAllEvents = createAsyncThunk("fetch-all-events", async () => {
         const apiUri = `http://localhost:5000/api/events`;
         const response = await axios.get(apiUri);
         return response.data;
-    } catch {
-        ErrorToast("Something went wrong.");
+    } catch(err) {
+        console.log(err)
     }
 });
 
@@ -18,8 +18,8 @@ export const fetchEvent = createAsyncThunk("fetch-event", async ({ id }) => {
         const apiUri = `http://localhost:5000/api/events/${id}`;
         const response = await axios.get(apiUri);
         return response.data;
-    } catch {
-        ErrorToast("Something went wrong.");
+    } catch(err) {
+        console.log(err)
     }
 });
 
@@ -42,7 +42,8 @@ export const addEvents = createAsyncThunk("add-event", async ({ data }) => {
             },
         });
         return response.data;
-    } catch {
+    } catch(err) {
+        console.log(err)
         ErrorToast("Something went wrong.");
     }
 });
@@ -128,8 +129,7 @@ const eventSlice = createSlice({
             })
             .addCase(fetchEvent.fulfilled, (state, action) => {
                 state.eventData = action.payload;
-                state.eventUpdateID = action.payload.event._id;
-                console.log();
+                console.log(action.payload);
                 state.getStatus = "success";
             })
             .addCase(fetchEvent.pending, (state) => {

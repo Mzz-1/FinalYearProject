@@ -39,8 +39,7 @@ export const Cart = () => {
 
                 setCart(cart);
             } else {
-                // Handle the case when user.id is undefined or falsy
-                // For example, show an error message or redirect the user
+              
             }
         } catch (err) {
          
@@ -71,6 +70,7 @@ export const Cart = () => {
             getProducts();
         }
     }, [user, dispatch, removeStatus]);
+
     const calculateTotal = () => {
         if (cart?.items && data?.products) {
             let total = 0;
@@ -90,6 +90,7 @@ export const Cart = () => {
     useEffect(() => {
         calculateTotal();
     }, [cart, data.products]);
+
     return (
         <div className="bg-gray-100 min-h-screen px-4 md:px-[50px] font-roboto md:font-slab">
             <div className="text-center  py-[40px]">

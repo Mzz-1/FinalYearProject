@@ -65,10 +65,7 @@ export const Modal = ({ children, onClick, message }) => {
 export const LargeModal = ({ children, onClick, message }) => {
     const [modal, setModal] = useState(false);
 
-    useEffect(() => {
-        onClick();
-    }, []);
-
+  
     return (
         <>
             <ViewButton onClick={() => setModal(true)} />

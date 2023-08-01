@@ -1,12 +1,9 @@
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Banner } from "../../components/Banner";
-import { ProductList } from "./ProductList";
 import { useUser } from "../../service/useUser";
 import { InfoToast, SuccessToast } from "../../helpers/Toast";
-import { Heading, Heading2 } from "../../components/Heading";
+import {  Heading2 } from "../../components/Heading";
 import KhaltiCheckout from "khalti-checkout-web";
 import { Config } from "../../components/khalti/KhaltiConfig";
 

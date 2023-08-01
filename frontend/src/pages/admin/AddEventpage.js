@@ -1,10 +1,9 @@
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import {  useEffect } from "react";
 import Input from "../../components/Input";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
-import { SuccessToast, PromiseToast } from "../../helpers/Toast";
+import { PromiseToast } from "../../helpers/Toast";
 import { DashboardActionButton } from "../../components/Button";
 import { Heading2 } from "../../components/Heading";
 import { addEvents, updateEvents,fetchEvent } from "../../redux-store/eventSlice";
@@ -27,9 +26,11 @@ const AddEventPage = () => {
     const { eventUpdateID,eventData,getStatus } = event   
 
     useEffect(() => {
+    
         dispatch(fetchEvent({id}))
-        document.title = "Events | Admin Dashboard";   
-    }, []);
+        document.title = "Events | Admin Dashboard";  
+      
+    }, [id]);
 
     const EventAction = (data) => {
         if (id) {
@@ -60,7 +61,7 @@ const AddEventPage = () => {
                         <Input
                             type="text"
                             placeholder="Name"
-                            defaultValue={eventData.event?.name}
+                            defaultValue={eventData?.event?.name}
                             register={{
                                 ...register("name", {
                                     required: "Please enter the event name.",
@@ -72,7 +73,7 @@ const AddEventPage = () => {
                         <Input
                             type="text"
                             placeholder="Place"
-                            defaultValue={eventData.event?.place}
+                            defaultValue={eventData?.event?.place}
                             register={{
                                 ...register("place", {
                                     required: "Please enter the event venue.",
@@ -84,7 +85,7 @@ const AddEventPage = () => {
                         <Input
                             type="text"
                             placeholder="Location"
-                            defaultValue={eventData.event?.location}
+                            defaultValue={eventData?.event?.location}
                             register={{
                                 ...register("location", {
                                     required: "Please enter event location.",
@@ -106,7 +107,7 @@ const AddEventPage = () => {
                         <label>Start Date</label>
                         <Input
                             type="date"
-                            defaultValue={eventData.event?.startDate}
+                            defaultValue={eventData?.event?.startDate}
                             register={{
                                 ...register("startDate", {
                                     required: "Please enter the start date.",
@@ -117,7 +118,7 @@ const AddEventPage = () => {
                         <label>End Date</label>
                         <Input
                             type="date"
-                            defaultValue={eventData.event?.endDate}
+                            defaultValue={eventData?.event?.endDate}
                             register={{
                                 ...register("endDate", {
                                     required: "Please enter the end date.",
@@ -128,7 +129,7 @@ const AddEventPage = () => {
                         <label>Start Time</label>
                         <Input
                             type="time"
-                            defaultValue={eventData.event?.startTime}
+                            defaultValue={eventData?.event?.startTime}
                             register={{
                                 ...register("startTime", {
                                     required: "Please enter the start time.",
@@ -139,7 +140,7 @@ const AddEventPage = () => {
                         <label>End Time</label>
                         <Input
                             type="time"
-                            defaultValue={eventData.event?.endTime}
+                            defaultValue={eventData?.event?.endTime}
                             register={{
                                 ...register("endTime", {
                                     required: "Please enter the end time.",

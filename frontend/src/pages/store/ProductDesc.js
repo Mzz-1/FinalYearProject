@@ -76,7 +76,7 @@ export const ProductDetails = () => {
            <div className="bg-[#F4F4F2] lg:h-[770px] w-[100vw] lg:w-[100%] flex items-center justify-center px-12 py-7">
                 <img
                     src={productData.product.url}
-                    className=" mb-[10px] aspect-w-16 aspect-h-9 shadow-2xl max-h-[700px]"
+                    className=" mb-[10px] aspect-w-16 aspect-h-9 shadow-2xl lg:max-h-[35vw]"
                     alt="product"
                 />
             </div>

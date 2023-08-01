@@ -24,7 +24,7 @@ export const EventList = ({ events, date }) => {
                     const today = new Date();
                     var datebool;
                     if (date === "ongoing") {
-                        datebool = startDateTime < today;
+                        datebool = startDateTime < today && endDateTime >= today;
                     }
                     if (date === "upcomming") {
                         datebool = startDateTime > today;
@@ -39,7 +39,7 @@ export const EventList = ({ events, date }) => {
                                             <img
                                                 src={events.url}
                                                 alt="events"
-                                                className=" aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16"
+                                                className=" aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-16 max-h-[35vw]"
                                             />
                                         </div>
                                         <div className="text-[20px] sm:w-[500px] m-auto  text-[#3C3737] ">
